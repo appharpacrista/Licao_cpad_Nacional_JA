@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 11 — Jacó: De Enganador a Homem de Honra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 11</div>
+    <div class="date">14 de Junho de 2026 · Dia do Pastor</div>
+    <h1 class="title">Jacó: De Enganador a Homem de Honra</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Então, disse: Não se chamará mais o teu nome Jacó, mas Israel, pois, como príncipe, lutaste com Deus e com os homens e prevaleceste." Gênesis, capítulo 32, versículo 28.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body',  x:'Somente Deus pode transformar o caráter e a vida do ser humano.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Segunda Coríntios, capítulo 3, versículo 18. Transformados de glória em glória.'},
+ {t:'daily', x:'Terça. Atos, capítulo 3, versículo 19. Arrependimento e conversão.'},
+ {t:'daily', x:'Quarta. Colossenses, capítulo 3, versículos 9 e 10. Vestidos do novo homem.'},
+ {t:'daily', x:'Quinta. Romanos, capítulo 12, versículo 2. A renovação do entendimento.'},
+ {t:'daily', x:'Sexta. Gálatas, capítulo 5, versículo 22. Quem é de Cristo tem o fruto do Espírito.'},
+ {t:'daily', x:'Sábado. Segunda Coríntios, capítulo 5, versículo 17. Sendo nova criatura em Cristo.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Gênesis, capítulo 32, versículos 22 a 31.'},
+ {t:'verse', x:'Versículo 22. E levantou-se aquela mesma noite, e tomou as suas duas mulheres, e as suas duas servas, e os seus onze filhos, e passou o vau de Jaboque.'},
+ {t:'verse', x:'Versículo 23. E tomou-os e fê-los passar o ribeiro; e fez passar tudo o que tinha.'},
+ {t:'verse', x:'Versículo 24. Jacó, porém, ficou só; e lutou com ele um varão, até que a alva subia.'},
+ {t:'verse', x:'Versículo 25. E, vendo que não prevalecia contra ele, tocou a juntura de sua coxa; e se deslocou a juntura da coxa de Jacó, lutando com ele.'},
+ {t:'verse', x:'Versículo 26. E disse: Deixa-me ir, porque já a alva subiu. Porém ele disse: Não te deixarei ir, se me não abençoares.'},
+ {t:'verse', x:'Versículo 27. E disse-lhe: Qual é o teu nome? E ele disse: Jacó.'},
+ {t:'verse', x:'Versículo 28. Então, disse: Não se chamará mais o teu nome Jacó, mas Israel, pois, como príncipe, lutaste com Deus e com os homens e prevaleceste.'},
+ {t:'verse', x:'Versículo 29. E Jacó lhe perguntou e disse: Dá-me, peço-te, a saber o teu nome. E disse: Por que perguntas pelo meu nome? E abençoou-o ali.'},
+ {t:'verse', x:'Versículo 30. E chamou Jacó o nome daquele lugar Peniel, porque dizia: Tenho visto a Deus face a face, e a minha alma foi salva.'},
+ {t:'verse', x:'Versículo 31. E saiu-lhe o sol, quando passou a Peniel; e manquejava da sua coxa.'},
+ {t:'body', x:'Hinos sugeridos: setenta e cinco, setenta e sete, e cento e oitenta e quatro, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Você já foi transformado por Jesus Cristo? Ser crente é ser nova criatura, gerada pelo Espírito Santo. João, capítulo 3, versículo 3. Jacó teve um encontro com Deus em Betel e ali começou o processo de transformação em sua vida. Depois, no retorno para a casa de seus pais, ele teve outro encontro com o Senhor em Peniel, que significa a face de Deus. Gênesis, capítulo 32, versículo 30. Jacó lutou com um anjo e teve seu nome mudado para Israel, que significa ele luta com Deus. O Senhor mudou o caráter de Jacó e também seu nome.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, enfatizar os aspectos da família de Jacó. Segundo, explicar que o desejo de Jacó de retornar à sua casa era divino. Terceiro, mostrar a passagem de Jacó pelo vau de Jaboque.'},
+ {t:'body', x:'Motivação. Jacó carregava um estigma, uma cicatriz, desde o seu nascimento. Ele mostrou-se um homem oportunista e mentiroso, um reflexo da disfunção familiar, do ambiente onde foi criado. Jacó teve que deixar sua casa, trabalhou duro, foi também enganado, mas teve um encontro transformador com Deus.'},
+ {t:'body', x:'Sugestão de Método. Professor, para introduzir a lição, faça a seguinte pergunta: quem já experimentou o poder transformador de Jesus? Explique que somente Jesus Cristo tem poder para transformar o homem. Não há pessoas difíceis para o Filho de Deus. Ele tem poder e pode transformar o mais perverso e o mais vil dos homens.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Depois de fazer a exposição dos tópicos, aplique as verdades estudadas, mostrando que, na Nova Aliança, somente a ação do Espírito Santo pode transformar o nosso velho homem.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 105, página 41, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Labão, localizado após o primeiro tópico, traz um resumo do personagem Labão, sogro de Jacó. Segundo, o texto Deus de meus pais, depois do terceiro tópico, traz um resumo dos acontecimentos na vida de Jacó quando caminhava em direção à casa dos seus pais.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Jacó cresceu em uma família marcada por favoritismos e conflitos: Isaque amava Esaú, e Rebeca, a Jacó. Nesse ambiente, ele aprendeu a enganar para alcançar o que queria. Contudo, ao fugir de casa, começou o processo de transformação que Deus realizaria em sua vida. O homem que enganou passou a ser enganado, e nas lutas e dores foi sendo moldado pelo Senhor. Em Peniel, teve um encontro decisivo com Deus e recebeu um novo nome: Israel. Nesta lição, veremos como Deus mudou seu caráter e fez dele um homem de honra, mostrando que só o Senhor pode transformar a vida humana. A história de Jacó nos ensina que a verdadeira mudança não vem das circunstâncias, mas do encontro pessoal com Deus, que nos faz novas criaturas.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Honra.'},
+
+ {t:'topic', x:'Tópico 1. A família de Jacó.'},
+ {t:'subtopic', x:'1. Um encontro especial.'},
+ {t:'body', x:'Jacó encontrou Raquel, filha de Labão, quando ela tentava dar de beber aos rebanhos de seu pai, pois era pastora de ovelhas. Gênesis, capítulo 29, versículo 10. Ela era a filha mais nova de Labão e tornou-se o grande amor de Jacó. Porém, ele chegou à casa de seu tio sem dinheiro algum. Naquele tempo, era necessário dar aos pais da noiva um dote antes do casamento. Sem recursos financeiros, Jacó fez um acordo com seu tio: ele trabalharia sem receber nada em troca durante sete anos para ter Raquel como esposa. O acordo de sete anos foi firmado entre o tio e o sobrinho. Jacó trabalhou duro e cumpriu seu acordo, mas Labão usou de engano. Depois de dar um banquete pelo suposto casamento com Raquel, na noite de núpcias, em lugar de entregar Raquel ao genro, pôs Leia ao lado dele. Gênesis, capítulo 29, versículo 23.'},
+ {t:'subtopic', x:'2. O enganador é enganado.'},
+ {t:'body', x:'Jacó colheu aquilo que ele havia semeado: mentira e engano. Deus nos perdoa, mas também nos disciplina. O princípio espiritual do Senhor permanece o mesmo: Não erreis... tudo o que o homem semear, isso também ceifará. Gálatas, capítulo 6, versículo 7; confira Provérbios, capítulo 22, versículo 8. Talvez esse triste acontecimento, ser ludibriado pelo próprio tio, tenha feito Jacó refletir a respeito de seus atos e do mal que causara quando enganou seu pai e seu irmão. Confira o capítulo 27. Leia era a filha mais velha de Labão, e ele não teve escrúpulos em usá-la para enganar Jacó. O amor de Jacó por Raquel era grande, e seu trabalho era lucrativo para Labão. Jacó não desistiu de sua amada e trabalhou pesado por mais sete anos por ela. Aprendemos que o amor não desiste com facilidade.'},
+ {t:'subtopic', x:'3. Muitos filhos.'},
+ {t:'body', x:'Este triste episódio na vida de Jacó nos mostra que a poligamia era algo comum naquele tempo; no entanto, contrariava e continua contrariando o propósito de Deus para o ser humano, o casamento monogâmico e hetero, um homem e uma mulher. Gênesis, capítulo 2, versículo 24. Na Nova Aliança, a monogamia é a única forma legítima de casamento. Mateus, capítulo 19, versículos 4 a 6; e Marcos, capítulo 10, versículos 4 a 9.'},
+ {t:'body', x:'A poligamia trouxe consequências terríveis para as famílias, em especial a família de Jacó. Porém, Deus honrou a Jacó e lhe concedeu muitos filhos. Os filhos sempre foram e são heranças do Senhor, ou seja, são uma recompensa que Ele nos dá. Salmos, capítulo 127, versículo 3.'},
+ {t:'body', x:'Jacó teve filhos com Leia e com a serva dela. Também teve filhos com Raquel e sua serva. Com Leia, Jacó teve os seguintes filhos: Rúben, Simeão, Levi, Judá, Issacar e Zebulom. Gênesis, capítulo 29, versículos 32 a 35; e capítulo 30, versículos 17 a 20. Totalizando seis filhos e mais uma filha, a quem deu o nome de Diná. Gênesis, capítulo 30, versículo 21. Com a serva de Leia, Zilpa, teve dois filhos, Gade e Aser. Gênesis, capítulo 30, versículos 9 a 13.'},
+ {t:'body', x:'Com sua amada esposa teve dois filhos. São eles: José e Benjamim. Gênesis, capítulo 30, versículos 22 a 24; e capítulo 35, versículos 16 a 19. Com Bila, serva de Raquel, teve mais dois filhos: Dã e Naftali. Gênesis, capítulo 30, versículos 3 a 8. Apesar de seus erros, Jacó foi honrado pelo Senhor, e seus filhos tornaram-se os líderes das doze tribos de Israel.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'A predileção de Isaque e Rebeca pelos filhos teve como consequência a disfunção familiar.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Labão.', x:'Irmão de Rebeca, Gênesis, capítulo 24, versículo 29, e pai de Raquel e Leia, capítulo 29, versículo 16. Labão está envolvido no noivado de Rebeca com Isaque, Gênesis, capítulo 24, versículos 29 a 51, mas ele é mais conhecido pela falsidade e trapaça, especialmente nas relações com o seu sobrinho Jacó. Gênesis, capítulo 29, versículo 1, ao capítulo 31, versículo 55. Labão é caracterizado por esse tipo de egocentrismo ao longo da narrativa. Ele continuou a enganar Jacó por saber que este era a chave da prosperidade dele. Jacó permaneceu na casa de Labão por vinte anos, Gênesis, capítulo 31, versículo 41, mas depois fugiu com a sua família e bens. Ele alcançou Jacó no caminho, e os dois fizeram uma aliança. Gênesis, capítulo 31, versículos 43 a 54. Dicionário Bíblico Baker. Rio de Janeiro, CPAD, 2023, página 298.'},
+
+ {t:'topic', x:'Tópico 2. Jacó deseja retornar à sua terra.'},
+ {t:'subtopic', x:'1. Jacó almeja retornar para sua casa.'},
+ {t:'body', x:'Depois de trabalhar vários anos para seu tio, Labão, Jacó sentiu o desejo de retornar à sua terra logo após Raquel dar à luz a José. Ele pediu que seu tio o liberasse, juntamente com suas esposas e seus filhos, pelos quais ele trabalhou durante anos. Gênesis, capítulo 30, versículos 25 a 27. Mas o trabalho de Jacó era lucrativo para Labão, e tudo indica que a saída de Jacó de sua casa não seria tão fácil. Labão pede que Jacó o continue servindo e faz uma nova proposta ao genro, pois estava vendo seus bens aumentarem com a bênção de Deus sobre o trabalho de Jacó. Versículo 27.'},
+ {t:'subtopic', x:'2. O acordo entre Labão e Jacó.'},
+ {t:'body', x:'Labão não concordou com o pedido de Jacó de ir para a sua terra. Ele pediu que Jacó ficasse ali, pois reconheceu que o Senhor estava abençoando sua vida e sua casa por amor de Jacó. Gênesis, capítulo 30, versículo 27. Para que Jacó não deixasse sua casa, Labão fez a seguinte proposta: Determina-me o teu salário, que to darei. Gênesis, capítulo 30, versículo 28. Jacó deseja trabalhar para o bem de sua família, e não mais para o enriquecimento de seu tio. Então, ele propôs que todos os animais salpicados e malhados, e todos os morenos entre os cordeiros, e o que era malhado e salpicado entre as cabras, seriam dele. Então, Labão aceita a proposta dizendo: Tomara que seja conforme a tua palavra. Gênesis, capítulo 30, versículo 34.'},
+ {t:'subtopic', x:'3. Deus manda Jacó retornar à casa de seus pais.'},
+ {t:'body', x:'O Senhor prosperou o trabalho das mãos de Jacó. Ele cresceu abundantemente e teve muitos rebanhos, servos, servas, e camelos e jumentos. Gênesis, capítulo 30, versículo 43. Não demorou para os invejosos levantarem-se contra ele. Os filhos de seu tio disseram: Jacó tem tomado tudo o que era de nosso pai e do que era de nosso pai fez ele toda esta glória. Gênesis, capítulo 31, versículo 1. Uma acusação mentirosa, carregada de inveja e maldade. Seu tio, de igual modo, demonstrava grande insatisfação contra ele. O ambiente tornou-se contrário a Jacó, mas Deus, que tudo vê e é justo, interveio na situação. O Senhor falou com Jacó: Torna à terra dos teus pais e à tua parentela, e eu serei contigo. Gênesis, capítulo 31, versículo 3.'},
+ {t:'body', x:'Certo dia, quando o sogro afastou-se para tosquiar ovelhas, Jacó fugiu de Labão, com suas mulheres e seus filhos. Depois de três dias da fuga, Labão tomou conhecimento de que Jacó fugira com sua família. Revoltado, saiu em perseguição a Jacó e o encontrou na montanha de Gileade. Gênesis, capítulo 31, versículos 22 e 23. Sem dúvida alguma, a intenção de Labão era de promover uma grande represália a Jacó, mas Deus interveio mais uma vez em favor do patriarca e impediu-lhe de fazer o mal. Gênesis, capítulo 31, versículos 24 a 29.'},
+ {t:'body', x:'Em seu encontro com Jacó, depois da fuga, Labão questionou o desaparecimento de seus deuses. Então, Jacó disse a Labão: Com quem achares os teus deuses, esse não viva. Gênesis, capítulo 31, versículo 32. Jacó não imagina que Raquel, a esposa amada, tinha-os furtado. Gênesis, capítulo 31, versículos 33 a 35. Labão era idólatra e, ao que tudo indica, tinha vários ídolos em sua casa, e sua filha Raquel seguiu o exemplo do pai. Na fuga com Jacó, ela furtou os deuses de Labão. Este se foi, porém Jacó prosseguiu sua caminhada em direção à casa de seus pais e enviou um presente para seu irmão, Esaú. Então, Esaú deslocou-se em direção a Jacó; este ficou tão temeroso de uma possível vingança que clamou a Deus dizendo: Deus de meu pai Isaque, ó Senhor, que me disse: Torna à tua terra e à tua parentela, livra-me, peço-te, da mão de meu irmão, da mão de Esaú. Gênesis, capítulo 32, versículos 9 a 11. Em seguida, enviou um grande presente para Esaú. Gênesis, capítulo 32, versículos 14 e 15.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Deus colocou no coração de Jacó o desejo de retornar à sua terra.'},
+
+ {t:'topic', x:'Tópico 3. Jacó no vau do Jaboque.'},
+ {t:'subtopic', x:'1. A angústia e o medo de Jacó.'},
+ {t:'body', x:'Aquele foi um momento muito significativo na vida de Jacó. Obedecendo à voz de Deus, ele estava retornando para a sua terra com toda a sua família. No entanto, estava muito temeroso com a reação de seu irmão Esaú. Como seria o encontro entre eles? Ninguém poderia imaginar. Jacó decide enviar, por intermédio de seus servos, um presente ao seu irmão.'},
+ {t:'body', x:'Jacó teve medo e ficou angustiado ao saber que seu irmão vinha ao seu encontro com quatrocentos homens, um pequeno exército. Gênesis, capítulo 32, versículo 6. Em meio às situações adversas que enfrentamos, precisamos fazer como Jacó: buscar o socorro divino e elevar os olhos aos céus. Salmos, capítulo 121, versículos 1 e 2. Elevar os olhos aos céus é a atitude de quem ora a Deus e confia no seu livramento.'},
+ {t:'body', x:'Em meio à aflição, Jacó elabora um plano: dividir suas esposas e filhos e os que estavam com ele em dois grupos, como também os animais. Se Esaú atacasse um grupo, o outro teria a possibilidade de escapar. Vemos aqui a preocupação de Jacó em proteger sua família. Cabe ao homem, o sacerdote do lar, proteger e cuidar da segurança de sua esposa e filhos. Protegê-los com suas orações e jejuns para que Deus os livre de todo o mal. Como anda a proteção de sua família?'},
+ {t:'subtopic', x:'2. Jacó ficou só e lutou com o anjo.'},
+ {t:'body', x:'Naquela noite, após sua família passar adiante, ele ficou só; certamente para orar a Deus e buscar seu socorro. Então lhe apareceu um homem, um anjo, que lutou com ele até o romper do dia. A luta de Jacó com o anjo durou toda a noite. Gênesis, capítulo 32, versículos 22 e 23. Há momentos em que uma oração sincera basta para que Deus responda. Jeremias, capítulo 33, versículo 3. Mas há situações que exigem perseverança: orar, interceder e jejuar, mesmo sem resposta imediata. Nessas horas, devemos agir como Jacó, que lutou em fé e declarou: Não te deixarei ir, se me não abençoares. Gênesis, capítulo 32, versículo 26. Vemos aqui perseverança, constância.'},
+ {t:'subtopic', x:'3. Jacó é transformado.'},
+ {t:'body', x:'Depois daquele encontro entre Jacó e o anjo, ele não foi mais o mesmo homem. Aprendemos aqui que quem tem um encontro real com Deus não é mais o mesmo. Não podemos sair da presença do Senhor da mesma maneira. Ele nos modela, nos transforma, assim como o barro na mão do oleiro. Jeremias, capítulo 18, versículos 1 a 6. Muitos dizem conhecer a Deus e serem cheios do Espírito Santo, mas os anos passam, e nunca vemos mudança em seu caráter e temperamento; logo, podemos dizer que esses ainda não experimentaram um relacionamento verdadeiro com o Eterno, pois não se deixaram transformar por sua presença.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Jacó ergue uma coluna em Betel e faz um voto ao Senhor.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Deus de meus pais.', x:'Jacó teve medo ao se aproximar do território de Esaú, pois pensava que seu irmão ainda estivesse aborrecido, talvez violento, por causa da maneira como o havia enganado mais de vinte anos antes. Por isso Jacó orou pedindo ajuda a Deus. A sua oração é um modelo para todos os crentes em situações de risco de vida. Primeiro, Jacó lembrou o Senhor de sua promessa de proteger aqueles que seguem os planos de Deus. Versículo 9. Segundo, agradeceu a Deus por todas as bênçãos imerecidas e pela ajuda que havia recebido. Versículo 10. Terceiro, orou pedindo que Deus o livrasse da situação potencialmente perigosa. Versículo 11. Quarto, disse que a principal razão para pedir a proteção de Deus era que ele pudesse cumprir o propósito de Deus para a vida dele. Versículo 12. Bíblia de Estudo Pentecostal para Jovens. Rio de Janeiro, CPAD, página 95.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Jacó teve muitos momentos difíceis em sua vida; no entanto, um dos piores momentos foi quando ele enganou seu pai. Esaú prometeu matá-lo, e ele teve que fugir, indo morar com seu tio, Labão. Na casa de seu tio, trabalhou muito e foi enganado e invejado. Então, o Senhor colocou em seu coração o desejo de retornar à sua terra. Mas a saída da casa de seu tio não foi nada fácil, nem foi fácil o reencontro com seu irmão Esaú.'},
+ {t:'body', x:'Em seu retorno para casa, ele lutou com o anjo e teve seu nome mudado. Jacó, em Peniel, declarou: Vi Deus face a face. Seu encontro com o Senhor salvou-lhe a vida e trouxe uma grande transformação de dentro para fora.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Qual o local do primeiro encontro entre Jacó e Raquel? Jacó encontrou Raquel, filha de Labão, seu tio, quando ela tentava dar de beber aos rebanhos de seu pai, pois era pastora de ovelhas. Gênesis, capítulo 29, versículo 10.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Qual o nome da filha de Labão que ele usou para enganar Jacó no dia do casamento? Leia.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Quantos anos Jacó trabalhou por Leia e Raquel, respectivamente? Ele trabalhou sete anos.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Quais os nomes dos filhos de Jacó com Leia e sua serva Zilpa? Com Leia, Jacó teve os seguintes filhos: Rúben, Simeão, Levi, Judá, Issacar e Zebulom, totalizando seis filhos, e mais uma filha, a quem deu o nome de Diná. Com a serva de Leia, Zilpa, teve dois filhos, Gade e Aser.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Quais os nomes dos filhos de Jacó com Raquel e sua serva Bila? Com sua amada esposa, teve dois filhos. São eles: José e Benjamim. Com Bila, serva de Raquel, teve mais dois filhos: Dã e Naftali.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>

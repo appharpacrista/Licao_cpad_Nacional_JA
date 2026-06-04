@@ -1,0 +1,27 @@
+COMO USAR (uma vez só, para configurar):
+-----------------------------------------
+1) Tenha o Git instalado (git-scm.com) e uma conta no GitHub.
+2) Crie um repositorio VAZIO no GitHub chamado "Licao_cpad".
+3) Dentro da pasta Licao_cpad, rode UMA vez:
+
+   git init
+   git branch -M main
+   git remote add origin https://github.com/SEU_USUARIO/Licao_cpad.git
+   git add -A
+   git commit -m "Primeiro envio"
+   git push -u origin main
+
+DEPOIS DISSO, para reenviar tudo sempre que mudar algo:
+-------------------------------------------------------
+- Windows: dois cliques em "enviar-github.bat"
+- Mac/Linux: rode "bash enviar-github.sh"
+
+ENVIO AGENDADO (opcional, "sozinho"):
+-------------------------------------
+- Windows: Agendador de Tarefas -> nova tarefa -> roda "enviar-github.bat" a cada X horas.
+- Mac/Linux: crontab -e -> ex.: 0 * * * * /caminho/Licao_cpad/enviar-github.sh
+
+PUBLICAR O SITE (para os index lerem as pastas):
+------------------------------------------------
+No GitHub: Settings -> Pages -> Source: branch "main" / pasta raiz "/ (root)" -> Save.
+O endereco fica https://SEU_USUARIO.github.io/Licao_cpad/

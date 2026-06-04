@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 10 — A Experiência Transformadora de Jacó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 10</div>
+    <div class="date">7 de Junho de 2026</div>
+    <h1 class="title">A Experiência Transformadora de Jacó</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"E eis que estou contigo, e te guardarei por onde quer que fores, e te farei tornar a esta terra, porque te não deixarei, até que te haja feito o que te tenho dito." Gênesis, capítulo 28, versículo 15.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body',  x:'Após um encontro com Deus, Jacó é transformado. Ninguém sai da presença do Senhor da mesma maneira.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Gênesis, capítulo 17, versículo 5. Deus transformou Abrão em Abraão.'},
+ {t:'daily', x:'Terça. Gênesis, capítulo 17, versículo 15. Deus transformou Sarai em Sara.'},
+ {t:'daily', x:'Quarta. Gênesis, capítulo 32, versículo 28. Deus transformou Jacó em Israel.'},
+ {t:'daily', x:'Quinta. João, capítulo 1, versículo 42. Deus transformou completamente a vida de Pedro.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 13, versículo 9. Deus transformou a vida de Saulo.'},
+ {t:'daily', x:'Sábado. João, capítulo 20, versículo 16; e Marcos, capítulo 5, versículo 19. Jesus transforma vidas.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Gênesis, capítulo 28, versículos 10 a 17.'},
+ {t:'verse', x:'Versículo 10. Partiu, pois, Jacó de Berseba e foi-se para Harã.'},
+ {t:'verse', x:'Versículo 11. E chegou a um lugar onde passou a noite, porque já o sol era posto; e tomou uma das pedras daquele lugar, e a pôs por sua cabeceira, e deitou-se naquele lugar.'},
+ {t:'verse', x:'Versículo 12. E sonhou: e eis que era posta na terra uma escada cujo topo tocava nos céus; e eis que os anjos de Deus subiam e desciam por ela.'},
+ {t:'verse', x:'Versículo 13. E eis que o Senhor estava em cima dela e disse: Eu sou o Senhor, o Deus de Abraão, teu pai, e o Deus de Isaque; esta terra em que estás deitado, ta darei a ti e à tua semente.'},
+ {t:'verse', x:'Versículo 14. E a tua semente será como o pó da terra; e estender-se-á ao ocidente, e ao oriente, e ao norte, e ao sul; e em ti e na tua semente serão benditas todas as famílias da terra.'},
+ {t:'verse', x:'Versículo 15. E eis que estou contigo, e te guardarei por onde quer que fores, e te farei tornar a esta terra, porque te não deixarei, até que seja feito o que te tenho dito.'},
+ {t:'verse', x:'Versículo 16. Acordando, pois, Jacó do seu sono, disse: Na verdade, o Senhor está neste lugar, e eu não o sabia.'},
+ {t:'verse', x:'Versículo 17. E temeu e disse: Quão terrível é este lugar! Este não é outro lugar senão a Casa de Deus; e esta é a porta dos céus.'},
+ {t:'body', x:'Hinos sugeridos: quarenta e dois, duzentos e noventa e dois, e quatrocentos e setenta, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Você acredita na transformação do ser humano? Na metanoia, a mudança profunda no modo de pensar, sentir e agir que o Espírito Santo realiza em nós de dentro para fora. Essa é a transformação que veremos na vida do patriarca Jacó. Seu processo começou quando, fugindo da casa dos pais, teve um encontro com Deus em um sonho. Jacó recebeu o nome de enganador, carregando um estigma por anos; contudo, Deus, em Seus desígnios, já o havia escolhido e, passo a passo, transformou sua história por completo. Sua vida nos mostra que ninguém está além do alcance da graça divina.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, enfatizar que o sonho de Jacó foi o início de uma mudança profunda em sua vida. Segundo, expor as descobertas de Jacó. Terceiro, explicar o que era a coluna de Betel.'},
+ {t:'body', x:'Motivação. Deus já falou com você por meio de um sonho? O Senhor comunica-se conosco de diversas maneiras, e foi assim que Ele revelou-se a Jacó, em sonho, enquanto este fugia da casa dos pais, sozinho no deserto. Jacó viu uma escada firmada na terra, cujo topo alcançava os céus, e anjos de Deus subindo e descendo por ela. Ali, na solidão da noite, ele teve um encontro real com o Eterno. A partir desse momento, iniciou-se em sua vida um profundo processo de transformação. Deus conhecia Jacó, inclusive suas falhas e enganos; embora não aprovasse seus atos, não revogou a bênção prometida a seus pais. Pelo contrário, trabalhou em seu caráter, moldando-o até torná-lo um novo homem, testemunho vivo da graça que restaura e renova.'},
+ {t:'body', x:'Sugestão de Método. Pergunte diretamente aos alunos: o que é metanoia? Incentive a participação dos alunos e ouça a todos com atenção. Diga que metanoia é uma mudança profunda no nosso modo de pensar, sentir e agir. Romanos, capítulo 12, versículo 2. É algo que somente o Espírito Santo pode realizar em nós. Sem a atuação do Consolador, não há transformação, não há Novo Nascimento. Jacó, antes da transformação em sua vida, era oportunista, pois, quando seu irmão chegou com fome e pediu para comer do seu guisado, ele poderia ter compartilhado sua refeição. Mas, numa prova de oportunismo e ambição, pediu que o irmão lhe vendesse a sua primogenitura. Gênesis, capítulo 25, versículo 31. Ele foi frio e calculista. Gênesis, capítulo 25, versículo 33; e Hebreus, capítulo 12, versículo 16.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Depois de fazer toda a exposição dos tópicos da Lição, aplique as verdades estudadas, mostrando que, após ter um encontro com Deus, todos são transformados. Ninguém sai da presença de Deus da mesma maneira.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 105, página 41, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Os Anjos de Deus, localizado depois do primeiro tópico, aprofunda o assunto a respeito dos anjos. Segundo, o texto Jacó, localizado depois do segundo tópico, revela um pouco quem era Jacó antes de ser transformado pelo Senhor.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Na lição anterior, vimos que o relacionamento entre Esaú e Jacó era conflituoso, a ponto de Esaú planejar matar Jacó depois do episódio que resultou na perda da bênção que seria sua após a morte de Isaque. Ante a ameaça de uma possível tragédia, Rebeca e Isaque aconselharam Jacó a ir embora para a casa de seu tio Labão, em Harã. Jacó tornou-se um fugitivo e saiu de casa sem levar nada, indo em direção ao deserto. Mas Deus revelou-se a ele num sonho que mudou sua vida.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Transformação.'},
+
+ {t:'topic', x:'Tópico 1. Um sonho que mudou uma vida.'},
+ {t:'subtopic', x:'1. Uma escada que tocava o céu.'},
+ {t:'body', x:'Durante sua fuga da casa de seus pais, Jacó dormiu e teve um sonho divino. Em seu sonho, ele viu uma escada cujo topo tocava os céus. Os anjos de Deus subiam e desciam por ela. Gênesis, capítulo 28, versículo 12. A Bíblia diz que os anjos são espíritos ministradores. Hebreus, capítulo 1, versículo 14. Eles trabalham para aqueles que confiam em Deus. Nas Escrituras Sagradas, vemos, por diversas vezes, o Senhor revelando sua vontade aos seus servos por intermédio de sonhos e dos anjos. No Novo Testamento, lemos que José, o esposo de Maria, teve um sonho em que um anjo lhe falou que ele não deveria deixá-la, porque o que nela foi gerado era do Espírito Santo. Mateus, capítulo 1, versículos 19 e 20. Segundo Números, capítulo 12, versículo 6, o Senhor revela-se em visões e sonhos aos seus profetas. Deus desejava falar e fazer algo na vida de Jacó.'},
+ {t:'subtopic', x:'2. Deus apresentou-se em sonhos a Jacó.'},
+ {t:'body', x:'Em seu sonho, Jacó não somente viu os anjos, mas Deus apresentou-se a ele no topo da escada. O Senhor falou com Jacó de modo semelhante ao que falara a seu pai. O Eterno fala a respeito do seu pacto com Abraão e Isaque, prometendo que daria a Jacó a terra em que ele estava deitado. Aquela terra seria de Jacó e de sua descendência. Certamente, Jacó estava temeroso ao ter que deixar sua família e seguir em direção a um lugar desconhecido; então, o Senhor, ainda em sonho, consola-o dizendo que estaria com ele e o guardaria de todo o perigo. Gênesis, capítulo 28, versículos 13 a 15.'},
+ {t:'subtopic', x:'3. As promessas de Deus a Jacó.'},
+ {t:'body', x:'Deus revelou-se a Jacó em sonhos e lhe fez promessas. Primeiro, prometeu dar-lhe a terra em que ele achava-se deitado, naquela noite sombria. Gênesis, capítulo 28, versículo 13. Depois, prometeu que sua semente seria tão numerosa como o pó da terra, e que ocuparia os quatro cantos da terra: ao ocidente, ao oriente, ao norte e ao sul. Em seguida, repetiu a promessa que fizera a Abraão e a Isaque: e a tua semente será como o pó da terra. Gênesis, capítulo 28, versículo 14. Por último, prometeu-lhe que estaria com ele e o guardaria por onde quer que andasse, e que lhe faria retornar à terra onde ele encontrava-se, e não o deixaria até que cumprisse o que lhe havia dito. Gênesis, capítulo 28, versículo 14.'},
+
+ {t:'aux', label:'Ampliando o Conhecimento. Jacó.', x:'Renomeado Israel pelo Senhor, em Gênesis, capítulo 32, versículo 28, Jacó foi o filho de Isaque e Rebeca, e pai de doze filhos, cujos descendentes tornaram-se as doze tribos. Metade do livro de Gênesis, de Gênesis, capítulo 25, versículo 19, a capítulo 49, versículo 33, narra a sua história e a dos seus filhos. Os capítulos intermediários de Gênesis concentram-se nas suas lutas com o seu irmão Esaú e com o seu tio Labão, e os capítulos posteriores concentram-se nos seus filhos Diná, Judá e, particularmente, José, durante o tempo deste no Egito. Amplie mais seus conhecimentos com a ajuda do Dicionário Bíblico Baker, editado pela CPAD, página 267.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Deus revelou-se a Jacó em sonhos, iniciando um processo de transformação em sua vida.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Os Anjos de Deus.', x:'A visão dos anjos que Jacó teve sugere que eles desempenhavam importante papel ao guiar e proteger o povo de Deus. Sob o novo concerto, o plano e a promessa de Deus de salvar as pessoas do pecado por meio do sacrifício de seu Filho, Jesus Cristo, os anjos também são ativos na vida das pessoas. Deus apareceu a Jacó com a mensagem de que a bênção prometida a seu avô, Abraão, continuaria por meio dele. Confira Gênesis, capítulo 12, versículo 3; e Gênesis, capítulo 13, versículos 14 a 17. Esta bênção incluía a presença de Deus, a sua orientação e proteção. Bíblia de Estudo Pentecostal para Jovens. Rio de Janeiro, CPAD, página 56.'},
+
+ {t:'topic', x:'Tópico 2. As descobertas de Jacó.'},
+ {t:'subtopic', x:'1. Jacó descobriu a presença de Deus.'},
+ {t:'body', x:'Depois de despertar do seu sono, Jacó disse: na verdade, o Senhor está neste lugar, e eu não o sabia. Gênesis, capítulo 28, versículo 16. Ele estava vivendo um dos piores momentos de sua vida, fugindo do seu lar em direção à casa de seu tio, e correndo o risco de ser morto por Esaú. No entanto, é nesse momento de adversidade que Deus revelou-se e mostrou que Jacó não estava sozinho. Isso nos lembra Jó, que disse que a dor e a aflição fizeram-no conhecer a Deus de modo pessoal. Jó, capítulo 42, versículo 5.'},
+ {t:'subtopic', x:'2. Jacó descobriu a Casa de Deus.'},
+ {t:'body', x:'Jacó ficou tão impactado com seu sonho, com a revelação de Deus e sua presença naquele lugar, que exclamou com temor: quão terrível é este lugar! Este não é outro lugar senão a Casa de Deus. Gênesis, capítulo 28, versículo 17. Foi uma experiência extraordinária. Sozinho, em meio à escuridão, ele jamais esperaria ter um encontro tão real com Deus. O Senhor estava iniciando um processo de transformação na vida de Jacó. Haveria uma mudança de dentro para fora no patriarca.'},
+ {t:'subtopic', x:'3. Jacó descobriu a porta dos céus.'},
+ {t:'body', x:'Sabemos que uma porta é uma abertura, através da qual temos acesso a determinado ambiente. Na Nova Aliança, conforme nos revela a Palavra de Deus, a porta de acesso aos céus é Jesus Cristo. Ele mesmo declarou: eu sou a porta; se alguém entrar por mim, salvar-se-á, e entrará, e sairá, e achará pastagens. João, capítulo 10, versículo 9. Hoje, não há outra maneira de chegar-se a Deus, ser transformado e santificado, senão por intermédio de Jesus Cristo.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Depois do seu encontro transformador com Deus, Jacó fez muitas descobertas.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Jacó.', x:'Ele fazia tudo, o certo e o errado, com grande zelo. Ele enganou seu próprio irmão Esaú, e seu pai, Isaque. Ele lutou com Deus, e trabalhou catorze anos para se casar com a mulher que amava. Por intermédio de Jacó, aprendemos como um forte líder pode, também, ser um servo. Também vemos como ações erradas sempre voltam para nos perturbar. Depois de enganar Esaú, Jacó correu para salvar sua vida, viajando mais de 640 quilômetros até Harã, onde vivia seu tio, Labão. Pelo caminho, ele recebeu uma mensagem do Senhor, em um sonho, e deu a esse lugar o nome de Betel. Em Harã, Jacó se casou e iniciou uma família. Bíblia de Estudo Cronológica Aplicação Pessoal. Rio de Janeiro, CPAD, página 58.'},
+
+ {t:'topic', x:'Tópico 3. A coluna de Betel.'},
+ {t:'subtopic', x:'1. A pedra transformada em coluna.'},
+ {t:'body', x:'Cheio de fé e de entusiasmo, Jacó decidiu demonstrar sua gratidão a Deus de forma bem concreta, plena de sentido e de devoção sincera. Ele poderia ter feito somente uma oração de gratidão a Deus por tudo o que lhe proporcionara, demonstrando seu amor e seu cuidado, mas o fez de modo bem real e visível. Ele levantou-se de madrugada, tomou a pedra que lhe servira de travesseiro e a levantou como uma coluna, que serviria de memorial ao Senhor. Gênesis, capítulo 28, versículo 18. Jacó derramou azeite sobre a pedra e apelidou aquele lugar, que antes se chamava Luz, de Betel, que significa Casa de Deus. Pela fé, Jacó viu não apenas uma coluna de pedra, mas um lugar especial de adoração ao Senhor.'},
+ {t:'subtopic', x:'2. O voto de gratidão a Deus.'},
+ {t:'body', x:'Gênesis, capítulo 28, versículos 20 a 22. Após consagrar a coluna de Betel, Jacó fez um voto a Deus, movido por um sentimento de fé e de profunda gratidão. Ele prometeu que, se Deus fosse com ele, e o guardasse na viagem, e lhe desse pão para comer e vestes para vestir, e se um dia voltasse em paz à casa de seu pai, o Senhor seria o seu Deus. Também prometeu que certamente daria o dízimo de tudo quanto Deus desse a ele. Gênesis, capítulo 28, versículos 21 e 22. Ele prometeu seguir o exemplo de Melquisedeque, que deu o dízimo de tudo a Abraão depois de grande vitória sobre seus inimigos. Hebreus, capítulo 7, versículos 1, 2 e 4.'},
+ {t:'subtopic', x:'3. O concerto de Deus com Jacó.'},
+ {t:'body', x:'As bênçãos do concerto eram transmitidas ao primogênito, mas com a família de Isaque seria diferente, pois Deus revelou que o filho mais velho serviria o mais novo. Já vimos que Esaú não deu importância à sua primogenitura, Gênesis, capítulo 25, versículo 31, e, como consequência, Jacó, que realmente desejava as bênçãos, recebeu as promessas que Esaú perdera. Gênesis, capítulo 28, versículos 13 a 15. Assim como foi com os patriarcas Abraão e Isaque, o concerto com Jacó exigia obediência e fé. Romanos, capítulo 1, versículo 5. Sem fé, ninguém pode agradar a Deus. A princípio, Jacó não demonstrou confiança no Senhor, mas fez uso de sua esperteza, do seu engano. Contudo, quando ele tem um encontro transformador com Deus e decide obedecê-lo, o Senhor renovou pessoalmente a ele as promessas de concerto. Gênesis, capítulo 35, versículos 9 a 13.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Jacó ergue uma coluna em Betel e faz um voto ao Senhor.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A história de Jacó mudou completamente depois que ele teve um encontro com Deus, quando caminhava em direção à casa de seu tio Labão. Em meio à noite escura, quando dormia, com a cabeça posta sobre uma pedra, solitário, teve um sonho que mudou sua vida. Deus revelou-se para ele em sonho. Aprendemos com a história de Jacó que somente o Senhor pode transformar uma pessoa e mudar sua história.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'O que Jacó viu em seu sonho? Em seu sonho, ele viu uma escada cujo topo tocava nos céus. Os anjos de Deus subiam e desciam por ela. Gênesis, capítulo 28, versículo 12.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'O que Hebreus, capítulo 1, versículo 14, diz a respeito dos anjos? A Bíblia diz que os anjos são espíritos ministradores. Hebreus, capítulo 1, versículo 14.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'De acordo com a lição, quais são as descobertas de Jacó? Jacó descobriu a presença de Deus, a Casa de Deus e a porta dos céus.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'O que significa Betel? Betel significa Casa de Deus.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Qual foi o voto de Jacó? Gênesis, capítulo 28, versículos 20 a 22. Ele prometeu que, se Deus fosse com ele, e o guardasse na viagem, e lhe desse pão para comer e vestes para vestir, e se um dia voltasse em paz à casa de seu pai, o Senhor seria o seu Deus. Também prometeu que, de tudo quanto Deus lhe desse, certamente daria o dízimo.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>

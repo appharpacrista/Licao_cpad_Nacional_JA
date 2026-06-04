@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="app" data-app="licao-cpad-mes">
+<title>Mês 3 — Segundo Trimestre — Lições Bíblicas CPAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f1e8; --bg-paper:#faf6ec; --ink:#1a1612; --ink-soft:#4a4036;
+    --ink-mute:#8a7f72; --rule:#d9cfbe; --accent:#8b2c0f; --accent-soft:#c4632e;
+    --highlight:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle at 20% 30%,rgba(139,44,15,0.03) 0%,transparent 50%),
+      radial-gradient(circle at 80% 70%,rgba(74,64,54,0.04) 0%,transparent 50%);z-index:0;}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.4;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");z-index:1;}
+  .wrapper{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 48px;}
+
+  /* breadcrumb */
+  .crumb{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--ink-mute);padding:34px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .crumb a{color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--ink-mute);transition:.2s;}
+  .crumb a:hover{color:var(--accent);border-color:var(--accent);}
+  .crumb span.sep{color:var(--rule);}
+  .crumb .here{color:var(--accent);}
+
+  header{padding:40px 0 60px;border-bottom:1px solid var(--rule);position:relative;}
+  header.top{padding:80px 0 60px;}
+  .header-grid{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.22em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:28px;display:flex;align-items:center;gap:14px;}
+  .eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2.8rem,6vw,4.6rem);
+    line-height:1.02;letter-spacing:-0.02em;margin:0 0 24px;color:var(--ink);}
+  h1 em{font-style:italic;font-weight:400;color:var(--accent);}
+  .subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.35rem;
+    color:var(--ink-soft);max-width:560px;margin:0;font-weight:400;}
+  .header-meta{text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+    letter-spacing:0.12em;color:var(--ink-mute);line-height:1.9;}
+  .header-meta strong{color:var(--ink);font-weight:500;}
+
+  .intro{padding:60px 0;display:grid;grid-template-columns:220px 1fr;gap:60px;border-bottom:1px solid var(--rule);}
+  .intro-label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--ink-mute);padding-top:10px;}
+  .intro-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.5;color:var(--ink-soft);margin:0;font-weight:400;}
+  .intro-text .drop{float:left;font-size:4.6rem;line-height:0.85;padding:8px 12px 0 0;color:var(--accent);font-weight:600;}
+
+  .files-section{padding:60px 0;}
+  .files-section + .files-section{padding-top:0;}
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.2rem;letter-spacing:-0.01em;margin:0;}
+  .count{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;color:var(--ink-mute);text-transform:uppercase;}
+
+  .file-list{list-style:none;padding:0;margin:0;}
+  .file-list li{border-bottom:1px solid var(--rule);}
+  .file-list li:first-child{border-top:1px solid var(--rule);}
+  .file-list a{display:grid;grid-template-columns:60px 1fr auto auto;align-items:center;gap:24px;
+    padding:22px 8px;text-decoration:none;color:var(--ink);
+    transition:all 0.35s cubic-bezier(0.2,0.8,0.2,1);position:relative;}
+  .file-list a::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);
+    transition:width 0.35s cubic-bezier(0.2,0.8,0.2,1);}
+  .file-list a:hover{background:var(--bg-paper);padding-left:24px;}
+  .file-list a:hover::before{width:3px;}
+  .file-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.1em;}
+  .file-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--ink);line-height:1.3;}
+  .file-name em{display:block;font-family:'Inter',sans-serif;font-size:0.78rem;font-style:normal;font-weight:400;
+    color:var(--ink-mute);margin-top:4px;letter-spacing:0.02em;}
+  .file-type{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--ink-mute);padding:4px 10px;border:1px solid var(--rule);border-radius:2px;background:var(--bg-paper);}
+  .file-type[data-type="pdf"]{color:var(--accent);border-color:var(--accent);}
+  .file-type[data-type="docx"]{color:#2c5282;border-color:#b8c8dc;}
+  .file-type[data-type="html"]{color:#6b46c1;border-color:#d4c5e8;}
+  .file-type[data-type="mp3"]{color:#2d6a4f;border-color:#b8d4c2;}
+  .file-type[data-type="dir"]{color:var(--accent);border-color:var(--accent);}
+  .open-arrow{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);letter-spacing:0.1em;transition:transform 0.3s ease;}
+  .file-list a:hover .open-arrow{transform:translateX(6px);}
+
+  /* destaque do leitor */
+  .reader-card{display:flex;align-items:center;gap:22px;border:1px solid var(--accent);background:var(--bg-paper);
+    border-radius:4px;padding:24px 26px;text-decoration:none;color:var(--ink);
+    transition:all .3s cubic-bezier(0.2,0.8,0.2,1);}
+  .reader-card:hover{background:#fff;box-shadow:0 10px 30px -18px rgba(139,44,15,.5);transform:translateY(-2px);}
+  .reader-ico{font-size:1.8rem;color:var(--accent);}
+  .reader-card .rc-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;}
+  .reader-card .rc-s{font-size:0.8rem;color:var(--ink-mute);margin-top:2px;}
+  .reader-card .open-arrow{margin-left:auto;}
+
+  /* players de audio */
+  .audio-grid{display:grid;gap:18px;margin-top:8px;}
+  .audio-row{border:1px solid var(--rule);background:var(--bg-paper);border-radius:4px;padding:16px 18px;}
+  .audio-row .an{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:10px;color:var(--ink);}
+  .audio-row audio{width:100%;}
+
+  /* accordion ano completo */
+  details.tree{border-bottom:1px solid var(--rule);}
+  details.tree:first-of-type{border-top:1px solid var(--rule);}
+  details.tree > summary{cursor:pointer;list-style:none;padding:22px 8px;display:grid;
+    grid-template-columns:60px 1fr auto;gap:24px;align-items:center;transition:.3s;}
+  details.tree > summary::-webkit-details-marker{display:none;}
+  details.tree > summary:hover{background:var(--bg-paper);}
+  details.tree .tnum{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--ink-mute);letter-spacing:0.1em;}
+  details.tree .tname{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;}
+  details.tree .tmark{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);}
+  details.tree[open] .tmark{transform:rotate(90deg);}
+  .tmark{display:inline-block;transition:transform .25s;}
+  .tree-body{padding:0 8px 18px 60px;}
+  .tree-body .mrow{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline;padding:10px 0;border-top:1px dashed var(--rule);}
+  .tree-body .mrow a{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;}
+  .tree-body .mrow a:hover{border-color:var(--accent);}
+  .tree-body .mfiles{font-size:0.78rem;color:var(--ink-mute);}
+
+  footer{border-top:1px solid var(--rule);padding:50px 0 60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;}
+  .colofon{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--ink-soft);line-height:1.5;max-width:420px;}
+  .colofon::before{content:'\2766';display:block;color:var(--accent);font-size:1.5rem;margin-bottom:12px;font-style:normal;}
+  .copyright{text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--ink-mute);line-height:1.9;}
+  .copyright a{color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--ink-mute);}
+  .copyright a:hover{color:var(--accent);border-color:var(--accent);}
+
+  .reveal{opacity:0;transform:translateY(20px);animation:revealUp 0.9s cubic-bezier(0.2,0.8,0.2,1) forwards;}
+  .reveal-1{animation-delay:0.05s;} .reveal-2{animation-delay:0.18s;}
+  .reveal-3{animation-delay:0.32s;} .reveal-4{animation-delay:0.48s;}
+  .file-list li,details.tree{opacity:0;transform:translateX(-12px);animation:revealRight 0.7s cubic-bezier(0.2,0.8,0.2,1) forwards;}
+  .file-list li:nth-child(1),details.tree:nth-of-type(1){animation-delay:0.55s;}
+  .file-list li:nth-child(2),details.tree:nth-of-type(2){animation-delay:0.62s;}
+  .file-list li:nth-child(3),details.tree:nth-of-type(3){animation-delay:0.69s;}
+  .file-list li:nth-child(4),details.tree:nth-of-type(4){animation-delay:0.76s;}
+  .file-list li:nth-child(5){animation-delay:0.83s;}
+  .file-list li:nth-child(6){animation-delay:0.90s;}
+  @keyframes revealUp{to{opacity:1;transform:translateY(0);}}
+  @keyframes revealRight{to{opacity:1;transform:translateX(0);}}
+
+  @media(max-width:768px){
+    .wrapper{padding:0 24px;}
+    header.top{padding:50px 0 40px;}
+    .header-grid{grid-template-columns:1fr;}
+    .header-meta{text-align:left;}
+    .intro{grid-template-columns:1fr;gap:20px;padding:40px 0;}
+    .file-list a,details.tree > summary{grid-template-columns:40px 1fr auto;gap:14px;padding:18px 6px;}
+    .file-type{display:none;}
+    .file-name,.tname{font-size:1.1rem;}
+    .tree-body{padding-left:46px;}
+    .reader-card{flex-wrap:wrap;}
+    footer{grid-template-columns:1fr;}
+    .copyright{text-align:left;}
+  }
+</style>
+</head>
+<body data-app="licao-cpad-mes">
+<div class="wrapper">
+  <nav class="crumb reveal reveal-1"><a href="../../index.html">Início</a><span class="sep">›</span><a href="../index.html">Segundo Trimestre</a><span class="sep">›</span><span class="here">Mês 3</span></nav>
+
+  <header>
+    <div class="header-grid">
+      <div>
+        <div class="eyebrow reveal reveal-1">Trimestre II · Mês 3</div>
+        <h1 class="reveal reveal-2">Mês 3 <em>· Lições</em></h1>
+        <p class="subtitle reveal reveal-3">Os arquivos abaixo são lidos automaticamente desta pasta.</p>
+      </div>
+      <div class="header-meta reveal reveal-3">
+        <div><strong>Trimestre</strong> · <a href="../index.html" style="color:var(--ink);text-decoration:underline;">Trimestre II</a></div>
+        <div><strong>Arquivos</strong> · <span id="tcount">…</span></div>
+        <div><strong>Raiz</strong> · <a href="../../index.html" style="color:var(--ink);text-decoration:underline;">início</a></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="files-section">
+    <div class="section-head">
+      <h2>Leitor de áudio</h2>
+      <span class="count">acessível · voz alta</span>
+    </div>
+    <a class="reader-card" href="../../Licao_11_leitor_audio.html">
+      <span class="reader-ico">▣</span>
+      <span>
+        <span class="rc-t">Abrir o leitor da lição</span>
+        <span class="rc-s">leitura em voz alta com destaque de palavras</span>
+      </span>
+      <span class="open-arrow">abrir →</span>
+    </a>
+  </section>
+
+  <section class="files-section">
+    <div class="section-head">
+      <h2>Áudios desta pasta</h2>
+      <span class="count" id="acount">lendo…</span>
+    </div>
+    <div class="audio-grid" id="players">
+      <p class="intro-text">Lendo os arquivos da pasta…</p>
+    </div>
+  </section>
+
+  <section class="files-section">
+    <div class="section-head">
+      <h2>Conteúdo da pasta</h2>
+      <span class="count" id="tcount_body">…</span>
+    </div>
+    <p class="intro-text" id="dirstatus" style="font-size:1rem;margin:0 0 18px;color:var(--ink-mute);">Lendo automaticamente o conteúdo desta pasta…</p>
+    <ul class="file-list" id="filelist"></ul>
+  </section>
+
+  <footer>
+    <p class="colofon">
+      Repositório de lições — Lições Bíblicas CPAD, organizado por trimestre e mês ao longo do ano.
+      Composto em Cormorant Garamond e JetBrains Mono.
+    </p>
+    <div class="copyright">
+      <div>© 2026 · Eduardo de Souza</div>
+      <div><a href="https://github.com/" target="_blank" rel="noopener">github</a> · <a href="mailto:edueandreia@ufmg.br">edueandreia@ufmg.br</a></div>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  const READER = "../../Licao_11_leitor_audio.html";
+  const AUDIO_RE = /\.(mp3|m4a|ogg|oga|wav|aac|flac|opus)$/i;
+
+  const elPlayers = document.getElementById('players');
+  const elList    = document.getElementById('filelist');
+  const elCount   = document.getElementById('acount');
+  const elTotal   = document.getElementById('tcount');
+  const elTotalB  = document.getElementById('tcount_body');
+  const elStatus  = document.getElementById('dirstatus');
+
+  function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+  // caminho da pasta atual (sem o index.html)
+  function folderPath(){
+    let p = location.pathname.replace(/[^\/]*$/, ''); // remove arquivo final
+    if(!p.endsWith('/')) p += '/';
+    return p;
+  }
+
+  // 1) GitHub Pages -> API de conteúdos do repositório
+  async function viaGitHub(){
+    const host = location.hostname;
+    if(!/\.github\.io$/i.test(host)) return null;
+    const owner = host.split('.')[0];
+    const segs = folderPath().split('/').filter(Boolean); // [repo, trimestre_x, MesY]
+    if(segs.length < 1) return null;
+    const repo = segs[0];
+    const sub  = segs.slice(1).join('/');
+    const api = `https://api.github.com/repos/${owner}/${repo}/contents/${sub}`;
+    const r = await fetch(api, {headers:{'Accept':'application/vnd.github+json'}});
+    if(!r.ok) throw new Error('GitHub API '+r.status);
+    const arr = await r.json();
+    if(!Array.isArray(arr)) return null;
+    return arr.filter(x=>x.type==='file').map(x=>x.name);
+  }
+
+  // 2) Servidor com índice de diretório (Apache/nginx/http.server sem index)
+  async function viaAutoindex(){
+    const r = await fetch(folderPath(), {headers:{'Accept':'text/html'}});
+    if(!r.ok) throw new Error('autoindex '+r.status);
+    const txt = await r.text();
+    // se voltou a própria página (tem nosso marcador), não há listagem
+    if(txt.includes('data-app="licao-cpad-mes"')) return null;
+    const doc = new DOMParser().parseFromString(txt, 'text/html');
+    const out = [];
+    doc.querySelectorAll('a[href]').forEach(a=>{
+      let h = a.getAttribute('href');
+      if(!h) return;
+      try{ h = decodeURIComponent(h); }catch(e){}
+      if(h.startsWith('?')||h.startsWith('/')||h.includes('://')) return;
+      if(h==='./'||h==='../'||h.endsWith('/')) return;       // pula pastas
+      h = h.split('?')[0].split('#')[0];
+      if(h && !out.includes(h)) out.push(h);
+    });
+    return out.length ? out : null;
+  }
+
+  function render(files){
+    files = files.slice().sort((a,b)=>a.localeCompare(b,'pt'));
+    const audios = files.filter(f=>AUDIO_RE.test(f));
+
+    // players inline para os áudios
+    if(audios.length){
+      elPlayers.innerHTML = audios.map(f=>`
+        <div class="audio-row">
+          <div class="an">${escapeHtml(f)}</div>
+          <audio controls preload="none" src="${encodeURI(f)}"></audio>
+        </div>`).join('');
+    } else {
+      elPlayers.innerHTML = '<p class="intro-text">Nenhum arquivo de áudio nesta pasta.</p>';
+    }
+    elCount.textContent = audios.length + ' arquivo(s) de áudio';
+
+    // lista de TODOS os arquivos + o leitor
+    let i = 0, rows = '';
+    files.forEach(f=>{
+      i++;
+      const ext = (f.split('.').pop()||'').toLowerCase();
+      const type = AUDIO_RE.test(f) ? 'mp3' : (ext.length<=4 ? ext : 'arq');
+      const sub  = AUDIO_RE.test(f) ? 'arquivo de áudio nesta pasta' : 'arquivo nesta pasta';
+      rows += `
+      <li><a href="${encodeURI(f)}">
+        <span class="file-num">${String(i).padStart(2,'0')}</span>
+        <span class="file-name">${escapeHtml(f)}<em>${sub}</em></span>
+        <span class="file-type" data-type="${escapeHtml(type)}">${escapeHtml(ext||'arq')}</span>
+        <span class="open-arrow">abrir →</span>
+      </a></li>`;
+    });
+    // leitor (arquivo único, na raiz)
+    i++;
+    rows += `
+      <li><a href="${READER}">
+        <span class="file-num">${String(i).padStart(2,'0')}</span>
+        <span class="file-name">Leitor de áudio da lição<em>leitura em voz alta — arquivo único do repositório</em></span>
+        <span class="file-type" data-type="html">html</span>
+        <span class="open-arrow">abrir →</span>
+      </a></li>`;
+    elList.innerHTML = rows;
+    elTotal.textContent = i; elTotalB.textContent = i + " itens";
+    elStatus.textContent = files.length + ' arquivo(s) lido(s) da pasta';
+  }
+
+  function fail(msg){
+    elPlayers.innerHTML = '';
+    elList.innerHTML = `
+      <li><a href="${READER}">
+        <span class="file-num">01</span>
+        <span class="file-name">Leitor de áudio da lição<em>leitura em voz alta — arquivo único do repositório</em></span>
+        <span class="file-type" data-type="html">html</span>
+        <span class="open-arrow">abrir →</span>
+      </a></li>`;
+    elTotal.textContent = '—'; if(elTotalB) elTotalB.textContent = '—';
+    elCount.textContent = '—';
+    elStatus.textContent = msg;
+  }
+
+  (async function(){
+    try{
+      let files = null;
+      try{ files = await viaGitHub(); }catch(e){}
+      if(files === null){ try{ files = await viaAutoindex(); }catch(e){} }
+      if(files === null){
+        fail('Listagem automática indisponível neste modo. Publique no GitHub Pages (ou sirva a pasta por um servidor com índice de diretório) para ver todos os arquivos.');
+        return;
+      }
+      // ignora o próprio index.html da lista visível, mas mantém o resto
+      files = files.filter(f=>f.toLowerCase()!=='index.html');
+      render(files);
+    }catch(err){
+      fail('Não foi possível ler a pasta: ' + err.message);
+    }
+  })();
+})();
+</script>
+
+</div>
+</body>
+</html>
