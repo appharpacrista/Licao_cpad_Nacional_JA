@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 12 — A Reconciliação de Jacó com Esaú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 12</div>
+    <div class="date">21 de Junho de 2026</div>
+    <h1 class="title">A Reconciliação de Jacó com Esaú</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Então, Esaú correu-lhe ao encontro e abraçou-o; e lançou-se sobre o seu pescoço e beijou-o; e choraram." Gênesis, capítulo 33, versículo 4.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body',  x:'Em Deus, sempre há possibilidade de perdão e reconciliação.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. João, capítulo 13, versículos 34 e 35. Amar uns aos outros.'},
+ {t:'daily', x:'Terça. Mateus, capítulo 6, versículo 12. Perdoando como somos perdoados.'},
+ {t:'daily', x:'Quarta. Colossenses, capítulo 3, versículo 13. Perdoando uns aos outros.'},
+ {t:'daily', x:'Quinta. Mateus, capítulo 6, versículo 15. Quem não perdoa não será perdoado.'},
+ {t:'daily', x:'Sexta. Hebreus, capítulo 10, versículo 17. Deus perdoa e esquece a ofensa.'},
+ {t:'daily', x:'Sábado. Mateus, capítulo 18, versículos 21 e 22. Até setenta vezes sete.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Gênesis, capítulo 33, versículos 1 a 10.'},
+ {t:'verse', x:'Versículo 1. E levantou Jacó os olhos e olhou, e eis que vinha Esaú, e quatrocentos homens com ele. Então, repartiu os filhos entre Leia, e Raquel, e as duas servas.'},
+ {t:'verse', x:'Versículo 2. E pôs as servas e seus filhos na frente, e a Leia e a seus filhos, atrás; porém a Raquel e José, os derradeiros.'},
+ {t:'verse', x:'Versículo 3. E ele mesmo passou adiante deles e inclinou-se à terra sete vezes, até que chegou a seu irmão.'},
+ {t:'verse', x:'Versículo 4. Então, Esaú correu-lhe ao encontro e abraçou-o; e lançou-se sobre o seu pescoço e beijou-o; e choraram.'},
+ {t:'verse', x:'Versículo 5. Depois, levantou os seus olhos, e viu as mulheres e os meninos, e disse: Quem são estes contigo? E ele disse: Os filhos que Deus graciosamente tem dado a teu servo.'},
+ {t:'verse', x:'Versículo 6. Então, chegaram as servas, elas e os seus filhos, e inclinaram-se.'},
+ {t:'verse', x:'Versículo 7. E chegou também Leia com seus filhos, e inclinaram-se; e, depois, chegaram José e Raquel e inclinaram-se.'},
+ {t:'verse', x:'Versículo 8. E disse Esaú: De que te serve todo este bando que tenho encontrado? E ele disse: Para achar graça aos olhos de meu senhor.'},
+ {t:'verse', x:'Versículo 9. Mas Esaú disse: Eu tenho bastante, meu irmão; seja para ti o que tens.'},
+ {t:'verse', x:'Versículo 10. Então, disse Jacó: Não! Se, agora, tenho achado graça a teus olhos, peço-te que tomes o meu presente da minha mão, porquanto tenho visto o teu rosto, como se tivesse visto o rosto de Deus; e tomaste contentamento em mim.'},
+ {t:'body', x:'Hinos sugeridos: oitenta e três, quinhentos e setenta e oito, e quinhentos e noventa e três, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Nessa lição, veremos o encontro e a reconciliação de Jacó com seu irmão Esaú. Jacó enganou seu irmão, mas depois foi ludibriado por seu sogro. O tempo de preparo na vida de Jacó, na casa de seu tio e sogro, havia terminado. Sua saída de Harã foi por direção de Deus. Gênesis, capítulo 31, versículos 3 e 13. Desse modo, Jacó empreendeu uma fuga com sua família, e logo foi perseguido pelo sogro. Contudo, este não pôde lhe fazer mal, porque Deus lhe determinou que não lhe falasse nem bem nem mal. Gênesis, capítulo 31, versículo 24. No entanto, Jacó ainda teria que se acertar com seu irmão.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar que Jacó e Esaú tinham sérios conflitos. Segundo, mostrar o encontro de Jacó e Esaú. Terceiro, saber que, depois do encontro com seu irmão, Jacó segue seu caminho.'},
+ {t:'body', x:'Motivação. Tudo indica que havia certa rivalidade entre Esaú e Jacó, resultado da predileção de seus pais. O relacionamento deles parecia não ser o dos melhores, mas tudo piorou depois que Jacó enganou seu pai, mentiu e tomou a bênção no lugar do seu irmão. Isso só agravou o relacionamento entre os irmãos; no entanto, a distância entre os irmãos, o tempo e a ação de Deus no coração deles fizeram com que houvesse arrependimento, perdão e reconciliação.'},
+ {t:'body', x:'Sugestão de Método. Nesta lição, estudaremos o encontro de Esaú e seu irmão Jacó. Eles tiveram um relacionamento difícil que muito tem a nos ensinar a respeito da prática do perdão. Infelizmente, muitos crentes não perdoam com facilidade os agravos recebidos. Por isso, aproveite a temática da lição para tratar a respeito do assunto. Sabemos que o perdão envolve um ofensor e um ofendido: aquele que cometeu a ofensa e aquele que sofreu a ofensa. Portanto, oriente os alunos a respeito do valor do perdão como mandamento divino e como um fator decisivo para a saúde mental e dos relacionamentos.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Depois de fazer toda a exposição dos tópicos da Lição, aplique as verdades estudadas, mostrando que é um dever do crente o perdão e a reconciliação, em especial no âmbito familiar.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 105, página 42, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Perdão, localizado depois do segundo tópico, ajuda a compreender a necessidade e a importância do perdão. Segundo, o texto Tirai os Deuses Estranhos que há no Meio de Vós, localizado depois do terceiro tópico, ajuda a compreender a idolatria na casa de Labão e Jacó.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Chegou o dia em que finalmente Jacó teria que encontrar seu irmão e acertar as contas com ele. Seu coração estava temeroso e ansioso. Mas Esaú, ao encontrar Jacó, abraçou-o e beijou-o. O inesperado aconteceu! Podemos ver o encontro fraternal entre os dois irmãos, que, pela graça de Deus, tomaram atitudes de valor, perdoando um ao outro. Aquele episódio tinha tudo para dar errado e tornar-se uma tragédia, mas o Senhor interveio. Nessa oportunidade, veremos que o encontro de Esaú com Jacó é um exemplo a ser seguido por todos os que tiverem algum tipo de desentendimento com seus familiares ou outras pessoas próximas.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Reconciliação.'},
+
+ {t:'topic', x:'Tópico 1. Irmãos em Conflito.'},
+ {t:'subtopic', x:'1. Jacó.'},
+ {t:'body', x:'Já vimos que Jacó lutou com o anjo, e essa luta resultou em uma transformação de caráter e em bênção de Deus sobre a sua vida. Esse episódio, em meio a circunstâncias adversas, fez com que Jacó compreendesse que a sua vida e o seu sucesso dependiam somente do Senhor. Nunca foi resultado de seus métodos e habilidades, mas da ajuda, orientação e bênção do Deus de Abraão e Isaque. Em nossa jornada cristã, também não podemos nos esquecer de que tudo que temos e somos vem do Senhor. Não lutamos fisicamente com os anjos, como fez Jacó, mas podemos lutar por intermédio da persistente oração, do jejum e da adoração até que vejamos o agir transformador de Deus em nossa vida e na vida de nossos familiares. Lucas, capítulo 11, versículos 5 a 10.'},
+ {t:'subtopic', x:'2. Esaú.'},
+ {t:'body', x:'Ao que parece, Deus não somente transformou Jacó, mas também, com o passar dos anos, trabalhou no coração de Esaú. Transformar o ser humano, seu caráter, sua personalidade e suas emoções é algo que somente o Criador pode fazer. A religião não tem esse poder, e o casamento, por melhor que seja o cônjuge, também não. O primogênito de Isaque perdeu a sua bênção porque a trocou por um prato de ensopado. Confira Gênesis, capítulo 25, versículos 31 a 34. Ao ser enganado pelo irmão, Esaú demonstrou raiva intensa e desejo de vingança. Contudo, não parece ter sentido tristeza pelas suas escolhas pecaminosas. O filho predileto de Isaque enfrentou as difíceis consequências de suas equivocadas escolhas. Mas agora ele desejava resolver as diferenças com o irmão de forma pacífica. No entanto, precisamos ressaltar que a atitude amistosa de Esaú foi a resposta de Deus à oração de Jacó. Gênesis, capítulo 32, versículo 11.'},
+ {t:'subtopic', x:'3. Raquel.'},
+ {t:'body', x:'É interessante ressaltar que Jacó colocou as servas e seus filhos à frente, depois Leia e seus filhos. Porém, sua amada Raquel e seu amado filho José colocou por último, em uma tentativa de protegê-los. Gênesis, capítulo 33, versículo 1. Essa maneira de agir de Jacó certamente causava ciúmes e divisões entre as famílias. Para que a disfunção familiar não seja uma realidade, é preciso que cônjuges e pais tenham atenção ao modo como os relacionamentos familiares são construídos. Toda forma de predileção deve ser evitada para que tenhamos uma família funcional.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Esaú e Jacó eram irmãos, mas viviam em conflito e tinham muito que se acertar.'},
+
+ {t:'topic', x:'Tópico 2. O Encontro entre Jacó e Esaú.'},
+ {t:'subtopic', x:'1. Deus entra em ação.'},
+ {t:'body', x:'Jacó ficou angustiado, com o coração cheio de temor. Quando viu o rosto do irmão de perto, deixou seu pequeno grupo para trás, adiantou-se e inclinou-se à terra sete vezes, até que chegou a seu irmão. Gênesis, capítulo 33, versículo 3. Àquela altura, pela bondade e intervenção de Deus, as incertezas e o medo já haviam se dissipado. Jacó tomou a iniciativa de ir em direção a Esaú e, em atitude de humildade, não se inclinou apenas uma ou duas vezes, como era comum naquela cultura, mas inclinou-se sete vezes. A humildade tem poder para dissipar a ira e nos conceder paz, vitória e descanso; por isso, Jesus nos convida a aprendermos com Ele, que é manso e humilde de coração. Mateus, capítulo 11, versículo 28.'},
+ {t:'subtopic', x:'2. Esaú abraça e beija Jacó.'},
+ {t:'body', x:'Não temos dúvida de que a mão de Deus moveu-se entre os dois irmãos. Certamente o Altíssimo já estava trabalhando nos sentimentos de Esaú, que, ao ver seu irmão ir ao seu encontro com tanta humildade, inclinando-se ao chão inúmeras vezes, toda a sua ira, mágoa ou cólera contra Jacó não tiveram mais lugar. Gênesis, capítulo 33, versículo 4. Somente Deus poderia promover tão grande reconciliação, pois, segundo afirma o escritor de Provérbios: O irmão ofendido é mais difícil de conquistar do que uma cidade forte; e as contendas são como ferrolhos de um palácio. Provérbios, capítulo 18, versículo 19.'},
+ {t:'subtopic', x:'3. O perdão verdadeiro.'},
+ {t:'body', x:'Houve, de fato, arrependimento e perdão entre os irmãos. Podemos afirmar que o Inimigo desejou a morte de Jacó e, assim, a quebra da promessa divina a Abraão. Ele, porém, foi envergonhado, e o nome do Deus de Abraão foi glorificado. Como seria precioso se, hoje, irmãos que estão carregando mágoas no coração se deixassem ser tocados pelo Deus de Abraão, Isaque e Jacó e fossem restaurados, envergonhando o Diabo. Desejamos que o ofendido vá ao encontro do ofensor; abracem-se e reconciliem-se como fizeram Esaú e Jacó. O caminho para a reconciliação não é deixar para lá nem entregar a Deus, mas é procurar o ofendido e, com amor, buscar o entendimento, como ensinou Jesus. Mateus, capítulo 18, versículos 15 a 17.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Esaú e Jacó se encontram e se perdoam.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Perdão.', x:'Biblicamente falando, perdoar é menos uma mudança de sentimentos, ou emoções, e mais uma restauração real de um relacionamento. Trata-se de reparar um dano, processo que é geralmente caro e doloroso. O perdão expressa o caráter do Deus misericordioso, que perdoa avidamente os pecadores que confessam os seus pecados, arrependem-se das suas transgressões e expressam isso por meio de ações apropriadas. O perdão nunca é questão de direito humano; é exclusivamente uma expressão graciosa do cuidado amoroso de Deus. A necessidade humana de perdão decorre de ações decorrentes da sua natureza decaída. Essas ações, ou não ações, feitas deliberadamente ou por coincidência, destroem a relação das pessoas com Deus, a qual só pode ser restaurada pela misericórdia perdoadora de Deus. Efésios, capítulo 2, versículo 1. Durante a aliança mosaica, o pecado colocou os ofensores sob a ira de Deus, entre os ímpios. O resgate desse destino poderia ser obtido somente pelo perdão de Deus, que era obtido por meio do arrependimento e do sacrifício. Embora o sacrifício fosse necessário para expressar o verdadeiro arrependimento, é um erro considerá-lo um pagamento que poderia comprar o perdão de Deus. Primeiro Samuel, capítulo 15, versículo 22; Provérbios, capítulo 21, versículo 3; Eclesiastes, capítulo 5, versículo 1; e Oseias, capítulo 6, versículo 6. O perdão de Deus continua sendo o seu dom gratuito e imerecido. Ainda que o sistema sacrificial tenha sido abolido, ou melhor, completado por meio de Cristo. Hebreus, capítulo 10, versículo 12. O ensino do Novo Testamento continua a reconhecer as condições para o perdão. Visto que o perdão restaura o relacionamento, o ofensor permanece envolvido e deve desejar a restauração. Lucas, capítulo 13, versículo 3; Lucas, capítulo 24, versículo 47; e Atos, capítulo 2, versículo 38. Deus não concede o seu perdão sem considerar a parte infratora. Dicionário Bíblico Baker. Rio de Janeiro, dois mil e vinte e três, página 389.'},
+
+ {t:'topic', x:'Tópico 3. A Família de Jacó Segue seu Caminho.'},
+ {t:'subtopic', x:'1. Os irmãos se separam.'},
+ {t:'body', x:'Depois do encontro e do perdão entre os irmãos, Esaú voltou para Seir, e Jacó foi para a cidade de Sucote, que significa abrigo, e estabeleceu sua casa ali. Gênesis, capítulo 33, versículo 16. Aprendemos com esse episódio que perdoar não significa andar novamente junto. Pode haver perdão sincero, mas cada um segue o seu caminho e o seu propósito com Deus. O que não podemos é guardar rancor, ressentimento, em nosso coração. Segundo Efésios, capítulo 4, versículo 32, devemos perdoar como também Deus em Cristo nos perdoou.'},
+ {t:'subtopic', x:'2. Jacó não retorna para a casa de seu pai.'},
+ {t:'body', x:'Deus havia ordenado que Jacó retornasse para a casa de seu pai, Isaque. Não sabemos o porquê, mas ele não cumpriu essa determinação divina e instalou-se em Siquém. Confira Gênesis, capítulo 31, versículo 13; e Gênesis, capítulo 35, versículo 1. Sua decisão e escolha teriam consequências ruins que foram reveladas mais tarde. Façamos o que o Senhor nos pediu para fazer, pois Ele é soberano e conhece todas as coisas.'},
+ {t:'subtopic', x:'3. Jacó levanta um altar ao Senhor.'},
+ {t:'body', x:'O patriarca comprou dos filhos de Hamor, pai de Sucote, aquela terra e levantou ali um altar ao Senhor. Gênesis, capítulo 33, versículo 20. Jacó chamou esse altar de Deus, o Deus de Israel, o único e verdadeiro. Gênesis, capítulo 33, versículo 20. Como Abraão e Isaque, ele adorou a Deus, reconhecendo a ajuda e o propósito do Senhor em sua vida. Você tem erguido um altar a Deus em sua casa, como fez Jacó? Quais altares estão sendo erguidos, e para quem, no meio de nossas famílias? Infelizmente, em muitos lares, as redes sociais, filmes e séries estão sendo levantados como altares. Que Deus venha tomar o primeiro lugar em nossa vida e em nossa casa. Mais tarde, depois do trágico incidente que envolveu sua filha Diná, Jacó finalmente foi a Betel, cumprindo a vontade do Senhor. Ali, ele destruiu todos os deuses estrangeiros em sua casa. Gênesis, capítulo 35, versículo 2.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Depois de encontrar seu irmão, Jacó segue seu caminho com sua família.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Tirai os Deuses Estranhos que há no Meio de Vós.', x:'Depois dos terríveis acontecimentos do capítulo 34, Deus disse a Jacó que conduzisse sua família a Betel, onde deveriam ter ficado desde o princípio. A essa altura, Jacó percebeu quanto sua família havia decaído espiritualmente, por isso insistiu com todos de sua casa: Tirai os deuses estranhos que há no meio de vós. Esta renovação espiritual da família de Jacó incluiu: primeiro, remover da casa tudo o que fosse uma ofensa a Deus, versículo 2; segundo, comprometer-se com a santidade pessoal, versículo 2; terceiro, renovar os compromissos com Deus por meio da adoração fiel e verdadeira, versículo 7, e capítulo 28, versículos 20 a 22; quarto, ter comunhão com Deus, versículo 9; e quinto, viver em conformidade com a Palavra de Deus, versículos 10 a 15, e em sacrifício espiritual, versículo 14. O comprometimento renovado de Jacó lhe permitiu vivenciar mais uma vez a presença, a proteção, a revelação e a bênção de Deus. Versículos 5, e 9 a 13. Bíblia de Estudo Pentecostal para Jovens. Rio de Janeiro, CPAD.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'As famílias de Abraão, Isaque e Jacó enfrentaram muitos desafios e dificuldades. Os conflitos familiares ocorridos na casa de Isaque e, posteriormente, na casa de Jacó são consequências da Queda. Gênesis, capítulo 3. Os relacionamentos, em especial os familiares, desde o início da criação, foram afetados por sentimentos de disputa, ódio e inveja. Satanás procura explorar esses sentimentos negativos, estimulando as contendas, a vingança e a separação. Que Deus nos ajude a perdoar como o Senhor perdoou.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'O que a luta entre Jacó e o anjo resultou? Essa luta resultou em uma transformação de caráter e em bênção de Deus sobre a vida de Jacó.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Somente quem pode transformar o ser humano? Transformar o ser humano, seu caráter, sua personalidade e suas emoções é algo que somente o Criador pode fazer.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Por que Esaú perdeu a sua bênção? O primogênito e preferido de Isaque perdeu a sua bênção porque era incrédulo e a trocou por um prato de ensopado. Confira Gênesis, capítulo 25, versículos 31 a 34.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Depois do encontro com Esaú, Jacó foi para qual cidade? Qual o significado do seu nome? Depois do encontro e do perdão entre os irmãos, Esaú voltou para Seir, e Jacó foi para a cidade de Sucote, que significa abrigo, e estabelece sua casa lá. Gênesis, capítulo 33, versículo 16.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Para onde Deus ordenou que Jacó retornasse? Ele cumpriu de imediato? Deus havia ordenado que Jacó retornasse para a casa de seu pai, Isaque. Não sabemos o porquê, mas ele não cumpriu essa determinação divina e instalou-se em Siquém. Confira Gênesis, capítulo 31, versículo 13; e Gênesis, capítulo 35, versículo 1.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
