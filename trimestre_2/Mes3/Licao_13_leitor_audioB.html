@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 13 — O Legado de Fé de Abraão, Isaque e Jacó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 13</div>
+    <div class="date">28 de Junho de 2026</div>
+    <h1 class="title">O Legado de Fé de Abraão, Isaque e Jacó</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível implementado por Eduardo de Souza - edueandreia@gmail.com</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 13.'},
+ {t:'versehead', x:'O Legado de Fé de Abraão, Isaque e Jacó.'},
+ {t:'body', x:'Vinte e oito de junho de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Pela fé, Abraão, sendo chamado, obedeceu, indo para um lugar que havia de receber por herança; e saiu, sem saber para onde ia." Hebreus, capítulo 11, versículo 8.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Abraão, Isaque e Jacó deixaram um legado de fé em Deus para as futuras gerações.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Gênesis, capítulo 12, versículos 1 a 3. O legado da obediência de Abraão.'},
+ {t:'daily', x:'Terça. Hebreus, capítulo 11, versículo 8. O legado da confiança nas promessas.'},
+ {t:'daily', x:'Quarta. Gênesis, capítulo 22, versículos 9 a 12. O legado da entrega total.'},
+ {t:'daily', x:'Quinta. Gênesis, capítulo 24, versículos 12 a 14. O legado espiritual de Isaque.'},
+ {t:'daily', x:'Sexta. Gênesis, capítulo 26, versículos 24 e 25. O legado da perseverança nas promessas.'},
+ {t:'daily', x:'Sábado. Gênesis, capítulo 32, versículos 24 a 28. O legado da transformação de Jacó.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Hebreus, capítulo 11, versículos 8 a 12, e 17 a 21.'},
+ {t:'verse', x:'Versículo 8. Pela fé, Abraão, sendo chamado, obedeceu, indo para um lugar que havia de receber por herança; e saiu, sem saber para onde ia.'},
+ {t:'verse', x:'Versículo 9. Pela fé, habitou na terra da promessa, como em terra alheia, morando em cabanas com Isaque e Jacó, herdeiros com ele da mesma promessa.'},
+ {t:'verse', x:'Versículo 10. Porque esperava a cidade que tem fundamentos, da qual o artífice e construtor é Deus.'},
+ {t:'verse', x:'Versículo 11. Pela fé, também a mesma Sara recebeu a virtude de conceber e deu à luz já fora da idade; porquanto teve por fiel aquele que lho tinha prometido.'},
+ {t:'verse', x:'Versículo 12. Pelo que também de um, e esse já amortecido, descenderam tantos, em multidão, como as estrelas do céu, e como a areia inumerável que está na praia do mar.'},
+ {t:'verse', x:'Versículo 17. Pela fé, ofereceu Abraão a Isaque, quando foi provado, sim, aquele que recebera as promessas ofereceu o seu unigênito.'},
+ {t:'verse', x:'Versículo 18. Sendo-lhe dito: Em Isaque será chamada a tua descendência, considerou que Deus era poderoso para até dos mortos o ressuscitar.'},
+ {t:'verse', x:'Versículo 19. E daí também, em figura, ele o recobrou.'},
+ {t:'verse', x:'Versículo 20. Pela fé, Isaque abençoou Jacó e Esaú, no tocante às coisas futuras.'},
+ {t:'verse', x:'Versículo 21. Pela fé, Jacó, próximo da morte, abençoou cada um dos filhos de José e adorou encostado à ponta do seu bordão.'},
+ {t:'body', x:'Hinos sugeridos: trezentos e setenta e oito, seiscentos e dez, e quinhentos e trinta e cinco, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Nesta lição, encerramos nosso trimestre de estudo sobre a vida dos patriarcas. Certamente nossa fé no Deus de Abraão, Isaque e Jacó foi fortalecida. O mesmo Deus que escolheu, sustentou e conduziu esses homens de fé é o que também nos sustenta hoje, acompanhando nossa jornada até o dia em que estaremos para sempre com Ele. Abraão deixou um legado poderoso para seus descendentes, para os judeus e também para nós, gentios. Ao estudarmos sua vida, aprendemos que o Senhor é soberano e governa a história com sabedoria e propósito. Por isso, confie nas promessas do Pai, assim como os patriarcas confiaram.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, mostrar o legado de fé de Abraão. Segundo, explicar o legado de Isaque. Terceiro, conhecer a escolha e o legado de fé de Jacó.'},
+ {t:'body', x:'Motivação. Assim como Abraão, Isaque e Jacó receberam promessas de Deus e precisaram aguardar com paciência o seu cumprimento, nós também somos chamados a caminhar confiantes, esperando pela maior e mais importante promessa do Pai: a nossa salvação plena. Que aguardemos com fé e perseverança o Grande Dia do Senhor, quando receberemos um corpo glorificado e estaremos para sempre com Ele.'},
+ {t:'body', x:'Sugestão de Método. Inicie a aula perguntando se as promessas de Deus eliminam as lutas da vida e, após ouvir os alunos, mostre que Abraão, Isaque e Jacó receberam promessas, mas enfrentaram impedimentos reais. Explique que Isaque lidou com esterilidade, fome, falta de água e vizinhos invejosos, mas continuou cavando poços e confiando na suficiência divina. Mostre também que Jacó, mesmo tendo enganado e sido enganado, teve um encontro com Deus que transformou seu caráter. Enfatize que as promessas de Deus coexistem com desafios e que a fé perseverante dos patriarcas nos inspira a confiar e avançar apesar das dificuldades, compreendendo que Deus nos fortalece no processo e usa cada situação para revelar seu cuidado, sua fidelidade e seu propósito em nossa jornada.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Depois de fazer toda a exposição dos tópicos da Lição, aplique as verdades estudadas, mostrando que Deus é fiel para com aqueles que nEle confiam e esperam, independentemente das nossas imperfeições.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição 105, página 42, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto A Fé de Abraão, localizado depois do primeiro tópico, traz uma reflexão do modo como as Escrituras Sagradas apresentam a ligação entre Deus e Abraão. Segundo, o texto O Concerto de Deus com Isaque ajuda a nossa compreensão no fato de que Deus procurou estabelecer o concerto abraâmico com cada geração seguinte a partir de Isaque, filho de Abraão. Terceiro, o texto A Graça de Deus nos faz compreender que a chamada e a transformação de Jacó foram resultado da incomensurável graça de Deus.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Com esta lição, encerramos o trimestre de estudos a respeito dos patriarcas Abraão, Isaque e Jacó. Abraão, com quem teve início o povo judeu, Isaque e Jacó têm seus nomes na galeria da fé de Hebreus, capítulo 11. Eles deixaram um legado inestimável para o povo judeu, para a Igreja do Senhor e para toda a humanidade em todos os tempos. Tanto o Judaísmo como o Cristianismo têm o exemplo de fé e obediência dos patriarcas a Deus como padrão para todos os que querem desenvolver uma fé verdadeira e viva no Senhor.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Reconciliação.'},
+
+ {t:'topic', x:'Tópico 1. O Legado de Abraão.'},
+ {t:'subtopic', x:'1. O alcance do legado de fé de Abraão.'},
+ {t:'body', x:'A herança de fé de Abraão não se limitou a Israel e à Igreja de Cristo; ela alcança todas as nações e famílias da terra. Deus lhe disse: E abençoarei os que te abençoarem e amaldiçoarei os que te amaldiçoarem; e em ti serão benditas todas as famílias da terra. Gênesis, capítulo 12, versículo 3. As famílias da terra seriam abençoadas por intermédio de Abraão, pois o Messias nasceria da sua semente. Na genealogia de Jesus, apresentada no Evangelho de Mateus, diz que Jesus, o Messias, era descendente de Davi, filho de Abraão. Mateus, capítulo 1, versículo 1. Os que creem em Jesus como Salvador, pela fé, são filhos de Abraão. Gálatas, capítulo 3, versículo 7.'},
+ {t:'subtopic', x:'2. A fé incondicional de Abraão.'},
+ {t:'body', x:'O que é fé? A Bíblia diz que a fé é o firme fundamento das coisas que se esperam e a prova das coisas que se não veem. Hebreus, capítulo 11, versículo 1. Abraão demonstrou ter essa fé verdadeira quando foi chamado por Deus. Ele estava em sua terra junto de sua família, num lugar onde predominava a idolatria. Certamente, de alguma forma, teve conhecimento de Deus, o Criador. O Senhor chamou Abraão de uma forma ímpar. Gênesis, capítulo 12, versículos 1 a 3. E ele obedeceu ao chamado de modo incondicional.'},
+ {t:'subtopic', x:'3. A resposta ao chamado de Deus.'},
+ {t:'body', x:'Abraão recebeu o chamado divino quando se encontrava em Harã, a caminho de Canaã. Ele poderia ter questionado, indagando a Deus, mas não questionou nada. Sem a menor dúvida, Deus agradou-se da atitude de fé de Abraão e confirmou suas promessas a ele e seus descendentes. Gênesis, capítulo 22, versículos 15 a 18.'},
+
+ {t:'quote', x:'Assim, Isaque torna-se um sinal do legado da alegria e da esperança produzidas pela fé.'},
+
+ {t:'aux', label:'Ampliando o Conhecimento.', x:'Abraão sabia que a terra prometida terrestre não seria o fim de sua jornada de fé. Antes, a promessa de Deus vai além de tudo aquilo que existe sobre a terra; trata-se da cidade celestial que Deus preparou para os seus servos fiéis. Abraão serve de exemplo para o povo de Deus, lembrando-nos de que estamos apenas viajando por este mundo a caminho da cidade de Deus e da casa que Ele preparou para nós no céu. Não devemos procurar ou esperar uma segurança absoluta na vida presente nem estar ligados a este mundo. Hebreus, capítulo 11, versículos 14 e 16; e Hebreus, capítulo 13, versículo 14. Devemos nos considerar como estrangeiros e peregrinos na terra. Esta não é a nossa pátria. Amplie mais o seu conhecimento, lendo a Bíblia de Estudo Pentecostal, editada pela CPAD, página 70.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Abraão deixou um legado de fé para Israel e à Igreja de Cristo, alcançando todas as nações e famílias da terra.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. A Fé de Abraão.', x:'Abrão é uma figura bíblica bem conhecida. O relato em Gênesis detalha cem anos de vida de Abraão e move-se rapidamente pelos primeiros setenta e cinco anos de eventos. O Novo Testamento apresenta Abraão de várias maneiras significativas. A íntima ligação entre o Senhor e Abraão é notada na identificação de Deus como o Deus de Abraão em Atos, capítulo 7, versículo 32, conforme Êxodo, capítulo 3, versículo 6. O Novo Testamento também celebra o caráter de Abraão como homem de fé que recebeu a promessa. Gálatas, capítulo 3, versículo 9; e Hebreus, capítulo 6, versículo 15. Abraão é o mais importante exemplo de como alguém é justificado pela fé, Romanos, capítulo 4, versículos 1 e 12, e do que significa andar pela fé, Tiago, capítulo 2, versículos 21 e 23. Os que exercem fé no Deus vivo, como fez Abraão, são chamados de filhos de Abraão. Gálatas, capítulo 3, versículo 7. Com relação às promessas da aliança feitas a Abraão no Antigo Testamento, os escritores do Novo Testamento destacam as promessas de semente e bênção. De acordo com Paulo, a semente de Abraão é finalmente cumprida em Cristo, e os que creem em Cristo são a semente de Abraão. Gálatas, capítulo 3, versículos 16 e 29. Similarmente, os que têm fé semelhante à de Abraão são abençoados. Gálatas, capítulo 3, versículo 9. A bênção concedida a Abraão chega aos gentios por meio da redenção de Cristo e está associada à transmissão do Espírito. Gálatas, capítulo 3, versículo 14. Dicionário Bíblico Baker. Rio de Janeiro, CPAD, dois mil e vinte e três, página 20.'},
+
+ {t:'topic', x:'Tópico 2. O Legado de Isaque.'},
+ {t:'subtopic', x:'1. O significado do nome.'},
+ {t:'body', x:'O nome Isaque significa riso, ou ele ri. O nascimento de Isaque trouxe um riso de alegria a seus pais e a todos que ouviram falar do seu nascimento, dando cumprimento da promessa divina. Gênesis, capítulo 21, versículos 1 a 7. Tal verdade nos mostra que aqueles que esperam o tempo de Deus e continuam crendo, apesar das circunstâncias adversas, vão também, em algum momento, sorrir de alegria. O nascimento de Isaque simboliza a fidelidade de Deus e a concretização do seu plano, mostrando que nada é impossível para o Senhor. Assim, Isaque se torna um sinal do legado da alegria e da esperança produzidas pela fé.'},
+
+ {t:'quote', x:'As famílias da terra seriam abençoadas por intermédio de Abraão.'},
+
+ {t:'subtopic', x:'2. Isaque, o herdeiro da bênção e da comunhão com Deus.'},
+ {t:'body', x:'Isaque cresceu debaixo da promessa e aprendeu com o exemplo de seu pai, a depender de Deus em todas as coisas. Quando assumiu o lugar de Abraão como patriarca, edificou altares e invocou o nome do Senhor, mantendo viva a comunhão com o Deus de seus pais. Gênesis, capítulo 26, versículos 24 e 25. Mesmo em meio à escassez e à inveja dos povos vizinhos, Isaque perseverou em fé e foi abençoado em tudo o que fez. Ele não se envolveu em conflitos, mas cultivou a paz, reabrindo os poços de seu pai e confiando na provisão divina. Gênesis, capítulo 26, versículos 18 a 22. O legado de Isaque é o de uma fé serena, marcada pela obediência silenciosa e pela confiança constante em Deus, mesmo quando as circunstâncias eram adversas.'},
+ {t:'subtopic', x:'3. Isaque e o legado de uma fé que confia na direção de Deus.'},
+ {t:'body', x:'Quando chegou o momento de constituir família, Isaque não tomou decisões apressadas, mas esperou o agir de Deus. Sua união com Rebeca foi resposta à oração e resultado da providência divina. Gênesis, capítulo 24, versículos 63 a 67. O texto bíblico mostra Isaque em atitude de meditação e oração no campo, o que revela um homem de oração e de comunhão com o Senhor. Gênesis, capítulo 24, versículo 63. Seu casamento foi fundamentado na fé e no propósito de Deus e, dessa união, nasceu uma geração escolhida para dar continuidade à aliança divina. Isaque nos ensina que o verdadeiro legado espiritual constrói-se quando confiamos em Deus para guiar nossos relacionamentos, decisões e planos.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Isaque, o filho da promessa, deixou um legado de fé e esperança para judeus e gentios.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Concerto de Deus com Isaque.', x:'Deus procurou estabelecer o concerto abraâmico com cada geração seguinte, a partir de Isaque, filho de Abraão. Gênesis, capítulo 17, versículo 21. Noutras palavras, não bastava que Isaque tivesse por pai a Abraão; ele, também, precisava aceitar pela fé as promessas de Deus. Somente então é que Deus diria: Eu sou contigo, e abençoar-te-ei, e multiplicarei a tua semente. Gênesis, capítulo 26, versículo 24. Bíblia de Estudo Pentecostal. Rio de Janeiro, CPAD, mil novecentos e noventa e cinco, página 73.'},
+
+ {t:'topic', x:'Tópico 3. O Legado de Jacó.'},
+ {t:'subtopic', x:'1. Homens com virtudes e erros.'},
+ {t:'body', x:'A Bíblia não esconde o fato de que os homens são imperfeitos e erram. Abraão, Isaque e Jacó também cometeram muitos erros. Mentiram e enganaram, pois não eram perfeitos, assim como nós. As Escrituras Sagradas nos mostram que, pelo fato de os seres humanos serem pecadores, nenhuma família seria perfeita. Entenda que Abraão, Isaque e Jacó, assim como suas famílias, não eram perfeitos. Quando entendemos essa verdade, paramos de exigir de nós e nossos familiares uma perfeição impossível de alcançar. Procure sempre ser o exemplo, e aceite e ame sua família com todo desprendimento, apesar das imperfeições. Aprendemos com os patriarcas que a vida familiar saudável é resultado do temor ao Senhor e a submissão aos seus mandamentos. Jacó, depois de transformado, foi temente ao Senhor, e sabemos que o temor a Deus é o princípio da sabedoria. Provérbios, capítulo 9, versículo 10.'},
+ {t:'subtopic', x:'2. O arrependimento muda destinos.'},
+ {t:'body', x:'Jacó teve um encontro com Deus em Betel quando fugia da casa dos seus pais, Gênesis, capítulo 28, versículos 10 a 19, e em Peniel, quando regressava, Gênesis, capítulo 32, versículos 24 a 30. Embora imperfeito, sua história nos mostra que a conversão sincera faz com que Deus derrame a sua bênção e cumpra as suas promessas. O Senhor prometeu e agiu na vida de Jacó não apenas como o provedor de recursos, mas também como o seu protetor.'},
+ {t:'subtopic', x:'3. A bênção ofuscando a tragédia.'},
+ {t:'body', x:'Deus prometeu abençoar Abraão e sua descendência, e Ele o fez. Jacó foi transformado e restaurado pelo Senhor, e toda restauração tem propósitos específicos: revelar a presença de Deus, sua bondade e misericórdia. Deus desejava o bem dos patriarcas, embora, como nós, eles fossem imperfeitos. Jacó mentiu e enganou seu pai, mas Deus permitiu que ele recebesse a bênção de Isaque. Esaú também errou, pois, sendo o primogênito, trocou sua primogenitura por um prato de lentilhas. Gênesis, capítulo 25, versículos 32 a 34. Além disso, Esaú não respeitou o mandamento de Deus para que não tomasse filhas dos povos estranhos como esposas, nem para si nem para seus filhos, e casou-se com duas mulheres hititas. Quando tinha quarenta anos, ele casou-se com mulheres de Canaã, o que não tinha a aprovação de Deus. Gênesis, capítulo 36, versículos 1 a 3. Porém, vimos na vida de Jacó que o Senhor permitiu a adversidade como uma maneira de ensinar e instruir. Deuteronômio, capítulo 13, versículo 3. Assim também, Deus deseja o nosso bem, ainda que experimentemos adversidades, para que sejamos ensinados e instruídos por Ele. Jacó nos deixa um legado de aprendizado nas adversidades e bênçãos na caminhada com Deus.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Deus transformou o caráter de Jacó, pois ele também fazia parte do concerto de Deus com Abraão e Isaque.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. A Graça de Deus.', x:'A chamada e a transformação de Jacó revelam a incomensurável graça de Deus. Graça é o núcleo, o elemento central crítico, da obra redentora e santificadora do Deus trino detalhado em todo o cânone das Escrituras. As variadas expressões da graça estão enraizadas na pessoa e obra de Deus, de modo que a sua graça e favor demonstrados efetivamente em todos os aspectos do reino criado glorificam-no à medida que são compartilhados e desfrutados uns com os outros. A terminologia bíblica que informa a compreensão da graça define-a como um dom ou reação ou mesmo disposição favorável em relação a alguém. Graça é generosidade, gratidão e boa vontade entre os humanos e de Deus para eles. As expressões divinas da graça são amorosas, misericordiosas e eficazes. Os textos bíblicos fornecem um contexto para um entendimento mais robusto do dom divino. Dicionário Bíblico Baker. Rio de Janeiro, CPAD, dois mil e vinte e três, página 229.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Vimos que o legado dos patriarcas foi de valor para todas as gerações em Israel e para a Igreja do Senhor Jesus Cristo, bem como para toda a humanidade. Depois do encontro de Deus com Jacó, quando fugia de seu irmão, o Senhor mudou o seu nome, denominando-o Israel, ou aquele que luta com Deus, e seu nome foi dado ao Estado de Israel. Assim, Abraão e sua descendência foram usados por Deus para abençoar toda a humanidade e as famílias da terra.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Qual foi o alcance do legado de fé de Abraão? A herança de fé de Abraão não se limitou a Israel e à Igreja de Cristo; ela alcança todas as nações e famílias da terra.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Segundo a lição, de quem eram os descendentes do Messias? A genealogia de Jesus apresentada no Evangelho de Mateus diz que Jesus, o Messias, era descendente de Davi, filho de Abraão. Mateus, capítulo 1, versículo 1.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'O que é fé? A Bíblia diz que a fé é o firme fundamento das coisas que se esperam e a prova das coisas que se não veem. Hebreus, capítulo 11, versículo 1.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Qual o significado do nome Isaque? O nome Isaque significa riso, ou ele ri.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Segundo a lição, o que o arrependimento pode mudar? O arrependimento muda destinos.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
