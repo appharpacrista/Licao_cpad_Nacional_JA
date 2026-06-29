@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 1 — O Chamado para os Gentios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em "Ouvir" ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 1</div>
+    <div class="date">5 de Julho de 2026</div>
+    <h1 class="title">O Chamado para os Gentios</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 1.'},
+ {t:'versehead', x:'O Chamado para os Gentios.'},
+ {t:'body', x:'Cinco de julho de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"E, servindo eles ao Senhor e jejuando, disse o Espírito Santo: Apartai-me a Barnabé e a Saulo para a obra a que os tenho chamado." Atos, capítulo 13, versículo 2.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Quando a igreja ouve o Espírito, o Evangelho avança e vidas são alcançadas para a glória de Deus.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 1, versículo 8. Sem o Espírito Santo não há missão verdadeira.'},
+ {t:'daily', x:'Terça. Atos, capítulo 11, versículo 26. A identidade e a missão caminham juntas.'},
+ {t:'daily', x:'Quarta. Mateus, capítulo 6, versículos 16 a 18. O jejum fortalece nossa sensibilidade espiritual.'},
+ {t:'daily', x:'Quinta. Isaías, capítulo 61, versículo 1. O ministério de Jesus começou pela unção do Espírito.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 4, versículo 31. A Igreja Primitiva avançava porque estava cheia do Espírito.'},
+ {t:'daily', x:'Sábado. Romanos, capítulo 10, versículos 14 e 15. Como ouvirão, se não há quem pregue?'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 13, versículos 1 a 12.'},
+ {t:'verse', x:'Versículo 1. Na igreja que estava em Antioquia havia alguns profetas e doutores, a saber: Barnabé, e Simeão, chamado Níger, e Lúcio, cireneu, e Manaém, que fora criado com Herodes, o tetrarca, e Saulo.'},
+ {t:'verse', x:'Versículo 2. E, servindo eles ao Senhor e jejuando, disse o Espírito Santo: Apartai-me a Barnabé e a Saulo para a obra a que os tenho chamado.'},
+ {t:'verse', x:'Versículo 3. Então, jejuando, e orando, e pondo sobre eles as mãos, os despediram.'},
+ {t:'verse', x:'Versículo 4. E assim estes, enviados pelo Espírito Santo, desceram a Selêucia e dali navegaram para Chipre.'},
+ {t:'verse', x:'Versículo 5. E, chegados a Salamina, anunciavam a palavra de Deus nas sinagogas dos judeus; e tinham também a João como cooperador.'},
+ {t:'verse', x:'Versículo 6. E, havendo atravessado a ilha até Pafos, acharam um certo judeu, mágico, falso profeta, chamado Barjesus.'},
+ {t:'verse', x:'Versículo 7. O qual estava com o procônsul Sérgio Paulo, varão prudente. Este, chamando a si Barnabé e Saulo, procurava muito ouvir a palavra de Deus.'},
+ {t:'verse', x:'Versículo 8. Mas resistia-lhes Elimas, o encantador, porque assim se interpreta o seu nome, procurando apartar da fé o procônsul.'},
+ {t:'verse', x:'Versículo 9. Todavia, Saulo, que também se chama Paulo, cheio do Espírito Santo e fixando os olhos nele, disse:'},
+ {t:'verse', x:'Versículo 10. Ó filho do diabo, cheio de todo o engano e de toda a malícia, inimigo de toda a justiça, não cessarás de perturbar os retos caminhos do Senhor?'},
+ {t:'verse', x:'Versículo 11. Eis aí, pois, agora, contra ti a mão do Senhor, e ficarás cego, sem ver o sol por algum tempo. No mesmo instante, a escuridão e as trevas caíram sobre ele, e, andando à roda, buscava a quem o guiasse pela mão.'},
+ {t:'verse', x:'Versículo 12. Então, o procônsul, vendo o que havia acontecido, creu, maravilhado da doutrina do Senhor.'},
+ {t:'body', x:'Hinos sugeridos: vinte e quatro, trezentos e quarenta, e trezentos e cinquenta e oito, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Neste trimestre, estudaremos A Igreja dos Gentios, acompanhando a expansão do Evangelho para além do contexto judaico e evidenciando a direção soberana do Espírito Santo na missão da Igreja. Nesta primeira lição, O Chamado para os Gentios, analisamos Atos, capítulo 13, e o envio de Paulo e Barnabé a partir da igreja de Antioquia, destacando uma comunidade sensível à voz do Espírito. O comentarista é o Pastor Wagner Gaby, líder da Assembleia de Deus em Curitiba, no Paraná, conferencista, advogado e escritor, autor de obras publicadas pela CPAD, como As Doenças do Século, Planejamento e Gestão Eclesiástica, Relações Públicas para Líderes Cristãos, e As Parábolas de Jesus.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, apresentar o contexto histórico e espiritual da igreja de Antioquia e sua missão aos gentios. Segundo, conduzir o aluno à reflexão sobre a atuação do Espírito Santo na condução da obra missionária e no envio dos obreiros. Terceiro, aplicar os princípios da igreja de Antioquia à vida da igreja local, assumindo a missão cristã como identidade e compromisso.'},
+ {t:'body', x:'Motivação. A missão da Igreja não nasce de estratégias humanas, mas do agir soberano do Espírito Santo. Ao estudar o chamado para os gentios, somos convidados a ouvir a voz de Deus, discernir seu propósito e compreender que também fazemos parte do plano divino de alcançar vidas e nações.'},
+ {t:'body', x:'Sugestão de Método. Conduza a aula partindo de uma breve pergunta provocativa sobre o alcance do Evangelho, levando o aluno a refletir se a fé cristã se limita a um grupo específico, por exemplo: Se o Evangelho é para todos, por que a Igreja Primitiva precisou aprender isso ao longo do tempo? Em seguida, apresente a transição da igreja judaica para a missão gentílica em Atos, destacando a ação do Espírito Santo conforme a exposição dos três tópicos. Por fim, promova uma aplicação prática, mostrando que a igreja atual é herdeira dessa missão e chamada a viver o Evangelho sem barreiras culturais ou étnicas.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Assim como a Igreja Primitiva ouviu a voz do Espírito e superou limites culturais para obedecer à missão, a igreja de hoje é chamada a examinar suas próprias barreiras, sociais e culturais, que podem dificultar o alcance do Evangelho. Viver como Igreja dos Gentios significa que deve haver abertura para que o Espírito Santo conduza a missão para além de nossas preferências e zonas de conforto.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 106, página 36, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Antioquia da Síria, localizado depois do primeiro tópico, aprofunda as características da igreja que se voltaria aos gentios. Segundo, o texto O Espírito Santo Inspira as Missões, localizado ao final do segundo tópico, reflete a respeito da motivação missionária da Igreja.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Lucas registra o cumprimento progressivo da promessa de Jesus em Atos, capítulo 1, versículo 8: o Evangelho alcançaria Jerusalém, Judeia, Samaria e chegaria aos confins da terra. Os capítulos 13 a 28 marcam a grande virada da narrativa, quando o foco deixa de ser Jerusalém e passa a Antioquia. É dessa igreja, caracterizada por diversidade, sensibilidade espiritual e prática missionária madura, que o Espírito Santo convoca Paulo e Barnabé para a evangelização dos gentios. A partir desse ponto, o ministério de Paulo torna-se central, e o Espírito é mostrado como o verdadeiro condutor da expansão cristã. A Missão Gentílica nasce, portanto, não como estratégia humana, mas como resposta ao chamado direto do Espírito para alcançar as nações.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Gentios.'},
+
+ {t:'topic', x:'Tópico 1. O Nascimento da Missão Gentílica.'},
+ {t:'subtopic', x:'1. Antioquia, um Centro Escolhido por Deus, versículo 1.'},
+ {t:'body', x:'Fundada por Seleuco Nicátor em trezentos antes de Cristo, Antioquia da Síria tornou-se a terceira maior cidade do Império Romano, atrás apenas de Roma e Alexandria. Culturalmente greco-helenista, abrigava significativa população judaica e exercia forte influência intelectual e comercial, contando com o porto de Selêucia, conforme Atos, capítulo 13, versículo 4. Foi ali que os discípulos foram chamados de cristãos pela primeira vez, conforme Atos, capítulo 11, versículo 26. Não por acaso, Deus escolheu Antioquia como base da missão gentílica, transformando aquela igreja em um centro de envio para as nações, uma verdadeira base missionária de envio às nações.'},
+ {t:'subtopic', x:'2. Profetas e Doutores Servindo ao Senhor, versículos 1 e 2.'},
+ {t:'body', x:'A liderança local reunia profetas e doutores, ou mestres, ministérios que, após o período apostólico, tornaram-se pilares da edificação da igreja, conforme Primeira Coríntios, capítulo 12, versículo 28. Os profetas exortavam mediante inspiração direta, e os mestres instruíam com base nas Escrituras e na tradição dos ensinos de Jesus. Durante o serviço ao Senhor, marcado por oração e jejum, o Espírito falou. A disposição desses líderes em buscar a vontade divina revela uma comunidade madura, centrada em Deus e apta a discernir o propósito do Espírito para além das necessidades locais.'},
+ {t:'subtopic', x:'3. A Separação de Paulo e Barnabé, versículos 2 e 3.'},
+ {t:'body', x:'O Espírito Santo ordenou: Apartai-me a Barnabé e a Saulo para a obra a que os tenho chamado. A igreja respondeu com jejum, oração e imposição de mãos, reconhecendo o chamado divino e enviando seus melhores obreiros. Esse ato inaugura um novo momento da história cristã: a missão aos gentios é assumida oficialmente pela igreja. A obediência da congregação demonstra que a comunidade local é parte ativa da vocação missionária, e que o envio deve ser sempre acompanhado de intercessão, consagração e dependência do Espírito.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Em Antioquia, o Espírito inaugura a missão cristã entre os gentios.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Antioquia da Síria.', x:'A Antioquia da Síria foi um importante centro político, econômico e religioso durante o período romano. A população diversificada de Antioquia contribuiu para uma grande diversidade de religiões ligadas à cidade. O seu subúrbio de Dafne era um importante local de culto para o paganismo, e a cidade manteve grande população judaica ao longo da sua história. Além disso, foi para Antioquia que muitos cristãos de Jerusalém fugiram durante a perseguição inicial da igreja. Aqui, pela primeira vez, os cristãos judeus começaram a focar intencionalmente em compartilhar o evangelho para os gentios, conforme Atos, capítulo 11, versículos 19 a 21. O resultado foi uma igreja grande, multicultural e vibrante. A igreja em Antioquia era conhecida pela sua diversidade étnica e cultural, a sua generosidade, pois enviou uma oferta a Jerusalém durante uma fome, veja Atos, capítulo 11, versículos 27 a 30, e o seu coração voltado para missões, pois serviu de sede para Paulo nas suas três viagens missionárias. Não surpreendentemente, foi em Antioquia que os seguidores de Cristo foram chamados pela primeira vez de cristãos, conforme Atos, capítulo 11, versículo 26. Dicionário Bíblico Baker. Rio de Janeiro, CPAD, dois mil e vinte e três, página 41.'},
+
+ {t:'topic', x:'Tópico 2. O Espírito Santo e a Obra Missionária.'},
+ {t:'subtopic', x:'1. O Espírito que Conduz a Missão.'},
+ {t:'body', x:'O Livro de Atos pode ser chamado, com justiça, de Atos do Espírito Santo. É Ele quem inspira, dirige, separa e envia os missionários. A missão não nasce da criatividade humana, mas da vontade soberana do Espírito. Sem o poder do Espírito, até os apóstolos permaneceram retraídos; com o Pentecostes, tornaram-se proclamadores ousados da fé. Assim, toda iniciativa evangelizadora autêntica é fruto da ação do Espírito no coração da igreja.'},
+ {t:'subtopic', x:'2. O Poder do Espírito na Evangelização dos Gentios.'},
+ {t:'body', x:'Os discípulos viviam cheios do Espírito, e por isso evangelizavam com coragem, discernimento e alegria, conforme Atos, capítulo 4, versículo 31; capítulo 5, versículo 41; e capítulo 7, versículo 55. O Batismo no Espírito Santo lhes deu poder para testemunhar de Cristo, e eficácia em sua mensagem, conforme Atos, capítulo 1, versículo 8. Essa unção não apenas fortaleceu a pregação, mas também conferiu autoridade espiritual para enfrentar resistências, realizar sinais e consolidar igrejas em diversos povos e regiões. A expansão registrada em Atos, de cento e vinte discípulos a multidões, é resultado direto dessa obra sobrenatural.'},
+ {t:'quote', x:'A obediência da congregação demonstra que a comunidade local é parte ativa da vocação missionária e que o envio deve ser sempre acompanhado de intercessão, consagração e dependência do Espírito.'},
+ {t:'subtopic', x:'3. Evidências da Ação Missionária do Espírito, Atos, capítulos 13 e 14.'},
+ {t:'body', x:'As primeiras viagens missionárias mostram a clara intervenção do Espírito: portas se abrem, vidas são transformadas, e igrejas são plantadas apesar de perseguições. Em Pafos, o confronto entre Paulo e Elimas não é apenas um episódio de oposição, mas uma demonstração de que a luz do Evangelho prevalece sobre as trevas. A conversão do procônsul Sérgio Paulo revela que nenhum nível social está além do alcance de Deus. A missão avança porque o Espírito autentica a mensagem e confirma a autoridade dos enviados.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'O Espírito Santo conduz e sustenta a expansão missionária da Igreja.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Espírito Santo Inspira as Missões.', x:'Notemos a palavra apartar. A tendência natural das igrejas, naqueles dias como hoje, era estabelecerem-se como grupos firmados. Não prestavam a devida atenção à expansão missionária. A igreja em Jerusalém começou a se acomodar como grupo firme, centralizado naquela cidade. O Senhor, então, quebrou aquela organização e fez os pedaços se espalharem por toda a Palestina. Agora, de entre os ministros de Antioquia, retiram estes dois para uma missão especial. Myer Pearman. Atos, A Igreja Primitiva na Força e na Unção do Espírito. Rio de Janeiro, CPAD, dois mil e dezoito, páginas 144 e 145.'},
+
+ {t:'topic', x:'Tópico 3. A Igreja como Agência Missionária.'},
+ {t:'subtopic', x:'1. A Igreja que Ouve a Voz de Deus.'},
+ {t:'body', x:'Antioquia serve de modelo para toda comunidade cristã: uma igreja que ora, jejua e discerne a direção divina. Uma igreja missionária cresce na comunhão e age por obediência. A obra missionária não é programação, mas identidade. Em Atos, capítulo 13, vemos que o Espírito fala à igreja que se coloca diante de Deus com reverência e compromisso.'},
+ {t:'subtopic', x:'2. Uma Igreja que Envia e Sustenta seus Missionários.'},
+ {t:'body', x:'A imposição de mãos sobre Paulo e Barnabé mostra que a igreja participa ativamente do envio. Não retém seus melhores servos, mas os consagra ao propósito eterno. Sustentar, interceder e acompanhar missionários é parte inseparável da vocação eclesial. Assim como Antioquia se tornou um centro de envio, cada igreja local é chamada a tornar-se base de operação para que o Evangelho alcance novos povos e culturas.'},
+ {t:'subtopic', x:'3. Uma Igreja que Cumpre a Grande Comissão.'},
+ {t:'body', x:'A ordem de Jesus permanece: ir, pregar, fazer discípulos e alcançar as nações, conforme Mateus, capítulo 28, versículos 19 e 20. No mundo, ainda há povos que nunca ouviram o Evangelho. Como ouvirão, se não há quem pregue? Romanos, capítulo 10, versículo 14. E como pregarão, se não forem enviados? Romanos, capítulo 10, versículo 15. O Espírito continua chamando homens e mulheres para essa obra, e cabe à igreja atender ao chamado com prontidão, oração, recursos e disposição para ir.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A igreja responde ao chamado do Espírito enviando e sustentando os missionários.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A missão entre os gentios começa com oração, jejum e sensibilidade à voz do Espírito. A igreja de Antioquia mostra que Deus fala, chama, separa e envia, e que a igreja responde, intercede e sustenta. A Palavra de Deus é poderosa para transformar todo pecador em uma pessoa regenerada, alcançada pela graça. Hoje, o Espírito continua chamando sua igreja para alcançar as nações. Estamos dispostos a ouvir, obedecer e participar da missão que ainda está em andamento?'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Em qual cidade os discípulos foram chamados de cristãos pela primeira vez? Antioquia.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Quem ordenou que separassem Saulo e Barnabé para as nações? O Espírito Santo.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Por que os discípulos evangelizavam com coragem, discernimento e alegria? Porque os discípulos viviam cheios do Espírito.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Quais evidências mostram a clara intervenção do Espírito nas primeiras viagens missionárias? Portas se abrem, vidas são transformadas, e igrejas são plantadas apesar de perseguições.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Por que Antioquia serve de modelo para toda a comunidade cristã? Porque Antioquia é uma igreja que ora, jejua e discerne a direção divina.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
