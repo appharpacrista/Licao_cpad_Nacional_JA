@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 2 — A Porta da Fé se Abre entre os Gentios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4.3vw,28px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.2;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,3.4vw,24px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 2</div>
+    <div class="date">12 de Julho de 2026</div>
+    <h1 class="title">A Porta da Fé se Abre entre os Gentios</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 2.'},
+ {t:'versehead', x:'A Porta da Fé se Abre entre os Gentios.'},
+ {t:'body', x:'Doze de Julho de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Porque o Senhor assim no-lo mandou: Eu te pus para luz dos gentios, para que sejas de salvação até aos confins da terra." Atos, capítulo 13, versículo 47.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'O propósito de Deus é que o Evangelho alcance todas as nações, revelando seu eterno desejo de salvar a todos.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 1, versículo 8. A missão aos gentios nasce da promessa do Espírito.'},
+ {t:'daily', x:'Terça. Atos, capítulo 11, versículo 26. Quem é formado em Cristo vive para anunciar Cristo.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 11, versículo 20. A primeira porta que Deus usa para alcançar os gentios.'},
+ {t:'daily', x:'Quinta. Isaías, capítulo 49, versículo 6. Deus planejou que seu povo fosse luz para as nações.'},
+ {t:'daily', x:'Sexta. Romanos, capítulo 1, versículo 16. O Evangelho é poder de Deus para todo o ser humano.'},
+ {t:'daily', x:'Sábado. Atos, capítulo 14, versículo 27. É Deus quem abre a porta da fé aos gentios.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 13, versículos 44 a 52.'},
+ {t:'verse', x:'Versículo 44. E, no sábado seguinte, ajuntou-se quase toda a cidade a ouvir a palavra de Deus.'},
+ {t:'verse', x:'Versículo 45. Então, os judeus, vendo a multidão, encheram-se de inveja e, blasfemando, contradiziam o que Paulo dizia.'},
+ {t:'verse', x:'Versículo 46. Mas Paulo e Barnabé, usando de ousadia, disseram: Era mister que a vós se vos pregasse primeiro a palavra de Deus; mas, visto que a rejeitais, e vos não julgais dignos da vida eterna, eis que nos voltamos para os gentios.'},
+ {t:'verse', x:'Versículo 47. Porque o Senhor assim no-lo mandou: Eu te pus para luz dos gentios, para que sejas de salvação até aos confins da terra.'},
+ {t:'verse', x:'Versículo 48. E os gentios, ouvindo isto, alegraram-se e glorificavam a palavra do Senhor, e creram todos quantos estavam ordenados para a vida eterna.'},
+ {t:'verse', x:'Versículo 49. E a palavra do Senhor se divulgava por toda aquela província.'},
+ {t:'verse', x:'Versículo 50. Mas os judeus incitaram algumas mulheres religiosas e honestas, e os principais da cidade, e levantaram perseguição contra Paulo e Barnabé, e os lançaram fora dos seus limites.'},
+ {t:'verse', x:'Versículo 51. Sacudindo, porém, contra eles o pó dos pés, partiram para Icônio.'},
+ {t:'verse', x:'Versículo 52. E os discípulos estavam cheios de alegria e do Espírito Santo.'},
+ {t:'body', x:'Hinos sugeridos: sessenta e cinco, duzentos e vinte e quatro, e trezentos e cinco, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Nesta lição, acompanhamos um dos momentos mais marcantes da história da Igreja. Quando Deus abre, de forma clara e soberana, a porta da fé aos gentios. Ao seguir a primeira viagem missionária de Paulo e Barnabé, percebemos que o Evangelho avança mesmo em meio à oposição, à rejeição e às dores do ministério. Ensinar esse conteúdo é conduzir os alunos a compreenderem que a missão não depende da aceitação humana, mas da fidelidade ao chamado de Deus. A igreja que discerne o agir do Espírito aprende a perseverar, a confiar no poder do Evangelho e a celebrar cada porta que o Senhor abre para a salvação.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar ao aluno o avanço missionário entre os gentios, de acordo com a missão em Chipre. Segundo, revelar ao aluno o impacto do Evangelho em Antioquia da Pisídia. Terceiro, fortalecer no aluno a fé que perseverou em Icônio, Listra e Derbe.'},
+ {t:'body', x:'Motivação. Estudar a missão entre os gentios nos ajuda a compreender que o Evangelho ultrapassa fronteiras culturais, religiosas e geográficas. Ao acompanhar a ação do Espírito Santo no livro de Atos, percebemos que a igreja de hoje é herdeira dessa missão e chamada a viver a fé com coragem, perseverança e compromisso com a salvação de vidas.'},
+ {t:'body', x:'Sugestão de Método. Para iniciar a aula, o professor pode apresentar um breve percurso missionário, como se conduzisse a classe por uma viagem com Paulo e Barnabé. Comece localizando Chipre como a primeira porta aberta aos gentios, avance para Antioquia da Pisídia, onde o Evangelho ilumina corações e provoca decisões, e prossiga até Icônio, Listra e Derbe, destacando a perseverança da fé em meio à oposição. Use um mapa das viagens missionárias do apóstolo Paulo, disponível em atlas bíblicos ou em bíblias de estudo. Esse movimento ajuda o aluno a perceber que a missão cristã é progressiva, enfrenta desafios distintos em cada contexto e permanece firme porque é conduzida pelo Espírito Santo.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Assim como a Igreja Primitiva respondeu ao chamado de Deus em diferentes cidades e contextos, somos desafiados a avaliar nossa disposição em obedecer ao Espírito Santo hoje. A lição nos convida a perseverar na fé, anunciar o Evangelho com coragem e confiar que Deus continua abrindo portas, mesmo em meio às dificuldades.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista, que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 106, página 37, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Luz que Alcança os Gentios, localizado depois do segundo tópico, aprofunda a questão do alcance do Evangelho aos gentios a partir de um debate entre os judeus. Segundo, o texto O Papel da Fé na Tarefa, localizado ao final do terceiro tópico, reflete sobre o papel da fé na missão da igreja cristã.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'A primeira viagem missionária do apóstolo Paulo está registrada em Atos, capítulos 13 e 14. Logo após serem separados pelo Espírito Santo, conforme Atos, capítulo 13, versículos 2 e 3, Paulo e Barnabé, guiados pela direção divina, iniciaram a obra que o Senhor lhes confiara. A jornada durou cerca de dois anos, entre os anos quarenta e seis e quarenta e oito depois de Cristo. Nesse período, acompanhados por João Marcos, partiram de Antioquia da Síria, seguiram para Chipre, terra natal de Barnabé, e avançaram pela Ásia Menor, anunciando o Evangelho em Antioquia da Pisídia, Icônio, Listra e Derbe. Toda a missão tinha um alvo claro. Alcançar os gentios e revelar que o plano de Deus abraça todas as nações sob a luz de Cristo. Esse é o assunto que veremos nesta lição.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Missão.'},
+
+ {t:'topic', x:'Tópico 1. A Missão em Chipre: a Primeira Porta Aberta entre os Gentios.'},
+ {t:'subtopic', x:'1. O envio missionário e o avanço da Palavra.'},
+ {t:'body', x:'Conduzidos pelo Espírito Santo, Paulo e Barnabé partiram de Antioquia, desceram a Selêucia e navegaram rumo a Chipre, terra natal de Barnabé e já evangelizada por helenistas, conforme Atos, capítulo 11, versículo 19. Aportando em Salamina, anunciaram o Evangelho nas sinagogas, cumprindo o princípio missionário revelado por Paulo, primeiro do judeu e também do grego, segundo Romanos, capítulo 1, versículo 16. Acompanhados por João Marcos, seu cooperador, conforme Colossenses, capítulo 4, versículo 10, avançaram pela ilha até Pafos, Atos, capítulo 13, versículo 6. Assim, a missão se expandia, demonstrando que proclamar a Palavra exige fidelidade, Segunda Timóteo, capítulo 3, versículos 16 e 17, reverência, Jeremias, capítulo 23, versículos 28 e 29, e obediência sensível à direção do Espírito Santo, Atos, capítulo 13, versículo 2.'},
+ {t:'subtopic', x:'2. O confronto com as trevas e a vitória do Evangelho.'},
+ {t:'body', x:'Em Pafos, os missionários enfrentaram Barjesus, também chamado Elimas, um mágico e falso profeta, conforme Deuteronômio, capítulo 18, versículos 9 a 11, e Gálatas, capítulo 5, versículos 20 e 21. Ele resistia à pregação, tentando impedir que o procônsul Sérgio Paulo, homem prudente, ouvisse a Palavra de Deus. Cheio do Espírito Santo, Paulo o repreendeu com autoridade, declarando o juízo divino, versículo 11. A cegueira que o atingiu confirmou o poder do Evangelho e levou Sérgio Paulo a crer, maravilhado com a doutrina do Senhor. Onde a luz resplandece, as trevas recuam, João, capítulo 1, versículo 5, e Efésios, capítulo 6, versículo 12.'},
+ {t:'subtopic', x:'3. Confiando no poder transformador do Evangelho.'},
+ {t:'body', x:'O encontro em Pafos revela que o Evangelho rompe barreiras sociais e espirituais. Paulo, cheio do Espírito Santo, confronta Elimas e testemunha a conversão de Sérgio Paulo, mostrando que a Palavra transforma mente, coração e vida, conforme Romanos, capítulo 12, versículo 2, e Segunda Coríntios, capítulo 5, versículo 17. O Evangelho ilumina o entendimento, renova o interior e produz frutos visíveis, Tiago, capítulo 2, versículos 14 a 26. Que também confiemos nesse poder, orando por quem resiste e anunciando com fé. A jornada agora avança para Antioquia da Pisídia, onde a missão alcançará novas proporções.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Em Chipre, o Espírito abre a primeira porta da missão gentílica.'},
+
+ {t:'topic', x:'Tópico 2. A Missão em Antioquia da Pisídia: o Evangelho que Ilumina.'},
+ {t:'subtopic', x:'1. A exposição apostólica que revela Cristo nas Escrituras.'},
+ {t:'body', x:'Levantando-se na sinagoga, Paulo dirige-se a judeus e gentios tementes a Deus, e percorre a história de Israel para revelar que tudo aponta para Cristo. Recorda os juízes e Saul, Juízes, capítulo 2, versículo 16, e Primeira Samuel, capítulo 31, versículo 13. Apresenta Jesus como o descendente de Davi, Mateus, capítulo 1, versículos 1 a 17, e Lucas, capítulo 3, versículos 23 a 38. Afirma que João preparou seu caminho, Mateus, capítulo 3. Que a cruz cumpriu as profecias, Isaías, capítulo 53, e Salmos, capítulo 22. E que a ressurreição foi confirmada por testemunhas e pelas Escrituras, Primeira Coríntios, capítulo 15, versículos 1 a 23, Salmos, capítulo 2, versículo 7, e Salmos, capítulo 16, versículo 10. Proclama a justificação pela fé, Romanos, capítulo 4, versículos 13 a 21, e a salvação a quem crê, João, capítulo 3, versículos 16 e 36. Seu discurso termina com um apelo solene para que os ouvintes não repitam o erro dos que rejeitaram o Messias. A repercussão é imediata. Enquanto muitos judeus se retiram, os gentios rogam que Paulo retorne no sábado seguinte. E assim, quase toda a cidade se reúne para ouvir a Palavra, Atos, capítulo 13, versículo 44, revelando uma abertura extraordinária ao Evangelho.'},
+ {t:'subtopic', x:'2. A rejeição dos judeus e a tristeza de Paulo diante da incredulidade.'},
+ {t:'body', x:'Fiel ao princípio de alcançar primeiro o judeu e depois o gentio, Romanos, capítulo 1, versículo 16, Paulo inicia sua pregação nas sinagogas. Contudo, em Antioquia da Pisídia, a inveja e a resistência dos judeus revelam a dor do apóstolo ao ver seu povo rejeitar o Evangelho, Romanos, capítulo 9, versículos 1 a 3. Diante dessa recusa, Paulo e Barnabé declaram: era mister que a vós se vos pregasse primeiro a palavra de Deus, mas, visto que a rejeitais, e vos não julgais dignos da vida eterna, eis que nos voltamos para os gentios, Atos, capítulo 13, versículo 46. Assim, dentro do propósito soberano de Deus, o Evangelho alcança as nações.'},
+ {t:'subtopic', x:'3. A porta da fé aberta aos gentios pela graça de Deus.'},
+ {t:'body', x:'Ao rejeitarem a mensagem, muitos judeus se tornaram indignos da vida eterna, não por um decreto arbitrário, mas pela resistência voluntária ao Evangelho. Assim, Paulo volta-se aos gentios, que recebem a Palavra com alegria e fé sincera. Cumpre-se, então, o propósito divino anunciado em Isaías. Israel seria luz para as nações, Isaías, capítulo 49, versículo 6, e de Israel viria Cristo, a luz para revelação aos gentios, Lucas, capítulo 2, versículo 32. O texto afirma que creram todos quantos estavam ordenados para a vida eterna, versículo 48. A melhor compreensão, conforme a Bíblia de Estudo Pentecostal, é que creram todos os que estavam dispostos para a vida eterna. Ou seja, todos os que responderam positivamente ao chamado do Espírito. A salvação é oferecida a todos, Primeira Timóteo, capítulo 2, versículo 4, Tito, capítulo 2, versículo 11, e Segunda Pedro, capítulo 3, versículo 9, mas acolhida apenas pelos que creem. Muitos gentios acolheram a Palavra e tornaram-se testemunhas vivas do poder transformador do Evangelho.'},
+ {t:'body', x:'Ainda hoje, o Senhor abre portas onde menos esperamos. A missão avança quando a igreja responde com fé, discernimento e obediência. Assim como Antioquia da Pisídia se tornou o lugar de grande colheita, Deus deseja usar cada crente como portador da luz de Cristo. A obra, porém, não terminou ali. Agora, a jornada missionária se desloca para Icônio, Listra e Derbe, onde novos desafios e milagres revelarão novamente o poder do Evangelho por meio do Espírito Santo.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'O Evangelho ilumina Antioquia da Pisídia e alcança os gentios.'},
+
+ {t:'aux', label:'Auxílio Devocional. Luz que Alcança os Gentios.', x:'A mensagem de Paulo aos judeus na sinagoga de Antioquia da Pisídia começou com uma ênfase na aliança de Deus com Israel. Este era um ponto de acordo, porque todos os judeus tinham orgulho de ser o povo escolhido de Deus. Então Paulo continuou a explicar como as Boas Novas representam o cumprimento da aliança. Mas, para alguns judeus, foi difícil aceitar esta mensagem. Por que era necessário que as Boas Novas chegassem primeiro aos judeus? Deus planejou que, por intermédio da nação judaica, todo o mundo viesse a conhecê-lo, Gênesis, capítulo 12, versículo 3. Paulo, um judeu, amava seu povo, Romanos, capítulo 9, versículos 1 a 5, e queria dar-lhe a oportunidade de unir-se a ele na proclamação da salvação de Deus. Infelizmente, muitos judeus não reconheceram a Jesus como o Messias e não entenderam que Deus oferecia a salvação a todos, judeus e gentios, que fossem a Ele por meio da fé em Cristo. Deus planejou que Israel fosse essa luz, Isaías, capítulo 49, versículo 6. De Israel nasceu Jesus, a luz das nações, Lucas, capítulo 2, versículo 32. Esta luz se expandiria e iluminaria os gentios. Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro, CPAD, dois mil e treze, páginas 1510 e 1511.'},
+
+ {t:'topic', x:'Tópico 3. A Missão em Icônio, Listra e Derbe: a Fé que Persevera.'},
+ {t:'subtopic', x:'1. Icônio: o testemunho ousado que enfrenta oposição.'},
+ {t:'body', x:'Em Icônio, Paulo e Barnabé entraram na sinagoga e anunciaram o Evangelho com tal convicção que muitos judeus e gregos creram. O Senhor confirmava a Palavra com sinais e prodígios, versículo 3, dando testemunho da graça que operava por meio deles. Entretanto, a cidade dividiu-se, e uma conspiração surgiu para apedrejá-los. Obedientes à direção do Espírito, os missionários retiraram-se para Listra, não por medo, mas por prudência, preservando-se para continuar a missão, Mateus, capítulo 10, versículo 23. Onde a Palavra frutifica, a oposição também se levanta, mas o avanço do Evangelho não pode ser detido.'},
+ {t:'subtopic', x:'2. Listra: milagres, confusão religiosa e sofrimento por Cristo.'},
+ {t:'body', x:'Em Listra, Paulo cura um homem aleijado de nascimento, o que leva a multidão, confundida, a tentar adorá-los como deuses. Paulo e Barnabé rejeitam a idolatria e anunciam o Deus vivo, Criador de todas as coisas. Porém, judeus vindos de Antioquia e Icônio incitam o povo contra eles, e Paulo é apedrejado e deixado como morto. Mas o Senhor o restaura, e ele se levanta, retornando à cidade para reafirmar seu compromisso com o Evangelho. A fé bíblica não foge da dor. Ela permanece firme porque está ancorada no Deus vivo.'},
+ {t:'subtopic', x:'3. Derbe: frutos que brotam da perseverança.'},
+ {t:'body', x:'Em Derbe, o Evangelho encontra terreno fértil. Muitos se convertem, e novos discípulos são formados. Mesmo após perseguições e sofrimento, Paulo e Barnabé continuam a pregar e edificam uma comunidade forte na fé. A obra missionária prossegue porque suas raízes não estão na comodidade, mas na fidelidade ao chamado de Cristo.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Em Icônio, Listra e Derbe, a fé persevera apesar da oposição.'},
+
+ {t:'aux', label:'Auxílio Teológico. O Papel da Fé na Tarefa.', x:'Deus ordenou que o cristianismo fosse uma religião de fé. Do ponto de vista objetivo, o cristianismo é uma religião de revelação sobrenatural. Do ponto de vista subjetivo, é uma religião de fé. A fé é o olho espiritual que observa Deus, que percebe Cristo como o Salvador e Senhor, que entende a Bíblia como a Palavra de Deus, que aceita a tarefa missionária como o propósito e a vontade de Deus, que descobre missões como o resultado natural da obra de Cristo, e que missões é um elemento inerente do chamado à salvação e submissão obediente às inclinações do Espírito Santo. Sem fé é impossível agradar a Deus. A fé é fundamental para toda a vida e todo empreendimento cristão. Não há uma obra espiritual verdadeiramente cristã que não seja também uma obra de fé. Embora o homem, através da queda, tenha se transformado de um ser que crê em um ser descrente, ainda assim, através da operação do Espírito Santo, pode voltar a ser crente. Pela fé, ele aceita a salvação oferecida em Cristo. Paulo nos diz que caminhamos pela fé e não pela visão. A vida cristã é, do início ao fim, uma vida de fé, assim como também é a tarefa missionária. Peters, George W. Teologia Bíblica de Missões. Rio de Janeiro, CPAD, dois mil, página 196.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Ao encerrar esse ciclo missionário, os apóstolos retornam às cidades onde haviam sofrido, fortalecendo os discípulos e estabelecendo presbíteros, Atos, capítulo 14, versículos 22 e 23. Depois, apresentam à igreja de Antioquia o relatório do que Deus fizera, celebrando que Deus abrira aos gentios a porta da fé, Atos, capítulo 14, versículo 27. A missão continua porque a graça conduz, sustenta e abre caminhos onde parecia impossível.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Por onde Paulo e Barnabé avançaram anunciando o Evangelho após partirem de Antioquia da Síria para Chipre? Avançaram pela Ásia Menor, em Antioquia da Pisídia, Icônio, Listra e Derbe.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'O que o encontro em Pafos revela? O encontro em Pafos revela que o Evangelho rompe barreiras sociais e espirituais.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'O que Paulo e Barnabé declaram com a recusa dos judeus ao Evangelho? Era mister que a vós se vos pregasse primeiro a Palavra de Deus.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Por que os judeus se tornaram indignos da vida eterna e o que se seguiu? Ao rejeitarem a mensagem, muitos judeus se tornaram indignos da vida eterna, não por um decreto arbitrário, mas pela resistência voluntária ao Evangelho. Assim, Paulo volta-se aos gentios, que recebem a Palavra com alegria e fé sincera.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'O que aconteceu quando os judeus vindos de Antioquia incitaram o povo contra Paulo e Barnabé? Paulo é apedrejado e deixado como morto. Mas o Senhor o restaura, e ele se levanta, retornando à cidade para reafirmar seu compromisso com o Evangelho.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
