@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 3 — A Graça que Alcança Todas as Nações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(32px,7vw,50px);line-height:1.1;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 3</div>
+    <div class="date">19 de Julho de 2026</div>
+    <h1 class="title">A Graça que Alcança Todas as Nações</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+const DATA = [
+ {t:'label', x:'Lição 3.'},
+ {t:'versehead', x:'A Graça que Alcança Todas as Nações.'},
+ {t:'body', x:'Dezenove de julho de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Porque pela graça sois salvos, por meio da fé; e isso não vem de vós; é dom de Deus." Efésios, capítulo 2, versículo 8.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'É pela graça que somos alcançados, perdoados e reconciliados com Deus.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 15, versículo 11. A salvação é afirmada como obra exclusiva da graça do Senhor Jesus.'},
+ {t:'daily', x:'Terça. Atos, capítulo 10, versículos 44 a 48. Deus não faz distinção entre pessoas.'},
+ {t:'daily', x:'Quarta. Efésios, capítulo 2, versículos 8 e 9. A salvação é um dom gratuito de Deus.'},
+ {t:'daily', x:'Quinta. Tito, capítulo 2, versículos 11 e 12. A graça de Deus se manifestou trazendo salvação a todos.'},
+ {t:'daily', x:'Sexta. Hebreus, capítulo 4, versículo 16. O trono da graça está aberto para o crente.'},
+ {t:'daily', x:'Sábado. Segunda Pedro, capítulo 3, versículo 18. Crescendo em graça e conhecimento de Jesus Cristo.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 15, versículos 1 a 5, 28, 29, e 36 a 39.'},
+ {t:'verse', x:'Versículo 1. Então, alguns que tinham descido da Judeia ensinavam assim os irmãos: Se vos não circuncidardes, conforme o uso de Moisés, não podeis salvar-vos.'},
+ {t:'verse', x:'Versículo 2. Tendo tido Paulo e Barnabé não pequena discussão e contenda contra eles, resolveu-se que Paulo, Barnabé e alguns dentre eles subissem a Jerusalém aos apóstolos e aos anciãos sobre aquela questão.'},
+ {t:'verse', x:'Versículo 3. E eles, sendo acompanhados pela igreja, passaram pela Fenícia e por Samaria, contando a conversão dos gentios, e davam grande alegria a todos os irmãos.'},
+ {t:'verse', x:'Versículo 4. Quando chegaram a Jerusalém, foram recebidos pela igreja e pelos apóstolos e anciãos e lhes anunciaram quão grandes coisas Deus tinha feito com eles.'},
+ {t:'verse', x:'Versículo 5. Alguns, porém, da seita dos fariseus que tinham crido se levantaram, dizendo que era mister circuncidá-los e mandar-lhes que guardassem a lei de Moisés.'},
+ {t:'verse', x:'Versículo 28. Na verdade, pareceu bem ao Espírito Santo e a nós não vos impor mais encargo algum, senão estas coisas necessárias.'},
+ {t:'verse', x:'Versículo 29. Que vos abstenhais das coisas sacrificadas aos ídolos, e do sangue, e da carne sufocada, e da fornicação; destas coisas fareis bem se vos guardardes. Bem vos vá.'},
+ {t:'verse', x:'Versículo 36. Alguns dias depois, disse Paulo a Barnabé: Tornemos a visitar nossos irmãos por todas as cidades em que já anunciamos a palavra do Senhor, para ver como estão.'},
+ {t:'verse', x:'Versículo 37. E Barnabé aconselhava que tomassem consigo a João, chamado Marcos.'},
+ {t:'verse', x:'Versículo 38. Mas a Paulo parecia razoável que não tomassem consigo aquele que desde a Panfília se tinha apartado deles e não os acompanhou naquela obra.'},
+ {t:'verse', x:'Versículo 39. E tal contenda houve entre eles, que se apartaram um do outro. Barnabé, levando consigo a Marcos, navegou para Chipre.'},
+ {t:'body', x:'Hinos sugeridos: trezentos e noventa e quatro, quatrocentos e nove, e quatrocentos e trinta e três, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Esta lição nos convida a uma reflexão madura e bíblica sobre a graça de Deus como fundamento da salvação e da unidade da Igreja. A partir do Concílio de Jerusalém, o estudo evidencia que a fé cristã não se apoia em méritos humanos, mas na ação soberana de Deus em Cristo. Ao ensinar, valorize o diálogo, a experiência de vida dos alunos e a aplicação prática, ajudando-os a compreender, viver e crescer na graça que alcança todas as nações.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, analisar com a classe como a graça sustenta a unidade da Igreja em Atos, capítulo 15. Segundo, examinar biblicamente a salvação pela graça como oferta universal em Cristo. Terceiro, incentivar a busca constante do trono da graça.'},
+ {t:'body', x:'Motivação. A graça que alcança todas as nações é essencial porque revela o coração do Evangelho e preserva a fé de legalismos e distorções liberais. Ao compreender a salvação como dom divino, o aluno fortalece sua convicção bíblica, cresce em unidade cristã e aprende a viver a fé com humildade, gratidão e compromisso diário com Deus.'},
+ {t:'body', x:'Sugestão de Método. Para reforçar a perspectiva bíblica do oferecimento universal da salvação, no segundo tópico, sugerimos que adote o método do contraste doutrinário guiado pelas Escrituras. Inicie apresentando textos centrais que afirmam a universalidade da graça, Romanos, capítulo 10, versículo 13; Tito, capítulo 2, versículo 11; e Primeira Timóteo, capítulo 2, versículos 3 a 6, e, em seguida, proponha a comparação respeitosa com correntes que restringem a salvação a um grupo previamente determinado. Estimule a classe a examinar o contexto bíblico, a coerência do caráter amoroso de Deus e a responsabilidade humana na resposta da fé. O objetivo é capacitar o aluno a defender, com mansidão e clareza, que a graça é suficiente e oferecida a todos.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. À luz do ensino bíblico, o cristão é chamado a viver sob o governo da graça, rejeitando todo legalismo e toda indiferença espiritual. Quem foi alcançado pela graça de Deus responde com fé obediente, compromisso com a santidade e disposição para anunciar que a salvação em Cristo está disponível a todos.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página trinta e sete, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto A Importância da Circuncisão, localizado depois do primeiro tópico, traz o contexto cultural da discussão de Atos, capítulo 15. Segundo, o texto A Graça que Respeita, localizado ao final do segundo tópico, aprofunda a reflexão da operação da Graça de Deus diante da cultura alheia.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'A expansão do Evangelho entre os gentios trouxe grande alegria à Igreja, mas também revelou um dos primeiros desafios doutrinários do Cristianismo. Com o retorno de Paulo e Barnabé a Antioquia da Síria, após a evangelização da Ásia Menor, surgiu uma controvérsia que ameaçava a unidade da fé: a salvação estaria condicionada à observância da Lei de Moisés? Cristãos oriundos do farisaísmo passaram a exigir a circuncisão dos gentios convertidos, provocando um debate decisivo sobre a natureza da graça. Diante dessa crise, a Igreja buscou discernimento espiritual e fidelidade às Escrituras, culminando numa decisão importante, no Concílio de Jerusalém, que mostrou que a Graça de Deus alcança todas as nações.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Graça.'},
+
+ {t:'topic', x:'Tópico 1. Quando a Graça Preserva a Unidade da Igreja.'},
+ {t:'subtopic', x:'1. O Concílio de Jerusalém.'},
+ {t:'body', x:'Realizado entre quarenta e oito e cinquenta depois de Cristo, o Concílio reuniu apóstolos, presbíteros e a igreja para tratar da controvérsia levantada pelos judaizantes, que defendiam a circuncisão como requisito para a salvação, Atos, capítulo 15, versículos 1 e 5. Contudo, tal exigência contrariava o ensino bíblico, pois a circuncisão nunca foi meio de justificação, Romanos, capítulo 2, versículos 25 a 29. Sob a liderança de Tiago e a direção do Espírito Santo, a Igreja reconheceu que a salvação alcança todas as nações pela graça.'},
+ {t:'subtopic', x:'2. O relatório de Pedro, versículos 7 a 11.'},
+ {t:'body', x:'Pedro relembra de sua experiência na casa de Cornélio, mostrando que Deus concedeu o Espírito Santo aos gentios mediante a fé, e não por obras da Lei, Atos, capítulo 10, versículos 44 a 46; Gálatas, capítulo 3, versículo 2. Sem fazer distinção entre judeus e gentios, Deus purificou seus corações pela fé, Atos, capítulo 10, versículos 34 a 48. Assim, Pedro questiona a imposição do jugo da Lei e afirma que todos são salvos pela graça do Senhor Jesus Cristo, Atos, capítulo 15, versículo 11.'},
+ {t:'subtopic', x:'3. O relatório de Paulo e Barnabé, versículo 12.'},
+ {t:'body', x:'Em seguida, Paulo e Barnabé relatam como Deus confirmou a missão gentílica por meio de sinais e prodígios, Atos, capítulo 4, versículo 30. Milagres como a cegueira do mágico cipriota, a cura em Listra e o livramento de Paulo testemunham a aprovação divina, Atos, capítulo 13, versículos 8 a 11; capítulo 14, versículos 8 a 10; e capítulo 14, versículos 19 e 20. Além disso, destacam que os gentios foram salvos pela graça, sem a exigência da Lei, Atos, capítulo 13, versículos 12, 44 e 48.'},
+ {t:'subtopic', x:'4. O discurso de Tiago, versículos 13 a 21.'},
+ {t:'body', x:'Tiago, o Justo, irmão do Senhor e líder respeitado da igreja, preside o Concílio com discernimento espiritual, Gálatas, capítulo 2, versículo 9. Após ouvir os testemunhos, reconhece que Deus visitou os gentios para formar dentre eles um povo para o seu nome. Fundamenta sua proposta nas Escrituras, citando Amós, capítulo 9, versículos 11 e 12, mostrando que a inclusão dos gentios já fazia parte do plano redentor. Assim, afirma que a missão gentílica não contradiz a revelação, mas a cumpre. O Concílio decide não impor a Lei mosaica aos gentios, recomendando apenas a abstinência de práticas que comprometeriam a comunhão: idolatria, imoralidade sexual, carne sufocada e sangue. A decisão é comunicada por carta às igrejas gentílicas, enviada com Paulo, Barnabé, Judas e Silas, reafirmando a direção do Espírito Santo, Atos, capítulo 15, versículo 28, e trazendo consolo e unidade. Após isso, surge a divergência entre Paulo e Barnabé quanto a João Marcos, resultando na separação dos dois líderes. Ainda assim, a obra missionária prossegue, e Marcos é posteriormente restaurado, Colossenses, capítulo 4, versículo 10; e Segunda Timóteo, capítulo 4, versículo 11.'},
+ {t:'body', x:'A decisão do Concílio revelou que a graça que preserva a unidade da Igreja é a mesma que Deus oferece como dom de salvação a todos, sem distinção.'},
+
+ {t:'label', x:'Ampliando o Conhecimento.'},
+ {t:'subtopic', x:'A Graça do Senhor Jesus.'},
+ {t:'body', x:'A questão crucial no concílio de Jerusalém era se a circuncisão, isto é, a remoção do prepúcio como um sinal do Antigo Testamento da aceitação do concerto de Deus, e a obediência à lei que Deus deu através de Moisés eram necessárias para a salvação. Aqueles que receberam esta delegação concluíram que os gentios, isto é, aqueles que não eram judeus, estariam sendo espiritualmente salvos pela graça do Senhor Jesus. Amplie mais o seu conhecimento lendo a Bíblia de Estudo Pentecostal, Edição Global, editada pela CPAD, página mil novecentos e setenta e dois.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'O Concílio de Jerusalém confirma a graça como base da unidade cristã.'},
+
+ {t:'aux', label:'Auxílio Bíblico-Exegético. A Importância da Circuncisão.', x:'A circuncisão era uma das práticas mais importantes do judaísmo, era central para a identidade judaica. Outras alianças tinham sinais diferentes, por exemplo, o arco no céu, Gênesis, capítulo 9, versículos 12, 13 e 17, mas a circuncisão colocava a marca da aliança na própria carne da pessoa, Gênesis, capítulo 17, versículos 11 e 13. A centralidade da circuncisão na vida judaica regular antes de Adriano pode ser exemplificada na reunião de convidados nas noites entre o nascimento de um menino e sua circuncisão no oitavo dia de vida. Uma obra pré-cristã opinava que a falha de alguns judeus, chamados filhos de Belial, em circuncidar seus filhos traria a ira sobre toda Israel por apostasia, conforme o livro de Jubileus, capítulo 15, versículos 33 e 34. O preço pago por Israel para manter a circuncisão poderia tornar o povo judeu muito mais leal a ela. Israel enfrentou o ridículo por causa dessa marca, razão pela qual alguns judeus tentavam apagá-la. Algumas mulheres tiveram de enfrentar a morte para circuncidar seus filhos; um opressor atirou-as do muro da cidade. Como a circuncisão era o sinal da aliança de Abraão, podia, pela justaposição com Êxodo, capítulo 4, versículos 22 e 23, e com os versículos 24 a 26, ser relacionada com a redenção. Por isso, mais tarde, os rabinos falavam do mérito envolvido na circuncisão. Keener, Craig S. Comentário Exegético Atos, capítulos 15 versículo 1 a 23 versículo 35. Rio de Janeiro, CPAD, dois mil e vinte e quatro, página dois mil seiscentos e vinte e três.'},
+
+ {t:'quote', x:'Pedro questiona a imposição do jugo da Lei e afirma que todos são salvos pela graça do Senhor Jesus Cristo.'},
+
+ {t:'topic', x:'Tópico 2. Um Presente de Salvação para Todos.'},
+ {t:'subtopic', x:'1. O que é a graça de Deus?'},
+ {t:'body', x:'A palavra grega cháris significa favor, bondade e dom imerecido. No Novo Testamento, a graça descreve a iniciativa soberana de Deus em salvar o ser humano, não por obras ou méritos, mas por amor e misericórdia, Efésios, capítulo 2, versículos 8 e 9. Diante do drama universal do pecado, que separou toda a humanidade de Deus, Romanos, capítulo 3, versículo 23, a graça se apresenta como o único meio de reconciliação. A Lei revela o pecado, mas não salva; somente a graça concede vida, pois onde abundou o pecado, superabundou a graça, Romanos, capítulo 5, versículo 20.'},
+ {t:'subtopic', x:'2. Jesus Cristo como a manifestação da graça.'},
+ {t:'body', x:'A graça alcança sua plena expressão na pessoa e na obra de Jesus Cristo. Por amor, Ele se fez pobre para nos enriquecer espiritualmente, Segunda Coríntios, capítulo 8, versículo 9. Em Cristo, a graça não apenas perdoa, mas justifica e transforma, conduzindo o crente a uma vida santa e piedosa, Romanos, capítulo 3, versículo 24; Tito, capítulo 2, versículos 11 e 12. Sua morte substitutiva e ressurreição garantem redenção, perdão e nova vida àqueles que creem, João, capítulo 1, versículo 17.'},
+ {t:'subtopic', x:'3. A graça é para todos os povos, sem exceção.'},
+ {t:'body', x:'O Concílio de Jerusalém confirmou que a salvação não exige a observância da Lei mosaica, sendo oferecida igualmente a judeus e gentios pela graça, mediante a fé, Atos, capítulo 15, versículo 11. Em Cristo, não há barreiras étnicas, culturais ou religiosas. Todo aquele que invoca o nome do Senhor será salvo, Romanos, capítulo 10, versículo 13. Essa graça universal deve ser recebida pela fé em Jesus Cristo, o único Salvador, Efésios, capítulo 2, versículo 8; Tito, capítulo 3, versículos 4 a 7.'},
+ {t:'body', x:'Diante dessa graça tão ampla e suficiente, somos chamados não apenas a recebê-la, mas a viver sob o seu governo. A graça que salva também ensina, corrige e fortalece. Quem foi alcançado por ela responde com gratidão, fé perseverante e uma vida que glorifica a Deus em obediência e amor.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'A graça de Deus oferece a salvação a todos por meio de Jesus Cristo.'},
+
+ {t:'aux', label:'Auxílio Bíblico-Teológico. A Graça que Respeita.', x:'Em seguida, vem o âmago da mensagem. Pareceu bem, edoxe, conforme os versículos 22 e 25, ao Espírito Santo e a nós, versículo 28. Dessa forma, os apóstolos e os anciãos estavam expressando sua convicção da presença da divina autoridade na decisão que haviam tomado. Pedro e João lembraram a promessa de Jesus aos discípulos: Mas, quando vier aquele Espírito da verdade, ele vos guiará em toda a verdade, João, capítulo 16, versículo 13. Eles haviam recebido o Espírito Santo no Pentecostes e agora podiam afirmar ter recebido a orientação divina. A decisão era não vos impor mais encargo algum, senão estas coisas necessárias, as coisas necessárias para evitar ofender seus irmãos judeus em Cristo. Lumby entende dessa maneira: enquanto eles, em Jerusalém, seguindo a sugestão do Espírito, estavam deixando de lado seus arraigados preconceitos contra qualquer relação com os gentios, afirmavam que os gentios, por sua vez, deveriam considerar carinhosamente os escrúpulos dos judeus. Comentário Bíblico Beacon, João a Atos. Rio de Janeiro, CPAD, dois mil e catorze, páginas trezentos e vinte e quatro e trezentos e vinte e cinco.'},
+
+ {t:'topic', x:'Tópico 3. Crescendo na Graça.'},
+ {t:'subtopic', x:'1. Como nos aproximar do trono da graça, Hebreus, capítulo 4, versículo 16.'},
+ {t:'body', x:'Crescer na graça e no conhecimento de Cristo pressupõe amadurecimento espiritual contínuo, Segunda Pedro, capítulo 3, versículo 18. Assim, o acesso ao trono da graça ocorre com confiança, não fundamentada em méritos humanos, mas na obra redentora de Cristo, que removeu a barreira do pecado, Hebreus, capítulo 10, versículos 19 a 22; Efésios, capítulo 3, versículo 12. Além disso, aproximamo-nos com fé viva e reverência, pois sem fé é impossível agradar a Deus, Hebreus, capítulo 11, versículo 6. Do mesmo modo, essa aproximação exige humildade e coração quebrantado, que o Senhor jamais despreza, Salmos, capítulo 51, versículo 17. Por isso, o trono é chamado de Trono da graça: dele procedem misericórdia, perdão, socorro e poder espiritual.'},
+ {t:'quote', x:'A Lei revela o pecado, mas não salva; somente a graça concede vida, pois onde abundou o pecado, superabundou a graça.'},
+ {t:'subtopic', x:'2. Quando devemos nos achegar ao trono da graça?'},
+ {t:'body', x:'As Escrituras orientam que busquemos a graça em tempo oportuno, Hebreus, capítulo 4, versículo 16. Isso significa que o auxílio divino está sempre disponível no momento exato da necessidade. Com efeito, Deus é socorro bem presente na angústia, Salmos, capítulo 46, versículo 1, e jamais se atrasa. Portanto, o trono da graça não é inacessível nem reservado a poucos, mas permanece aberto a todos os crentes, que podem se achegar com confiança, hoje e sempre, pela fé em Jesus Cristo.'},
+ {t:'subtopic', x:'3. O que recebemos ao nos achegarmos ao trono da graça?'},
+ {t:'body', x:'Ao nos aproximarmos de Deus, recebemos misericórdia, perdão, fortalecimento espiritual e capacitação para viver segundo a sua vontade, Romanos, capítulo 3, versículo 24; Filipenses, capítulo 2, versículo 13. Assim, toda a vida cristã depende dessa graça, desde a salvação até o crescimento contínuo em Cristo, Tito, capítulo 2, versículos 11 e 12; Segunda Pedro, capítulo 3, versículo 18. Além disso, Deus comunica sua graça por meios espirituais ordenados: a Palavra, Segunda Timóteo, capítulo 3, versículo 15; a pregação do Evangelho, Romanos, capítulo 1, versículo 16; a oração, Hebreus, capítulo 4, versículo 16; o jejum, Mateus, capítulo 6, versículos 16 a 18; a adoração, Colossenses, capítulo 3, versículo 16; a plenitude do Espírito Santo, Efésios, capítulo 5, versículo 18; e a comunhão à mesa do Senhor, Atos, capítulo 2, versículo 42.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Crescer na graça é viver dependente de Deus por fé e comunhão.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Resumindo, o Concílio de Jerusalém reafirmou que a salvação é exclusivamente pela graça, abrindo caminho para a expansão universal do Evangelho, Efésios, capítulo 2, versículos 8 e 9. Desse modo, esse marco histórico ensina que a Igreja deve enfrentar desafios doutrinários com fidelidade bíblica, humildade pastoral e plena dependência do Espírito Santo, cumprindo sua missão entre todas as nações, Mateus, capítulo 28, versículos 19 e 20.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Qual foi a principal controvérsia doutrinária tratada no Concílio de Jerusalém? A defesa da circuncisão como requisito para a salvação, Atos, capítulo 15, versículos 1 e 5. Mas sob a liderança de Tiago e a direção do Espírito Santo, a Igreja reconheceu que a salvação alcança todas as nações pela graça.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'No subtópico sobre o discurso de Tiago, qual é a decisão do Concílio e o que ele recomenda? O Concílio decide não impor a Lei mosaica aos gentios, recomendando apenas a abstinência de práticas que comprometeriam a comunhão: idolatria, imoralidade sexual, carne sufocada e sangue.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Por que a graça de Deus é o único meio de salvação para todos os povos e como ela se apresenta? Diante do drama universal do pecado, que separou toda a humanidade de Deus, Romanos, capítulo 3, versículo 23, a graça se apresenta como o único meio de reconciliação.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'De acordo com Hebreus, capítulo 4, versículo 16, com quais atitudes espirituais o crente deve se aproximar do trono da graça? Com fé viva, reverência, humildade e coração quebrantado.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Segundo a lição, quais bênçãos o crente recebe ao se achegar ao trono da graça de Deus? Ao nos aproximarmos de Deus, recebemos misericórdia, perdão, fortalecimento espiritual e capacitação para viver segundo a sua vontade, Romanos, capítulo 3, versículo 24; Filipenses, capítulo 2, versículo 13.'}
+];
+
+const reader = document.getElementById('reader');
+const segIndexEls = [];
+
+function tokenize(el, text){
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
