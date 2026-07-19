@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 4 — O Espírito que nos Guia para Além das Fronteiras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 4</div>
+    <div class="date">26 de Julho de 2026</div>
+    <h1 class="title">O Espírito que nos Guia para Além das Fronteiras</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 4.'},
+ {t:'versehead', x:'O Espírito que nos Guia para Além das Fronteiras.'},
+ {t:'body', x:'Vinte e seis de julho de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"De sorte que as igrejas eram confirmadas na fé e cada dia cresciam em número." Atos, capítulo 16, versículo 5.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'O Espírito Santo não apenas guia o cristão em seus passos, mas também o impede de avançar quando isso não está em acordo com a vontade de Deus.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 15, versículos 39 e 40, e capítulo 16, versículo 1. O Espírito Santo conduz a nossa vida em meio às tensões.'},
+ {t:'daily', x:'Terça. Atos, capítulo 16, versículos 6 a 9. Deus dirige a nossa vida, abrindo e fechando portas.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 16, versículos 14 e 15. Quando o coração se abre, a Palavra é recebida com fé.'},
+ {t:'daily', x:'Quinta. Atos, capítulo 16, versículos 16 a 18. O nome de Jesus tem autoridade sobre as trevas.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 16, versículos 22 a 26. A fidelidade ao Evangelho sustenta o crente.'},
+ {t:'daily', x:'Sábado. Atos, capítulo 16, versículos 30 e 31. A salvação pela fé em Cristo transforma famílias inteiras.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 16, versículos 11 a 18, e 25 a 31.'},
+ {t:'verse', x:'Versículo 11. E, navegando de Trôade, fomos correndo em caminho direito para a Samotrácia e, no dia seguinte, para Neápolis.'},
+ {t:'verse', x:'Versículo 12. E dali, para Filipos, que é a primeira cidade desta parte da Macedônia e é uma colônia; e estivemos alguns dias nesta cidade.'},
+ {t:'verse', x:'Versículo 13. No dia de sábado, saímos fora das portas, para a beira do rio, onde julgávamos haver um lugar para oração; e, assentando-nos, falamos às mulheres que ali se ajuntaram.'},
+ {t:'verse', x:'Versículo 14. E uma certa mulher, chamada Lídia, vendedora de púrpura, da cidade de Tiatira, e que servia a Deus, nos ouvia, e o Senhor lhe abriu o coração para que estivesse atenta ao que Paulo dizia.'},
+ {t:'verse', x:'Versículo 15. Depois que foi batizada, ela e a sua casa, nos rogou, dizendo: Se haveis julgado que eu seja fiel ao Senhor, entrai em minha casa e ficai ali. E nos constrangeu a isso.'},
+ {t:'verse', x:'Versículo 16. E aconteceu que, indo nós à oração, nos saiu ao encontro uma jovem que tinha espírito de adivinhação, a qual, adivinhando, dava grande lucro aos seus senhores.'},
+ {t:'verse', x:'Versículo 17. Esta, seguindo a Paulo e a nós, clamava, dizendo: Estes homens, que nos anunciam o caminho da salvação, são servos do Deus Altíssimo.'},
+ {t:'verse', x:'Versículo 18. E isto fez ela por muitos dias. Mas Paulo, perturbado, voltou-se e disse ao espírito: Em nome de Jesus Cristo, te mando que saias dela. E, na mesma hora, saiu.'},
+ {t:'verse', x:'Versículo 25. Perto da meia-noite, Paulo e Silas oravam e cantavam hinos a Deus, e os outros presos os escutavam.'},
+ {t:'verse', x:'Versículo 26. E, de repente, sobreveio um tão grande terremoto, que os alicerces do cárcere se moveram, e logo se abriram todas as portas, e foram soltas as prisões de todos.'},
+ {t:'verse', x:'Versículo 27. Acordando o carcereiro e vendo abertas as portas da prisão, tirou a espada e quis matar-se, cuidando que os presos já tinham fugido.'},
+ {t:'verse', x:'Versículo 28. Mas Paulo clamou com grande voz, dizendo: Não te faças nenhum mal, que todos aqui estamos.'},
+ {t:'verse', x:'Versículo 29. E, pedindo luz, saltou dentro e, todo trêmulo, se prostrou ante Paulo e Silas.'},
+ {t:'verse', x:'Versículo 30. E, tirando-os para fora, disse: Senhores, que é necessário que eu faça para me salvar?'},
+ {t:'verse', x:'Versículo 31. E eles disseram: Crê no Senhor Jesus Cristo e serás salvo, tu e a tua casa.'},
+ {t:'body', x:'Hinos sugeridos: cento e cinquenta e cinco, duzentos e noventa, e quinhentos e onze, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Nesta lição, temos a oportunidade de refletir sobre a ação soberana do Espírito Santo na condução da missão cristã. A segunda viagem missionária de Paulo revela que o avanço do Evangelho não depende apenas de planejamento humano, mas de sensibilidade à direção divina. Ao estudar a abertura de novos campos, os conflitos espirituais e a transformação de vidas, o aluno compreenderá que o Espírito Santo guia, impede, redireciona e fortalece a Igreja para avançar além das fronteiras, cumprindo o propósito de Deus.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, interpretar a direção do Espírito Santo na expansão missionária e na Igreja. Segundo, contrastar o poder do Evangelho com a atuação das trevas em Filipos. Terceiro, mobilizar a classe a responder com fé e louvor em contextos de sofrimento.'},
+ {t:'body', x:'Motivação. Estudar esta lição é fundamental para compreender que a missão cristã não avança apenas por iniciativa humana, mas pela direção soberana do Espírito Santo. Ao observar como Deus guia, redireciona e sustenta seus servos, fortalecemos a fé, aprendemos a discernir a vontade divina e somos encorajados a confiar no Espírito mesmo em meio a conflitos, oposição e sofrimento.'},
+ {t:'body', x:'Sugestão de Método. Para concluir a lição, proponha um momento de síntese reflexiva, retomando brevemente os três movimentos do texto: direção do Espírito, confronto espiritual e transformação de vidas. Em seguida, convide a classe a identificar situações atuais em que precisam discernir a vontade de Deus, mantendo fidelidade mesmo em contextos adversos. Finalize com uma leitura bíblica coletiva de Atos, capítulo 16, versículo 31, e um momento de oração, incentivando os alunos a consagrarem seus caminhos ao Espírito Santo, reforçando a ligação entre ensino bíblico, experiência de fé e prática cristã.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. De acordo com o ensino bíblico, o cristão é chamado a viver segundo a direção do Espírito Santo, confiando em Deus mesmo quando caminhos são fechados ou surgem adversidades. A fidelidade, o louvor e a obediência transformam crises em oportunidades de testemunho, permitindo que o Evangelho alcance vidas e lares por meio da graça de Cristo.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e seis, página trinta e oito, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Lídia e a Expansão do Evangelho, localizado depois do primeiro tópico, aprofunda o assunto sobre o papel das mulheres na expansão da igreja gentílica do primeiro século. Segundo, o texto Discernimento Espiritual e a Integridade da Mensagem Cristã, localizado ao final do segundo tópico, aprofunda a reflexão a respeito do discernimento espiritual no trabalho da expansão do Evangelho.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'A segunda viagem missionária de Paulo marca um avanço decisivo da Igreja: o fortalecimento das igrejas já fundadas e a expansão do Evangelho para novos territórios, culminando na entrada da mensagem cristã na Europa. Atos, capítulo 15, versículo 36, ao capítulo 18, versículo 22. Mesmo diante de conflitos e mudanças de rota, o Espírito Santo conduz cada passo, impedindo caminhos e abrindo outros conforme a vontade de Deus. Esta lição revela o Espírito que nos guia para além das fronteiras, mostrando que a missão avança quando a Igreja aprende a ouvir, obedecer e confiar na direção divina.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Fronteiras.'},
+
+ {t:'topic', x:'Tópico 1. Lídia: Quando o Espírito Abre o Coração e Funda uma Igreja.'},
+ {t:'subtopic', x:'1. A direção soberana do Espírito na segunda viagem missionária.'},
+ {t:'body', x:'Na segunda viagem missionária, o destaque recai não apenas sobre a expansão geográfica da Igreja, mas sobre a condução soberana do Espírito Santo em cada decisão. Após a separação entre Paulo e Barnabé, Paulo parte com Silas, recomendado pela igreja, e em Listra incorpora Timóteo à equipe missionária. Atos, capítulo 15, versículos 39 e 40, e capítulo 16, versículo 1. Ao tentarem avançar para a Ásia e para a Bitínia, são impedidos pelo Espírito, aprendendo que a missão não avança apenas por estratégia humana, mas por sensibilidade espiritual. Em Trôade, Paulo recebe a visão do varão macedônio, confirmando a direção divina rumo à Europa. Atos, capítulo 16, versículo 9.'},
+ {t:'subtopic', x:'2. Fé sincera, sensibilidade espiritual e hospitalidade de Lídia.'},
+ {t:'body', x:'Lídia é apresentada como adoradora de Deus, provavelmente uma gentia temente ao Senhor. Comerciante de púrpura, originária de Tiatira, possuía boa condição financeira, mas não era dominada pelo materialismo. Em Filipos, demonstra sensibilidade espiritual ao participar das reuniões de oração. O texto afirma que o Senhor lhe abriu o coração para atender à mensagem de Paulo, revelando que a conversão é obra da graça divina. Lídia crê, é batizada com sua casa e coloca seus bens a serviço do Reino, tornando seu lar o primeiro núcleo da igreja em solo europeu. Atos, capítulo 16, versículos 14 e 15, e versículo 40.'},
+ {t:'subtopic', x:'3. A pregação em Filipos: simplicidade, graça e poder transformador.'},
+ {t:'body', x:'Sem sinagoga, Paulo inicia a missão junto a mulheres reunidas à beira do rio. Ali, em um ambiente simples, o Evangelho produz frutos eternos. Lídia responde com fé e obediência, ensinando que Deus age tanto em grandes centros quanto em encontros humildes. Sua conversão inaugura a igreja em Filipos e revela que onde o Espírito abre corações, o Reino avança. Contudo, a mesma cidade que recebe o Evangelho também manifestará oposição espiritual, preparando o cenário para a libertação da jovem possessa, que veremos no próximo tópico. Atos, capítulo 16, versículos 16 a 21.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'O Espírito dirige a missão ao abrir corações e plantar igrejas.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Lídia e a Expansão do Evangelho.', x:'Depois de seguir a liderança do Espírito Santo rumo à Macedônia, Paulo fez seu primeiro contato evangelístico com um pequeno grupo de mulheres. Ele nunca permitiu que barreiras sociais ou culturais o impedissem de anunciar as Boas Novas. Pregou para aquelas mulheres, e Lídia, uma comerciante influente, creu em Jesus. Isso abriu o caminho para o ministério naquela região. Deus frequentemente trabalha nas mulheres e por intermédio delas desde o início da Igreja. Lídia era uma comerciante de tecidos de púrpura, provavelmente rica, pois tais tecidos eram caros, frequentemente usados como sinal de nobreza ou realeza. Por que a família de Lídia foi batizada depois que ela respondeu com fé às Boas Novas? Porque o batismo era um sinal público da identificação da pessoa com Cristo e com a comunidade cristã. Talvez nem todos os parentes de Lídia tenham escolhido seguir a Cristo, porém a família dela tornou-se cristã. Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro, CPAD, dois mil e treze, página mil quinhentos e vinte.'},
+
+ {t:'topic', x:'Tópico 2. A Libertação da Jovem Possessa e o Confronto com os Poderes das Trevas.'},
+ {t:'subtopic', x:'1. A expulsão de um espírito de adivinhação, versículos 16 a 18.'},
+ {t:'body', x:'Mesmo tendo como base a casa de Lídia, Paulo e seus companheiros continuavam a frequentar o lugar de oração. Atos, capítulo 16, versículo 13. Numa dessas ocasiões, encontraram uma jovem escrava possessa por um espírito de adivinhação, prática condenada pelas Escrituras. Deuteronômio, capítulo 18, versículos 9 a 11. Embora falasse verdades sobre os missionários, seu testemunho não procedia de Deus, à semelhança dos demônios que reconheceram Jesus. Marcos, capítulo 1, versículo 24; e Lucas, capítulo 4, versículo 41. Perturbado, Paulo ordenou, em nome de Jesus Cristo, que o espírito saísse dela, e a libertação foi imediata. Atos, capítulo 16, versículo 18. Isso revela a autoridade do Evangelho sobre as trevas.'},
+ {t:'subtopic', x:'2. A reação dos exploradores e a perseguição injusta, versículos 19 a 22.'},
+ {t:'body', x:'A libertação da jovem significou prejuízo financeiro para seus senhores, que, movidos por interesses econômicos, arrastaram Paulo e Silas às autoridades. Atos, capítulo 16, versículo 19. Sob falsas acusações de perturbação da ordem pública, os missionários foram condenados sem julgamento, açoitados publicamente e lançados na prisão. Atos, capítulo 16, versículos 22 e 23. A fé cristã mostrou-se uma ameaça não à ordem social, mas a sistemas de exploração travestidos de religiosidade.'},
+ {t:'subtopic', x:'3. A falha da justiça humana, versículos 21 a 24.'},
+ {t:'body', x:'Os magistrados romanos ignoraram o devido processo legal e violaram os direitos de Paulo e Silas como cidadãos romanos. Atos, capítulo 16, versículos 22 a 24; confira também Atos, capítulo 22, versículos 25 a 29. O episódio evidencia que a justiça humana é falha e pode ser movida por pressões e interesses, mas isso não frustra os propósitos de Deus. Salmo 37, versículos 12 e 13. Muitas vezes, o sofrimento do justo se torna instrumento para a manifestação da graça. O crente é chamado a discernir, confiar e permanecer fiel, mesmo quando agir corretamente resulta em oposição e injustiça. Deus continua soberano, inclusive nas prisões da vida. E é justamente nesse contexto que o Senhor transformará dor em testemunho, como no episódio da prisão de Paulo e Silas e a conversão do carcereiro.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'O Evangelho confronta as trevas e liberta vidas pelo poder de Jesus.'},
+
+ {t:'aux', label:'Auxílio Bíblico-Teológico. Discernimento Espiritual e a Integridade do Evangelho.', x:'A habilidade de adivinhar dessa moça vinha de espíritos malignos que a possuíam. A adivinhação era uma prática comum nas culturas grega e romana. Havia muitos métodos pelos quais as pessoas tentavam predizer eventos futuros, interpretar fenômenos da natureza e comunicar-se com os mortos. A jovem escrava estava possessa por um espírito maligno e enriquecia seus senhores interpretando sinais e lendo a sorte das pessoas. Eles exploravam a infeliz condição da jovem para obter lucros pessoais. O que a jovem dizia sobre Paulo era verdade, embora a informação procedesse de um demônio. Por que o apóstolo se sentiu incomodado por um espírito maligno anunciar a verdade a seu respeito? Se Paulo aceitasse o testemunho do demônio, estaria ligando a pregação das Boas Novas a atividades relacionadas aos demônios. Isso traria grandes prejuízos à mensagem a respeito de Cristo. A luz e as trevas não se misturam. Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro, CPAD, dois mil e treze, página mil quinhentos e vinte.'},
+
+ {t:'topic', x:'Tópico 3. A Prisão de Paulo e Silas e a Conversão do Carcereiro.'},
+ {t:'subtopic', x:'1. Açoitados e presos por causa do Evangelho, Atos, capítulo 16, versículos 22 a 24.'},
+ {t:'body', x:'Falsamente acusados, Paulo e Silas foram publicamente açoitados e lançados no cárcere interior de Filipos, com os pés presos no tronco. Tratados como criminosos perigosos, sofreram humilhação, dor e injustiça. O cárcere interior, provavelmente localizado no subsolo, era um lugar de escuridão e sofrimento extremo. Contudo, aquele ambiente de aflição tornou-se cenário da manifestação do poder de Deus, mostrando que nenhuma prisão é capaz de limitar a ação soberana do Senhor.'},
+ {t:'subtopic', x:'2. O louvor que abre portas e transforma ambientes, Atos, capítulo 16, versículos 25 e 26.'},
+ {t:'body', x:'Por volta da meia-noite, mesmo feridos e imobilizados, Paulo e Silas oravam e cantavam hinos a Deus. O louvor, nascido em meio à dor, revelou uma fé que não depende das circunstâncias. Romanos, capítulo 5, versículo 3; e Tiago, capítulo 1, versículo 2. Subitamente, um terremoto sacudiu a prisão, abriu as portas e soltou as cadeias de todos os presos. O milagre foi tão impactante que ninguém tentou fugir, evidenciando que a presença de Deus gera reverência e temor.'},
+ {t:'subtopic', x:'3. A conversão do carcereiro e a vitória da graça, Atos, capítulo 16, versículos 27 a 34.'},
+ {t:'body', x:'Ao ver as portas abertas, o carcereiro, tomado de desespero, tentou tirar a própria vida, mas foi impedido por Paulo. Profundamente impactado, perguntou: Que devo fazer para ser salvo? A resposta foi clara: Crê no Senhor Jesus Cristo e serás salvo, tu e a tua casa. Atos, capítulo 16, versículo 31. Ele creu, cuidou das feridas dos missionários, foi batizado com sua família e recebeu-os com alegria. Onde o Evangelho entra, vidas e lares são transformados. Segunda Coríntios, capítulo 5, versículo 17. Este episódio ensina que Deus continua soberano mesmo nas prisões da vida. Quando o crente escolhe louvar em meio à dor e permanecer fiel diante da injustiça, o Senhor transforma sofrimento em testemunho e usa circunstâncias adversas para salvar outros.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Louvor e fé em meio à dor conduzem à salvação e transformação.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Após cerca de três anos de intensa atividade missionária, Paulo retorna a Antioquia da Síria, Atos, capítulo 18, versículo 22, encerrando um ciclo marcado por direção divina, perseverança e frutos abundantes. A narrativa bíblica deixa claro que a missão é contínua e exige fidelidade, mesmo em meio às oposições. Guiados pelo Espírito Santo, os servos de Deus avançam, a Igreja é fortalecida e novas comunidades cristãs são estabelecidas, inclusive no solo europeu. A expansão do Reino depende de obreiros comprometidos com a Palavra e sensíveis à voz do Espírito. Assim como Paulo, sejamos fiéis, ousados e obedientes à direção do Espírito Santo em cada etapa da nossa caminhada cristã.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'O que ocorreu quando Paulo e Silas tentaram avançar para a Ásia e Bitínia durante a segunda viagem missionária? Ao tentarem avançar para a Ásia e para a Bitínia, Paulo e Silas são impedidos pelo Espírito, aprendendo que a missão não avança apenas por estratégia humana, mas por sensibilidade espiritual.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'O que aconteceu após o Senhor abrir o coração de Lídia para atender a mensagem de Paulo? Lídia crê e é batizada com sua casa.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Por que os senhores da jovem possessa se revoltaram contra Paulo e Silas após a libertação dela? A libertação da jovem significou prejuízo financeiro para seus senhores, que, movidos por interesses econômicos, arrastaram Paulo e Silas às autoridades. Atos, capítulo 16, versículo 19.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'O que Paulo e Silas faziam na prisão, mesmo feridos e imobilizados? Paulo e Silas oravam e cantavam hinos a Deus.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Qual foi a pergunta feita pelo carcereiro a Paulo e Silas, e qual foi a resposta dada por eles? Profundamente impactado, perguntou: Que devo fazer para ser salvo? A resposta foi clara: Crê no Senhor Jesus Cristo e serás salvo, tu e a tua casa. Atos, capítulo 16, versículo 31.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
