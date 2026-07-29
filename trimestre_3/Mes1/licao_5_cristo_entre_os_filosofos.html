@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 5 — Cristo entre os Filósofos: O Deus Desconhecido se Revela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 5</div>
+    <div class="date">2 de Agosto de 2026</div>
+    <h1 class="title">Cristo entre os Filósofos: O Deus Desconhecido se Revela</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 5.'},
+ {t:'versehead', x:'Cristo entre os Filósofos: O Deus Desconhecido se Revela.'},
+ {t:'body', x:'Dois de agosto de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Mas Deus, não tendo em conta os tempos da ignorância, anuncia agora a todos os homens, em todo lugar, que se arrependam." Atos, capítulo 17, versículo 30.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'A obra evangelística floresce quando o coração, sensível ao Espírito, discerne os tempos e proclama com ousadia a graça salvadora de Cristo.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 17, versículo 16. O coração sensível ao Espírito se entristece diante da idolatria.'},
+ {t:'daily', x:'Terça. Atos, capítulo 17, versículo 17. O Evangelho deve ser anunciado nos ambientes do cotidiano.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 17, versículo 18. A fé cristã confronta visões de mundo que negam a ressurreição.'},
+ {t:'daily', x:'Quinta. Atos, capítulo 17, versículos 22 e 23. A sabedoria espiritual discerne pontes culturais.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 17, versículos 24 e 25. Deus é o Criador e Sustentador de todas as coisas.'},
+ {t:'daily', x:'Sábado. Atos, capítulo 17, versículos 30 e 31. Deus chama todos ao arrependimento e à salvação.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 17, versículos 15 a 20, e 30 a 32.'},
+ {t:'verse', x:'Versículo 15. E os que acompanhavam Paulo o levaram até Atenas e, recebendo ordem para que Silas e Timóteo fossem ter com ele o mais depressa possível, partiram.'},
+ {t:'verse', x:'Versículo 16. E, enquanto Paulo os esperava em Atenas, o seu espírito se comovia em si mesmo, vendo a cidade tão entregue à idolatria.'},
+ {t:'verse', x:'Versículo 17. De sorte que disputava na sinagoga com os judeus e religiosos e, todos os dias, na praça, com os que se apresentavam.'},
+ {t:'verse', x:'Versículo 18. E alguns dos filósofos epicureus e estoicos contendiam com ele. Uns diziam: Que quer dizer este paroleiro? E outros: Parece que é pregador de deuses estranhos. Porque lhes anunciava a Jesus e a ressurreição.'},
+ {t:'verse', x:'Versículo 19. E, tomando-o, o levaram ao Areópago, dizendo: Poderemos nós saber que nova doutrina é essa de que falas?'},
+ {t:'verse', x:'Versículo 20. Pois coisas estranhas nos trazes aos ouvidos; queremos, pois, saber o que vem a ser isso.'},
+ {t:'verse', x:'Versículo 30. Mas Deus, não tendo em conta os tempos da ignorância, anuncia agora a todos os homens, em todo lugar, que se arrependam,'},
+ {t:'verse', x:'Versículo 31. porquanto tem determinado um dia em que com justiça há de julgar o mundo, por meio do varão que destinou; e disso deu certeza a todos, ressuscitando-o dos mortos.'},
+ {t:'verse', x:'Versículo 32. E, como ouviram falar da ressurreição dos mortos, uns escarneciam, e outros diziam: Acerca disso te ouviremos outra vez.'},
+ {t:'body', x:'Hinos sugeridos: quarenta e oito, cento e vinte e quatro, e quinhentos e cinco, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Nesta lição, acompanhamos Paulo em Atenas, centro da filosofia e da religiosidade antiga, onde um povo culto vivia distante do Deus verdadeiro. Com sensibilidade espiritual, o apóstolo discerne a idolatria e anuncia o Evangelho no Areópago, revelando o Deus Desconhecido. Guiado pelo Espírito, Paulo dialoga com a cultura sem comprometer a verdade, proclamando o Deus Criador, o chamado ao arrependimento e a certeza da ressurreição em Cristo.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, levar o aluno a compreender a idolatria em Atenas. Segundo, analisar os postulados dos filósofos epicureus e estoicos à luz do Evangelho. Terceiro, aplicar o discurso do apóstolo Paulo no Areópago à vida cristã.'},
+ {t:'body', x:'Motivação. Estudar o episódio de Atos, capítulo 17, fortalece a compreensão de que o Evangelho dialoga com a cultura sem perder sua verdade. A lição ensina a discernir contextos, confrontar falsas visões de mundo e proclamar Cristo com fidelidade, revelando que somente Deus responde às buscas mais profundas do ser humano.'},
+ {t:'body', x:'Sugestão de Método. Já estudamos quatro lições. Por isso, antes de iniciar esta lição, sugerimos que faça uma breve revisão orientada das quatro lições anteriores, destacando o fio condutor do trimestre: A Igreja dos Gentios, da chamada missionária à consolidação do Evangelho entre os povos. Retome, de forma sintética, o chamado dos gentios, os desafios enfrentados pela igreja gentílica nascente e a ação soberana de Deus em diferentes contextos. Essa revisão ajuda o aluno a perceber a progressão do conteúdo, a unidade temática do trimestre e a compreender que a experiência de Paulo em Atenas não é um episódio isolado, mas parte do agir contínuo de Deus na missão da Igreja.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. De acordo com esta lição, aprendemos que o cristão é chamado a viver e anunciar o Evangelho com discernimento e fidelidade, mesmo em ambientes culturalmente desafiadores. Assim como Paulo, devemos dialogar com respeito, sem negociar a verdade, proclamando Cristo como única esperança de salvação.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página trinta e oito, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Filósofos Epicureus e Estoicos, localizado depois do segundo tópico, expande o contexto a respeito da filosofia dos epicureus e estoicos nos tempos bíblicos. Segundo, o texto Ao Deus Desconhecido, localizado ao final do terceiro tópico, remonta o contexto religioso em Atenas de acordo com o texto bíblico.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Partindo de Bereia, Paulo chega a Atenas, célebre por sua erudição, arte e tradição filosófica. Atos, capítulo 17, versículos 15 a 34. Embora ainda fosse um centro intelectual de destaque, a cidade estava tomada pela idolatria. Ao observar tantos altares, Paulo se comoveu diante de um povo culto, porém distante do Deus verdadeiro. Cheio do Espírito Santo, ele discerniu que por trás da sabedoria humana havia corações carentes de salvação. É nesse contexto que o apóstolo anuncia Cristo entre os filósofos, revelando o Deus até então desconhecido.'},
+
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Evangelho.'},
+
+ {t:'topic', x:'Tópico 1. Contexto Histórico, Cultural e Religioso de Atenas.'},
+ {t:'subtopic', x:'1. Atenas: o centro intelectual marcado pela idolatria. Atos, capítulo 17, versículo 16.'},
+ {t:'body', x:'Quando Paulo chegou a Atenas, por volta do ano cinquenta depois de Cristo, a cidade ainda exercia enorme influência cultural e intelectual, apesar de sua pouca relevância política sob o domínio romano. Berço de filósofos como Sócrates, Platão e Aristóteles, Atenas destacava-se pelas artes, poesia e filosofia. Contudo, por trás de sua sofisticação, havia uma religiosidade profundamente idólatra e politeísta. Lucas registra a reação de Paulo, que se comoveu ao ver a cidade entregue à idolatria. Atos, capítulo 17, versículo 16.'},
+ {t:'subtopic', x:'2. O início da evangelização na sinagoga. Atos, capítulo 17, versículo 17, primeira parte.'},
+ {t:'body', x:'Como era seu costume, Paulo iniciou sua proclamação do Evangelho na sinagoga, dialogando com judeus e gentios tementes a Deus. Atos, capítulo 17, versículo 17, primeira parte. Esse método seguia o princípio apostólico de anunciar o Evangelho primeiro ao judeu e também ao grego. Romanos, capítulo 1, versículo 16; confira também Atos, capítulo 17, versículo 2. Ainda que a comunidade judaica em Atenas fosse pequena, ela oferecia uma base inicial para a exposição das Escrituras e a apresentação de Jesus como o Messias prometido. A sinagoga permanecia, assim, como espaço estratégico para o anúncio do Evangelho.'},
+ {t:'subtopic', x:'3. A proclamação do Evangelho na ágora. Atos, capítulo 17, versículo 17, segunda parte.'},
+ {t:'body', x:'Além da sinagoga, Paulo levou o Evangelho à ágora, a praça pública onde se concentrava a vida social, política e intelectual da cidade. Atos, capítulo 17, versículo 17, segunda parte. Ali, dialogava diariamente com gentios e filósofos interessados em ouvir alguma novidade. Atos, capítulo 17, versículo 21. Esse movimento revela que o Evangelho não se restringe aos espaços religiosos, mas deve alcançar o coração da sociedade.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Atenas revela cultura, idolatria profunda e necessidade do Evangelho.'},
+ {t:'quote', x:'A sinagoga permanecia, assim, como espaço estratégico para o anúncio do Evangelho.'},
+
+ {t:'topic', x:'Tópico 2. Os Filósofos Epicureus e Estoicos. Atos, capítulo 17, versículos 18 a 21.'},
+ {t:'subtopic', x:'1. Os epicureus: o prazer como finalidade da vida. Atos, capítulo 17, versículo 18.'},
+ {t:'body', x:'Entre os que confrontaram Paulo em Atenas estavam os filósofos epicureus, seguidores de Epicuro, que viveu de trezentos e quarenta e um a duzentos e setenta anos antes de Cristo. Eles defendiam o prazer como bem supremo, entendido como ausência de dor e sofrimento. Eram materialistas e negavam a providência divina, admitindo a existência dos deuses apenas de forma distante e indiferente à vida humana. Para eles, a morte representava o fim de tudo, o que justificava uma vida voltada à satisfação imediata dos desejos. Essa visão colidia frontalmente com o Evangelho, que afirma a responsabilidade moral presente e a realidade da vida eterna. Primeira Coríntios, capítulo 15, versículo 32.'},
+ {t:'subtopic', x:'2. Os estoicos: razão, destino e impessoalidade divina. Atos, capítulo 17, versículo 18.'},
+ {t:'body', x:'Também dialogavam com Paulo os filósofos estoicos, seguidores de Zeno, que viveu de trezentos e trinta e três a duzentos e sessenta e três anos antes de Cristo. Valorizavam a razão, a virtude e o autocontrole, defendendo que o homem deveria submeter-se ao destino e controlar as emoções. Embora cressem em uma divindade, concebiam Deus não como um ser pessoal, mas como uma força impessoal que permeava todas as coisas. Eram panteístas e fatalistas, negando tanto a ressurreição do corpo quanto a imortalidade individual da alma, posição que se opunha diretamente à fé cristã. Atos, capítulo 17, versículo 18; confira também Primeira Coríntios, capítulo 15, versículo 12.'},
+ {t:'subtopic', x:'3. Paulo levado ao Areópago: o Evangelho diante da cultura. Atos, capítulo 17, versículos 19 a 21.'},
+ {t:'body', x:'Diante das reações diversas, Paulo foi levado ao Areópago, local que designava tanto a Colina de Marte quanto o conselho de sábios atenienses. Alguns o desprezaram, chamando-o de paroleiro, enquanto outros demonstraram curiosidade diante do ensino estranho que anunciava Jesus e a ressurreição. Atos, capítulo 17, versículos 19 a 21. Esse episódio nos ensina que devemos estar preparados para apresentar a fé cristã em contextos intelectuais e culturais desafiadores, sem diluir a verdade do Evangelho.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Epicureus e estóicos são confrontados pelo Evangelho pregado pelo apóstolo Paulo.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Filósofos Epicureus e Estóicos.', x:'Os epicureus originalmente ensinavam que fazer ou descobrir o bem definitivo traria a felicidade. Nos dias de Paulo, porém, essa crença havia se degenerado em um modo de vida mais ligado à busca do prazer, baseado na gratificação temporária e no deleite sensual. Os filósofos estóicos ensinavam que as pessoas deveriam viver em harmonia com a natureza, ser autoconfiantes, independentes e reprimir os seus desejos. Em uma época, o estoicismo pode ter apresentado algumas qualidades decentes, mas, naquele período, havia se transformado em um sistema de arrogância e orgulho próprio. Essas filosofias possuem fortes similaridades com as atitudes e crenças de muitas pessoas hoje, que olham para os seus próprios interesses ou confiam em coisas e pessoas diferentes de Deus para dar significado à vida. Filosofias como essas sempre gerarão oposição à mensagem de Cristo e aos seus servos. Contudo, a exemplo de Paulo, devemos graciosamente argumentar com pessoas espiritualmente desorientadas e confiar no Espírito Santo para que Ele nos conceda as palavras adequadas, a fim de defendermos a nossa fé e convencer alguns da verdade de Cristo como o único caminho para uma vida verdadeira. João, capítulo 14, versículo 6. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro: CPAD, dois mil e vinte e dois, página mil, novecentos e setenta e nove.'},
+
+ {t:'topic', x:'Tópico 3. O Discurso de Paulo no Areópago.'},
+ {t:'subtopic', x:'1. Observação cultural como ponto de contato com o Evangelho. Atos, capítulo 17, versículos 22 e 23.'},
+ {t:'body', x:'O discurso de Paulo no Areópago representa um dos encontros mais significativos entre o Evangelho e a cultura helênica. Com sabedoria e sensibilidade espiritual, o apóstolo não inicia com ataques, mas constrói pontes, revelando como a verdade de Deus pode ser anunciada com firmeza e respeito em ambientes culturais adversos. O apóstolo inicia o seu discurso reconhecendo a religiosidade dos atenienses e menciona o altar dedicado Ao Deus Desconhecido. Em vez de confrontar diretamente a idolatria, utiliza esse elemento cultural como ponto de partida para anunciar o Deus verdadeiro.'},
+ {t:'subtopic', x:'2. O Deus Criador, Sustentador e Senhor da história. Atos, capítulo 17, versículos 24 a 29.'},
+ {t:'body', x:'Na sequência, Paulo proclama Deus como Criador do mundo e de tudo o que nele há, Senhor do céu e da terra, que não habita em templos feitos por mãos humanas nem depende do serviço humano. Versículos 24 e 25. Afirma a unidade da raça humana e a soberania divina sobre os tempos e limites das nações, versículo 26, revelando que o propósito de Deus é que os homens o busquem, versículo 27. Ao citar poetas gregos, Paulo mostra que até na cultura pagã há vestígios da verdade, mas conclui que Deus não pode ser comparado a imagens materiais. Atos, capítulo 17, versículo 29.'},
+ {t:'subtopic', x:'3. O chamado ao arrependimento e o anúncio do Juízo. Atos, capítulo 17, versículos 30 e 31.'},
+ {t:'body', x:'Paulo encerra o discurso com um chamado direto ao arrependimento, afirmando que Deus agora ordena que todos se arrependam, pois estabeleceu um dia em que julgará o mundo com justiça por meio de Jesus Cristo, confirmado pela ressurreição. Versículos 30 e 31; confira também Primeira Coríntios, capítulo 15, versículos 1 a 23. A reação é mista: alguns zombam, outros desejam ouvir novamente, e poucos creem, entre eles Dionísio e Dâmaris. Versículos 32 a 34. O discurso do apóstolo no Areópago ensina que o crente deve anunciar o Evangelho com coragem, fidelidade, respeito e sensibilidade cultural, sem abrir mão das verdades centrais da fé.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Paulo anuncia no Areópago o Deus verdadeiro e chama todos ao arrependimento real.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Ao Deus Desconhecido.', x:'Os gregos tinham medo de ofender quaisquer deuses, deixando de lhes dar a devida atenção; por isso, pensaram que esse monumento poderia contemplar algum que tivesse sido esquecido. Ainda hoje, muitas pessoas têm a forte sensação de que algo está faltando em suas vidas, especialmente no que diz respeito às questões espirituais. Alguns buscam sinceramente, mas permanecem desorientados em suas crenças e esforços para se conectar com algo sobrenatural. Como resultado, continuam espiritualmente perdidos, independentemente de quão sinceros ou dedicados sejam a uma crença ou sistema religioso. Talvez seja surpreendente para alguns cristãos perceber que muitas dessas pessoas estão abertas a considerar uma mensagem que afirme oferecer respostas e esperança. O povo de Deus, que encontrou as respostas por meio do perdão e de um relacionamento pessoal com Cristo, não deve hesitar em compartilhar essa mensagem de esperança com aqueles que buscam sinceramente a verdade. Por meio do testemunho ousado de um único cristão, muitos outros também podem encontrar aquilo que procuram. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro: CPAD, dois mil e vinte e dois, página mil, novecentos e setenta e nove.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'O discurso de Paulo permanece como referência para o diálogo cristão com a cultura: parte da realidade do ouvinte, reconhece os sinais de verdade presentes na sociedade e, com fidelidade, conduz à revelação de Deus em Jesus Cristo. O Evangelho demonstra ser capaz de dialogar com qualquer filosofia, sem perder seu poder de confrontar consciências e chamar todos ao arrependimento e à fé no Cristo ressuscitado.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Em Atenas, o que Paulo discerniu diante de um povo culto, porém distante do Deus verdadeiro? Cheio do Espírito Santo, ele discerniu que por trás da sabedoria humana havia corações carentes de salvação.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Em quais dos ambientes Paulo iniciou e expandiu a evangelização em Atenas, segundo a lição? Como era seu costume, Paulo iniciou sua proclamação do Evangelho na sinagoga, dialogando com judeus e gentios tementes a Deus. Atos, capítulo 17, versículo 17, primeira parte.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'O que aconteceu quando Paulo foi levado ao Areópago? Alguns o desprezaram, chamando-o de paroleiro, enquanto outros demonstraram curiosidade diante do ensino estranho que anunciava Jesus e a ressurreição. Atos, capítulo 17, versículos 19 a 21.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Qual foi a postura de Paulo para iniciar seu discurso no Areópago, representando um dos encontros mais significativos entre o Evangelho e a cultura helênica? Com sabedoria e sensibilidade espiritual, o apóstolo não inicia com ataques, mas constrói pontes, revelando como a verdade de Deus pode ser anunciada com firmeza e respeito em contextos intelectualmente desafiadores.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como Paulo encerra o seu discurso no Areópago? Paulo encerra o discurso com um chamado direto ao arrependimento, afirmando que Deus agora ordena que todos se arrependam, pois estabeleceu um dia em que julgará o mundo com justiça por meio de Jesus Cristo, confirmado pela ressurreição. Versículos 30 e 31; confira também Primeira Coríntios, capítulo 15, versículos 1 a 23.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
