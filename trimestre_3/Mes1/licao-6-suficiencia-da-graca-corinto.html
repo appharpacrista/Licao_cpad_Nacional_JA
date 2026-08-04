@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 6 — A Suficiência da Graça na Cidade de Corinto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,7vw,50px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 6</div>
+    <div class="date">9 de Agosto de 2026</div>
+    <h1 class="title">A Suficiência da Graça na Cidade de Corinto</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 6.'},
+ {t:'versehead', x:'A Suficiência da Graça na Cidade de Corinto.'},
+ {t:'body', x:'Nove de agosto de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Porque eu sou contigo, e ninguém lançará mão de ti para te fazer mal, pois tenho muito povo nesta cidade." Atos, capítulo 18, versículo 10.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Deus é Onipotente e não há nada que Ele não possa realizar segundo a sua vontade.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 18, versículos 1 a 4. A luz do Evangelho resplandece em ambientes desafiadores.'},
+ {t:'daily', x:'Terça. Primeira Coríntios, capítulo 2, versículos 3 a 5. A obra de Deus avança pelo poder do Espírito.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 18, versículos 5 e 6. Deus sustenta a missão mesmo diante da rejeição e da oposição.'},
+ {t:'daily', x:'Quinta. Filipenses, capítulo 4, versículos 15 e 16. Na comunhão a igreja se fortalece e se mantém viva.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 18, versículos 9 e 10. A presença do Senhor nos encoraja a pregar.'},
+ {t:'daily', x:'Sábado. Segunda Coríntios, capítulo 12, versículo 9. A graça de Deus é o poder divino que se aperfeiçoa na fraqueza.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 18, versículos 1 a 11.'},
+ {t:'verse', x:'Versículo 1. Depois disto, partiu Paulo de Atenas e chegou a Corinto.'},
+ {t:'verse', x:'Versículo 2. E, achando um certo judeu por nome Áquila, natural do Ponto, que havia pouco tinha vindo da Itália, e Priscila, sua mulher, pois Cláudio tinha mandado que todos os judeus saíssem de Roma, se ajuntou com eles.'},
+ {t:'verse', x:'Versículo 3. E, como era do mesmo ofício, ficou com eles e trabalhava; pois tinham por ofício fazer tendas.'},
+ {t:'verse', x:'Versículo 4. E todos os sábados disputava na sinagoga e convencia a judeus e gregos.'},
+ {t:'verse', x:'Versículo 5. Quando Silas e Timóteo desceram da Macedônia, foi Paulo impulsionado pela palavra, testificando aos judeus que Jesus era o Cristo.'},
+ {t:'verse', x:'Versículo 6. Mas, resistindo e blasfemando eles, sacudiu as vestes e disse-lhes: O vosso sangue seja sobre a vossa cabeça; eu estou limpo e, desde agora, parto para os gentios.'},
+ {t:'verse', x:'Versículo 7. E, saindo dali, entrou em casa de um homem chamado Tito Justo, que servia a Deus e cuja casa estava junto da sinagoga.'},
+ {t:'verse', x:'Versículo 8. E Crispo, principal da sinagoga, creu no Senhor com toda a sua casa; também muitos dos coríntios, ouvindo-o, creram e foram batizados.'},
+ {t:'verse', x:'Versículo 9. E disse o Senhor, em visão, a Paulo: Não temas, mas fala e não te cales.'},
+ {t:'verse', x:'Versículo 10. Porque eu sou contigo, e ninguém lançará mão de ti para te fazer mal, pois tenho muito povo nesta cidade.'},
+ {t:'verse', x:'Versículo 11. E ficou ali um ano e seis meses, ensinando entre eles a palavra de Deus.'},
+ {t:'body', x:'Hinos sugeridos: setenta e nove, oitenta e nove, e duzentos e cinco, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'O estudo desta lição nos convida a uma leitura madura e reflexiva da experiência de Paulo em Corinto, integrando fé, contexto e vida. Considerando que a aprendizagem ocorre na interação entre experiências pessoais e a ação formadora da Palavra, este plano valoriza o diálogo e a aplicação consciente da Palavra. Ao reconhecer desafios, medos e decisões do apóstolo, o aluno é levado a reinterpretar sua própria caminhada à luz da suficiência da graça de Deus, fortalecendo a fé e o compromisso cristão.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, conduzir o aluno a compreender Corinto e os desafios do Evangelho. Segundo, verificar com o aluno a missão de Paulo e a suficiência da graça. Terceiro, conscientizar sobre a graça de Deus diante dos desafios da vida cristã.'},
+ {t:'body', x:'Motivação. Estudar a experiência de Paulo em Corinto permite compreender que a missão cristã não se sustenta na força humana, mas na graça de Deus. Esse tema fortalece a fé, orienta a prática cristã e ajuda o aluno a interpretar desafios pessoais e ministeriais à luz da fidelidade divina.'},
+ {t:'body', x:'Sugestão de Método. Para introduzir o primeiro tópico, o professor pode iniciar a aula apresentando um panorama histórico, social e religioso da cidade de Corinto, situando o aluno no contexto em que Paulo desenvolveu seu ministério. Por meio de uma breve exposição dialogada, destaque o contraste entre riqueza material e decadência moral, estimulando o aluno a perceber como o ambiente influencia a nossa jornada de fé. Em seguida, apresente a estratégia inicial de Paulo ao pregar na sinagoga, convidando a classe a refletir sobre desafios, resistências e a necessidade de depender da graça divina em contextos adversos. Use a Bíblia de Estudo Pentecostal, Edição Global, editada pela CPAD, para enriquecer seu plano de aula.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. A vida cristã é sustentada pela graça de Deus em meio às pressões e fragilidades. Assim como Paulo, o crente aprende a confiar na presença do Senhor, perseverar diante das dificuldades e servir com fidelidade, mesmo em contextos moral e espiritualmente desafiadores.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página trinta e nove, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Corinto, localizado depois do primeiro tópico, remonta o contexto religioso e moral da cidade de Corinto. Segundo, o texto Porque Eu Sou Contigo, localizado ao final do segundo tópico, aprofunda o aspecto encorajador do Evangelho ao ministério do apóstolo Paulo.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'A fundação da igreja em Corinto, narrada em Atos, capítulo 18, revela um momento decisivo da missão cristã, no qual a graça de Deus se mostra plenamente suficiente em meio a adversidades intensas. Em uma cidade marcada pela imoralidade e pelo pluralismo religioso, o apóstolo Paulo experimenta o sustento divino para perseverar e anunciar o Evangelho com fidelidade. Este episódio ensina que, mesmo em contextos desafiadores, a graça do Senhor capacita seus servos a permanecer firmes e frutíferos.'},
+
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Suficiência.'},
+
+ {t:'topic', x:'Tópico 1. Paulo Chega a Corinto. Atos, capítulo 18, versículos 1 a 6.'},
+ {t:'subtopic', x:'1. Corinto: riqueza material e miséria espiritual.'},
+ {t:'body', x:'Após deixar Atenas, Paulo chega a Corinto, capital da província romana da Acaia desde vinte e sete antes de Cristo. A cidade havia superado Atenas em importância política e comercial, tornando-se um dos maiores centros econômicos do mundo romano. Cosmopolita e estrategicamente localizada, Corinto reunia povos de diversas culturas, mas também se destacava por sua profunda decadência moral. Templos pagãos, especialmente o de Afrodite, marcavam a vida religiosa da cidade, associando culto e prostituição ritual. Historiadores antigos relatam a presença de centenas de prostitutas religiosas ligadas a esse culto. Diante desse cenário espiritualmente caótico, Paulo chega consciente da complexidade da missão que o aguardava, anunciando o Evangelho em fraqueza, e em temor e em grande tremor, conforme Primeira Coríntios, capítulo 2, versículos 1 a 5.'},
+ {t:'subtopic', x:'2. Temor humano e dependência da graça.'},
+ {t:'body', x:'O apóstolo traz consigo as marcas das perseguições sofridas em Filipos, Tessalônica e Bereia, conforme Atos, capítulo 16, versículos 22 a 24, e Atos, capítulo 17, versículos 5 a 10 e 13, além da constante preocupação pastoral com as igrejas já fundadas, conforme Segunda Coríntios, capítulo 11, versículo 28. A grandiosidade econômica de Corinto contrastava com sua profunda degradação espiritual, intensificando o peso emocional da missão. O próprio Paulo reconhece que esteve entre eles em fraqueza, e em temor e em grande tremor, conforme Primeira Coríntios, capítulo 2, versículo 3. Ainda assim, ele não recua. Sua experiência revela que o temor humano não anula a chamada divina, mas conduz o servo a uma dependência mais profunda da graça de Deus, que se aperfeiçoa na fraqueza, conforme Segunda Coríntios, capítulo 12, versículo 9.'},
+ {t:'quote', x:'Apesar dos frutos visíveis, Paulo enfrenta forte oposição e passa a temer por sua permanência em Corinto.'},
+ {t:'subtopic', x:'3. O início do ministério e a oposição na sinagoga.'},
+ {t:'body', x:'Como era seu costume, Paulo inicia sua obra na sinagoga, anunciando que Jesus é o Cristo prometido. Nesse período, encontra Priscila e Áquila, judeus expulsos de Roma pelo decreto do imperador Cláudio. Trabalhando com eles como fabricante de tendas, Paulo une sustento próprio e missão, estabelecendo uma parceria que seria decisiva para a igreja em Corinto, conforme Atos, capítulo 18, versículos 2 e 3. Com a chegada de Silas e Timóteo, trazendo notícias animadoras e apoio das igrejas da Macedônia, Paulo passa a dedicar-se integralmente à Palavra, conforme Atos, capítulo 18, versículo 5. Contudo, a crescente oposição judaica o impede de continuar na sinagoga, preparando o caminho para uma nova etapa da missão, agora fora daquele ambiente religioso.'},
+
+ {t:'label', x:'Ampliando o Conhecimento.'},
+ {t:'aux', label:'O Papel de Corinto.', x:'Corinto desempenhou um papel significativo no ministério de Paulo, pois este a visitou em diversas ocasiões, conforme Primeira Coríntios, capítulo 12, versículo 14, e capítulo 13, versículo 1; escreveu Primeira e Segunda Coríntios para a sua igreja, e foi onde, ao que tudo indica, escreveu Romanos e Primeira e Segunda Tessalonicenses. Outros líderes da Igreja Primitiva também ministraram em Corinto, como Apolo, por exemplo, conforme Atos, capítulo 19, versículo 1. Amplie mais o seu conhecimento lendo o Dicionário Bíblico Baker, editado pela CPAD, páginas cento e vinte e seis e cento e vinte e sete.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Paulo anuncia o Evangelho em Corinto, enfrentando oposição e dependendo da graça.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Corinto.', x:'Corinto ostentava a acrópole mais impressionante da Grécia; a sua Acrocorinto elevava-se a duzentos e quarenta metros acima da cidade. A Acrocorinto servia de fortaleza e abrigava templos, sendo o mais famoso o templo de Afrodite, que, na cidade velha, destruída pelos romanos em cento e quarenta e seis antes de Cristo, ostentava mil escravos e prostitutas do templo. A sua presença contribuiu para a reputação de Corinto como cidade excessivamente imoral. Um verbo grego foi cunhado, korinthiazomai, literalmente corintiar, que significava praticar imoralidade sexual. Na época da chegada de Paulo, Corinto era um dos centros comerciais mais importantes de todo o Império Romano e a maior cidade da Grécia, com uma população livre de cerca de trezentos mil habitantes e mais quatrocentos e sessenta mil escravos. Corinto tinha uma população judaica significativa, sobretudo depois de quarenta e nove depois de Cristo, quando os judeus foram expulsos de Roma, conforme Atos, capítulo 18, versículo 2. Durante o ano e meio de ministério de Paulo, ele discutia regularmente na sinagoga, conforme Atos, capítulo 18, versículo 4. Dicionário Bíblico Baker. Rio de Janeiro, CPAD, dois mil e vinte e três, página cento e vinte e sete.'},
+
+ {t:'topic', x:'Tópico 2. A Continuidade da Missão e o Encorajamento Divino. Atos, capítulo 18, versículos 7 a 11.'},
+ {t:'subtopic', x:'1. A casa de Justo e o avanço do Evangelho.'},
+ {t:'body', x:'Expulso da sinagoga, Paulo não abandona a cidade. Um gentio temente a Deus, Tito Justo, oferece sua casa, localizada ao lado da sinagoga, como novo espaço para a pregação. Essa mudança estratégica amplia o alcance do Evangelho e confere visibilidade positiva à nova comunidade cristã. O resultado é expressivo: muitos coríntios creem, entre eles Crispo, principal da sinagoga, que aceita a fé juntamente com toda a sua casa, conforme Atos, capítulo 18, versículos 7 e 8. O Evangelho demonstra, mais uma vez, que, quando portas se fecham, Deus abre novos caminhos para a expansão do Reino.'},
+ {t:'quote', x:'Deus reafirma sua presença, promete proteção e revela que há muito povo naquela cidade.'},
+ {t:'subtopic', x:'2. O medo do apóstolo e a palavra que fortalece.'},
+ {t:'body', x:'Apesar dos frutos visíveis, Paulo enfrenta forte oposição e passa a temer por sua permanência em Corinto, conforme Primeira Coríntios, capítulo 2, versículo 3. O peso espiritual da cidade, aliado à hostilidade crescente, fragiliza emocionalmente o apóstolo. Nesse contexto, o Senhor lhe aparece em visão e o exorta: Não temas, mas fala e não te cales, conforme Atos, capítulo 18, versículo 9. Deus reafirma sua presença, promete proteção e revela que há muito povo naquela cidade. Essa palavra divina não apenas consola, mas reposiciona Paulo na missão, lembrando-o de que o sucesso da obra não depende da força humana, mas da fidelidade à chamada.'},
+ {t:'subtopic', x:'3. Graça suficiente, perseverança e transição.'},
+ {t:'body', x:'Fortalecido pela promessa do Senhor, Paulo permanece em Corinto por um ano e seis meses, ensinando a Palavra de Deus e consolidando a igreja, conforme Atos, capítulo 18, versículo 11. A experiência do apóstolo ensina que sentir medo não é sinal de fracasso espiritual, mas de oportunidade para experimentar a suficiência da graça divina. Quando o servo confia na presença de Deus, o temor é vencido e a missão prossegue. Contudo, a fidelidade de Paulo não o livraria de novos conflitos. A consolidação da igreja em Corinto logo despertaria reações mais intensas, culminando no julgamento do apóstolo diante do procônsul Gálio, episódio que revelará a soberania de Deus até mesmo nos tribunais humanos, conforme Atos, capítulo 18, versículos 12 a 17.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Deus encoraja Paulo, fortalece a missão e sustenta a igreja em Corinto.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Porque Eu Sou Contigo.', x:'Para Paulo, estas palavras não se referem à presença geral de Cristo em todos os lugares, conforme Atos, capítulo 17, versículos 26 a 28; Salmo cento e trinta e nove; Jeremias, capítulo 23, versículos 23 e 24; e Amós, capítulo 9, versículos 2 a 4. Antes, elas se referem à sua proximidade especial com aqueles que são fiéis a Ele. A proximidade de Cristo significa que Ele está pessoalmente ali para comunicar os seus desejos e propósitos e para cooperar conosco ao realizar estes propósitos. A presença especial de Deus também dá ao seu povo um senso maior do seu amor e os ajuda a experimentar um relacionamento mais profundo com Ele. O fato de que Deus está conosco significa que Ele está presente em todas as situações de nossas vidas para nos abençoar, ajudar, proteger e guiar. Podemos aprender mais sobre o que significa Cristo conosco considerando as passagens do Antigo Testamento onde Deus disse que estava com o seu povo fiel. Quando Moisés estava com medo de voltar para o Egito, Deus disse: Eu serei contigo, conforme Êxodo, capítulo 3, versículo 12. Quando Josué se tornou o líder de Israel após a morte de Moisés, Deus prometeu: Serei contigo; não te deixarei nem te desampararei, conforme Josué, capítulo 1, versículo 5. E Deus encorajou Israel com estas palavras: Quando passares pelas águas, estarei contigo; não temas, pois, porque estou contigo, conforme Isaías, capítulo 43, versículos 2 e 5. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro, CPAD, dois mil e vinte e dois, página mil novecentos e oitenta e um.'},
+
+ {t:'topic', x:'Tópico 3. Paulo Diante de Gálio: A Graça que Sustenta em Meio à Oposição. Atos, capítulo 18, versículos 12 a 17.'},
+ {t:'subtopic', x:'1. A acusação dos judeus e a proteção divina.'},
+ {t:'body', x:'A oposição judaica em Corinto não cessou, e Paulo foi levado diante de Gálio, procônsul da Acaia, sob a acusação de ensinar contrariamente à lei, conforme os versículos 12 e 13. Antes mesmo que Paulo se defendesse, Gálio rejeitou a denúncia, declarando não ser de sua competência julgar disputas religiosas internas, conforme os versículos 14 e 15. Ao expulsar os acusadores do tribunal, o governador confirmou, sem o saber, a promessa do Senhor de que ninguém faria mal ao apóstolo, conforme Atos, capítulo 18, versículos 9 e 10. Assim, Deus usou a autoridade civil para preservar a obra missionária.'},
+ {t:'subtopic', x:'2. O espancamento de Sóstenes e o alcance da graça.'},
+ {t:'body', x:'Após a decisão de Gálio, Sóstenes, principal da sinagoga, foi espancado diante do tribunal, sem que o procônsul interviesse, conforme o versículo 17. Embora o texto não detalhe as motivações, o episódio revela a instabilidade da oposição humana. Posteriormente, um Sóstenes é citado como irmão em Cristo, conforme Primeira Coríntios, capítulo 1, versículo 1, o que sugere uma possível conversão. Se confirmada, essa transformação reforça o poder do Evangelho, capaz de alcançar até mesmo seus opositores.'},
+ {t:'subtopic', x:'3. A suficiência da graça na experiência de Paulo.'},
+ {t:'body', x:'Em Corinto, Paulo viveu intensamente a suficiência da graça de Deus. Em meio a fragilidades, pressões e oposição, aprendeu que o poder divino se aperfeiçoa na fraqueza, conforme Segunda Coríntios, capítulo 12, versículo 9. A cidade marcada pela decadência tornou-se um campo fértil para a manifestação da graça. Sustentado pelo Senhor, Paulo permaneceu ali dezoito meses, e uma igreja foi estabelecida, conforme Atos, capítulo 18, versículo 11. Assim, aprendemos que não é a ausência de lutas, mas a presença da graça, que nos mantém firmes. Como Paulo, somos chamados a confiar que a graça de Deus é suficiente para nos sustentar em qualquer circunstância.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A graça de Deus protege Paulo e triunfa sobre a oposição em Corinto.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A experiência de Paulo em Corinto ensina que a missão cristã exige coragem sustentada pela graça e discernimento para anunciar a verdade eterna em contextos marcados por profundas mudanças. A igreja ali não nasceu em terreno favorável, mas foi estabelecida e fortalecida pela suficiência da graça de Deus. O avanço do Evangelho não depende de recursos humanos, mas da presença fiel do Senhor que assegura: Eu sou contigo. Que aprendamos hoje com Corinto a confiar plenamente na graça divina, proclamando o Evangelho com fidelidade doutrinária, sensibilidade pastoral e amor genuíno, certos de que a graça de Deus continua sendo suficiente para sustentar e fazer frutificar a obra em qualquer tempo e lugar.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Quais características de Corinto representavam um grande desafio para a missão de Paulo, tanto do ponto de vista moral quanto espiritual? Cosmopolita e estrategicamente localizada, Corinto reunia povos de diversas culturas, mas também se destacava por sua profunda decadência moral. Templos pagãos, especialmente o de Afrodite, marcavam a vida religiosa da cidade, associando culto e prostituição ritual.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'De que maneira o contexto cultural e religioso de Corinto intensificava o peso emocional da missão? A grandiosidade econômica de Corinto contrastava com sua profunda degradação espiritual, intensificando o peso emocional da missão. O próprio Paulo reconhece que esteve entre eles em fraqueza, temor e grande tremor, conforme Primeira Coríntios, capítulo 2, versículo 3.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Como a parceria entre Paulo, Priscila e Áquila foi decisiva para a igreja em Corinto? Trabalhando com eles como fabricante de tendas, Paulo une sustento próprio e missão, estabelecendo uma parceria que seria decisiva para a igreja em Corinto, conforme Atos, capítulo 18, versículos 2 e 3.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Após Paulo ser expulso da sinagoga e dar continuidade ao trabalho missionário na casa de Tito Justo, quais foram os resultados dessa mudança estratégica? Essa mudança amplia o alcance do Evangelho. O resultado foi expressivo: muitos coríntios creem, entre eles Crispo, principal da sinagoga, que aceita a fé juntamente com toda a sua casa, conforme Atos, capítulo 18, versículos 7 e 8.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como o julgamento de Paulo diante de Gálio evidenciou a soberania de Deus no cumprimento da promessa divina feita ao apóstolo em Corinto? Ao expulsar os acusadores do tribunal, o governador confirmou, sem o saber, a promessa do Senhor de que ninguém faria mal ao apóstolo, conforme Atos, capítulo 18, versículos 9 e 10, e Deus usou a autoridade civil para preservar a obra missionária.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
