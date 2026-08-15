@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 8 — Despedida em Éfeso: Entre Lágrimas e Alertas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.1;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 8</div>
+    <div class="date">23 de Agosto de 2026</div>
+    <h1 class="title">Despedida em Éfeso: Entre Lágrimas e Alertas</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 8.'},
+ {t:'versehead', x:'Despedida em Éfeso: Entre Lágrimas e Alertas.'},
+ {t:'body', x:'Vinte e três de agosto de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Olhai, pois, por vós e por todo o rebanho sobre que o Espírito Santo vos constituiu bispos, para apascentardes a igreja de Deus, que ele resgatou com o seu próprio sangue." Atos, capítulo 20, versículo 28.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'A Igreja é preservada quando líderes vigilantes cuidam do rebanho com fidelidade à Palavra e submissão ao Espírito Santo.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 20, versículos 19 a 21. A fidelidade cristã se revela em humildade e perseverança.'},
+ {t:'daily', x:'Terça. Filipenses, capítulo 1, versículos 20 e 21. Viver para Cristo dá sentido à vida e sustenta a missão.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 20, versículo 28. O Espírito Santo estabelece líderes para cuidar do rebanho.'},
+ {t:'daily', x:'Quinta. Primeira Pedro, capítulo 5, versículos 2 e 3. O verdadeiro pastoreio é exercido com vigilância, amor e exemplo.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 20, versículo 32. A Palavra da graça edifica a Igreja e garante a nossa herança.'},
+ {t:'daily', x:'Sábado. Primeira Timóteo, capítulo 6, versículos 6 a 10. O contentamento e o desprendimento em Deus.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 20, versículos 17 a 25 e 36 a 38.'},
+ {t:'verse', x:'Versículo 17. De Mileto, mandou a Éfeso chamar os anciãos da igreja.'},
+ {t:'verse', x:'Versículo 18. E, logo que chegaram junto dele, disse-lhes: Vós bem sabeis, desde o primeiro dia em que entrei na Ásia, como em todo esse tempo me portei no meio de vós.'},
+ {t:'verse', x:'Versículo 19. Servindo ao Senhor com toda a humildade e com muitas lágrimas e tentações que, pelas ciladas dos judeus, me sobrevieram.'},
+ {t:'verse', x:'Versículo 20. Como nada, que útil seja, deixei de vos anunciar e ensinar publicamente e pelas casas.'},
+ {t:'verse', x:'Versículo 21. Testificando, tanto aos judeus como aos gregos, a conversão a Deus e a fé em nosso Senhor Jesus Cristo.'},
+ {t:'verse', x:'Versículo 22. E, agora, eis que, ligado eu pelo espírito, vou para Jerusalém, não sabendo o que lá me há de acontecer.'},
+ {t:'verse', x:'Versículo 23. Senão o que o Espírito Santo, de cidade em cidade, me revela, dizendo que me esperam prisões e tribulações.'},
+ {t:'verse', x:'Versículo 24. Mas em nada tenho a minha vida por preciosa, contanto que cumpra com alegria a minha carreira e o ministério que recebi do Senhor Jesus, para dar testemunho do evangelho da graça de Deus.'},
+ {t:'verse', x:'Versículo 25. E, agora, na verdade, sei que todos vós, por quem passei pregando o Reino de Deus, não vereis mais o meu rosto.'},
+ {t:'verse', x:'Versículo 36. E, havendo dito isto, pôs-se de joelhos e orou com todos eles.'},
+ {t:'verse', x:'Versículo 37. E levantou-se um grande pranto entre todos e, lançando-se ao pescoço de Paulo, o beijavam.'},
+ {t:'verse', x:'Versículo 38. Entristecendo-se muito, principalmente pela palavra que dissera, que não veriam mais o seu rosto. E acompanharam-no até ao navio.'},
+ {t:'body', x:'Hinos sugeridos: quinze, cento e oitenta e sete, e trezentos e quatro, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'A lição desta semana nos convida à reflexão sobre a fidelidade ministerial, a vigilância doutrinária e o cuidado pastoral à luz de Atos, capítulo 20. Ao trabalhar a despedida de Paulo, considere os aspectos cognitivos, isto é, a compreensão do texto e a análise histórica; os aspectos afetivos, isto é, empatia, zelo e amor pela Igreja; e os aspectos práticos, isto é, a aplicação ministerial. Trabalhe para que essa aula fortaleça o compromisso pessoal, integrando conteúdo bíblico, maturidade espiritual e responsabilidade eclesial.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, conduzir a classe a compreender e valorizar a fidelidade cristã. Segundo, orientar a classe a discernir erros e fundamentar-se na sã doutrina. Terceiro, encorajar a classe a aplicar vigilância e amor no serviço cristão.'},
+ {t:'body', x:'Motivação. Estudar Atos, capítulo 20, é compreender que a fidelidade não é opcional, mas vocacional. Ao analisar o legado de Paulo, percebemos que doutrina, caráter e amor pastoral sustentam a Igreja. Conhecer esse ensino fortalece a nossa identidade pentecostal e desperta responsabilidade espiritual no servir o Corpo de Cristo.'},
+ {t:'body', x:'Sugestão de Método. Inicie a aula escrevendo no quadro o título da lição, Despedida em Éfeso: Entre Lágrimas e Alertas, e o tema do trimestre, A Igreja dos Gentios: Da Chamada Missionária à Consolidação do Evangelho entre os Povos. Promova uma revisão dialogada das Lições 5 a 7, destacando missão, consolidação e liderança. Em seguida, peça sínteses breves e conecte as respostas a Atos, capítulo 20, mostrando que a despedida de Paulo representa o amadurecimento da Igreja e a necessidade permanente de vigilância doutrinária e amor pastoral.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. A despedida de Paulo nos chama a viver com coerência, vigilância e amor. Na vida cristã, isso significa cuidar da própria fé, permanecer firmes na sã doutrina e servir com integridade, mesmo em meio a pressões.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 106, página 40, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Aconselhamentos Pastorais, localizado depois do segundo tópico, aprofunda as advertências apostólicas aos líderes de Éfeso. Segundo, o texto O Altruísmo de Paulo, localizado ao final do terceiro tópico, trata sobre o cuidado e o serviço pastoral.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Esta lição acompanha a comovente despedida do apóstolo Paulo dos presbíteros de Éfeso, em Mileto, antes de sua saída definitiva da Ásia. Trata-se do único discurso registrado de Paulo dirigido exclusivamente a líderes cristãos, no qual ele exorta ao cuidado do rebanho, alerta contra falsas doutrinas e reafirma a fidelidade ao ensino apostólico. Entre lágrimas, oração e abraços, o apóstolo revela o peso da separação e a urgência da vigilância espiritual diante dos perigos que ameaçam a Igreja.'},
+
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Advertências.'},
+
+ {t:'topic', x:'Tópico 1. O Ministério de Paulo como Exemplo de Fidelidade.'},
+ {t:'subtopic', x:'1. Um ministério vivido com coerência e entrega, versículos 17 a 21.'},
+ {t:'body', x:'Paulo apresenta seu ministério como um testemunho vivo de fidelidade ao Senhor. Ele recorda aos presbíteros de Éfeso que serviu com toda a humildade, lágrimas e provações, versículo 19, na tradução Almeida Revista e Atualizada, demonstrando que o verdadeiro ministério nasce do quebrantamento e da perseverança. Sua fidelidade manifesta-se no compromisso de anunciar todo o conselho de Deus, sem omitir verdades, proclamando arrependimento para com Deus e fé em Jesus Cristo, versículos 20 e 21. Assim, vida e mensagem caminham juntas, revelando que a autoridade espiritual é confirmada por um testemunho coerente. Primeira Coríntios, capítulo 4, versículo 16.'},
+ {t:'subtopic', x:'2. A fidelidade apostólica como guarda da verdade.'},
+ {t:'body', x:'A fidelidade apostólica envolve zelo pela sã doutrina e vigilância contra o erro. Paulo sabia que apenas a verdade do Evangelho seria capaz de confrontar falsas doutrinas e preservar a Igreja. Gálatas, capítulo 1, versículos 6 a 9. Por isso, líderes são chamados a ensinar com firmeza, mansidão e discernimento, retendo a fiel palavra para exortar e convencer os contradizentes. Tito, capítulo 1, versículo 9; e Segunda Timóteo, capítulo 2, versículo 24. A Igreja permanece saudável quando se alimenta da Palavra e desenvolve uma fé não fingida, sustentada por uma boa consciência. Primeira Timóteo, capítulo 1, versículo 5.'},
+ {t:'subtopic', x:'3. Fidelidade diante do futuro e consciência irrepreensível, versículos 22 a 27.'},
+ {t:'body', x:'O apóstolo também revela pressentimentos acerca do futuro, afirmando que o Espírito lhe testificava prisões e tribulações em Jerusalém, versículos 22 e 23. Ainda assim, não recua, pois considera sua vida sem valor diante do chamado de completar a carreira e testemunhar do Evangelho da graça, versículo 24; Filipenses, capítulo 1, versículos 20 e 21. Sua consciência estava limpa, pois havia anunciado plenamente a vontade de Deus, tornando-se irrepreensível quanto à responsabilidade espiritual do rebanho, versículos 26 e 27; e Ezequiel, capítulo 33, versículos 7 a 9. Esse exemplo nos ensina que a fidelidade não elimina sofrimentos, mas produz segurança diante de Deus. A partir dessa convicção, Paulo passa a exortar os líderes a cuidarem vigilantemente da Igreja.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'O apóstolo Paulo é um exemplo de fidelidade, coerência e entrega total ao ministério.'},
+
+ {t:'aux', label:'Ampliando o Conhecimento. O Presbítero.', x:'O ofício de ancião ou presbítero, presbyteros, é um dos mais comuns na igreja. Esse ofício é baseado no modelo dos anciãos da sinagoga judaica. Paulo e Barnabé designaram presbíteros em todas as igrejas logo na sua primeira viagem missionária. Atos, capítulo 14, versículo 23. Tiago instrui os enfermos a chamar os presbíteros da igreja para estes orarem por aqueles. Tiago, capítulo 5, versículo 14. Amplie mais o seu conhecimento lendo o Dicionário Bíblico Baker, editado pela CPAD, página 365.'},
+
+ {t:'topic', x:'Tópico 2. Advertências aos Presbíteros contra os Falsos Mestres.'},
+ {t:'subtopic', x:'1. O Espírito Santo como originador do ministério pastoral, versículo 28.'},
+ {t:'body', x:'Paulo afirma que os líderes da igreja foram constituídos pelo próprio Espírito Santo como bispos, epískopoi, isto é, supervisores do rebanho, versículo 28. No mesmo versículo, eles também são chamados de pastores, evidenciando que presbíteros, bispos e pastores designam o mesmo ofício, sob perspectivas complementares. Atos, capítulo 14, versículo 23; e Tito, capítulo 1, versículos 5 a 7. Essa função não nasce de ambição pessoal, mas de vocação divina, o que torna a responsabilidade ainda maior, pois o rebanho pertence a Deus e foi adquirido com o sangue de Cristo. Por isso, antes de cuidar dos outros, o líder deve zelar por sua própria vida espiritual e testemunho. Primeira Timóteo, capítulo 3, versículos 1 a 7; e Tito, capítulo 1, versículos 5 a 9.'},
+ {t:'subtopic', x:'2. O perigo real e contínuo das falsas doutrinas, versículos 29 e 30.'},
+ {t:'body', x:'O apóstolo adverte que lobos cruéis surgiriam, tanto de fora quanto de dentro da própria comunidade, distorcendo a verdade para atrair discípulos após si, versículos 29 e 30. Esses falsos mestres, movidos por interesses egoístas, representam ainda hoje uma ameaça constante à fidelidade da Igreja. Romanos, capítulo 16, versículos 17 e 18; e Primeira João, capítulo 4, versículo 1. Embora o contexto histórico inclua possíveis influências gnósticas, a advertência é atemporal: sempre haverá ensinos que relativizam a verdade bíblica. Por isso, somente a permanência na sã doutrina preserva a fé genuína e protege o povo de Deus contra o engano. Segunda Timóteo, capítulo 4, versículos 3 e 4.'},
+ {t:'subtopic', x:'3. Vigilância espiritual como dever permanente do pastor, versículo 31.'},
+ {t:'body', x:'Diante desses perigos, Paulo exorta os presbíteros à vigilância constante, lembrando-lhes que por três anos advertiu a igreja com lágrimas, versículo 31. Vigiar implica cuidar, alimentar e proteger o rebanho com amor e fidelidade, seguindo o exemplo do Bom Pastor. Primeira Pedro, capítulo 5, versículos 2 e 3; e João, capítulo 10, versículo 11. Essa exortação também se aplica à Igreja hoje: líderes e membros são chamados a permanecer atentos, firmes na Palavra e sensíveis à voz do Espírito. Com essa advertência solene, Paulo prepara os presbíteros para compreenderem que o cuidado pastoral exige dependência da graça divina.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Vigilância pastoral contra erros e falsos mestres traz sabedoria ao ministério.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Aconselhamentos Pastorais.', x:'Paulo demonstrou seus motivos espirituais, despertando os presbíteros a cumprirem fielmente seus ministérios. Olhai pois por vós, e por todo o rebanho sobre que o Espírito Santo vos constituiu bispos, para apascentardes a igreja de Deus, que ele resgatou com seu próprio sangue. Veja João, capítulo 21, versículo 15; Atos, capítulo 13, versículo 2; e Primeira Pedro, capítulo 5, versículos 1 e 2. Seria um grande pecado negligenciar o povo de Deus, comprado a tão alto preço. Paulo adverte sobre dois perigos. Primeiro, contra a intrusão de falsos mestres, chamados lobos cruéis. Estes vivem às custas do rebanho e não em prol dele. Apocalipse, capítulo 2, versículos 1 e 2. Segundo, contra os que causariam separações na igreja, ensinando doutrinas contrárias às Escrituras. Romanos, capítulo 16, versículos 17 e 18; Primeira Timóteo, capítulo 3, versículo 6; Segunda Timóteo, capítulo 1, versículo 5; e Primeira João, capítulo 2, versículo 26, e capítulo 4, versículos 1, 3 e 5. Quanto à vigilância do rebanho, Paulo cita seu próprio exemplo, versículo 31. O ditado conhecido diz: A eterna vigilância é o preço da liberdade. Este cuidado também é necessário para a união espiritual dos membros da Igreja. Pearman, Myer. Atos: A Igreja Primitiva na Força e na Unção do Espírito. Rio de Janeiro: CPAD, dois mil e dezoito, páginas 209 e 210.'},
+
+ {t:'topic', x:'Tópico 3. O Cuidado Pastoral de Paulo com os Líderes da Igreja.'},
+ {t:'subtopic', x:'1. A Palavra de Deus como fundamento seguro do ministério, versículo 32.'},
+ {t:'body', x:'Ao concluir sua exortação, Paulo entrega os presbíteros a Deus e à palavra da sua graça, revelando o coração do cuidado pastoral: a centralidade das Escrituras. É a Palavra que edifica, amadurece e conduz o crente à herança entre os santificados. Efésios, capítulo 4, versículo 12; e Romanos, capítulo 8, versículo 17. A fidelidade apostólica não se apoia em autoridade pessoal nem em tradições humanas, mas na submissão plena à Palavra confiada por Deus. Segunda Timóteo, capítulo 1, versículo 14. O verdadeiro líder jamais se coloca acima das Escrituras, mas se deixa governar por elas, pois somente a Palavra preserva a Igreja firme e frutífera.'},
+ {t:'subtopic', x:'2. O exemplo de desprendimento e serviço cristão, versículos 33 a 35.'},
+ {t:'body', x:'Paulo reforça sua integridade ao declarar que não cobiçou riquezas nem buscou ganhos pessoais. Pelo contrário, trabalhou com as próprias mãos para suprir suas necessidades e ajudar os que estavam com ele. Atos, capítulo 18, versículo 3. Esse testemunho confronta diretamente a postura de falsos obreiros, movidos pela ganância e pelo desejo de lucro. Primeira Timóteo, capítulo 6, versículos 5 a 10; e Segunda Pedro, capítulo 2, versículos 14 e 15. Ao citar as palavras do Senhor Jesus, mais bem-aventurada coisa é dar do que receber, versículo 35, Paulo ensina que o ministério autêntico é marcado pelo serviço sacrificial e pelo cuidado com os fracos, e não pela exploração do rebanho.'},
+ {t:'subtopic', x:'3. Uma despedida marcada por amor, comunhão e lágrimas, versículos 36 a 38.'},
+ {t:'body', x:'O encontro termina em oração, lágrimas e abraços, revelando a profundidade do vínculo espiritual entre Paulo e os líderes de Éfeso. Suas lágrimas expressam sofrimento, versículo 19; e Filipenses, capítulo 3, versículo 18; zelo pastoral, versículo 31; e amor sincero, versículo 37. Esse afeto mostra que a defesa da verdade jamais deve ser dissociada do amor cristão. Anos depois, embora elogiada por sua firmeza doutrinária, a igreja de Éfeso seria advertida por ter abandonado o primeiro amor. Apocalipse, capítulo 2, versículo 4. O cuidado pastoral, portanto, exige equilíbrio entre verdade e amor. A Igreja permanece viva quando guarda a sã doutrina sem perder a chama da comunhão, da oração e da devoção sincera a Cristo.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Palavra, serviço e amor marcam o cuidado pastoral.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Altruísmo de Paulo.', x:'De ninguém cobicei a prata, nem o ouro, nem o vestido. Paulo contrasta seu exemplo com o dos falsos obreiros, que atraem discípulos atrás de si mesmos, visando ganhos. Primeira Timóteo, capítulo 6, versículos 5 a 10; Romanos, capítulo 16, versículos 17 e 18; e Segunda Pedro, capítulo 2, versículos 14 e 15. Paulo não permitiu que a mínima cobiça obscurecesse sua visão das almas necessitadas. Não permitiu que nenhum interesse em ouro ou prata diminuísse sua paixão pelas almas. As ações de Paulo confirmaram seu testemunho: vós mesmos sabeis que para o que me era necessário a mim, e aos que estão comigo, estas mãos me serviram. Pearman, Myer. Atos: A Igreja Primitiva na Força e na Unção do Espírito. Rio de Janeiro: CPAD, dois mil e dezoito, página 210.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'O discurso de Paulo aos presbíteros de Éfeso permanece como um legado espiritual para a Igreja em todas as épocas. Nele aprendemos que a firmeza na Palavra, a vigilância espiritual e o amor pastoral são o maior antídoto contra as falsas doutrinas e a apostasia. A Igreja de hoje necessita de líderes e membros comprometidos com a verdade do Evangelho, dispostos a servir com integridade e a cuidar do rebanho de Deus. Assim, a fidelidade bíblica continua sendo o caminho seguro para preservar a Igreja do Senhor em meio aos desafios de cada geração.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Na sua comovente despedida dos presbíteros de Éfeso, como Paulo apresenta seu ministério? Paulo apresenta seu ministério como um testemunho vivo de fidelidade ao Senhor. Ele recorda aos presbíteros de Éfeso que serviu com toda a humildade, lágrimas e provações, demonstrando que o verdadeiro ministério nasce do quebrantamento e da perseverança.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'De que maneira a fidelidade de Paulo se manifesta? Sua fidelidade manifesta-se no compromisso de anunciar todo o conselho de Deus, sem omitir verdades, proclamando arrependimento para com Deus e fé em Jesus Cristo, versículos 20 e 21.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'O que Paulo afirma sobre os líderes da igreja? Paulo afirma que os líderes da igreja foram constituídos pelo próprio Espírito Santo como bispos, epískopoi, isto é, supervisores do rebanho, versículo 28.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'De que maneira Paulo reforça sua integridade, como exemplo de desprendimento e serviço cristão, confrontando a postura dos falsos obreiros movidos por ganância? Paulo reforça sua integridade ao declarar que não cobiçou riquezas nem buscou ganhos pessoais. Pelo contrário, trabalhou com as próprias mãos para suprir suas necessidades e ajudar os que estavam com ele.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como termina o encontro de Paulo com os líderes de Éfeso? O encontro termina em oração, lágrimas e abraços, revelando a profundidade do vínculo espiritual entre Paulo e os líderes de Éfeso.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
