@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 7 — Quando o Espírito Sopra em Éfeso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 7</div>
+    <div class="date">16 de Agosto de 2026</div>
+    <h1 class="title">Quando o Espírito Sopra em Éfeso</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 7.'},
+ {t:'versehead', x:'Quando o Espírito Sopra em Éfeso.'},
+ {t:'body', x:'Dezesseis de agosto de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Assim, a palavra do Senhor crescia poderosamente e prevalecia." Atos, capítulo 19, versículo 20.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Onde o Espírito Santo é derramado, a Palavra é confirmada com poder, o pecado é confrontado, e vidas, famílias e cidades são transformadas.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 19, versículos 1 a 6. O derramamento do Espírito conduz o crente à plenitude da fé.'},
+ {t:'daily', x:'Terça. Atos, capítulo 19, versículos 8 a 10. A Palavra e a ação do Espírito transformam pessoas.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 19, versículos 11 e 12. O Espírito Santo confirma o Evangelho com sinais poderosos.'},
+ {t:'daily', x:'Quinta. Atos, capítulo 19, versículos 17 a 20. Onde o Espírito age com poder, a Palavra do Senhor prevalece.'},
+ {t:'daily', x:'Sexta. Joel, capítulo 2, versículos 28 e 29. O derramamento do Espírito alcança todas as gerações.'},
+ {t:'daily', x:'Sábado. Atos, capítulo 19, versículos 23 a 26. O Evangelho transforma estruturas sociais.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 19, versículos 1 a 12.'},
+ {t:'verse', x:'Versículo 1. E sucedeu que, enquanto Apolo estava em Corinto, Paulo, tendo passado por todas as regiões superiores, chegou a Éfeso e, achando ali alguns discípulos.'},
+ {t:'verse', x:'Versículo 2. Disse-lhes: Recebestes vós já o Espírito Santo quando crestes? E eles disseram-lhe: Nós nem ainda ouvimos que haja Espírito Santo.'},
+ {t:'verse', x:'Versículo 3. Perguntou-lhes, então: Em que sois batizados, então? E eles disseram: No batismo de João.'},
+ {t:'verse', x:'Versículo 4. Mas Paulo disse: Certamente João batizou com o batismo do arrependimento, dizendo ao povo que cresse no que após ele havia de vir, isto é, em Jesus Cristo.'},
+ {t:'verse', x:'Versículo 5. E os que ouviram foram batizados em nome do Senhor Jesus.'},
+ {t:'verse', x:'Versículo 6. E, impondo-lhes Paulo as mãos, veio sobre eles o Espírito Santo; e falavam línguas e profetizavam.'},
+ {t:'verse', x:'Versículo 7. Estes eram, ao todo, uns doze varões.'},
+ {t:'verse', x:'Versículo 8. E, entrando na sinagoga, falou ousadamente por espaço de três meses, disputando e persuadindo-os acerca do Reino de Deus.'},
+ {t:'verse', x:'Versículo 9. Mas, como alguns deles se endurecessem e não obedecessem, falando mal do Caminho perante a multidão, retirou-se deles e separou os discípulos, disputando todos os dias na escola de um certo Tirano.'},
+ {t:'verse', x:'Versículo 10. E durou isto por espaço de dois anos, de tal maneira que todos os que habitavam na Ásia ouviram a palavra do Senhor Jesus, tanto judeus como gregos.'},
+ {t:'verse', x:'Versículo 11. E Deus, pelas mãos de Paulo, fazia maravilhas extraordinárias.'},
+ {t:'verse', x:'Versículo 12. De sorte que até os lenços e aventais se levavam do seu corpo aos enfermos, e as enfermidades fugiam deles, e os espíritos malignos saíam.'},
+ {t:'body', x:'Hinos sugeridos: vinte e quatro, trezentos e quarenta, e trezentos e quarenta e nove, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Esta lição, fundamentada em Atos, capítulo 19, nos conduz a refletir sobre a ação do Espírito em um contexto urbano, plural e resistente à fé. Para aprofundar essa reflexão, propomos uma aula que articule exposição bíblica, diálogo e aplicação prática. Valorize as vivências da classe, estimule a interação e conduza o grupo a perceber como Palavra e Espírito continuam transformando vidas e contextos hoje.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar a ação do Espírito no ministério de Paulo. Segundo, analisar o impacto do Evangelho na transformação da cidade. Terceiro, aplicar o ensino da missão da Igreja à realidade contemporânea.'},
+ {t:'body', x:'Motivação. O ensino sobre o derramamento do Espírito em Éfeso fortalece a compreensão bíblica de um movimento espiritual que une doutrina, poder e transformação social. Ao longo da nossa história, testemunhamos que Palavra e Espírito caminham juntos. Assim, o Movimento do Espírito desperta fé madura, discernimento e compromisso missionário na vida da Igreja hoje.'},
+ {t:'body', x:'Sugestão de Método. Para o terceiro tópico, utilize o método expositivo dialogado com linha do tempo comparativa. Você pode desenhar uma linha do tempo na lousa ou em uma cartolina. Inicie na linha do tempo, destacando o impacto do Espírito em Éfeso e os avivamentos históricos mencionados no tópico. Em seguida, peça à classe para identificar marcas comuns dos avivamentos históricos citados na lição. Depois, conduza uma síntese coletiva, aplicando esses princípios à realidade da igreja local hoje. Estimule a reflexão bíblica, oração e proposições práticas de testemunho e missão.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. O derramamento do Espírito nos chama a viver a fé autêntica, com arrependimento, santidade e ousadia missionária. A lição nos convida a examinar práticas pessoais, renunciar o que compromete a comunhão com Deus e assumir um compromisso ativo de testemunhar Cristo na família e na sociedade.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página trinta e nove, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Recebestes vós já o Espírito Santo, localizado depois do primeiro tópico, aprofunda a doutrina do batismo no Espírito Santo em relação aos efésios. Segundo, o texto Lenços e Aventais, localizado ao final do segundo tópico, aprofunda o aspecto poderoso do ministério do apóstolo Paulo em Éfeso.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Durante sua terceira viagem missionária, Paulo estabeleceu em Éfeso um dos mais relevantes centros do cristianismo primitivo. Capital da província da Ásia, a cidade era estratégica no comércio, nos transportes e na religião, marcada pela idolatria e por práticas ocultistas ligadas ao culto de Artêmis. Nesse cenário espiritualmente desafiador, Atos, capítulo 19, registra um poderoso mover de Deus, revelando que o derramamento do Espírito Santo é capaz de confrontar o pecado, restaurar vidas e transformar cidades inteiras.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Soprar.'},
+
+ {t:'topic', x:'Tópico 1. O Espírito Santo sobre o Ministério de Paulo. Atos, capítulo 19, versículos 1 a 10.'},
+ {t:'subtopic', x:'1. A restauração da verdadeira doutrina, versículos 1 a 7.'},
+ {t:'body', x:'Ao chegar a Éfeso, Paulo encontra discípulos que haviam recebido apenas o batismo de João, possuindo uma compreensão parcial do Evangelho, Atos, capítulo 19, versículos 1 a 3. Com clareza pastoral, ele corrige essa lacuna doutrinária, anunciando a plenitude da fé em Cristo. Aqueles discípulos são batizados em nome de Jesus e recebem o Espírito Santo, evidenciado por línguas e profecias, Atos, capítulo 19, versículos 4 a 7. O texto revela que todo verdadeiro derramamento do Espírito começa com alinhamento à verdade bíblica. Em tempos de confusão espiritual e relativismo religioso, a restauração da sã doutrina continua sendo o fundamento indispensável para um mover genuíno do Espírito, João, capítulo 16, versículo 13.'},
+ {t:'subtopic', x:'2. O ensino perseverante diante da resistência, versículos 8 e 9.'},
+ {t:'body', x:'Durante três meses, Paulo ensina na sinagoga, anunciando o Reino de Deus e procurando convencer judeus e gentios, Atos, capítulo 19, versículo 8. Contudo, a resistência cresce, e muitos passam a falar mal do Caminho, expressão que descreve não apenas uma doutrina, mas um estilo de vida centrado em Cristo, Atos, capítulo 9, versículo 2, e João, capítulo 14, versículo 6. Diante do endurecimento, Paulo se retira e separa os discípulos, mostrando que fidelidade à verdade exige discernimento. Em uma sociedade marcada pela intolerância à fé cristã, o texto ensina que o Espírito conduz a Igreja a novos espaços sem comprometer sua identidade, Atos, capítulo 13, versículo 46.'},
+ {t:'subtopic', x:'3. Formação sólida que transforma uma região inteira, versículos 9 e 10.'},
+ {t:'body', x:'Na escola de Tirano, Paulo passa a ensinar diariamente, investindo tempo, disciplina e profundidade na formação espiritual dos discípulos, Atos, capítulo 19, versículos 9 e 10. O resultado é extraordinário: toda a Ásia ouve a Palavra do Senhor. O ensino consistente prepara o terreno para milagres, libertação e transformação social. Assim também hoje, cidades e nações são impactadas quando a Igreja alia Palavra, Espírito e perseverança. Esse mover em Éfeso prepara o cenário para manifestações ainda mais visíveis do poder de Deus, como veremos no próximo tópico, quando o Evangelho confronta diretamente as forças espirituais que dominavam a cidade, Atos, capítulo 19, versículos 11 a 20.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'No ministério de Paulo, o Espírito restaura a doutrina e fortalece o ensino fiel.'},
+
+ {t:'aux', label:'Auxílio Bíblico-Teológico. Recebestes vós já o Espírito Santo?', x:'Em Éfeso, falar noutras línguas é mencionado em conexão com certos discípulos que Paulo encontrou ali, Atos, capítulo 19, versículos 1 a 7. Embora o livro de Atos quase sempre use a palavra discípulo no sentido de um seguidor de Jesus, um cristão, Paulo sentia que, nesse caso, faltava algo. Sem dúvida, esses homens professavam ser seguidores de Jesus. Porém, Paulo lhes perguntou se tinham recebido o Espírito Santo depois de terem crido. A maioria das versões bíblicas registra que se deve traduzir: quando crestes. O grego diz literalmente: tendo crido, recebestes? O crer, em grego, é um particípio passado; enquanto que receber é o verbo principal. Posto que o particípio frequentemente revela seu relacionamento com o verbo principal, o fato de crer estar no particípio significa que antecedia o receber: depois de terem crido. A impressão dada por Atos, capítulo 19, versículo 2, é que, visto que esses discípulos alegavam ser crentes, o batismo com o Espírito Santo deveria ter sido o passo seguinte, um passo distinto depois do ato de crer, embora não necessariamente separado deste por um longo período. Horton, Stanley M. O Espírito Santo na Bíblia: A Atuação do Espírito Santo de Gênesis a Apocalipse. Rio de Janeiro: C P A D, dois mil e vinte e quatro, páginas cento e setenta e dois, setenta e três e setenta e cinco.'},
+
+ {t:'topic', x:'Tópico 2. O Derramamento do Espírito Santo e o Impacto do Evangelho na Cidade. Atos, capítulo 19, versículos 11 a 20.'},
+ {t:'subtopic', x:'1. Manifestações extraordinárias do poder do Espírito, versículos 11 e 12.'},
+ {t:'body', x:'O derramamento do Espírito Santo em Éfeso não se restringiu à proclamação verbal do Evangelho, mas foi confirmado por sinais extraordinários. Deus operava milagres incomuns por meio de Paulo, promovendo curas e libertações que autentificavam a mensagem anunciada, Atos, capítulo 19, versículos 11 e 12, e Romanos, capítulo 15, versículos 18 e 19. Até objetos que tocaram o apóstolo tornaram-se instrumentos da ação divina, não por si mesmos, mas pelo poder de Deus que responde à fé, João, capítulo 14, versículo 12. Assim, o Espírito revela seu poder para transformar realidades marcadas pela dor e o sofrimento.'},
+ {t:'subtopic', x:'2. Confronto espiritual e ruptura com o ocultismo, versículos 13 a 19.'},
+ {t:'body', x:'O derramamento do Espírito também expôs a diferença entre fé autêntica e religiosidade vazia. Os filhos de Ceva tentaram usar o nome de Jesus sem relacionamento com Ele e foram envergonhados, demonstrando que autoridade espiritual não se imita, mas procede de comunhão com Cristo, Atos, capítulo 19, versículos 13 a 16. O impacto foi profundo: muitos confessaram pecados e abandonaram práticas ocultistas, queimando publicamente livros de magia de alto valor. O Espírito Santo produziu arrependimento visível e transformação concreta. Assim também hoje, o verdadeiro mover de Deus liberta pessoas de enganos espirituais, dependências ocultas e falsas promessas que continuam seduzindo sociedades inteiras.'},
+ {t:'subtopic', x:'3. A Palavra que cresce e transforma uma cidade inteira, versículo 20.'},
+ {t:'body', x:'O resultado do derramamento do Espírito é resumido na afirmação: Assim a Palavra do Senhor crescia poderosamente e prevalecia, Atos, capítulo 19, versículo 20. O crescimento do Evangelho ocorreu tanto em número quanto em profundidade espiritual, produzindo mudança de valores, hábitos e comportamentos, Colossenses, capítulo 1, versículo 6. Onde o Espírito é derramado, a Palavra avança, a santidade é restaurada e a sociedade é impactada. Esse progresso prepara o cenário para o próximo confronto em Éfeso, quando o Evangelho tocará interesses econômicos e estruturas idolátricas, revelando que o poder de Deus transforma não apenas indivíduos, mas também sistemas inteiros, Atos, capítulo 19, versículos 23 a 27.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Em Éfeso, o Espírito confirma o Evangelho e transforma a cidade.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Lenços e Aventais.', x:'O ministério de Paulo em Éfeso foi marcado por milagres extraordinários de cura e de libertação às pessoas que estavam sob o controle de demônios. Alguns desses atos foram o resultado direto do ministério de Paulo, guiado pelo Espírito. Mas a sua vida e a sua obra para Deus estavam tão saturadas com o poder do Senhor que alguns desses milagres aconteceram por contato indireto com os lenços e aventais de Paulo, que haviam estado em contato com o seu corpo, isto é, os lenços e aventais suados que ele havia usado. Naturalmente, esses objetos materiais não tinham, em si mesmos, nenhuma qualidade mágica, nenhum poder espiritual, mas representavam um ponto de contato e fé envolvendo alguém que tinha um poderoso relacionamento com Deus, confira Mateus, capítulo 9, versículo 20, onde a mulher foi curada depois de tocar a orla da veste de Jesus. As doenças desapareciam, e os maus espíritos se retiravam, quando a pessoa que estava sofrendo tocava a veste, confira Atos, capítulo 5, versículo 15, e Marcos, capítulo 5, versículo 27. Qualquer ministro, hoje, que tente conquistar reconhecimento ou sustento financeiro, anunciando lenços para cura, não está agindo de acordo com a motivação e o espírito de Paulo, pois ele não usou tais itens para ganhar dinheiro nem exibir poder espiritual. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro: C P A D, dois mil e vinte e dois, página mil novecentos e oitenta e quatro.'},
+
+ {t:'topic', x:'Tópico 3. A Manifestação do Poder de Deus entre os Gentios.'},
+ {t:'subtopic', x:'1. O impacto do derramamento do Espírito em uma cidade.'},
+ {t:'body', x:'Na Escritura, gentios designa os povos que não pertencem etnicamente a Israel, Isaías, capítulo 49, versículo 6, e Romanos, capítulo 3, versículo 29. Em Éfeso, o derramamento do Espírito Santo alcançou uma cidade majoritariamente gentílica, mostrando que Deus transforma não apenas indivíduos, mas realidades coletivas. O mover do Espírito produziu ensino fiel da Palavra, arrependimento genuíno e abandono visível do pecado, Joel, capítulo 2, versículos 12 a 17, impactando estruturas culturais e econômicas, Atos, capítulo 19, versículos 17 a 20. O resultado foi santidade prática, restauração de lares e profundo impacto social.'},
+ {t:'subtopic', x:'2. Exemplos históricos do derramamento do Espírito Santo.'},
+ {t:'body', x:'Ao longo da história, Deus tem derramado seu Espírito em momentos decisivos. No Pentecostes, a Igreja nasceu revestida de poder e testemunho, Atos, capítulo 2, versículos 1 a 4. No País de Gales, entre mil novecentos e quatro e mil novecentos e cinco, o avivamento do Espírito produziu conversões e transformação social. Na Rua Azusa, entre mil novecentos e seis e mil novecentos e nove, o Espírito rompeu barreiras raciais e deu origem ao Movimento Pentecostal Moderno. No Brasil, desde mil novecentos e dez, gerações têm sido marcadas por esse derramamento. Movimentos recentes, como Asbury, em dois mil e vinte e três, confirmam que Deus ainda cumpre sua promessa de derramar o Espírito sobre toda carne, Isaías, capítulo 44, versículo 3, e Joel, capítulo 2, versículos 28 a 32.'},
+ {t:'subtopic', x:'3. O derramamento do Espírito e a missão da Igreja.'},
+ {t:'body', x:'Em Éfeso, o derramamento do Espírito não permaneceu restrito à cidade; tornou-se fonte de expansão missionária para toda a Ásia Menor, Atos, capítulo 19, versículo 10. Todo mover genuíno do Espírito desperta a Igreja para a Grande Comissão, Mateus, capítulo 28, versículos 19 e 20. Onde o Espírito é derramado, o medo cede lugar à ousadia e os crentes tornam-se testemunhas eficazes, Atos, capítulo 1, versículo 8. O derramamento não é um fim em si mesmo, mas um impulso missionário que gera multiplicação e plantação de novas igrejas. Assim como em Éfeso, Deus deseja usar sua Igreja hoje para transformar cidades e nações, levando o Evangelho além das paredes do templo, até que Cristo seja conhecido por todos, Marcos, capítulo 16, versículo 15.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Por meio da Igreja, o Espírito impacta nações e impulsiona a missão hoje.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'O derramamento do Espírito Santo em Éfeso revela que, onde a Palavra é ensinada com fidelidade, o Espírito atua com poder e o arrependimento produz compromisso, Deus transforma vidas e cidades. Não foi um mover superficial, mas profundamente espiritual e ético, gerando frutos duradouros. O Evangelho ali foi anunciado com ousadia, vivido em santidade e confirmado com poder. Essa mesma obra o Senhor deseja realizar hoje em sua Igreja, quando permanecemos fiéis e sensíveis à sua ação.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Em Éfeso, o que Paulo faz ao encontrar discípulos que haviam recebido apenas o batismo de João? Com clareza pastoral, ele corrige essa lacuna doutrinária, anunciando a plenitude da fé em Cristo. Aqueles discípulos são batizados em nome de Jesus e recebem o Espírito Santo, evidenciado por línguas e profecias, Atos, capítulo 19, versículos 4 a 7.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Como o derramamento do Espírito em Éfeso não se restringiu à proclamação verbal do Evangelho? Ele foi confirmado por sinais extraordinários. Deus operava milagres incomuns por meio de Paulo, promovendo curas e libertações que autentificavam a mensagem anunciada.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Qual foi o impacto do exemplo dos filhos de Ceva em contraste com a fé autêntica? O impacto foi profundo: muitos confessaram pecados e abandonaram práticas ocultistas, queimando publicamente livros de magia de alto valor, Deuteronômio, capítulo 18, versículos 9 a 12.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Como o derramamento do Espírito Santo impactou não apenas indivíduos, mas também estruturas culturais e econômicas da cidade de Éfeso? Em Éfeso, o derramamento do Espírito Santo alcançou uma cidade majoritariamente gentílica, mostrando que Deus transforma não apenas indivíduos, mas realidades coletivas. O mover do Espírito produziu ensino fiel da Palavra, arrependimento genuíno e abandono visível do pecado.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Em Éfeso, o derramamento do Espírito permaneceu restrito à cidade? Não. Tornou-se fonte de expansão missionária para toda a Ásia Menor, Atos, capítulo 19, versículo 10. Todo mover genuíno do Espírito desperta a Igreja para a Grande Comissão, Mateus, capítulo 28, versículos 19 e 20.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
