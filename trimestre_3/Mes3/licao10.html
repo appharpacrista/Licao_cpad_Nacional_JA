@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 10 — Uma Esperança Inabalável Perante os Poderosos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,7vw,50px);line-height:1.1;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 10</div>
+    <div class="date">6 de Setembro de 2026</div>
+    <h1 class="title">Uma Esperança Inabalável Perante os Poderosos</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 10.'},
+ {t:'versehead', x:'Uma Esperança Inabalável Perante os Poderosos.'},
+ {t:'body', x:'Seis de setembro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"E, por isso, procuro sempre ter uma consciência sem ofensa, tanto para com Deus como para com os homens." Atos, capítulo 24, versículo 16.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body',  x:'A fidelidade ao Evangelho se expressa em uma consciência irrepreensível diante de Deus e dos homens.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 24, versículos 4 e 5. A fidelidade ao Evangelho pode gerar acusações injustas.'},
+ {t:'daily', x:'Terça. Atos, capítulo 24, versículos 10 a 13. Uma vida íntegra é a melhor defesa diante de acusações humanas.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 24, versículos 14 a 16. A consciência limpa diante de Deus e dos homens sustenta o testemunho cristão.'},
+ {t:'daily', x:'Quinta. Primeira Pedro, capítulo 3, versículos 15 e 16. A boa consciência permite defender a fé com mansidão e firmeza.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 24, versículos 24 e 25. A Palavra confronta consciências e chama ao arrependimento.'},
+ {t:'daily', x:'Sábado. Hebreus, capítulo 10, versículos 35 e 36. A esperança em Deus fortalece o crente a perseverar.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 24, versículos 1 a 6, e 10 a 16.'},
+ {t:'verse', x:'Versículo 1. Cinco dias depois, o sumo sacerdote, Ananias, desceu com os anciãos e um certo Tértulo, orador, os quais compareceram perante o governador contra Paulo.'},
+ {t:'verse', x:'Versículo 2. E, sendo chamado, Tértulo começou a acusá-lo, dizendo:'},
+ {t:'verse', x:'Versículo 3. Visto como, por ti, temos tanta paz, e, por tua prudência, se fazem a este povo muitos e louváveis serviços, sempre e em todo lugar, ó potentíssimo Félix, com todo o agradecimento o queremos reconhecer.'},
+ {t:'verse', x:'Versículo 4. Mas, para que te não detenha muito, rogo-te que, conforme a tua equidade, nos ouças por pouco tempo.'},
+ {t:'verse', x:'Versículo 5. Temos achado que este homem é uma peste e promotor de sedições entre todos os judeus, por todo o mundo, e o principal defensor da seita dos nazarenos.'},
+ {t:'verse', x:'Versículo 6. O qual intentou também profanar o templo; e, por isso, o prendemos e, conforme a nossa lei, o quisemos julgar.'},
+ {t:'verse', x:'Versículo 10. Paulo, porém, fazendo-lhe o governador sinal que falasse, respondeu: Porque sei que já vai para muitos anos que desta nação és juiz, com tanto melhor ânimo respondo por mim.'},
+ {t:'verse', x:'Versículo 11. Pois bem podes saber que não há mais de doze dias que subi a Jerusalém a adorar.'},
+ {t:'verse', x:'Versículo 12. E não me acharam no templo falando com alguém, nem amotinando o povo nas sinagogas, nem na cidade.'},
+ {t:'verse', x:'Versículo 13. Nem tampouco podem provar as coisas de que agora me acusam.'},
+ {t:'verse', x:'Versículo 14. Mas confesso-te que, conforme aquele Caminho, a que chamam seita, assim sirvo ao Deus de nossos pais, crendo tudo quanto está escrito na Lei e nos Profetas.'},
+ {t:'verse', x:'Versículo 15. Tendo esperança em Deus, como estes mesmos também esperam, de que há de haver ressurreição de mortos, tanto dos justos como dos injustos.'},
+ {t:'verse', x:'Versículo 16. E, por isso, procuro sempre ter uma consciência sem ofensa, tanto para com Deus como para com os homens.'},
+ {t:'body', x:'Hinos sugeridos: cento e sete, trezentos, e quinhentos e oitenta e um, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Diante de tribunais humanos e pressões injustas, o servo de Deus é chamado a permanecer firme. Em Atos, capítulo 24, Paulo nos ensina que a verdadeira força nasce de uma consciência limpa e de uma esperança viva na ressurreição. Ao conduzir esta aula, recorde que ensinar é também testemunhar: nossa fidelidade cotidiana pode inspirar os alunos a sustentar a fé, mesmo quando confrontados pelos poderosos deste mundo.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, expor a injustiça contra Paulo e refletir sobre fidelidade. Segundo, enfatizar a defesa do apóstolo e aplicar à vida cristã. Terceiro, desafiar o aluno a viver esperança firme diante das pressões.'},
+ {t:'body', x:'Motivação. Ao estudarmos a respeito da firmeza de Paulo diante de acusações e pressões políticas, somos levados a examinar nossa própria consciência e esperança. Esta lição não trata apenas de história bíblica, mas de postura cristã atual. Que sua classe se sinta motivada a aprender como viver com integridade e coragem diante das adversidades.'},
+ {t:'body', x:'Sugestão de Método. Inicie a aula apresentando o contexto da acusação contra Paulo, Atos, capítulo 24, versículos 1 a 9, pedindo que a classe identifique as intenções e estratégias dos acusadores. Em seguida, conduza os alunos à leitura da defesa, versículos 10 a 16, destacando como Paulo responde com serenidade e fatos. Por fim, enfatize que o centro da defesa não é apenas jurídico, mas teológico: a esperança da ressurreição. Mostre progressivamente que a Verdade não se impõe por retórica, mas se sustenta na convicção da fé e numa consciência limpa diante de Deus.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Com base no exemplo do apóstolo Paulo, somos chamados a responder às acusações e pressões não com ira, mas com verdade e esperança. A vida cristã exige consciência limpa, firmeza doutrinária e confiança na ressurreição dos mortos. Quando nossa defesa nasce da fé, nenhuma oposição pode abalar nosso testemunho.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e seis, página quarenta e um, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Acusação contra Paulo, localizado depois do primeiro tópico, amplia a reflexão a respeito da prisão de Paulo em Jerusalém. Segundo, o texto Defesa da Fé, localizado ao final do segundo tópico, aprofunda o papel da defesa do apóstolo Paulo diante de poderosos.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Em Atos, capítulo 24, acompanhamos o julgamento de Paulo diante do governador Félix. Cinco dias após sua prisão, líderes judeus, conduzidos pelo sumo sacerdote Ananias e representados pelo orador Tértulo, apresentam acusações falsas contra o apóstolo. Mesmo diante de injustiça, interesses políticos e corrupção, Paulo mantém uma fé firme, testificando do Caminho e da ressurreição. O episódio revela que nenhuma autoridade humana é capaz de abalar a fé de quem confia plenamente em Deus.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Esperança.'},
+
+ {t:'topic', x:'Tópico 1. A Acusação Injusta.'},
+ {t:'subtopic', x:'1. A conspiração judaica contra Paulo, versículos 1 e 2.'},
+ {t:'body', x:'A presença do sumo sacerdote Ananias, de alguns anciãos e do orador profissional Tértulo diante do governador Félix revela uma articulação cuidadosamente planejada para condenar Paulo. Não se tratava de buscar justiça, mas de silenciar a voz do Evangelho. A união dessas lideranças religiosas demonstra como interesses políticos e religiosos podem se associar para combater a verdade, Atos, capítulo 24, versículo 1. Paulo não era acusado por crimes reais, mas por anunciar Cristo e a esperança da ressurreição, o que sempre despertou oposição, Atos, capítulo 23, versículo 12; Mateus, capítulo 5, versículos 11 e 12.'},
+ {t:'subtopic', x:'2. O discurso bajulador de Tértulo diante do poder, versículos 2 a 4.'},
+ {t:'body', x:'Tértulo inicia sua acusação com palavras exageradas de elogio ao governador Félix, tentando conquistar sua simpatia por meio da bajulação. Embora a administração de Félix fosse marcada por corrupção e violência, o orador recorre a um discurso vazio de verdade, usando a adulação como estratégia para influenciar a decisão judicial, Atos, capítulo 24, versículos 2 a 4. Em seguida, apresenta Paulo como uma ameaça pública, chamando-o de peste e líder de uma seita perigosa, Atos, capítulo 24, versículo 5.'},
+ {t:'subtopic', x:'3. Falsas acusações contra Paulo, versículos 5 a 9.'},
+ {t:'body', x:'As acusações levantadas contra Paulo resumem-se a três pontos: sedição política, heresia religiosa e profanação do templo, Atos, capítulo 24, versículos 5 e 6. Nenhuma delas, porém, pôde ser comprovada. O apóstolo não incitava revoltas, não negava a Lei e não profanara o templo; sua fé estava firmada na esperança da ressurreição prometida por Deus, Atos, capítulo 24, versículos 14 e 15. Esse cenário revela que a injustiça humana não anula a justiça divina. A fidelidade ao Evangelho inevitavelmente gera oposição, mas a comunhão com Cristo sustenta o crente mesmo em meio às falsas acusações, Mateus, capítulo 5, versículos 11 e 12. Diante disso, veremos como Paulo transforma a acusação injusta em oportunidade para uma defesa firme e testemunhal da fé cristã.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'A acusação injusta revela oposição à verdade do Evangelho.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Acusação contra Paulo.', x:'O relato de Lucas do caso contra Paulo reflete o procedimento legal padrão dos romanos, que incluía a acusação trazida por um orador, ou advogado. Tértulo era um nome romano comum, mas ele pode ter sido um judeu, versículo 6, embora se refira aos judeus de forma objetiva no versículo 5. Tértulo começou com uma captatio benevolentiae, a introdução padrão de um discurso greco-romano destinada a conquistar a simpatia do ouvinte, Félix. Paulo foi acusado por Tértulo de muito mais do que apenas introduzir um gentio no templo, ou seja, profanar o templo. Embora a acusação de profanação do templo talvez fizesse Félix suspeitar de Paulo, as acusações de ser um promotor de sedições e o principal defensor certamente o deixaram alarmado, pois isso significava que Paulo constituía uma ameaça para o governo romano. Tértulo também afirmou que as autoridades em Jerusalém teriam condições de lidar com a situação se Lísias não tivesse interferido. É evidente que os judeus entendiam que eles deviam ser liberados para lidar com Paulo da maneira que quisessem. Bíblia de Estudo Holman. Rio de Janeiro: C P A D, dois mil e dezenove, página mil setecentos e sessenta e oito.'},
+
+ {t:'topic', x:'Tópico 2. A Defesa do Evangelho Baseada na Verdade.'},
+ {t:'subtopic', x:'1. Paulo expõe sua integridade e fala com coragem, versículos 10 a 13.'},
+ {t:'body', x:'Diante do governador Félix, Paulo demonstra respeito à autoridade constituída, sem abrir mão da verdade. Ele inicia sua defesa com serenidade e firmeza, confiando não em artifícios retóricos, mas na clareza de sua conduta. Sem testemunhas em sua defesa e sem aviso prévio das acusações, Paulo responde com coragem, amparado pela assistência do Espírito Santo, o verdadeiro Advogado do crente, Marcos, capítulo 13, versículo 11; Lucas, capítulo 21, versículo 15; João, capítulo 14, versículo 16. Ele nega com fatos as acusações de sedição e profanação do templo, afirmando que esteve em Jerusalém para adorar a Deus e que seus acusadores diretos sequer estavam presentes, Atos, capítulo 24, versículos 11 a 13. Sua vida íntegra torna-se o argumento mais convincente contra as falsas acusações.'},
+ {t:'subtopic', x:'2. A fé na ressurreição como fundamento da defesa, versículos 14 a 16.'},
+ {t:'body', x:'Paulo deixa claro que o centro de sua fé é a esperança da ressurreição dos mortos, doutrina fundamental do Evangelho e da fé cristã, Atos, capítulo 24, versículos 14 e 15; Primeira Coríntios, capítulo 15, versículo 20. Mesmo diante de autoridades políticas, ele não dilui nem oculta sua convicção. Ao confessar publicamente sua fé, Paulo cumpre o ensino de Cristo de não negar o seu nome diante dos homens, Mateus, capítulo 10, versículos 32 e 33.'},
+ {t:'subtopic', x:'3. Uma consciência irrepreensível diante de Deus e dos homens, versículos 17 a 21.'},
+ {t:'body', x:'Paulo afirma viver com uma consciência limpa diante de Deus e dos homens, fruto de uma vida coerente, piedosa e íntegra, Atos, capítulo 24, versículo 16. Essa consciência irrepreensível lhe concede paz interior e ousadia para enfrentar qualquer tribunal terreno, pois sabe que Deus é o Juiz supremo, que julga com justiça e equidade, Salmos, capítulo 98, versículo 9. O cristão que anda em santidade não teme acusações injustas, pois sua fidelidade está firmada no Senhor.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'A defesa firme revela fé na verdade e na ressurreição.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Defesa da Fé.', x:'O verbo grego apologeomai significa dizer em defesa, defender-se. A palavra portuguesa apologia deriva diretamente do substantivo grego correlato apologia, que significa defesa, e não desculpa, como o termo inglês apology. A conhecida obra de Platão, Apologia, consiste na defesa de Sócrates, não em um pedido de desculpas. No Novo Testamento, apologia pode referir-se a uma defesa por meio da conduta, Segunda Coríntios, capítulo 7, versículo 11, ou do discurso, Filipenses, capítulo 1, versículos 7 e 16; Primeira Pedro, capítulo 3, versículo 15, frequentemente em contexto jurídico, Atos, capítulo 22, versículo 1; capítulo 25, versículo 16; Segunda Timóteo, capítulo 4, versículo 16, bem como de forma escrita, Primeira Coríntios, capítulo 9, versículo 3. De modo semelhante, o verbo apologeomai geralmente indica uma defesa verbal, Atos, capítulo 19, versículo 33, também em contexto judicial, Lucas, capítulo 12, versículo 11; capítulo 21, versículo 14; Atos, capítulo 24, versículo 10; capítulo 25, versículo 8; capítulo 26, versículos 1 e 2, e 24, podendo ainda referir-se à consciência que se defende, Romanos, capítulo 2, versículo 15, ou a uma defesa escrita, Segunda Coríntios, capítulo 12, versículo 19. Bíblia de Estudo Holman. Rio de Janeiro: C P A D, dois mil e dezenove, página mil setecentos e sessenta e oito.'},
+
+ {t:'topic', x:'Tópico 3. A Esperança que Supera a Opressão.'},
+ {t:'subtopic', x:'1. Félix adia, mas escuta a mensagem.'},
+ {t:'body', x:'O governador Félix possuía conhecimento prévio acerca do Caminho, isto é, do cristianismo, versículo 22, e sabia que Paulo não era culpado das acusações levantadas contra ele. Ainda assim, optou pelo adiamento e pela omissão. Embora moralmente corrompido e interessado em suborno, versículo 26, Félix foi confrontado pela Palavra viva e eficaz, que alcança o íntimo do coração humano e revela o pecado com clareza, Hebreus, capítulo 4, versículos 12 e 13.'},
+ {t:'subtopic', x:'2. A Palavra provoca temor nos ímpios.'},
+ {t:'body', x:'A Palavra de Deus desperta temor porque expõe a santidade divina e confronta o pecado humano. Paulo falou de justiça a governantes injustos, de domínio próprio a pessoas marcadas pela imoralidade e de juízo vindouro a quem vivia sem temor de Deus, Atos, capítulo 24, versículos 24 e 25. O temor experimentado por Félix não foi acompanhado de arrependimento, evidenciando que não basta sentir medo; é necessário responder com obediência à voz do Espírito Santo, que convence do pecado e conduz à salvação, João, capítulo 16, versículos 7 e 8. O endurecimento do coração diante da verdade resulta em perda espiritual, mesmo quando a consciência é tocada.'},
+ {t:'subtopic', x:'3. A firmeza de Paulo na esperança em Cristo.'},
+ {t:'body', x:'Apesar de permanecer preso por dois anos, Paulo não perdeu a fé nem a esperança. Sua confiança estava firmada em Deus, e não nas decisões humanas, Hebreus, capítulo 10, versículos 35 e 36. A prisão, longe de silenciar sua missão, tornou-se instrumento para a expansão do testemunho cristão. Paulo nos ensina que a verdadeira liberdade não depende das circunstâncias, mas da esperança viva em Cristo. Assim, este episódio reafirma que nenhuma opressão é capaz de aprisionar aquele que vive sustentado pela promessa de Deus e comprometido com o Evangelho.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A esperança em Cristo sustenta o crente diante da opressão.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A fidelidade cristã precisa ser maior do que o medo da perseguição. A exemplo de Paulo, somos chamados a permanecer firmes na fé mesmo quando enfrentamos injustiças e pressões. Preso e acusado injustamente, o apóstolo não negociou a verdade nem silenciou seu testemunho. Sua postura revela que a confiança em Cristo sustenta o servo de Deus em qualquer circunstância. O mundo pode tentar calar a voz do cristão, mas o Evangelho permanece vivo, verdadeiro e sempre triunfante.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Em Atos, capítulo 24, o que revela uma articulação planejada contra Paulo? A presença do sumo sacerdote Ananias, de alguns anciãos e do orador profissional Tértulo diante do governador Félix revela uma articulação cuidadosamente planejada para condenar Paulo.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Quais foram as três acusações principais feitas contra Paulo? As acusações levantadas contra Paulo resumem-se a três pontos: sedição política, heresia religiosa e profanação do templo, Atos, capítulo 24, versículos 5 e 6.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Como Paulo se porta diante do governador Félix? Paulo demonstra respeito à autoridade constituída sem abrir mão da verdade. Ele inicia sua defesa com serenidade e firmeza.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'O que Paulo deixa claro em relação a sua fé na esperança da ressurreição? Paulo deixa claro que o centro de sua fé é a esperança da ressurreição dos mortos, doutrina fundamental do Evangelho e da fé cristã.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como a postura de Paulo demonstra a esperança em Cristo? Apesar de permanecer preso por dois anos, Paulo não perdeu a fé nem a esperança. Sua confiança estava firmada em Deus, e não nas decisões humanas, Hebreus, capítulo 10, versículos 35 e 36.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
