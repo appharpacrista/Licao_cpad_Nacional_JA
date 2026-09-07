@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 13 — A Missão Continua em Nós</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 13</div>
+    <div class="date">27 de Setembro de 2026</div>
+    <h1 class="title">A Missão Continua em Nós</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 13.'},
+ {t:'versehead', x:'A Missão Continua em Nós.'},
+ {t:'body', x:'Vinte e sete de Setembro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Mas importa que o evangelho seja primeiramente pregado entre todas as nações." Marcos, capítulo 13, versículo 10.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Importa que a Igreja pregue o Evangelho a todas as nações, pois essa missão deve avançar até os confins da terra.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Marcos, capítulo 13, versículo 10. Importa que o Evangelho seja pregado a todas as nações.'},
+ {t:'daily', x:'Terça. Atos, capítulo 1, versículo 8. O Evangelho avança até os confins da terra.'},
+ {t:'daily', x:'Quarta. Atos, capítulo 28, versículos 30 e 31. O Evangelho é anunciado com ousadia e sem impedimento.'},
+ {t:'daily', x:'Quinta. Romanos, capítulo 10, versículos 14 e 15. A pregação é o meio de Deus para alcançar as nações.'},
+ {t:'daily', x:'Sexta. Segunda Timóteo, capítulo 2, versículo 9. As circunstâncias não impedem o avanço do Evangelho.'},
+ {t:'daily', x:'Sábado. Mateus, capítulo 28, versículos 18 a 20. A Igreja é enviada para anunciar o Evangelho a todos os povos.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Mateus, capítulo 28, versículos 18 a 20; Atos, capítulo 1, versículo 8; e Efésios, capítulo 2, versículos 13 a 18.'},
+
+ {t:'versehead', x:'Mateus, capítulo 28.'},
+ {t:'verse', x:'Versículo 18. E, chegando-se Jesus, falou-lhes, dizendo: É-me dado todo o poder no céu e na terra.'},
+ {t:'verse', x:'Versículo 19. Portanto, ide, ensinai todas as nações, batizando-as em nome do Pai, e do Filho, e do Espírito Santo;'},
+ {t:'verse', x:'Versículo 20. ensinando-as a guardar todas as coisas que eu vos tenho mandado; e eis que eu estou convosco todos os dias, até à consumação dos séculos. Amém!'},
+
+ {t:'versehead', x:'Atos, capítulo 1.'},
+ {t:'verse', x:'Versículo 8. Mas recebereis a virtude do Espírito Santo, que há de vir sobre vós; e serme-eis testemunhas tanto em Jerusalém como em toda a Judeia e Samaria e até aos confins da terra.'},
+
+ {t:'versehead', x:'Efésios, capítulo 2.'},
+ {t:'verse', x:'Versículo 13. Mas, agora, em Cristo Jesus, vós, que antes estáveis longe, já pelo sangue de Cristo chegastes perto.'},
+ {t:'verse', x:'Versículo 14. Porque ele é a nossa paz, o qual de ambos os povos fez um; e, derribando a parede de separação que estava no meio,'},
+ {t:'verse', x:'Versículo 15. na sua carne, desfez a inimizade, isto é, a lei dos mandamentos, que consistia em ordenanças, para criar em si mesmo dos dois um novo homem, fazendo a paz,'},
+ {t:'verse', x:'Versículo 16. e, pela cruz, reconciliar ambos com Deus em um corpo, matando com ela as inimizades.'},
+ {t:'verse', x:'Versículo 17. E, vindo, ele evangelizou a paz a vós que estáveis longe e aos que estavam perto;'},
+ {t:'verse', x:'Versículo 18. porque, por ele, ambos temos acesso ao Pai em um mesmo Espírito.'},
+ {t:'body', x:'Hinos sugeridos: cento e quinze, cento e vinte e sete, e duzentos e vinte e sete, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Ao iniciar esta lição, lembremos de que a missão da Igreja não é projeto humano, mas desígnio eterno de Deus. A autoridade de Cristo e o poder do Espírito sustentam o chamado que nos envia até os confins da terra. Ensinar este tema é reacender no coração da classe a consciência de que fomos alcançados para alcançar. A missão continua porque o Senhor permanece conosco, e sua graça ainda reúne povos em um só Corpo.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar o mandato universal de Cristo à luz da Grande Comissão. Segundo, demonstrar o papel do Espírito na expansão missionária da Igreja. Terceiro, conduzir o aluno a assumir compromisso pessoal com missões.'},
+ {t:'body', x:'Motivação. A missão não é apenas tema doutrinário, mas identidade da Igreja. Estudar esta lição é compreender que fomos alcançados para alcançar. Ao refletir sobre o mandato de Cristo e o poder do Espírito, a classe será despertada a perceber que a obra continua e que cada crente tem parte ativa nela.'},
+ {t:'body', x:'Sugestão de Método. No fechamento do trimestre, conduza a classe a reconstruir o percurso estudado, da chamada missionária à consolidação do Evangelho entre os gentios, destacando como o Espírito Santo dirigiu cada etapa da expansão. Retome Atos, capítulo 1, versículo 8, como eixo estruturante da narrativa e mostre que o livro termina, mas a missão não. Retome Atos, capítulo 1, versículo 8, como eixo da narrativa e mostre que Atos, capítulo 28, versículos 30 e 31, afirma que Paulo pregava com toda ousadia e sem impedimento, indicando que nada pôde deter o avanço do Evangelho. Conclua desafiando a turma a reconhecer seus confins da terra e assumir compromisso ativo com a missão.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Se a missão continua, nossa fé não pode ser passiva. Cada crente é chamado a viver como testemunha onde está: na família, no trabalho e na igreja. Orar, contribuir, discipular e anunciar fazem parte da vida cristã autêntica. Alcançados pela graça, tornamo-nos instrumentos para alcançar outros.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página quarenta e dois, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto O Espírito Santo e a Glória do Cristo Exaltado, localizado depois do segundo tópico, aprofunda a reflexão a respeito do poder do Espírito para a Missão. Segundo, o texto Começando em Jerusalém, localizado ao final do terceiro tópico, amplia o estudo sobre a continuidade do chamado missionário.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'A missão da Igreja nasce do mandato de Cristo e do poder do Espírito Santo, tendo como alvo todas as nações. Desde o princípio, o plano de Deus sempre foi alcançar também os gentios, rompendo barreiras étnicas e culturais. A expansão do Evangelho confirma que Deus não faz acepção de pessoas e chama todos para o seu Reino. Assim, a Igreja é essencialmente missionária e permanece chamada a anunciar Cristo até os confins da terra, Atos, capítulo 28, versículos 30 e 31.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Comissão.'},
+
+ {t:'topic', x:'Tópico 1. O Mandato Universal de Jesus.'},
+ {t:'subtopic', x:'1. A autoridade de Cristo sobre todas as nações.'},
+ {t:'body', x:'Mateus, capítulo 28, versículo 18. Ao declarar que toda autoridade lhe foi dada no céu e na terra, Jesus afirma seu domínio absoluto e estabelece o fundamento da missão da Igreja. Essa autoridade, confirmada após a ressurreição, garante que a ordem missionária não se apoie em força humana, mas no senhorio do Cristo glorificado. Por isso, a missão é universal e inegociável. Em Atos, capítulo 1, versículo 8, o Senhor revela o meio dessa missão: o poder do Espírito Santo. Sem a ação do Espírito, não há testemunho eficaz; sem missão, a Igreja perde sua razão de existir. Hoje, essa mesma autoridade continua sustentando a proclamação do Evangelho em todas as realidades onde a Igreja está inserida.'},
+ {t:'quote', x:'"A Igreja atual é chamada a manter-se fiel ao mandato missionário, certa de que o retorno glorioso de Cristo encontrará um povo comprometido com a proclamação do Reino."'},
+ {t:'subtopic', x:'2. A ordem de fazer discípulos em todas as etnias.'},
+ {t:'body', x:'Mateus, capítulo 28, versículo 19. A Grande Comissão revela que o Evangelho não reconhece fronteiras culturais, sociais ou étnicas. Fazer discípulos de todas as nações é o desdobramento natural da autoridade de Cristo sobre todos os povos, Marcos, capítulo 16, versículo 15. O discipulado vai além da conversão inicial: envolve ensino, formação espiritual e transformação de vida. Assim, a Igreja dos gentios confirma que o plano de Deus sempre foi incluir todos os povos em seu Reino. Essa missão continua vigente, chamando cada cristão a testemunhar com fidelidade até a volta de Cristo.'},
+ {t:'subtopic', x:'3. A promessa da presença de Cristo até o fim.'},
+ {t:'body', x:'Mateus, capítulo 28, versículo 20. A ordem missionária vem acompanhada de uma promessa consoladora: Jesus estaria com sua Igreja todos os dias, até a consumação dos séculos. Essa presença constante, manifestada pelo Espírito Santo, sustenta a obra missionária mesmo em meio às adversidades. Não caminhamos sozinhos; o Senhor é nosso ajudador, Hebreus, capítulo 13, versículos 5 e 6. Essa certeza fortalece a fé, renova a esperança e garante que a missão de Deus não falhará. Assim, confiantes na presença de Cristo, avançamos para compreender como essa missão se concretiza na expansão do Evangelho entre os gentios.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'A autoridade de Cristo fundamenta e ordena a missão universal.'},
+
+ {t:'topic', x:'Tópico 2. O Poder do Espírito Santo na Missão.'},
+ {t:'subtopic', x:'1. A capacitação do Espírito Santo para testemunhar.'},
+ {t:'body', x:'Atos, capítulo 1, versículo 8, primeira parte. Em Atos, capítulo 1, versículo 8, Jesus afirma que a missão da Igreja só é possível mediante a capacitação do Espírito Santo. O poder prometido não é humano, nem resultado de preparo intelectual apenas, mas uma habilitação divina que concede ousadia, discernimento e autoridade espiritual para testemunhar de Cristo, Lucas, capítulo 24, versículo 49. Esse poder capacita o crente a viver em santidade e a comunicar eficazmente o Evangelho. Além disso, o Espírito Santo atua no coração dos ouvintes, convencendo do pecado, da justiça e do juízo, João, capítulo 16, versículo 8. Ele revela o pecado da incredulidade, manifesta a justiça de Deus em Cristo, Segunda Coríntios, capítulo 5, versículo 21, e aponta para o juízo já decretado sobre Satanás, assegurando que a missão não depende apenas de quem anuncia, mas do agir soberano de Deus.'},
+ {t:'subtopic', x:'2. A expansão geográfica e espiritual do Evangelho.'},
+ {t:'body', x:'Atos, capítulo 1, versículo 8, segunda parte. A missão cristã é progressiva e expansiva. O testemunho começa em Jerusalém, alcança a Judeia e Samaria e se estende até os confins da terra. Essa progressão revela o plano divino para a evangelização mundial e estrutura o próprio livro de Atos: capítulos 1 a 7, capítulos 8 a 12, e capítulos 13 a 28. A expressão confins da terra aponta para todos os povos, culturas e regiões, sem distinção. Assim, o Evangelho rompe limites geográficos, étnicos e culturais, demonstrando que o plano de Deus sempre foi alcançar toda a humanidade, Romanos, capítulo 15, versículo 20.'},
+ {t:'subtopic', x:'3. A missão como responsabilidade de toda a Igreja.'},
+ {t:'body', x:'Paulo mostra que a fé nasce ao ouvir a mensagem proclamada do Evangelho, Romanos, capítulo 10, versículos 13 a 15. A missão não é tarefa exclusiva de líderes, mas responsabilidade de toda a Igreja. Todos os crentes foram chamados para anunciar as virtudes de Deus, Primeira Pedro, capítulo 2, versículo 9. Ser enviado é um privilégio e uma honra, pois quão formosos são sobre os montes os pés do que anuncia boas-novas, Isaías, capítulo 52, versículo 7, segundo a versão Nova Almeida Atualizada. Assim, fortalecida pelo Espírito e consciente de sua vocação, a Igreja segue proclamando o Evangelho, agora considerando como esse anúncio encontra respostas diferentes no coração humano.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'O Espírito capacita e impulsiona a expansão missionária.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Espírito Santo e a Glória do Cristo Exaltado.', x:'A partida de Jesus não causou tristeza aos discípulos. Eles sabiam que o Espírito Santo viria em seguida, e lhes seria, de forma invisível, o que seu Mestre havia sido de forma visível: vos convém que eu vá; porque, se eu não for, o Consolador não virá a vós; mas, se eu for, enviar-vo-lo-ei, João, capítulo 16, versículo 7. Enquanto os discípulos olhavam seu Mestre subindo, talvez pensassem: quão grande e rico dom deve ser o Consolador, se sua presença custa a ida do Mestre! O Espírito Santo não iria comunicar à Igreja o Cristo terrestre, e sim o celestial, que voltou a ser investido da glória que tinha com o Pai antes que houvesse mundo, equipado com os infinitos tesouros da graça que Ele comprara mediante sua morte na cruz. Pearman, Myer. Atos: A Igreja Primitiva na força e na unção do Espírito. Rio de Janeiro: CPAD, dois mil e dezoito, página onze.'},
+
+ {t:'topic', x:'Tópico 3. A Grande Comissão e a Continuidade do Chamado Missionário.'},
+ {t:'subtopic', x:'1. A inclusão dos gentios no Corpo de Cristo.'},
+ {t:'body', x:'Efésios, capítulo 2, versículos 11 a 16. Em Efésios, capítulo 2, versículos 11 a 16, Paulo afirma que os gentios, antes separados, sem esperança e alheios às promessas, foram aproximados de Deus por meio do sangue de Cristo. Na cruz, Jesus derrubou a parede de separação, abolindo as ordenanças que dividiam judeus e gentios, criando em si mesmo um novo homem e estabelecendo a paz. A obra redentora de Cristo reconciliou ambos em um só corpo, formando uma nova comunidade espiritual. Assim, a Igreja é composta de judeus e gentios unidos em Cristo, confirmando que o Evangelho é universal e que Deus não faz acepção de pessoas, Atos, capítulo 10, versículos 34 a 36. A inclusão dos gentios revela que a salvação não pertence a um grupo específico, mas é oferecida a todos pela graça.'},
+ {t:'subtopic', x:'2. A continuidade da missão até a volta de Cristo.'},
+ {t:'body', x:'Jesus ensina que, antes do fim, importa que o evangelho seja primeiramente pregado entre todas as nações, Marcos, capítulo 13, versículo 10. Mesmo em meio a perseguições, crises e instabilidades, a missão não pode ser interrompida. A pregação do Evangelho é parte do plano soberano de Deus e deve prosseguir até a consumação dos tempos. Assim como a Igreja Primitiva perseverou em anunciar Cristo apesar das adversidades, a Igreja atual é chamada a manter-se fiel ao mandato missionário, certa de que o retorno glorioso de Cristo encontrará um povo comprometido com a proclamação do Reino.'},
+ {t:'subtopic', x:'3. O compromisso da Igreja atual com missões locais e transculturais.'},
+ {t:'body', x:'Paulo exorta Timóteo a pregar a Palavra a tempo e fora de tempo, revelando que a missão exige perseverança, fidelidade e prontidão, Segunda Timóteo, capítulo 4, versículo 2. Esse chamado se estende à Igreja de hoje, que deve anunciar o Evangelho em contextos locais e transculturais, sustentando, enviando e indo. A missão é global, urgente e inadiável, Mateus, capítulo 28, versículos 19 e 20; e Marcos, capítulo 16, versículo 15. Manter viva a chama missionária é um dever espiritual, pois ai de mim se não anunciar o evangelho, Primeira Coríntios, capítulo 9, versículo 16. Assim, a Grande Comissão permanece como o compromisso permanente da Igreja até que Cristo volte.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A missão continua na Igreja até a volta gloriosa de Cristo.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Começando em Jerusalém.', x:'Sentimos uma vocação para ir a um campo missionário estrangeiro? O melhor teste da nossa vocação é nosso zelo espiritual pelo próximo, aqui, onde moramos. Se não estamos sendo uma bênção para as pessoas cuja língua e costumes conhecemos, dificilmente uma viagem marítima operará essa transformação milagrosa. O amor que transformará o mundo tem que começar em casa, embora não termine ali. Os discípulos não deviam ficar com os olhos fitos no céu. Jesus voltaria mais tarde. Nesse ínterim, haveria o serviço de Cristo para fazer. A contemplação que não nos leva a enfrentar os deveres cristãos com zelo e ardor não tem proveito. O Novo Testamento tem muitos mistérios transcendentes, tais como a Trindade, a encarnação da divindade, a expiação e outros. Existe o perigo de nos ocuparmos com os mistérios da Trindade e nos esquecermos do próprio Senhor, de nos dedicarmos ao estudo da expiação que venhamos a nos esquecer daqueles pelos quais Jesus morreu. Pearman, Myer. Atos: A Igreja Primitiva na força e na unção do Espírito. Rio de Janeiro: CPAD, dois mil e dezoito, páginas catorze e quinze.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A Igreja nasceu com vocação missionária. A expansão do Evangelho entre os gentios confirma que a salvação não conhece fronteiras étnicas, culturais ou geográficas. Somos herdeiros diretos da missão confiada à Igreja Primitiva e chamados a dar continuidade a esse legado. Cabe a nós proclamar Cristo a todos os povos, com fidelidade e compromisso, anunciando, discipulando e testemunhando até a volta do Senhor Jesus. A missão continua, e a responsabilidade é de toda a Igreja.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Como e por quem foi estabelecido o fundamento da missão da Igreja? Ao declarar que toda autoridade lhe foi dada no céu e na terra, Jesus afirma seu domínio absoluto e estabelece o fundamento da missão da Igreja.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'O que revela a Grande Comissão, no tocante a fazer discípulos de todas tribos, línguas e nações? A Grande Comissão revela que o Evangelho não reconhece fronteiras culturais, sociais ou étnicas. Fazer discípulos de todas as nações é o desdobramento natural da autoridade de Cristo sobre todos os povos, Marcos, capítulo 16, versículo 15.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Segundo Atos, capítulo 1, versículo 8, como a gloriosa e desafiadora missão da Igreja se torna possível a seres humanos tão limitados? Em Atos, capítulo 1, versículo 8, Jesus afirma que a missão da Igreja só é possível mediante a capacitação do Espírito Santo. O poder prometido não é humano, nem resultado de preparo intelectual apenas, mas uma habilitação divina que concede ousadia, discernimento e autoridade espiritual para testemunhar de Cristo, Lucas, capítulo 24, versículo 49.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'O que Paulo afirma em Efésios, capítulo 2, versículos 11 a 16, demonstrando que judeus e gentios foram reconciliados em um só corpo por meio da obra de Cristo? Em Efésios, capítulo 2, versículos 11 a 16, Paulo afirma que os gentios, antes separados, sem esperança e alheios às promessas, foram aproximados de Deus por meio do sangue de Cristo. Na cruz, Jesus derrubou a parede de separação, abolindo as ordenanças que dividiam judeus e gentios, criando em si mesmo um novo homem e estabelecendo a paz.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'O que a Igreja de hoje deve fazer diante do chamado registrado em Mateus, capítulo 28, versículos 19 e 20, e em Marcos, capítulo 16, versículo 15? Esse chamado se estende à Igreja de hoje, que deve anunciar o Evangelho em contextos locais e transculturais, sustentando, enviando e indo. A missão é global, urgente e inadiável, Mateus, capítulo 28, versículos 19 e 20; e Marcos, capítulo 16, versículo 15.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
