@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 11 — Entre Tempestades e Promessas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  .date2{font-style:italic;color:var(--ink-soft);font-size:14px;margin-top:2px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,7vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 11</div>
+    <div class="date">13 de Setembro de 2026</div>
+    <div class="date2">Dia Nacional de Missões</div>
+    <h1 class="title">Entre Tempestades e Promessas</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 11.'},
+ {t:'versehead', x:'Entre Tempestades e Promessas.'},
+ {t:'body', x:'Treze de Setembro de dois mil e vinte e seis. Dia Nacional de Missões.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Mas, agora, vos admoesto a que tenhais bom ânimo, porque não se perderá a vida de nenhum de vós, mas somente o navio." Atos, capítulo 27, versículo 22.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Mesmo quando perdas materiais são inevitáveis, Deus preserva a vida e cumpre suas promessas àqueles que confiam nEle.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 27, versículos 22 a 25. Deus preserva a vida dos que confiam nEle em meio às perdas.'},
+ {t:'daily', x:'Terça. Salmos, capítulo 46, versículos 1 e 2. O Senhor é refúgio seguro quando tudo ao redor parece desmoronar.'},
+ {t:'daily', x:'Quarta. Isaías, capítulo 43, versículo 2. As tempestades não anulam o cuidado fiel de Deus.'},
+ {t:'daily', x:'Quinta. Segunda Coríntios, capítulo 4, versículos 8 e 9. Podemos estar abatidos, mas nunca abandonados por Deus.'},
+ {t:'daily', x:'Sexta. Hebreus, capítulo 10, versículo 23. A esperança permanece firme por causa da fidelidade de Deus.'},
+ {t:'daily', x:'Sábado. Mateus, capítulo 10, versículos 29 e 31. Mesmo em meio às crises, a vida está sob o cuidado de Deus.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 27, versículos 9 a 15, e 21 a 26.'},
+ {t:'verse', x:'Versículo 9. Passado muito tempo, e sendo já perigosa a navegação, pois também o jejum já tinha passado, Paulo os admoestava,'},
+ {t:'verse', x:'Versículo 10. dizendo-lhes: Varões, vejo que a navegação há de ser incômoda e com muito dano, não só para o navio e a carga, mas também para a nossa vida.'},
+ {t:'verse', x:'Versículo 11. Mas o centurião cria mais no piloto e no mestre do que no que dizia Paulo.'},
+ {t:'verse', x:'Versículo 12. E, como aquele porto não era cômodo para invernar, os mais deles foram de parecer que se partisse dali para ver se podiam chegar a Fenice, que é um porto de Creta que olha para a banda do vento da África e do Coro, e invernar ali.'},
+ {t:'verse', x:'Versículo 13. E, soprando o vento sul brandamente, lhes pareceu terem já o que desejavam, e, fazendo-se de vela, foram de muito perto costeando Creta.'},
+ {t:'verse', x:'Versículo 14. Mas, não muito depois, deu nela um pé de vento, chamado Euroaquilão.'},
+ {t:'verse', x:'Versículo 15. E, sendo o navio arrebatado e não podendo navegar contra o vento, dando de mão a tudo, nos deixamos ir à toa.'},
+ {t:'verse', x:'Versículo 21. Havendo já muito que se não comia, então, Paulo, pondo-se em pé no meio deles, disse: Fora, na verdade, razoável, ó varões, ter-me ouvido a mim e não partir de Creta, e assim evitariam este incômodo e esta perdição.'},
+ {t:'verse', x:'Versículo 22. Mas, agora, vos admoesto a que tenhais bom ânimo, porque não se perderá a vida de nenhum de vós, mas somente o navio.'},
+ {t:'verse', x:'Versículo 23. Porque, esta mesma noite, o anjo de Deus, de quem eu sou e a quem sirvo, esteve comigo,'},
+ {t:'verse', x:'Versículo 24. dizendo: Paulo, não temas! Importa que sejas apresentado a César, e eis que Deus te deu todos quantos navegam contigo.'},
+ {t:'verse', x:'Versículo 25. Portanto, ó varões, tende bom ânimo! Porque creio em Deus que há de acontecer assim como a mim me foi dito.'},
+ {t:'verse', x:'Versículo 26. É, contudo, necessário irmos dar numa ilha.'},
+ {t:'body', x:'Hinos sugeridos: quatro, quinhentos e quinze, e quinhentos e setenta e oito, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'À luz de Atos, capítulo 27, esta lição nos convida a contemplar o agir soberano de Deus quando os ventos são contrários e as decisões humanas falham. Em meio às perdas e incertezas, o Senhor continua presente, sustentando a vida e cumprindo suas promessas. Que possamos confiar não na estabilidade do navio, mas na fidelidade daquEle que governa as tempestades.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar como decisões humanas precipitam crises espirituais. Segundo, demonstrar que a promessa divina sustenta o crente na crise. Terceiro, conduzir o aluno a confiar na providência de Deus nas perdas.'},
+ {t:'body', x:'Motivação. Estudar Atos, capítulo 27, é reconhecer que as tempestades não anulam os propósitos de Deus. Ao refletir sobre crises, decisões e promessas cumpridas, somos desafiados a enxergar a fidelidade divina em meio às perdas. Esta lição fortalece a esperança e renova a confiança na soberania do Senhor.'},
+ {t:'body', x:'Sugestão de Método. Desenvolva o Tópico dois em três movimentos: leitura de Atos, capítulo 27, versículos 21 a 26, destacando o contraste entre desespero humano e promessa divina; breve exposição doutrinária sobre a fidelidade de Deus que fala no auge da crise; e aplicação dialogada, perguntando: Que promessa sustenta você hoje? Incentive testemunhos breves, reforçando que a intervenção divina não elimina a tempestade de imediato, mas renova o ânimo e confirma o propósito de Deus.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Na vida cristã, as tempestades não significam abandono, mas oportunidade de ouvir a voz de Deus com mais clareza. Quando tudo parece perdido, somos chamados a permanecer firmes na promessa e agir com fé. Confiar no Senhor em meio à crise transforma desespero em testemunho vivo de esperança.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página quarenta e dois, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto A Intervenção Divina em Meio à Crise, localizado depois do segundo tópico, amplia a reflexão a respeito da realidade bíblica de que Deus intervém na hora do desespero. Segundo, o texto Paulo, não Temas, localizado ao final do terceiro tópico, aprofunda o tema providência divina como o fundamento do cumprimento de promessas e preservação da vida dos fiéis.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'O episódio de Atos, capítulo 27, narra a dramática viagem de Paulo rumo a Roma, marcada por perigos, decisões humanas equivocadas e uma violenta tempestade no mar. Mesmo como prisioneiro, o apóstolo se destaca como instrumento da providência divina, sendo usado por Deus para preservar vidas em meio ao naufrágio. Essa narrativa revela que, nas crises da caminhada cristã, o Senhor continua soberano, ensinando-nos a confiar em sua direção, mesmo quando tudo parece fora de controle.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Tempestade.'},
+
+ {t:'topic', x:'Tópico 1. A Tempestade que Surge na Viagem.'},
+ {t:'subtopic', x:'1. A decisão precipitada de navegar apesar da advertência de Paulo.'},
+ {t:'body', x:'Versículos 9 a 12. Mesmo na condição de prisioneiro, Paulo demonstra discernimento espiritual ao alertar que a viagem seria perigosa e traria prejuízos, versículo 10. Contudo, o centurião e a tripulação confiaram mais na experiência técnica do piloto do que na orientação que Deus concedia por meio do apóstolo, versículo 11. Essa escolha revela uma tendência recorrente do ser humano: priorizar a lógica humana em detrimento da direção divina. A Escritura adverte que caminhos que parecem certos podem conduzir à ruína, Provérbios, capítulo 14, versículo 12; e Tiago, capítulo 4, versículos 13 a 17. Paulo não falava apenas por experiência, embora tivesse sobrevivido a naufrágios anteriores, Segunda Coríntios, capítulo 11, versículo 25, mas por sensibilidade espiritual. A preservação das vidas ocorreu não pela decisão humana, mas pela misericórdia do Senhor, versículo 24.'},
+ {t:'subtopic', x:'2. A fragilidade humana diante das forças da natureza.'},
+ {t:'body', x:'Versículos 13 a 17. Um vento favorável levou a tripulação a acreditar que a decisão fora correta, versículo 13, mas logo foram surpreendidos pelo Euroaquilão, um vendaval que tirou completamente o controle do navio, versículos 14 e 15. Todo esforço humano mostrou-se insuficiente: cordas, manobras e estratégias falharam, versículo 17. A tempestade expôs os limites da força humana e revelou a necessidade de depender de Deus. É nas crises que o crente também aprende que o Senhor é refúgio seguro nas angústias, Salmos, capítulo 46, versículo 1, e que sua graça se manifesta plenamente quando nossas forças se esgotam, Segunda Coríntios, capítulo 12, versículo 9.'},
+ {t:'subtopic', x:'3. A perda da esperança diante da adversidade.'},
+ {t:'body', x:'Versículos 18 a 20. Com o agravamento da tempestade, a tripulação lançou fora a carga e os próprios equipamentos do navio, versículos 18 e 19. Após muitos dias sem sol ou estrelas, perderam toda referência e esperança de salvação, versículo 20. A ausência de luz simboliza o desespero que se instala quando não se enxerga saída. Contudo, mesmo nesse cenário, Deus não abandona os seus. A fidelidade do Senhor se renova diariamente, Lamentações, capítulo 3, versículos 22 e 23, e Ele permanece como auxílio certo, Salmos, capítulo 121, versículos 1 e 2. Essa crise prepara o cenário para a intervenção divina, onde a Palavra de Deus trará ânimo, direção e vida.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Decisões humanas sem Deus geram crises e expõem fragilidades.'},
+
+ {t:'topic', x:'Tópico 2. A Intervenção de Deus na Hora do Desespero.'},
+ {t:'subtopic', x:'1. A palavra de encorajamento de Paulo.'},
+ {t:'body', x:'Versículos 21 a 26. Após muitos dias de jejum forçado e absoluto desânimo, Paulo se levanta com autoridade espiritual para falar aos que estavam no navio. Antes de encorajá-los, relembra que sua advertência fora ignorada, o que confere peso às palavras de ânimo que se seguem. Em meio ao caos, o apóstolo transmite esperança, afirmando que não haveria perda de vidas, versículo 22. Essa esperança não era ilusória, mas fundamentada em Deus, que fortalece os abatidos, Isaías, capítulo 41, versículo 10, e enche seus servos de esperança pelo poder do Espírito Santo, Romanos, capítulo 15, versículo 13. Assim como a âncora sustenta o navio na tempestade, a esperança em Deus mantém firme a alma do crente, Hebreus, capítulo 6, versículo 19. A fé do apóstolo Paulo renova o ânimo de todos e revela que o Senhor comunica sua vontade aos que o temem, Amós, capítulo 3, versículo 7; e Salmos, capítulo 25, versículo 14.'},
+ {t:'subtopic', x:'2. A promessa de Deus em meio à crise.'},
+ {t:'body', x:'Versículos 23 e 24. Quando toda expectativa humana se esvaiu, Deus interveio sobrenaturalmente. Um anjo do Senhor apareceu a Paulo, assegurando que nenhum dos duzentos e setenta e seis homens pereceria, embora o navio fosse destruído. Essa promessa reafirma que muitas são as aflições do justo, mas o Senhor o livra de todas, Salmos, capítulo 34, versículo 19. Ao declarar Deus, de quem eu sou, versículo 23, Paulo reconhece sua total pertença ao Senhor, lembrando que fomos comprados por alto preço, Primeira Coríntios, capítulo 6, versículos 19 e 20. As promessas divinas não dependem das circunstâncias, mas da fidelidade daquEle que prometeu, Hebreus, capítulo 10, versículo 23.'},
+ {t:'subtopic', x:'3. A fé e a liderança espiritual de Paulo.'},
+ {t:'body', x:'Versículos 33 a 36. Fortalecido pela promessa divina, Paulo assume liderança espiritual e prática. Ele exorta todos a se alimentarem, pois precisariam de forças para sobreviver ao desfecho da crise. Ao partir o pão e dar graças a Deus diante de todos, testemunha uma fé viva que inspira coragem e esperança, Mateus, capítulo 5, versículo 16. A intervenção divina não elimina imediatamente a tempestade, mas garante o cumprimento do propósito de Deus. Assim, aprendemos que, mesmo em meio à adversidade, a fé obediente prepara o caminho para a salvação e aponta para a fidelidade do Senhor, que se revelará plenamente no desfecho da viagem.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Deus intervém na crise e renova o ânimo pela promessa.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. A Intervenção Divina em Meio à Crise.', x:'O prisioneiro judeu seguia ao longo das estradas, para Roma. Talvez despertasse olhares de zombaria enquanto passava. Os cristãos que o acompanhavam, no entanto, sabiam que andavam ao lado do embaixador de Cristo, um embaixador em cadeias, Efésios, capítulo 6, versículo 20; e Segunda Coríntios, capítulo 5, versículo 20. Paulo nunca disse que era prisioneiro do Império Romano. Não! Chamava-se prisioneiro de Jesus Cristo, Filemom, versículo 1. Dizia com isso que estava preso à vontade de Deus. Cumpria o plano de Deus para sua vida e sua obra. E, também, que todas as coisas cooperam para o bem. Humanamente, a detenção de Paulo parecia um duro golpe contra o Cristianismo, pois suas viagens missionárias foram interrompidas. Contudo, na soberania divina, tudo foi transformado em bênção para o mundo inteiro, Filipenses, capítulo 1, versículo 12. Preservado das ciladas dos judeus, o apóstolo teve tempo para descanso, oração e meditação após intensas labutas. Do cativeiro surgiram epístolas como Filipenses, Colossenses, Efésios e Filemom. Além disso, acorrentado a guardas romanos, testificava continuamente; as frequentes trocas faziam com que seus ensinos se espalhassem pelas casernas, tabernas, cortes e palácios. Embora não visitasse as igrejas, muitos obreiros o procuravam para receber orientação pessoal e profunda. Pearman, Myer. Atos: A Igreja Primitiva na força e na unção do Espírito. Rio de Janeiro: CPAD, dois mil e dezoito, páginas duzentos e cinquenta e duzentos e cinquenta e um.'},
+
+ {t:'topic', x:'Tópico 3. A Providência Divina no Naufrágio.'},
+ {t:'body', x:'Atos, capítulo 27, versículos 39 a 44.'},
+ {t:'subtopic', x:'1. O cuidado de Deus preservando vidas.'},
+ {t:'body', x:'Versículos 39 a 44. A promessa do Senhor cumpriu-se integralmente: todos chegaram em segurança à terra, conforme havia sido anunciado, Lucas, capítulo 21, versículo 18. O naufrágio do navio não impediu o agir de Deus, antes confirmou sua fidelidade. Aquilo que parecia o fim tornou-se instrumento para glorificar o Senhor e fortalecer a fé. Como declara o profeta: Quando passares pelas águas, estarei contigo, Isaías, capítulo 43, versículo 2. Deus permitiu a perda do navio, mas preservou o que era essencial: a vida. Assim aprendemos que a verdadeira segurança não está nos recursos humanos, mas na providência divina, pois o Senhor guarda aqueles que confiam no seu amor e os livra da morte, Salmos, capítulo 33, versículos 18 e 19.'},
+ {t:'subtopic', x:'2. A soberania divina acima das decisões humanas.'},
+ {t:'body', x:'Versículos 42 e 43. Diante do risco de fuga dos prisioneiros, os soldados decidiram matá-los para evitar punições severas, prática comum no contexto romano, Atos, capítulo 12, versículo 19; e Atos, capítulo 16, versículo 27. No entanto, esse plano humano foi frustrado. Júlio, o centurião, desejando salvar Paulo, impediu a execução. Assim, vemos que até as decisões das autoridades estão sob o governo de Deus. Como ensina a Escritura: Como ribeiros de águas, assim é o coração do rei na mão do Senhor, Provérbios, capítulo 21, versículo 1. Nenhum poder poderia impedir o propósito divino, pois Deus havia determinado que Paulo testemunharia em Roma, Atos, capítulo 27, versículo 24.'},
+ {t:'subtopic', x:'3. O cumprimento fiel da promessa de Deus.'},
+ {t:'body', x:'Versículo 44. Conforme a palavra do Senhor, todos escaparam com vida. A fidelidade de Deus prevaleceu sobre o caos da tempestade. Durante toda a crise, Paulo permaneceu sustentado pela promessa divina, demonstrando que a esperança firmada em Deus não decepciona. A Escritura afirma que Deus é fiel para cumprir o que prometeu, Hebreus, capítulo 10, versículo 23, não tarda em agir, Segunda Pedro, capítulo 3, versículo 9, e jamais mente, Números, capítulo 23, versículo 19. O naufrágio, longe de ser derrota, tornou-se testemunho vivo de que o Senhor governa todas as coisas e honra a fé daqueles que confiam plenamente em sua Palavra.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A providência divina cumpre promessas e preserva vidas.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Paulo, não Temas.', x:'Enquanto Deus tiver um lugar e um propósito não concluído para a vida de uma pessoa na terra, e enquanto essa pessoa estiver buscando um relacionamento mais profundo com Deus e seguindo a orientação do Espírito Santo, confira Atos, capítulo 23, versículo 11, e capítulo 24, versículo 16, o Senhor irá proteger essa pessoa da morte. Todos os servos fiéis de Deus têm o direito de orar dizendo: Ó, Senhor, sou Teu; eu te sirvo; protege-me, confira Salmos, capítulo 16, versículos 1 e 2. Paulo é um prisioneiro no barco, no entanto, ele é um homem livre, espiritualmente, por causa do seu relacionamento com Cristo. Por causa da presença de Deus, ele está livre do temor, ao passo que aqueles que navegam com ele estão paralisados de terror, por causa deste perigo no mar. Somente o crente sincero e fiel que vivencia a proximidade de Deus pode encarar os perigos desta vida com coragem e confiança em Cristo. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro: CPAD, dois mil e vinte e dois, página dois mil e quatro.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'O naufrágio de Paulo não representou derrota, mas o cumprimento do propósito de Deus em sua jornada até Roma. A narrativa nos ensina que, mesmo quando as circunstâncias parecem fora de controle, a providência divina continua conduzindo os que confiam no Senhor. As tempestades da vida cristã não anulam as promessas de Deus; antes, tornam-se ocasiões para testemunhar sua fidelidade. Assim, aprendemos que confiar em Deus é descansar na certeza de que Ele nos guia em segurança em meio às maiores adversidades.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Por que a advertência de Paulo sobre os perigos da viagem foi ignorada, e o que isso revela sobre a confiança humana diante da direção de Deus? O centurião e a tripulação confiaram mais na experiência técnica do piloto do que na orientação que Deus concedia por meio do apóstolo, versículo 11. Essa escolha revela uma tendência recorrente do ser humano: priorizar a lógica humana em detrimento da direção divina.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Que fatores naturais e circunstanciais demonstraram a fragilidade humana diante da tempestade enfrentada pelo navio? Um vento favorável levou a tripulação a acreditar que a decisão fora correta, versículo 13, mas logo foram surpreendidos pelo Euroaquilão, um vendaval que tirou completamente o controle do navio, versículos 14 e 15.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Qual foi a mensagem recebida por Paulo da parte de Deus durante a crise, e como essa promessa restaurou a esperança dos que estavam a bordo? Um anjo do Senhor apareceu a Paulo, assegurando que nenhum dos duzentos e setenta e seis homens pereceria, embora o navio fosse destruído. Essa promessa reafirma que muitas são as aflições do justo, mas o Senhor o livra de todas, Salmos, capítulo 34, versículo 19.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'De que maneira a fé e a liderança espiritual de Paulo influenciaram a tripulação em meio ao desespero? Fortalecido pela promessa divina, Paulo assume liderança espiritual e prática. Ele exorta todos a se alimentarem, pois precisariam de forças para sobreviver ao desfecho da crise.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como o naufrágio confirma a promessa divina, tornando-se testemunho da soberania e da fidelidade de Deus? O naufrágio, longe de ser derrota, tornou-se testemunho vivo de que o Senhor governa todas as coisas e honra a fé daqueles que confiam plenamente em sua Palavra.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
