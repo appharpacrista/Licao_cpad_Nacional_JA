@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 12 — O Evangelho Chega ao Coração do Império</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 12</div>
+    <div class="date">20 de Setembro de 2026 · Dia Nacional da Escola Dominical</div>
+    <h1 class="title">O Evangelho Chega ao Coração do Império</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 12.'},
+ {t:'versehead', x:'O Evangelho Chega ao Coração do Império.'},
+ {t:'body', x:'Vinte de Setembro de dois mil e vinte e seis. Dia Nacional da Escola Dominical.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Pregando o Reino de Deus e ensinando com toda a liberdade as coisas pertencentes ao Senhor Jesus Cristo, sem impedimento algum." Atos, capítulo 28, versículo 31.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Nada pode impedir o avanço do Reino de Deus quando o Evangelho é anunciado com fidelidade, coragem e esperança.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Atos, capítulo 28, versículos 30 e 31. O Reino de Deus é anunciado com ousadia e liberdade.'},
+ {t:'daily', x:'Terça. Mateus, capítulo 24, versículo 14. O Evangelho do Reino será pregado a todos os povos.'},
+ {t:'daily', x:'Quarta. Filipenses, capítulo 1, versículos 12 a 14. As prisões servem ao progresso do Evangelho.'},
+ {t:'daily', x:'Quinta. Segunda Timóteo, capítulo 2, versículos 8 e 9. O mensageiro pode estar preso, mas a Palavra não.'},
+ {t:'daily', x:'Sexta. Atos, capítulo 4, versículos 29 a 31. O Espírito concede ousadia para anunciar Cristo.'},
+ {t:'daily', x:'Sábado. Romanos, capítulo 8, versículo 31. Se Deus é por nós, ninguém pode nos impedir.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Atos, capítulo 28, versículos 16 a 24, e 28 a 31.'},
+ {t:'verse', x:'Versículo 16. E, logo que chegamos a Roma, o centurião entregou os presos ao general dos exércitos; mas a Paulo se lhe permitiu morar por sua conta, com o soldado que o guardava.'},
+ {t:'verse', x:'Versículo 17. E aconteceu que, três dias depois, Paulo convocou os principais dos judeus e, juntos eles, lhes disse: Varões irmãos, não havendo eu feito nada contra o povo ou contra os ritos paternos, vim, contudo, preso desde Jerusalém, entregue nas mãos dos romanos,'},
+ {t:'verse', x:'Versículo 18. os quais, havendo-me examinado, queriam soltar-me, por não haver em mim crime algum de morte.'},
+ {t:'verse', x:'Versículo 19. Mas, opondo-se os judeus, foi-me forçoso apelar para César, não tendo, contudo, de que acusar a minha nação.'},
+ {t:'verse', x:'Versículo 20. Por esta causa vos chamei, para vos ver e falar; porque pela esperança de Israel estou com esta cadeia.'},
+ {t:'verse', x:'Versículo 21. Então, eles lhe disseram: Nós não recebemos acerca de ti cartas algumas da Judeia, nem veio aqui algum dos irmãos que nos anunciasse ou dissesse de ti mal algum.'},
+ {t:'verse', x:'Versículo 22. No entanto, bem quiséramos ouvir de ti o que sentes; porque, quanto a esta seita, notório nos é que em toda parte se fala contra ela.'},
+ {t:'verse', x:'Versículo 23. E, havendo-lhe eles assinalado um dia, muitos foram ter com ele à pousada, aos quais declarava com bom testemunho o Reino de Deus e procurava persuadi-los à fé de Jesus, tanto pela lei de Moisés como pelos profetas, desde pela manhã até à tarde.'},
+ {t:'verse', x:'Versículo 24. E alguns criam no que se dizia, mas outros não criam.'},
+ {t:'verse', x:'Versículo 28. Seja-vos, pois, notório que esta salvação de Deus é enviada aos gentios, e eles a ouvirão.'},
+ {t:'verse', x:'Versículo 29. E, havendo ele dito isto, partiram os judeus, tendo entre si grande contenda.'},
+ {t:'verse', x:'Versículo 30. E Paulo ficou dois anos inteiros na sua própria habitação que alugara e recebia todos quantos vinham vê-lo,'},
+ {t:'verse', x:'Versículo 31. pregando o Reino de Deus e ensinando com toda a liberdade as coisas pertencentes ao Senhor Jesus Cristo, sem impedimento algum.'},
+ {t:'body', x:'Hinos sugeridos: dezoito, cento e noventa e dois, e duzentos e noventa e oito, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Na lição desta semana, contemplamos um prisioneiro que, acorrentado, anuncia o Reino com liberdade. Roma representa o coração do poder humano; contudo, ali também ecoa a soberania de Cristo. Essa lição nos convida a perceber que correntes não aprisionam a Palavra. Quando o Evangelho é proclamado com fidelidade, Deus transforma limites em oportunidades e faz avançar sua missão.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, mostrar que a prisão não impediu o avanço do Reino de Deus. Segundo, destacar a reação dos judeus e discernir o campo da decisão. Terceiro, enfatizar o exemplo de Paulo à missão da Igreja hoje.'},
+ {t:'body', x:'Motivação. O livro de Atos termina sem ponto final porque a missão continua. Ao estudar o avanço do Evangelho aos gentios, perceberemos que fazemos parte dessa história. Somos herdeiros de uma obra que não pode ser detida. Compreender isso desperta responsabilidade, zelo e compromisso missionário.'},
+ {t:'body', x:'Sugestão de Método. Inicie o terceiro tópico com a leitura dialogada do texto de Atos, capítulo 28, versículos 28 a 31, solicitando que a classe identifique expressões que revelem continuidade da missão, como enviada aos gentios, e sem impedimento algum. Em seguida, exponha o terceiro tópico e, depois, discuta com a classe como a rejeição parcial impulsionou a expansão do Evangelho. Peça para que dois ou três alunos relacionem o texto à realidade atual, no contexto social, profissional e familiar. Finalize com síntese coletiva, destacando que os membros do Corpo de Cristo são responsáveis por dar continuidade ao Reino em seu tempo.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Em Atos, assim como o apóstolo Paulo transformou limitações em oportunidade missionária, somos chamados a viver o Evangelho onde estamos. Mesmo diante de rejeições ou barreiras, a missão continua. Cada espaço, família, trabalho e igreja, pode tornar-se campo de proclamação do Reino, com ousadia e fidelidade.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio à Lições Bíblicas Adultos. Na edição cento e seis, página quarenta e dois, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao final do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Isaías e a Rejeição de Cristo em Roma, localizado depois do segundo tópico, aprofunda o episódio da pregação do Evangelho aos judeus de Roma. Segundo, o texto Atos Continua: A Missão não Terminou, localizado ao final do terceiro tópico, aprofunda o assunto a respeito da salvação dos gentios e a história inacabada da Igreja a partir de Atos.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Esta lição revela o ponto culminante da jornada missionária de Paulo: sua chegada a Roma, não como homem livre, mas como prisioneiro de Cristo. Mesmo sob custódia, o apóstolo transforma a residência vigiada em um centro de proclamação do Evangelho. O Livro de Atos se encerra mostrando que nada pode deter o avanço da Palavra. Com ousadia e fé inabalável, Paulo anuncia o Reino de Deus e o Senhor Jesus Cristo, revelando que o Evangelho segue adiante, sem impedimentos.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Evangelho.'},
+
+ {t:'topic', x:'Tópico 1. Paulo em Roma: Prisioneiro, mas Livre em Cristo.'},
+ {t:'subtopic', x:'1. Mesmo em custódia, Paulo recebe certa liberdade.'},
+ {t:'body', x:'Versículos 16, 20 e 30. Ao chegar a Roma, Paulo não foi lançado em uma prisão comum, mas colocado em residência vigiada, permanecendo sob custódia de um soldado. Ainda acorrentado, versículo 20, desfrutava de relativa liberdade para receber pessoas e testemunhar. Ele próprio custeava sua moradia, versículo 30, possivelmente com ajuda de irmãos na fé, Filipenses, capítulo 4, versículos 10, 14 e 18. Essa condição revela que, embora limitado fisicamente, Paulo não estava aprisionado espiritualmente. Suas correntes não restringiram sua comunhão nem sua missão. Assim, aprendemos que a verdadeira liberdade não depende de circunstâncias externas, mas da comunhão com Cristo, Segunda Coríntios, capítulo 3, versículo 17.'},
+ {t:'subtopic', x:'2. A prisão não impede o cumprimento do plano de Deus.'},
+ {t:'body', x:'Paulo compreendeu que sua prisão fazia parte do propósito divino. Em vez de desânimo, enxergou oportunidade: soldados, oficiais e visitantes passaram a ouvir o Evangelho. O que parecia derrota tornou-se avanço missionário, Filipenses, capítulo 1, versículo 12. Essa postura revela maturidade espiritual: confiar que Deus age mesmo nas adversidades, Romanos, capítulo 8, versículo 28. O cristão é chamado a discernir o agir de Deus nos momentos difíceis e a glorificá-lo em toda circunstância, transformando provações em testemunho vivo da graça.'},
+ {t:'subtopic', x:'3. O Evangelho vence barreiras políticas, sociais e religiosas.'},
+ {t:'body', x:'A vida de Paulo comprova que nenhuma estrutura humana pode deter a Palavra. Diante de governadores e reis, proclamou a fé com ousadia, Atos, capítulo 24, versículos 24 e 25; e Atos, capítulo 26, versículos 1 a 32, demonstrando que Deus governa sobre todos os reinos, Daniel, capítulo 4, versículo 32. Socialmente, anunciou um Evangelho que reconcilia ricos e pobres, livres e escravos, Filemom, versículos 10 a 16; e Gálatas, capítulo 3, versículo 28. Religiosamente, enfrentou tanto a incredulidade judaica quanto a idolatria gentílica, mantendo firme a centralidade de Cristo, Atos, capítulo 13, versículos 45 e 46; e Atos, capítulo 19, versículos 26 e 27. Logo, a Igreja de hoje é chamada a viver esse mesmo Evangelho que rompe muros e reconcilia vidas. Com o propósito de imitá-lo, veremos como Paulo utiliza sua liberdade limitada para anunciar o Reino de Deus sem impedimento algum.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Preso em Roma, Paulo permaneceu livre para cumprir sua missão.'},
+
+ {t:'quote', x:'"O texto revela que o Evangelho avança apesar da resistência humana e que o plano de Deus inclui todas as nações."'},
+
+ {t:'topic', x:'Tópico 2. O Evangelho Pregado aos Judeus em Roma.'},
+ {t:'subtopic', x:'1. Paulo convoca os líderes judeus para esclarecer sua situação.'},
+ {t:'body', x:'Versículo 17. Três dias após chegar a Roma, Paulo reúne os principais líderes judeus para explicar as razões de sua prisão. Embora os judeus tivessem sido expulsos da cidade por decreto de Cláudio, Atos, capítulo 18, versículo 2, muitos já haviam retornado, e havia expressiva presença judaica em Roma. O apóstolo deixa claro que não cometeu nenhuma ofensa contra o povo judeu nem contra as tradições dos pais. Mesmo assim, foi entregue aos romanos em Jerusalém. Após ser interrogado, poderia ter sido libertado, mas a oposição judaica o levou a apelar para César, versículos 18 e 19. Sua atitude revela amor pelo próprio povo e compromisso com a verdade. Ao afirmar estar preso pela esperança de Israel, versículo 20, Paulo aponta para a esperança messiânica e a ressurreição, Atos, capítulo 23, versículo 6; e Atos, capítulo 26, versículos 6 a 8, despertando o interesse dos judeus em ouvir sua posição acerca do Caminho, do qual se falava por toda parte, versículo 22.'},
+ {t:'subtopic', x:'2. Paulo anuncia o Reino de Deus, mostrando Cristo nas Escrituras.'},
+ {t:'body', x:'Versículos 23 e 24. Em dia marcado, Paulo passa longas horas expondo o Reino de Deus e procurando persuadi-los acerca de Jesus, fundamentando-se na Lei de Moisés e nos Profetas, versículo 23. Sua pregação é bíblica, paciente e centrada em Cristo. O resultado é misto: alguns creem, outros rejeitam, versículo 24. Diante da incredulidade, Paulo aplica Isaías, capítulo 6, versículos 9 e 10, denunciando a dureza do coração e anunciando que a salvação seria enviada aos gentios, que a ouviriam, versículos 26 e 27. O texto revela que o Evangelho avança apesar da resistência humana e que o plano de Deus inclui todas as nações.'},
+ {t:'subtopic', x:'3. A reação dividida revela que o coração é o campo da decisão.'},
+ {t:'body', x:'A Palavra foi anunciada com clareza, mas as respostas foram distintas. Isso evidencia que o coração humano é o campo onde a decisão acontece. A Escritura sempre exige resposta: fé ou rejeição, Deuteronômio, capítulo 11, versículos 26 a 28; Salmos, capítulo 119, versículo 11; e Provérbios, capítulo 4, versículo 23. Nesse caso, ouvir a Palavra não é suficiente; é necessário obedecer e acolher Cristo pela fé, Lucas, capítulo 11, versículo 28. A partir dessa rejeição parcial, o texto mostrará como Paulo passa a dedicar-se livremente à proclamação do Evangelho a todos, sem distinção, anunciando o Reino de Deus com ousadia e perseverança.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Paulo anuncia Cristo aos judeus; alguns creem, outros rejeitam.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Isaías e a Rejeição de Cristo em Roma.', x:'Os judeus em Roma tinham ouvido a respeito da seita do cristianismo, do ponto de vista dos judeus, capítulo 24, versículo 14, mas não tinham recebido nenhuma palavra oficial de Jerusalém sobre Paulo. Essa falta de comunicação entre Jerusalém e Roma pode ter sido causada pelo inverno ou pode indicar que os líderes judeus em Jerusalém tinham perdido o interesse no caso de Paulo, uma vez que ele agora estava fora da vista deles, além de sua jurisdição e, provavelmente, não mais lhes causaria problemas. De qualquer forma, os cristãos de Jerusalém sabiam mais da situação de Paulo do que os judeus incrédulos. Lucas identifica o momento decisivo na discussão como sendo a palavra desafiadora de Paulo de que o Espírito Santo bem falou por meio do profeta Isaías sobre a obstinação espiritual de Israel. Uma vez que Paulo disse isso em resposta àqueles que não criam, versículo 24, naquilo que ele dizia sobre Jesus, sua citação de Isaías sugeria claramente que a vinda de Jesus Cristo e sua rejeição pelos judeus foram preditas no Antigo Testamento. Bíblia de Estudo Holman. Rio de Janeiro: CPAD, dois mil e dezenove, página mil setecentos e setenta e seis.'},
+
+ {t:'topic', x:'Tópico 3. A Rejeição dos Judeus e a Salvação aos Gentios.'},
+ {t:'subtopic', x:'1. O endurecimento espiritual de Israel.'},
+ {t:'body', x:'Diante da reação dividida dos judeus em Roma, Paulo encerra o diálogo citando Isaías, capítulo 6, versículos 9 e 10, revelando que a rejeição não era falta de evidência, mas resistência do coração, Mateus, capítulo 13, versículos 14 e 15; e Romanos, capítulo 11, versículo 7. A Palavra havia sido anunciada com clareza, porém muitos escolheram não obedecer. A cegueira denunciada pelo profeta não era intelectual, mas espiritual, Marcos, capítulo 4, versículo 12; e Lucas, capítulo 8, versículo 10. A rejeição da verdade endurece o coração e afasta o homem da salvação. Por isso, toda geração é chamada a responder à Palavra com fé e submissão. Rejeitar o chamado de Deus é assumir o risco do endurecimento espiritual, João, capítulo 14, versículo 21.'},
+ {t:'quote', x:'"Diante da incredulidade, Paulo aplica Isaías, capítulo 6, versículos 9 e 10, denunciando a dureza do coração e anunciando que a salvação seria enviada aos gentios, que a ouviriam."'},
+ {t:'subtopic', x:'2. A salvação estende-se aos gentios conforme o plano eterno de Deus.'},
+ {t:'body', x:'A incredulidade de parte de Israel não frustrou o propósito divino; antes, confirmou o alcance universal do Evangelho. Paulo declara com autoridade que esta salvação de Deus é enviada aos gentios, e eles a ouvirão, Atos, capítulo 28, versículo 28, cumprindo a promessa de Jesus de que o testemunho alcançaria todas as nações, Atos, capítulo 1, versículo 8; e Romanos, capítulo 10, versículos 12 e 13. O Evangelho revela-se como graça oferecida a todos, sem distinção. Por causa disso a Igreja é enviada ao mundo inteiro, chamada a anunciar a salvação com fidelidade, sem barreiras étnicas, culturais ou religiosas.'},
+ {t:'subtopic', x:'3. Atos termina proclamando um Reino que não pode ser detido.'},
+ {t:'body', x:'O livro se encerra com Paulo pregando o Reino de Deus e ensinando com toda liberdade as coisas pertencentes ao Senhor Jesus Cristo, sem impedimento algum, versículo 31. Preso, mas livre; limitado por correntes, mas não pela Palavra. O Reino de Deus permanece a mensagem central da Igreja, Lucas, capítulo 4, versículo 43; e Atos, capítulo 1, versículo 3, não sustentado por palavras apenas, mas pelo poder do Espírito Santo, Primeira Coríntios, capítulo 4, versículo 20; e Atos, capítulo 1, versículo 8. Atos termina sem um amém porque a missão continua. O Evangelho chegou a Roma, mas não parou ali. A Igreja de Cristo permanece chamada a proclamar o Reino com ousadia, fidelidade e poder, até que o Senhor volte.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Rejeição judaica amplia a salvação aos gentios.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Atos Continua: A Missão não Terminou.', x:'Por que o livro de Atos termina tão abruptamente? Ele não trata apenas da vida de Paulo; tem como principal tema a divulgação das Boas Novas, que foram apresentadas. Aparentemente, Deus não considerou necessário que alguém escrevesse um livro adicional descrevendo a continuação da história da Igreja Primitiva. Depois que o evangelho havia sido pregado em Roma, seria espalhado pelo mundo. O livro de Atos aborda a história da Igreja e sua crescente expansão por Jerusalém, Antioquia, Éfeso e Roma, as cidades mais influentes do mundo ocidental, e relata os poderosos milagres e testemunhos dos heróis e mártires da Igreja Primitiva: Pedro, Estêvão, Tiago e Paulo. Todo o ministério cristão foi iniciado e mantido pelo Espírito Santo, que trabalhou na vida de pessoas comuns, comerciantes, viajantes, escravos, carcereiros, líderes da Igreja, homens, mulheres, gentios, judeus, ricos e pobres. Muitos heróis não glorificados da fé continuaram a pregar o evangelho, pelo poder do Espírito Santo, por gerações sucessivas, transformando o mundo com uma mensagem invariável: Jesus Cristo é o Salvador e o Senhor de todos os que o invocam. Hoje, nós podemos ser os heróis não glorificados na contínua história da divulgação do evangelho, levando a mesma mensagem ao mundo de nossos dias, para que muitos mais possam ouvir e crer. Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro: CPAD, dois mil e treze, página mil quinhentos e quarenta e sete.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'O encerramento do livro de Atos, com Paulo pregando sob custódia, mas com liberdade espiritual, simboliza a vitória da missão de Cristo. O Evangelho alcançou o coração do Império Romano e, dali, passou a ecoar por todo o mundo. Essa realidade inspira a Igreja a permanecer firme, certa de que nenhuma circunstância pode impedir o agir de Deus. Os atos do Espírito Santo e a proclamação do Evangelho continuam na vida dos servos de Cristo até o fim dos tempos, Atos, capítulo 2, versículos 17 a 21; e Mateus, capítulo 28, versículos 18 a 20. Assim, Atos não termina com um ponto final, mas com uma vírgula: a missão prossegue por meio da Igreja, que, como Paulo, anuncia Jesus com toda a ousadia e sem impedimento algum, Atos, capítulo 28, versículo 31.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'De que forma a condição de prisão domiciliar de Paulo em Roma evidenciou que ele estava limitado fisicamente, mas livre espiritualmente para cumprir sua missão? Paulo não foi lançado em uma prisão comum, mas colocado em residência vigiada, sob custódia de um soldado. Ainda acorrentado, desfrutava de relativa liberdade para receber pessoas e testemunhar.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Como Paulo interpretou sua prisão à luz do propósito de Deus, transformando a adversidade em oportunidade para o avanço do Evangelho? Paulo compreendeu que sua prisão fazia parte do propósito divino. Em vez de desânimo, enxergou oportunidade para o avanço do Evangelho.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Qual foi o principal motivo apresentado por Paulo aos líderes judeus para explicar por que ele estava preso, e como isso se relaciona com a esperança de Israel? Ao afirmar estar preso pela esperança de Israel, versículo 20, Paulo aponta para a esperança messiânica e a ressurreição, Atos, capítulo 23, versículo 6; e Atos, capítulo 26, versículos 6 a 8, despertando o interesse dos judeus em ouvir sua posição acerca do Caminho.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Como Paulo anuncia o Reino de Deus aos judeus? Paulo passa longas horas expondo o Reino de Deus e procurando persuadi-los acerca de Jesus, fundamentando-se na Lei de Moisés e nos Profetas, versículo 23. Sua pregação é bíblica, paciente e centrada em Cristo.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'De que maneira a rejeição do Evangelho por parte de muitos judeus contribuiu para o avanço da salvação entre os gentios, segundo o desfecho do livro de Atos? A incredulidade de parte de Israel não frustrou o propósito divino; antes, confirmou o alcance universal do Evangelho.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
