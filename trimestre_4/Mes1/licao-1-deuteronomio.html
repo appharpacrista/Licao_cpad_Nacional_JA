@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 1 — Deuteronômio: O Livro da Aliança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,7vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 1</div>
+    <div class="date">4 de Outubro de 2026</div>
+    <h1 class="title">Deuteronômio: O Livro da Aliança</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 1.'},
+ {t:'versehead', x:'Deuteronômio: o Livro da Aliança.'},
+ {t:'body', x:'Quatro de outubro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"Eis aqui esta terra, eu a dei diante de vós; entrai e possuí a terra que o Senhor jurou a vossos pais, Abraão, Isaque e Jacó, que a daria a eles e à sua semente depois deles." Deuteronômio, capítulo 1, versículo 8.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'A fidelidade a Deus e à sua Palavra dirige o crente a viver pela fé e alcançar as suas promessas.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Josué, capítulo 1, versículo 8; e Segunda Timóteo, capítulo 3, versículo 16. A obediência à Palavra conduz à vida santa e à direção de Deus.'},
+ {t:'daily', x:'Terça. Deuteronômio, capítulo 11, versículos 26 a 28. A desobediência à Palavra conduz à perda espiritual.'},
+ {t:'daily', x:'Quarta. Segunda Timóteo, capítulo 2, versículo 2. A responsabilidade de transmitir fielmente a Palavra à próxima geração.'},
+ {t:'daily', x:'Quinta. Deuteronômio, capítulo 1, versículos 6 a 8; e Filipenses, capítulo 3, versículo 20. Como povo de Deus, somos chamados a avançar pela fé rumo à promessa.'},
+ {t:'daily', x:'Sexta. Deuteronômio, capítulo 6, versículo 5; e capítulo 12, versículo 1. Um relacionamento com Deus marcado por amor e obediência.'},
+ {t:'daily', x:'Sábado. Mateus, capítulo 4, versículos 4, 7 e 10. Jesus confirma a autoridade e a inspiração de Deuteronômio.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Deuteronômio, capítulo 1, versículos 1 a 8.'},
+ {t:'verse', x:'Versículo 1. Estas são as palavras que Moisés falou a todo o Israel, além do Jordão, no deserto, na planície defronte do mar de Sufe, entre Parã, Tofel, Labã, Hazerote e Di-Zaabe.'},
+ {t:'verse', x:'Versículo 2. Onze jornadas há desde Horebe, caminho da montanha de Seir, até Cades-Barneia.'},
+ {t:'verse', x:'Versículo 3. E sucedeu que, no ano quadragésimo, no mês décimo primeiro, no primeiro dia do mês, Moisés falou aos filhos de Israel, conforme tudo o que o Senhor lhe mandara acerca deles,'},
+ {t:'verse', x:'Versículo 4. depois que feriu a Seom, rei dos amorreus, que habitava em Hesbom, e a Ogue, rei de Basã, que habitava em Astarote, em Edrei.'},
+ {t:'verse', x:'Versículo 5. Além do Jordão, na terra de Moabe, começou Moisés a declarar esta lei, dizendo:'},
+ {t:'verse', x:'Versículo 6. O Senhor, nosso Deus, nos falou em Horebe, dizendo: Tempo bastante haveis estado neste monte.'},
+ {t:'verse', x:'Versículo 7. Voltai-vos e parti; ide à montanha dos amorreus, e a todos os seus vizinhos, e à planície, e à montanha, e ao vale, e ao sul, e à ribeira do mar, e à terra dos cananeus, e ao Líbano, até ao grande rio, o rio Eufrates.'},
+ {t:'verse', x:'Versículo 8. Eis aqui esta terra, eu a dei diante de vós; entrai e possuí a terra que o Senhor jurou a vossos pais, Abraão, Isaque e Jacó, que a daria a eles e à sua semente depois deles.'},
+ {t:'body', x:'Hinos sugeridos: cento e sete, duzentos e cinquenta e nove, e duzentos e setenta e seis, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Neste trimestre, estudaremos o livro de Deuteronômio. Esse livro reafirma a aliança de Deus com Israel e destaca a importância da fidelidade à sua Palavra. Na primeira lição, veremos Deuteronômio, o Livro da Aliança, compreendendo o seu propósito, contexto histórico e relevância doutrinária para a vida cristã. O comentarista deste trimestre é o Pastor Osiel Gomes, líder da Assembleia de Deus em Tirirical, no Maranhão, mestre em teologia, conferencista e autor de várias obras, cuja abordagem une profundidade teológica, aplicação prática e fidelidade às Escrituras.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, explicar a autoria, o propósito e o valor de Deuteronômio. Segundo, apresentar o contexto histórico e espiritual de Deuteronômio. Terceiro, mostrar os ensinos doutrinários e práticos de Deuteronômio.'},
+ {t:'body', x:'Motivação. O livro de Deuteronômio é um chamado à fidelidade e à renovação espiritual. As suas páginas revelam princípios eternos para uma vida de fé, obediência e compromisso com Deus. Por isso, esta lição é um desafio a ouvirmos, guardarmos e vivermos a Palavra do Senhor diariamente.'},
+ {t:'body', x:'Sugestão de Método. Para o desenvolvimento do segundo tópico, utilize um método expositivo-visual, reproduzindo no quadro ou em slide a divisão natural de Deuteronômio, conforme a Bíblia de Estudo Pentecostal, Edição Global. Apresente o livro em três grandes discursos de Moisés: retrospectiva histórica, dos capítulos 1 a 4 e versículo 43; renovação da Lei, do capítulo 4, versículo 44, ao capítulo 26, versículo 19; e bênçãos, advertências e despedida final, dos capítulos 27 a 30, além dos atos finais de Moisés e a sua morte, nos capítulos 31 a 34. Em seguida, destaque no mapa bíblico a trajetória de Israel até as campinas de Moabe e relacione geografia e espiritualidade. Esse recurso ajudará a classe a compreender o contexto histórico, o avanço da narrativa e o propósito exortativo de Moisés à nova geração.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Deuteronômio ensina-nos que a fidelidade à Palavra de Deus é indispensável para uma vida espiritual consistente. Assim como Israel precisou confiar, obedecer e avançar rumo à promessa, também somos chamados a viver pela fé, rejeitar a desobediência e permanecer firmes na verdade bíblica.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e seis, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao fim dos tópicos, você encontrará auxílios que darão suporte à preparação de sua aula. Primeiro, o texto Visão Panorâmica, localizado após o segundo tópico, contribui para a compreensão do contexto imediato do livro de Deuteronômio e da sua estrutura temática. Segundo, o texto O Propósito do Livro, localizado ao fim do terceiro tópico, aprofunda a compreensão do propósito central do livro de Deuteronômio.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Nesta lição, estudaremos o livro de Deuteronômio, integrante do Pentateuco, e destacaremos os princípios da aliança que Deus estabeleceu com Israel. Nele, Moisés apresenta o seu discurso final, prepara o povo para a entrada na Terra Prometida e reafirma a centralidade da Lei e a necessidade de fidelidade a Deus, conforme Deuteronômio, capítulo 28, versículos 1 e 2. O livro também nos conduz à compreensão de três discursos do Legislador de Israel, nos capítulos 1 a 4, 5 a 27, e 28 a 34, dos seus atos finais e da sua conexão com o Novo Testamento, além de revelar fundamentos permanentes para a vida cristã.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Aliança.'},
+
+ {t:'topic', x:'Tópico 1. Deuteronômio: Autoria e Propósito do Livro.'},
+ {t:'subtopic', x:'1. Autoria.'},
+ {t:'body', x:'A tradição judaica, a evidência interna e os estudiosos conservadores reconhecem Moisés como autor de Deuteronômio, pois foi o mediador da aliança entre Deus e Israel, conforme Deuteronômio, capítulo 1, versículo 1, e capítulo 31, versículos 9 e 24. O livro registra os discursos, instruções e exortações dirigidos ao povo nas campinas de Moabe. Apenas os acontecimentos posteriores à sua morte, descritos no capítulo final, podem ter sido registrados por Josué ou por outro escriba sob inspiração divina. Em Deuteronômio, capítulo 1, versículo 3, observa-se que o conteúdo antecede a sua morte e a conquista da Terra Prometida.'},
+ {t:'subtopic', x:'2. Definição.'},
+ {t:'body', x:'O título deriva da expressão grega deuteronomion, traduzida na Septuaginta como repetição da Lei, conforme Deuteronômio, capítulo 17, versículo 18. O livro reflete a releitura de Moisés sobre a Lei às vésperas da entrada em Canaã. Na tradição judaica, é chamado hadevarim, isto é, estas palavras, destacando-se o seu caráter discursivo. Com linguagem acessível, Moisés exorta Israel à fidelidade exclusiva ao Senhor, conforme Deuteronômio, capítulo 5, versículos 7 a 10, e adverte o povo contra a idolatria e a corrupção moral. Estruturado em três discursos, Deuteronômio reafirma que a obediência à Palavra conduz à bênção e à vida santa, conforme Josué, capítulo 1, versículo 8, comparado com Segunda Timóteo, capítulo 3, versículo 16.'},
+ {t:'subtopic', x:'3. Valor e Propósito de Deuteronômio.'},
+ {t:'body', x:'O valor de Deuteronômio é permanente para a edificação espiritual do povo de Deus, evidenciado no seu uso na reforma de Esdras e Neemias. O livro destaca o amor de Deus e a devoção que Ele requer, conforme Deuteronômio, capítulo 6, versículo 5, e instrui o povo a viver com justiça, equidade e integridade, pois a obediência conduz à vida e à bênção, enquanto a desobediência leva à maldição, conforme Deuteronômio, capítulo 11, versículos 26 a 28. O seu propósito é reafirmar a aliança e preparar o povo para a promessa. Hoje, somos chamados a renovar nosso compromisso com Deus, a viver em fidelidade e a experimentar a vitória em Cristo, conforme Primeira Coríntios, capítulo 15, versículo 57.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Deuteronômio reafirma a Lei e a aliança de Deus com Israel.'},
+
+ {t:'aux', label:'Ampliando o Conhecimento.', x:'Podemos compreender o livro de Deuteronômio a partir de três verbos centrais que estabelecem os três grandes discursos do livro: recordar, nos capítulos 1 a 4 e versículo 43; obedecer, do capítulo 4, versículo 44, ao capítulo 26, versículo 19; e vigiar, nos capítulos 27 a 30. Recordar, porque o livro preserva a memória da Lei. Obedecer, porque exorta o povo a viver segundo os mandamentos ao entrar na Terra Prometida. Vigiar, porque apresenta bênçãos para a obediência e maldições para a desobediência. Esse livro nos chama a viver uma vida consciente do Evangelho como testemunho vivo na sociedade. Para ampliar mais o seu conhecimento, consulte a Bíblia de Estudo Pentecostal, Edição Global, editada pela CPAD, páginas duzentos e dezenove a trezentos e dois.'},
+
+ {t:'topic', x:'Tópico 2. Contexto Histórico de Deuteronômio.'},
+ {t:'subtopic', x:'1. Panorama espiritual.'},
+ {t:'body', x:'O capítulo 1 de Deuteronômio começa com um cenário espiritual. A expressão estas são as palavras que Moisés falou, versículo 1, do hebraico êlleh hadvarim, introduz um discurso com autoridade divina. Não são palavras humanas, mas revelação de Deus, que exige obediência. Dirigidas à nova geração, nas campinas de Moabe, visavam renovar a aliança. Como não presenciou o Êxodo, o povo precisava ser instruído antes de entrar na Terra Prometida. Isso evidencia a importância de transmitir a Palavra entre gerações, conforme Segunda Timóteo, capítulo 2, versículo 2.'},
+ {t:'subtopic', x:'2. Panorama geográfico.'},
+ {t:'body', x:'Após apresentar o discurso de Moisés, Deuteronômio descreve regiões percorridas por Israel: o deserto, terra desabitada, a planície de Arabá e locais como Parã, Labã, Hazerote e Di-Zaabe, indicando a rota até Canaã. Em Deuteronômio, capítulo 1, versículo 2, destaca-se que o trajeto de Horebe a Cades-Barneia poderia ser feito em poucos dias, mas levou quarenta anos devido à desobediência do povo. A antiga geração sofreu as consequências da sua incredulidade e falta de temor; logo, aprendemos que a jornada rumo à Canaã Celestial exige santidade, fé e obediência para que alcancemos as promessas de Deus, conforme Hebreus, capítulo 4, versículos 1 a 11.'},
+ {t:'subtopic', x:'3. O discurso exortativo de Moisés.'},
+ {t:'body', x:'Consciente de que não entraria na Terra Prometida, conforme Deuteronômio, capítulo 1, versículo 37, e capítulo 3, versículo 27, Moisés profere o seu discurso final e prepara o povo para a transição de liderança a Josué. Esse momento de despedida e instrução é recorrente entre líderes bíblicos, como, por exemplo, Jacó, Josué, Samuel e Davi, e também é observado em Jesus, conforme João, capítulos 14 a 16. Moisés fala em tom de vitória e recorda feitos do Senhor, como a derrota de Seom e Ogue. As palavras dele não eram meramente humanas, mas revelação divina. A Lei refere-se à Torá, conjunto de ensinos que orientavam a vida moral e espiritual de Israel, base da sua identidade como povo de Deus.'},
+ {t:'subtopic', x:'4. Desafiando a nova geração a ser decisiva.'},
+ {t:'body', x:'A antiga geração de Israel falhou no seu compromisso com o Senhor Deus e não entrou na Terra Prometida. O primeiro discurso de Moisés revisa esse passado e orienta a nova geração à fidelidade. Após quarenta anos, surge um povo chamado a obedecer, conforme Deuteronômio, capítulo 1, versículos 6 a 8. O centro está em Deuteronômio, capítulo 1, versículo 8: Deus já deu a terra; cabia a Israel possuí-la pela fé. É assim também hoje, pois somos chamados a viver pela fé, rumo à cidade celestial, conforme Filipenses, capítulo 3, versículo 20.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Moisés relembra a jornada de Israel e exorta à obediência.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Visão Panorâmica.', x:'Moisés rememorou intensamente o concerto de Deus com Israel em três sermões ou discursos inspirados. O primeiro discurso de Moisés recordou a história de Israel, enfatizando a dúvida persistente do povo e a sua rebelião desde que eles deixaram o monte Sinai, e convocou a nova geração para que evitasse os erros do passado e reverentemente temesse e obedecesse a Deus, do capítulo 1, versículo 1, ao capítulo 4, versículo 43. O segundo discurso de Moisés relembrou e aplicou muitas leis do concerto referentes a questões como a adoração, o sábado, os pobres, as festas anuais, os direitos de herança e propriedade, a imoralidade sexual e a preservação da justiça, do capítulo 4, versículo 44, ao capítulo 26, versículo 19. O terceiro discurso de Moisés foi uma profecia a respeito das bênçãos e maldições que o povo receberia como resultado de sua obediência ou desobediência, do capítulo 27, versículo 1, ao capítulo 30, versículo 20. Os capítulos restantes incluem o ato de Moisés de comissionar Josué como seu sucessor e um testemunho sobre a morte de Moisés, do capítulo 31, versículo 1, ao capítulo 34, versículo 12. Bíblia de Estudo Pentecostal, Edição Global, primeira edição, Rio de Janeiro, CPAD, dois mil e vinte e dois, página trezentos.'},
+
+ {t:'topic', x:'Tópico 3. O Lado Doutrinário e Prático de Deuteronômio.'},
+ {t:'subtopic', x:'1. Relevância doutrinária.'},
+ {t:'body', x:'A relevância doutrinária de Deuteronômio fundamenta-se na revelação do caráter de Deus: justo, santo, fiel, misericordioso, zeloso e verdadeiro, conforme Deuteronômio, capítulo 7, versículo 9, e capítulo 10, versículo 17. O livro apresenta o relacionamento entre o Senhor e Israel, que deve ser marcado por temor, obediência e reverência, e exige submissão contínua à vontade e à Lei de Deus, conforme Deuteronômio, capítulo 6, versículo 5, e capítulo 12, versículo 1. Destaca-se também o seu aspecto messiânico, ao apontar para Jesus como o Profeta semelhante a Moisés, conforme Deuteronômio, capítulo 18, versículo 15, comparado com Atos, capítulo 3, versículo 23; logo, o povo era chamado a viver segundo a Lei para cumprir a sua missão e, assim, experimentar o favor divino.'},
+ {t:'subtopic', x:'2. Relevância ética e prática.'},
+ {t:'body', x:'Em Deuteronômio, Moisés destaca temas essenciais à vida do povo, especialmente a educação espiritual dos filhos, conforme Deuteronômio, capítulo 6, versículos 6 e 7. No cotidiano, os pais deveriam ensinar a Palavra e, assim, formar gerações firmes na fé, como ocorreu com Timóteo, conforme Segunda Timóteo, capítulo 1, versículo 5. O livro também enfatiza o amor e a fidelidade a Deus, expressos na obediência aos seus mandamentos, conforme Deuteronômio, capítulo 6, versículo 5. Além disso, orienta sobre liderança justa e submissão à Lei, visando o bem comum. O seu tom exortativo chama o povo a rejeitar a idolatria e viver segundo a vontade divina. Assim, o livro evidencia princípios de justiça, compaixão e responsabilidade que servem de referência para a ética cristã.'},
+ {t:'subtopic', x:'3. O posicionamento de Jesus e dos apóstolos sobre Deuteronômio.'},
+ {t:'body', x:'Ao citar Deuteronômio, conforme Mateus, capítulo 4, versículos 4, 7 e 10, Jesus não apenas confirma a sua inspiração, autoridade e valor prático, como também evidencia a sua relevância permanente. Deuteronômio revela princípios que orientam uma vida conforme o padrão de Deus. De igual modo, apóstolos como Pedro, conforme Atos, capítulo 3, versículo 23, Paulo, conforme Gálatas, capítulo 3, versículo 13, e o autor de Hebreus, conforme Hebreus, capítulo 10, versículo 30, recorreram a ele e, inclusive, reafirmaram a certeza do juízo divino. Essas referências demonstram que tanto Cristo quanto os seus apóstolos reconheciam Deuteronômio como Escritura inspirada, em que se encontram fundamentos que apontam para o cumprimento das promessas messiânicas em Jesus Cristo, o Senhor.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Deuteronômio une doutrina, ética e fidelidade à Palavra.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Propósito do Livro.', x:'O propósito original de Moisés ao se dirigir à nova geração de Israel antes de passar a liderança a Josué foi desafiar, encorajar e instruir as pessoas sobre: primeiro, os atos poderosos e as promessas de Deus; segundo, as suas próprias obrigações de fé e obediência previstas no concerto; e terceiro, a sua necessidade de reverenciar a Deus e viver para realizar os seus propósitos. Moisés queria relembrar o povo da séria responsabilidade e do privilégio de amar e honrar a Deus de todo o coração, de toda a alma e força, conforme capítulo 6, versículo 4. Bíblia de Estudo Pentecostal, Edição Global, primeira edição, Rio de Janeiro, CPAD, dois mil e vinte e dois, página trezentos.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'A leitura do livro de Deuteronômio possui grande valor para nós, os salvos em Cristo Jesus, pois nos conduz à compreensão da aliança que Deus firmou com Israel. Ao mesmo tempo, ressalta a importância de obedecer aos preceitos divinos e de renovar continuamente nosso compromisso de fé. Somos, portanto, chamados a viver uma vida cristã autêntica, que é marcada pela fé e responsabilidade, e a responder ao Senhor com amor, obediência e disposição constante para ouvir a sua Palavra.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'O que reúne o livro de Deuteronômio? O livro de Deuteronômio reúne discursos e registros históricos de Moisés.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Qual é o valor de Deuteronômio para o povo de Deus? O valor de Deuteronômio é permanente para a edificação espiritual do povo de Deus, evidenciado no seu uso na reforma de Esdras e Neemias.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Qual é a mensagem central de Deuteronômio, capítulo 1, versículo 8? O centro está em Deuteronômio, capítulo 1, versículo 8: Deus já deu a terra; cabia a Israel possuí-la pela fé.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'A relevância doutrinária de Deuteronômio fundamenta-se em quê? A relevância doutrinária de Deuteronômio fundamenta-se na revelação do caráter de Deus: justo, santo, fiel, misericordioso, zeloso e verdadeiro, conforme Deuteronômio, capítulo 7, versículo 9, e capítulo 10, versículo 17.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'O que demonstram as referências de Cristo e dos apóstolos sobre o livro de Deuteronômio? Essas referências demonstram que tanto Cristo quanto os seus apóstolos reconheciam Deuteronômio como Escritura inspirada, na qual se encontram fundamentos que apontam para o cumprimento das promessas messiânicas em Jesus Cristo.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
