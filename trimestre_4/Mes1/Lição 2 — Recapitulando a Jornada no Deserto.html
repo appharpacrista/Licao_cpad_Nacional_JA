@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 2 — Recapitulando a Jornada no Deserto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;
+    --paper:#fbf6e9;
+    --ink:#2b2417;
+    --ink-soft:#5b5236;
+    --gold:#a87f2e;
+    --gold-deep:#7a5a16;
+    --line:#d8c9a3;
+    --hl-seg:#f6e4ad;
+    --hl-word:#e2b53d;
+    --shadow:rgba(80,60,20,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, #fbf3df 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #efe3c4 0%, transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+
+  /* ---------- Top bar / controls ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    margin:0 -22px 30px;
+    background:linear-gradient(180deg,#fbf6e9 70%, rgba(251,246,233,.92));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -10px var(--shadow);
+  }
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{
+    font-family:'Spectral',serif;font-size:15px;cursor:pointer;
+    border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);
+    padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s ease;letter-spacing:.02em;
+  }
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- Header ---------- */
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(30px,6.4vw,50px);line-height:1.08;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;} .rule::after{right:-12px;}
+
+  /* ---------- Reading blocks ---------- */
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .topic .num{color:var(--gold);}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .daily b{color:var(--gold-deep);}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){
+    .status{width:100%;margin-left:0;text-align:left;}
+    p.body{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 2</div>
+    <div class="date">11 de Outubro de 2026</div>
+    <h1 class="title">Recapitulando a Jornada no Deserto</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* ============================================================
+   CONTEÚDO — texto otimizado para áudio
+   Referências por extenso · pausas após títulos · sem caracteres estranhos
+   ============================================================ */
+const DATA = [
+ {t:'label', x:'Lição 2.'},
+ {t:'versehead', x:'Recapitulando a Jornada no Deserto.'},
+ {t:'body', x:'Onze de outubro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'"O SENHOR, vosso Deus, que vai adiante de vós, por vós pelejará, conforme tudo o que fez convosco, diante de vossos olhos, no Egito." Deuteronômio, capítulo 1, versículo 30.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Confiar em Deus conduz à vitória; já a incredulidade leva à derrota e ao fracasso espiritual.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Deuteronômio, capítulo 1, versículos 9 a 12. A liderança compartilhada fortalece a obra de Deus.'},
+ {t:'daily', x:'Terça. Êxodo, capítulo 18, versículo 21; Atos, capítulo 6, versículo 3. A liderança segundo Deus é compartilhada, criteriosa e espiritual.'},
+ {t:'daily', x:'Quarta. Deuteronômio, capítulo 1, versículo 21; Hebreus, capítulo 11, versículo 6. A promessa exige fé para ser alcançada.'},
+ {t:'daily', x:'Quinta. Deuteronômio, capítulo 1, versículo 28; Provérbios, capítulo 3, versículos 5 e 6. A incredulidade distorce a visão e enfraquece o coração.'},
+ {t:'daily', x:'Sexta. Deuteronômio, capítulo 1, versículos 34 e 35. A incredulidade impede o cumprimento da promessa divina.'},
+ {t:'daily', x:'Sábado. Deuteronômio, capítulo 1, versículos 41 e 42; Isaías, capítulo 1, versículo 19. A obediência no tempo de Deus conduz à vitória.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Deuteronômio, capítulo 1, versículos 9 a 12, 19 a 21, 26 a 28 e 34 a 36.'},
+ {t:'verse', x:'Versículo 9. E, no mesmo tempo, eu vos falei, dizendo: Eu sozinho não poderei levar-vos.'},
+ {t:'verse', x:'Versículo 10. O SENHOR, vosso Deus já vos tem multiplicado; e eis que já hoje em multidão sois como as estrelas dos céus.'},
+ {t:'verse', x:'Versículo 11. O SENHOR, Deus de vossos pais, vos aumente, como sois, ainda mil vezes mais e vos abençoe, como vos tem falado.'},
+ {t:'verse', x:'Versículo 12. Como suportaria eu sozinho as vossas moléstias, e as vossas cargas, e as vossas diferenças?'},
+ {t:'verse', x:'Versículo 19. Então, partimos de Horebe e caminhamos por todo aquele grande e tremendo deserto que vistes, pelo caminho das montanhas dos amorreus, como o SENHOR, nosso Deus, nos ordenara; e chegamos a Cades-Barneia.'},
+ {t:'verse', x:'Versículo 20. Então, eu vos disse: Chegados sois às montanhas dos amorreus, que o SENHOR, nosso Deus, nos dará.'},
+ {t:'verse', x:'Versículo 21. Eis que o SENHOR, teu Deus, te deu esta terra diante de ti; sobe e possui-a como te falou o SENHOR, Deus de teus pais; não temas e não te assustes.'},
+ {t:'verse', x:'Versículo 26. Porém vós não quisestes subir, mas fostes rebeldes ao mandado do SENHOR, vosso Deus.'},
+ {t:'verse', x:'Versículo 27. E murmurastes nas vossas tendas e dissestes: Porquanto o SENHOR nos aborrece e nos tirou da terra do Egito para nos entregar nas mãos dos amorreus, para destruir-nos.'},
+ {t:'verse', x:'Versículo 28. Para onde subiremos? Nossos irmãos fizeram com que se derretesse o nosso coração, dizendo: Maior e mais alto é este povo do que nós; as cidades são grandes e fortificadas até aos céus; e também vimos ali filhos dos gigantes.'},
+ {t:'verse', x:'Versículo 34. Ouvindo, pois, o SENHOR a voz das vossas palavras, indignou-se e jurou, dizendo:'},
+ {t:'verse', x:'Versículo 35. Nenhum dos homens desta maligna geração verá esta boa terra que jurei dar a vossos pais,'},
+ {t:'verse', x:'Versículo 36. Salvo Calebe, filho de Jefoné; ele a verá, e a terra que pisou darei a ele e a seus filhos; porquanto perseverou em seguir ao SENHOR.'},
+ {t:'body', x:'Hinos sugeridos: cinquenta e oito, duzentos e vinte e cinco, e trezentos e sessenta e cinco, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Estudaremos a recapitulação feita por Moisés acerca da jornada de Israel no deserto, especialmente os acontecimentos em Cades-Barneia. Ao recordar os erros da antiga geração, o líder de Israel evidencia como a incredulidade, a murmuração e a desobediência impediram o povo de alcançar a promessa divina. Ao mesmo tempo, a lição destaca a importância da liderança sábia, da fé perseverante e da obediência ao Senhor. Trata-se de um chamado à Igreja para que aprenda com o passado e permaneça fiel.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, enfatizar o valor da liderança compartilhada na obra de Deus. Segundo, elencar os perigos espirituais da incredulidade. Terceiro, refletir sobre as consequências da desobediência a Deus.'},
+ {t:'body', x:'Motivação. A jornada de Israel no deserto revela lições atuais sobre fé, obediência e perseverança. Ela auxilia-nos a perceber que os erros do passado servem de advertência para nossa caminhada espiritual hoje. Essa lição é um desafio a confiarmos plenamente em Deus e a permanecermos firmes na sua Palavra.'},
+ {t:'body', x:'Sugestão de Método. Para iniciar a aula, sugerimos a seguinte pergunta à classe: Qual experiência com Deus você jamais esqueceu? Permita que dois ou três alunos compartilhem respostas rápidas. Em seguida, explique que Moisés utilizou a recordação como instrumento pedagógico e espiritual para fortalecer a nova geração. Mostre que recordar os feitos de Deus preserva a fé, corrige erros e fortalece a perseverança. A partir disso, introduza a ideia central da lição: Israel fracassou quando esqueceu a fidelidade divina e deu lugar à incredulidade. Assim, a memória espiritual torna-se essencial para uma caminhada cristã firme e obediente. Lamentações, capítulo 3, versículo 21.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. A jornada de Israel no deserto revela que a incredulidade, a murmuração e a desobediência afastam o crente das promessas de Deus. Em contraste, a fé, a perseverança e a submissão à vontade do Senhor conduzem à vitória espiritual.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e sete, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao fim dos tópicos, você encontrará auxílios que darão suporte à preparação de sua aula. Primeiro, o texto O Exemplo de Moisés, localizado após o primeiro tópico, auxilia na compreensão do tema da liderança compartilhada. Segundo, o texto Diga Não à Incredulidade, localizado ao fim do segundo tópico, aprofunda a reflexão sobre o perigo espiritual da incredulidade enfrentado pela nação de Israel.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Analisaremos nesta lição a primeira parte do primeiro grande discurso de Moisés em Deuteronômio, em que ele relembra a trajetória de Israel no deserto e a rebeldia do povo em Cades-Barneia, que se recusou a entrar na Terra Prometida. Assim, o propósito do livro é conduzir a nova geração à reflexão para que ela aprenda com os erros do passado e não os repita, bem como reconheça que a desobediência compromete o cumprimento das promessas divinas e afasta o povo da vontade de Deus. A lição, portanto, será dividida em três partes: o valor da liderança compartilhada, capítulo 1, versículos 9 a 18; a recusa de entrar em Canaã, capítulo 1, versículos 19 a 33; e a sentença divina em razão da desobediência, capítulo 1, versículos 34 a 46.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Incredulidade.'},
+
+ {t:'topic', x:'Tópico 1. O Valor da Liderança Compartilhada.'},
+ {t:'subtopic', x:'1. A necessidade de liderança.'},
+ {t:'body', x:'A Bíblia evidencia que o crescimento do povo de Deus exige liderança estruturada e compartilhada. Em Deuteronômio, capítulo 1, versículos 9 a 12, ainda dentro do primeiro discurso de Moisés, vê-se que o legislador de Israel reconhece que não poderia conduzir sozinho uma multidão que crescia conforme a promessa feita a Abraão, em Gênesis, capítulo 15, versículo 5. Com o aumento do povo, surgem também demandas, conflitos e responsabilidades. Por isso, Moisés institui auxiliares, pois compreende que liderar isoladamente conduz ao esgotamento. A liderança compartilhada fortalece a tomada de decisões e protege a obra. Deve, contudo, ser criteriosa e evitar a escolha de pessoas sem vocação, pois Deus requer obreiros comprometidos com a sua vontade.'},
+ {t:'subtopic', x:'2. Critérios espirituais para compartilhar a liderança.'},
+ {t:'body', x:'A necessidade de cooperadores não justifica escolhas precipitadas. A Escritura adverte quanto à imposição apressada de mãos, em Primeira Timóteo, capítulo 5, versículo 22, e indica que a liderança deve ser cuidadosamente discernida. Moisés, orientado por Jetro, conforme Êxodo, capítulo 18, versículos 13 a 27, selecionou homens com qualidades evidentes: sabedoria, experiência e caráter. A liderança não é fruto de conveniência, e sim de vocação e preparo. Assim como na Igreja Primitiva, a escolha envolve critérios objetivos e participação comunitária, conforme Atos, capítulo 6, versículos 1 a 6. Deus requer líderes capazes de servir com responsabilidade, discernimento e compromisso com a sua obra.'},
+ {t:'subtopic', x:'3. O exercício justo e subordinado da liderança.'},
+ {t:'body', x:'Os líderes escolhidos deveriam agir com justiça e imparcialidade, pois representariam o próprio Deus diante do povo. Não poderiam favorecer pessoas, e sim julgar com equidade, conforme Deuteronômio, capítulo 1, versículos 16 e 17. A liderança delegada exige submissão à autoridade estabelecida e mantém unidade de propósito, conforme Amós, capítulo 3, versículo 3. Os líderes deveriam recorrer a Moisés em casos difíceis, evitando, assim, decisões independentes. Desse modo, o êxito ministerial depende da fidelidade às orientações recebidas e do temor ao Senhor. A liderança, portanto, sustenta-se na justiça, na unidade e na consciência de que toda autoridade procede de Deus.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'A liderança sábia e compartilhada fortalece a obra de Deus.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O Exemplo de Moisés.', x:'Foi um tremendo fardo para Moisés guiar a nação. Ele poderia não ter completado a tarefa, caso não contasse com a ajuda de Deus e de outras pessoas. Assim como nações, empresas e organizações, na medida em que as igrejas crescem, tornam-se complexas. Surgem as necessidades e disputas internas. Um líder não pode tomar sozinho todas as decisões. Precisa de colaboradores fiéis. Talvez, assim como Moisés, você tenha uma propensão para tentar fazer todo o trabalho sozinho. Por medo ou vergonha, não pede ajuda. Mas lembre-se, Moisés tomou uma sábia decisão ao compartilhar a liderança com outros. Em vez de tentar lidar com as maiores responsabilidades sozinho, procure compartilhar a carga de forma que outros possam ajudá-lo e exercitar seus dons e habilidades dados por Deus em prol da Igreja. Moisés demonstrou ter algumas qualidades comuns nos bons líderes, como sabedoria, experiência e compreensão. Elas são bem diferentes daquelas que costumam ajudar a eleger os líderes de hoje: boa aparência, riqueza, popularidade e disposição para fazer qualquer coisa para chegar ao topo. As qualidades demonstradas por Moisés devem ser cultivadas por nós que lideramos e devem ser identificadas naqueles a quem elegemos como líderes. Bíblia de Estudo Aplicação Pessoal, primeira edição, Rio de Janeiro, CPAD, dois mil e treze, páginas duzentos e trinta e dois e duzentos e trinta e três.'},
+
+ {t:'topic', x:'Tópico 2. A Recusa de Entrar na Terra Prometida.'},
+ {t:'subtopic', x:'1. Uma recordação resumida.'},
+ {t:'body', x:'Moisés relembra a jornada desde Horebe até Cades-Barneia e destaca os desafios do deserto e o cuidado constante de Deus, conforme Deuteronômio, capítulo 1, versículos 19 a 21. Mesmo diante de um caminho árido, a promessa estava garantida: "Eis que o SENHOR, teu Deus, te deu esta terra diante de ti; sobe e possui-a." Deuteronômio, capítulo 1, versículo 21. Cades-Barneia torna-se símbolo decisivo: lugar de milagres, mas também de incredulidade. Foi ali que o povo esteve às portas da bênção, porém recuou por falta de fé. Essa memória serve de alerta à próxima geração: sem fé é impossível agradar a Deus, conforme Hebreus, capítulo 11, versículo 6, e a incredulidade impede o cumprimento das suas promessas.'},
+ {t:'subtopic', x:'2. Fracassando pela linguagem da incredulidade.'},
+ {t:'body', x:'Dando continuidade à recordação anterior, Moisés mostra que, mesmo diante da promessa confirmada em Deuteronômio, capítulo 1, versículo 21, o povo permitiu que a incredulidade moldasse as suas decisões. Embora os espias reconhecessem que a terra fosse boa, conforme Deuteronômio, capítulo 1, versículo 25, as suas palavras foram dominadas pelo medo e pelo desânimo, conforme Deuteronômio, capítulo 1, versículo 28. Assim, contrariaram a confiança que deveriam ter em Deus. A narrativa revela que estratégias humanas tornam-se obstáculos quando dissociadas da fé, conforme Provérbios, capítulo 3, versículos 5 e 6. A incredulidade não só impede a ação divina, como também contamina a comunidade, gera temor e afasta o povo do cumprimento das promessas.'},
+ {t:'subtopic', x:'3. Pecados marcantes na vida de Israel.'},
+ {t:'body', x:'Dando sequência ao quadro anterior, a incredulidade expressa pelos espias resultou em pecados concretos no povo. Israel recusou subir, rebelou-se contra a ordem divina e passou a murmurar nas suas tendas, conforme Deuteronômio, capítulo 1, versículos 26 e 27. A desobediência e a falta de fé distorceram a percepção que o povo tinha de Deus, o que o levou a duvidar do seu amor e cuidado. Mesmo diante das promessas e do agir poderoso do Senhor, Israel preferiu retroceder. Moisés, porém, reafirma o cuidado divino e compara-o ao de um pai que cuida e guia o seu filho, conforme Deuteronômio, capítulo 1, versículo 31. A lição é clara: a incredulidade gera pecado e impede o avanço espiritual, conforme Hebreus, capítulo 3, versículo 12, e Primeira Coríntios, capítulo 10, versículo 10.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'A incredulidade impediu Israel de entrar na Terra Prometida.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Diga Não à Incredulidade.', x:'Moisés relembrou a Israel a história da missão dos espias à Terra Prometida, conforme Números, capítulos 13 e 14. Recordou que, quando eles retornaram com o relatório sobre os gigantes e as cidades muradas, os israelitas temeram prosseguir e começaram a reclamar de sua condição. Mas o relato da minoria, Josué e Calebe, enfatizava que a terra era fértil, o inimigo vulnerável e Deus estava ao lado deles. Tornamo-nos temerosos e ficamos imobilizados quando focamos os aspectos negativos de uma situação. Mas é muito melhor olhar o lado positivo: a orientação de Deus e suas promessas. Diante de uma importante decisão, descubra o que deve fazer e aja com fé. Olhe para as bênçãos enquanto confia em Deus para vencer os obstáculos. Os problemas não podem roubar sua vitória. Bíblia de Estudo Aplicação Pessoal, primeira edição, Rio de Janeiro, CPAD, dois mil e treze, página duzentos e trinta e três.'},
+
+ {t:'topic', x:'Tópico 3. A Sentença Divina pela Desobediência.'},
+ {t:'subtopic', x:'1. A gravidade da rebeldia e o valor da fidelidade.'},
+ {t:'body', x:'É severa a expressão divina ao chamar Israel de geração maligna, conforme Deuteronômio, capítulo 1, versículo 35, mas ela é resultado do desprezo às bênçãos e aos cuidados do Senhor. A rebeldia, evidenciada desde o episódio do bezerro de ouro, em Êxodo, capítulo 32, revela um coração resistente à Palavra. Por causa disso, aquela geração não entrou na Terra Prometida. Deus, contudo, preserva dois remanescentes fiéis: Calebe e Josué, que não cederam à incredulidade, conforme Números, capítulo 14, versículo 30. Moisés, ainda que falho, conforme Números, capítulo 20, versículos 10 a 12, demonstrou coração pastoral ao interceder pelo povo, conforme Números, capítulo 20, versículo 6, e, tempos depois, encorajou Josué com maturidade espiritual, conforme Deuteronômio, capítulo 31, versículos 7 e 8.'},
+ {t:'subtopic', x:'2. A formação da nova geração pela fidelidade.'},
+ {t:'body', x:'Em continuidade ao contraste entre rebeldia e fidelidade, o Senhor revela que os filhos herdariam a promessa que os seus pais desprezaram, conforme Deuteronômio, capítulo 1, versículo 39. Aqueles considerados frágeis foram preservados da sentença, o que evidencia a graça divina. Isso, contudo, não isenta a responsabilidade dos pais: cabe-lhes formar os filhos na fé e na obediência, conforme Deuteronômio, capítulo 6, versículos 6 e 7. A geração anterior fracassou por causa do seu mau exemplo, porém Deus reafirma o seu cuidado e propósito redentor. Assim, os pais devem ensinar, corrigir, testemunhar e conduzir os seus filhos no caminho do Senhor para que estes não repitam os erros do passado, conforme Provérbios, capítulo 22, versículo 6, e Salmos, capítulo 78, versículos 5 a 8.'},
+ {t:'subtopic', x:'3. As consequências da desobediência persistente.'},
+ {t:'body', x:'Dando sequência à sentença divina, Israel passa a experimentar na prática os efeitos da sua rebeldia. Os que rejeitaram a promessa agora tentam agir por conta própria, fora do tempo e da direção de Deus, conforme Deuteronômio, capítulo 1, versículos 41 e 42. O resultado não poderia ser outro: derrota e frustração, conforme Deuteronômio, capítulo 1, versículo 44. O choro que se segue não nasce de arrependimento sincero, mas de remorso, não sendo, portanto, ouvido pelo Senhor. A desobediência prolonga o deserto e gera estagnação espiritual. Mais uma lição clara: não devemos agir fora da vontade de Deus, pois isso gera fracasso. Arrependimento tardio sem mudança real não conduz à bênção; o essencial é viver em obediência contínua, conforme Isaías, capítulo 1, versículo 19, e Segunda Coríntios, capítulo 7, versículo 10.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'A desobediência trouxe juízo, mas a fidelidade preservou a promessa.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Recapitular a jornada de Israel, especialmente em Cades-Barneia, é contemplar um verdadeiro espelho espiritual. Moisés evidencia que os pecados do povo: rebeldia, desobediência, orgulho e desprezo à voz de Deus, foram determinantes para o seu fracasso. A sua intenção era advertir a nova geração para que esta não repetisse os mesmos erros. Assim como Israel necessitava de fé, obediência e liderança para entrar na Terra Prometida, a Igreja depende desses fundamentos para avançar rumo ao cumprimento da promessa eterna.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'De acordo com a lição, o que a Bíblia evidencia? A Bíblia evidencia que o crescimento do povo de Deus exige liderança estruturada e compartilhada.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Quais eram as qualidades evidentes dos homens selecionados por Moisés? Moisés, orientado por Jetro, conforme Êxodo, capítulo 18, versículos 13 a 27, seleciona homens com qualidades evidentes: sabedoria, experiência e caráter.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Embora os espias reconhecessem que a terra era boa, como foram caracterizadas as palavras deles? Embora os espias reconhecessem a bondade da terra, conforme Deuteronômio, capítulo 1, versículo 25, a sua linguagem foi dominada pelo medo e pelo desânimo, conforme Deuteronômio, capítulo 1, versículo 28.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Como os pais devem agir para conduzir os seus filhos no caminho do Senhor? Os pais devem ensinar, corrigir e testemunhar, conduzindo os seus filhos no caminho do Senhor para que não repitam os erros do passado, conforme Provérbios, capítulo 22, versículo 6, e Salmos, capítulo 78, versículos 5 a 8.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Com base na afirmação: a desobediência prolonga o deserto e gera estagnação espiritual, qual lição aprendemos claramente? Mais uma lição clara: não devemos agir fora da vontade de Deus, pois isso gera fracasso.'}
+];
+
+/* ============================================================
+   RENDERIZAÇÃO
+   ============================================================ */
+const reader = document.getElementById('reader');
+const segIndexEls = []; // elementos faláveis na ordem de leitura
+
+function tokenize(el, text){
+  // quebra por espaços preservando posição de caractere para casar com o boundary do TTS
+  let i = 0;
+  const re = /(\s+)/;
+  const parts = text.split(re);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+      charPos += part.length;
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+      charPos += part.length;
+    }
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    d.innerHTML = '<span></span>';
+    d.querySelector('span').textContent = item.x;
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    box.appendChild(lab);
+    // a label do auxílio também é falada
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    segIndexEls.push(labSeg);
+
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+
+  const el = document.createElement('div');
+  el.className = 'seg ' + (
+    item.t==='label'?'label':
+    item.t==='topic'?'topic':
+    item.t==='subtopic'?'subtopic':
+    item.t==='versehead'?'versehead':
+    item.t==='verse'?'verse':
+    item.t==='daily'?'daily':'body'
+  );
+  if(item.t==='quote') el.className = 'seg quote';
+  if(item.t==='body') el.classList.add('body');
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* ============================================================
+   SÍNTESE DE VOZ + DESTAQUE
+   ============================================================ */
+const synth = window.speechSynthesis;
+let voices = [];
+let current = 0;
+let playing = false;
+let stopped = true;
+
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  // preferir uma voz pt-BR
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+
+function clearWordHL(el){
+  if(!el) return;
+  el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+}
+function clearAll(){
+  segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); });
+}
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    // casa o índice do caractere com o intervalo da palavra
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{
+    clearWordHL(el);
+    if(stopped) return;
+    speakFrom(i+1);
+  };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled=false; $pause.textContent='⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  $play.textContent = '▶ Ouvir';
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){
+    synth.resume(); $pause.textContent='⏸ Pausar'; $status.textContent='Retomando…';
+  } else {
+    synth.pause(); $pause.textContent='▶ Continuar'; $status.textContent='Pausado.';
+  }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{
+  $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×';
+});
+
+// clique em qualquer trecho começa a leitura a partir dele
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+
+// segurança: cancelar fala ao fechar
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
