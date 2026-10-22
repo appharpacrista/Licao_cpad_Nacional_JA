@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 4 — O Chamado à Obediência</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--ink-soft:#5b5236;--gold:#a87f2e;--gold-deep:#7a5a16;--line:#d8c9a3;--hl-seg:#f6e4ad;--hl-word:#e2b53d;--shadow:rgba(80,60,20,.18);}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:radial-gradient(circle at 18% 12%,#fbf3df 0%,transparent 55%),radial-gradient(circle at 85% 80%,#efe3c4 0%,transparent 50%),var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+.bar{position:sticky;top:0;z-index:50;margin:0 -22px 30px;background:linear-gradient(180deg,#fbf6e9 70%,rgba(251,246,233,.92));border-bottom:1px solid var(--line);backdrop-filter:blur(6px);box-shadow:0 6px 18px -10px var(--shadow);}
+.bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+.btn{font-family:'Spectral',serif;font-size:15px;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;transition:all .18s ease;}
+.btn:hover{background:var(--gold);color:#fff;}
+.btn.primary{background:var(--gold);color:#fff;}
+.btn.primary:hover{background:var(--gold-deep);}
+.btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+.ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+input[type=range]{width:108px;}
+.spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+.status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+header.head{text-align:center;padding:34px 0 8px;}
+.kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+.date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;}
+.rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+.rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+.rule::before{left:-12px;}.rule::after{right:-12px;}
+.seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+.seg:hover{background:#f1e6c5;}
+.seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+.w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+.w.spoken{background:var(--hl-word);color:#3a2c05;}
+.label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+.topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;margin:38px 0 6px;line-height:1.15;}
+.subtopic{font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+.versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:18px 0 8px;font-style:italic;}
+p.body,.body{font-size:18px;margin:11px 0;text-align:justify;}
+.verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+.aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+.aux .label{margin-top:0;}
+.daily{font-size:17px;margin:7px 0;}
+.hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+.sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;}
+.sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+.sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+@media(max-width:520px){.status{width:100%;margin-left:0;text-align:left;}p.body,.body{text-align:left;}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-inner">
+  <button id="play" class="btn primary">▶ Ouvir</button>
+  <button id="pause" class="btn" disabled>⏸ Pausar</button>
+  <button id="stop" class="btn" disabled>⏹ Parar</button>
+  <div class="ctl">Velocidade <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95"><span class="spd" id="rateVal">0.95×</span></div>
+  <div class="ctl">Voz <select id="voice"></select></div>
+  <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+</div></div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 4</div>
+    <div class="date">25 de Outubro de 2026</div>
+    <h1 class="title">O Chamado à Obediência</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+  <div id="reader"></div>
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+const DATA = [
+ {t:'label', x:'Lição 4.'},
+ {t:'versehead', x:'O Chamado à Obediência.'},
+ {t:'body', x:'Vinte e cinco de outubro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'“Andareis em todo o caminho que vos manda o Senhor, vosso Deus, para que vivais, e bem vos suceda, e prolongueis os dias na terra que haveis de possuir.” Deuteronômio, capítulo 5, versículo 33.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Ouvir, aprender e praticar a Palavra revelam um relacionamento verdadeiro com o Senhor Deus.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Deuteronômio, capítulo 5, versículo 1; e Romanos, capítulo 10, versículo 17. Ouvindo a Palavra de Deus para viver com fé.'},
+ {t:'daily', x:'Terça. Salmo 119, versículo 73; e Mateus, capítulo 11, versículo 29. Aprendendo para transformar o coração e viver a fé.'},
+ {t:'daily', x:'Quarta. Deuteronômio, capítulo 5, versículos 6 a 11; e Mateus, capítulo 22, versículo 37. Amando a Deus acima de tudo em plena obediência.'},
+ {t:'daily', x:'Quinta. Primeira João, capítulo 3, versículo 18; e Romanos, capítulo 13, versículo 9. Amando o próximo com verdade, justiça e atitudes.'},
+ {t:'daily', x:'Sexta. Deuteronômio, capítulo 5, versículo 22; e Primeira Timóteo, capítulo 2, versículo 5. Deus revela-se ao seu povo e chama-o à obediência.'},
+ {t:'daily', x:'Sábado. Deuteronômio, capítulo 5, versículo 33; e Salmo 119, versículo 105. Obedecer a Deus é andar no caminho da vida.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Deuteronômio, capítulo 5, versículos 1 a 10, 16 a 21, e 29.'},
+ {t:'verse', x:'Versículo 1. E chamou Moisés a todo o Israel e disse-lhes: Ouve, ó Israel, os estatutos e juízos que hoje vos falo aos ouvidos; e aprendê-los-eis e guardá-los-eis, para os cumprir.'},
+ {t:'verse', x:'Versículo 2. O Senhor, nosso Deus, fez conosco concerto, em Horebe.'},
+ {t:'verse', x:'Versículo 3. Não foi com nossos pais que fez o Senhor este concerto, senão conosco, todos os que hoje aqui estamos vivos.'},
+ {t:'verse', x:'Versículo 4. Face a face o Senhor falou conosco, no monte, do meio do fogo.'},
+ {t:'verse', x:'Versículo 5. Naquele tempo, eu estava em pé entre o Senhor e vós, para vos notificar a palavra do Senhor, porque temestes o fogo e não subistes ao monte. Dizendo:'},
+ {t:'verse', x:'Versículo 6. Eu sou o Senhor, teu Deus, que te tirei da terra do Egito, da casa da servidão.'},
+ {t:'verse', x:'Versículo 7. Não terás outros deuses diante de mim.'},
+ {t:'verse', x:'Versículo 8. Não farás para ti imagem de escultura, nem semelhança alguma do que há em cima no céu, nem embaixo na terra, nem nas águas debaixo da terra;'},
+ {t:'verse', x:'Versículo 9. não te encurvarás a elas, nem as servirás; porque eu, o Senhor, teu Deus, sou Deus zeloso, que visito a maldade dos pais sobre os filhos, até à terceira e quarta geração daqueles que me aborrecem,'},
+ {t:'verse', x:'Versículo 10. e faço misericórdia em milhares aos que me amam e guardam os meus mandamentos.'},
+ {t:'verse', x:'Versículo 16. Honra a teu pai e a tua mãe, como o Senhor, teu Deus, te ordenou, para que se prolonguem os teus dias e para que te vá bem na terra que te dá o Senhor, teu Deus.'},
+ {t:'verse', x:'Versículo 17. Não matarás.'},
+ {t:'verse', x:'Versículo 18. E não adulterarás.'},
+ {t:'verse', x:'Versículo 19. E não furtarás.'},
+ {t:'verse', x:'Versículo 20. E não dirás falso testemunho contra o teu próximo.'},
+ {t:'verse', x:'Versículo 21. E não cobiçarás a mulher do teu próximo; e não desejarás a casa do teu próximo, nem o seu campo, nem o seu servo, nem a sua serva, nem o seu boi, nem o seu jumento, nem coisa alguma do teu próximo.'},
+ {t:'verse', x:'Versículo 29. Quem dera que eles tivessem tal coração que me temessem e guardassem todos os meus mandamentos todos os dias, para que bem lhes fosse a eles e a seus filhos, para sempre!'},
+ {t:'body', x:'Hinos sugeridos: cento e três, duzentos e dez, e quinhentos e oito, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Ao iniciar o segundo discurso de Moisés, registrado em Deuteronômio, capítulo 5, somos conduzidos ao coração da Aliança estabelecida entre Deus e Israel. Às vésperas da entrada na Terra Prometida, Moisés relembra os Dez Mandamentos não como um simples código de normas, mas como a expressão da vontade divina para um povo chamado a viver em comunhão com o Senhor. Nesta lição, veremos que o chamado para ouvir, aprender e obedecer à Palavra revela que a verdadeira fé manifesta-se em uma vida de amor a Deus e ao próximo, marcada pela fidelidade, reverência e compromisso com a vontade do Senhor.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, apresentar o concerto em Horebe e o chamado à obediência. Segundo, justificar os mandamentos como expressão da vontade divina. Terceiro, conscientizar sobre as bênçãos de ouvir e obedecer à voz de Deus.'},
+ {t:'body', x:'Motivação. A obediência a Deus vai além de regras: ela expressa amor, fé e compromisso com o Senhor. Desse modo, incentive os alunos a perceberem que ouvir, aprender e praticar a Palavra continua sendo o caminho seguro para uma vida abençoada e cheia da presença de Deus.'},
+ {t:'body', x:'Sugestão de Método. Inicie a aula desenhando na lousa dois caminhos. Em um deles, escreva: “Ouvir, Aprender e Obedecer”. No outro: “Ignorar, Esquecer e Desobedecer”. Em seguida, apresente situações práticas do cotidiano, como família, trabalho, igreja e vida espiritual, e peça que os alunos indiquem qual caminho produz melhores resultados. Após as respostas, leia Deuteronômio, capítulo 5, versículo 33, e destaque que Moisés apresentou ao povo uma decisão semelhante: seguir os caminhos do Senhor ou se afastar deles. Explique que os Dez Mandamentos não foram dados apenas como regras, mas como orientações para uma vida de comunhão, proteção e bênção.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. A obediência ensinada em Deuteronômio, capítulo 5, começa ao ouvir a Palavra. Em seguida, cresce no aprendizado e manifesta-se na prática diária. Desafie os alunos a escolherem, nesta semana, uma orientação bíblica para colocar em prática e demonstrar que amar a Deus é viver segundo a sua vontade.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e oito, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Relembrando a Aliança, localizado após o primeiro tópico, aprofunda o tema da recordação da Aliança e sua importância para a fidelidade ao Senhor. Segundo, o texto O que os Mandamentos Revelam, localizado ao fim do segundo tópico, auxilia na compreensão do significado dos mandamentos divinos e da sua aplicação prática à vida do crente.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Destacamos nesta lição o segundo discurso principal de Moisés, que enfatiza a obediência à Lei de Deus nos Dez Mandamentos. Às vésperas da entrada na Terra Prometida, ele relembra a Lei não como rito, e sim como expressão do relacionamento com Deus. O seu propósito é conduzir o povo à fidelidade e à reverência ao concerto do Sinai. Para os salvos em Cristo, a lição é preciosa, pois nos chama a viver em obediência não à letra, “mas segundo o Espírito”. Romanos, capítulo 8, versículo 4.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Obediência.'},
+
+ {t:'topic', x:'Tópico 1. O Concerto Reiterado em Horebe.'},
+ {t:'subtopic', x:'1. O chamado para ouvir e obedecer.'},
+ {t:'body', x:'Moisés inicia o capítulo convocando o povo a ouvir, aprender e cumprir a Lei: “Ouve, ó Israel”. Deuteronômio, capítulo 5, versículo 1. Essa sequência revela o caminho da comunhão com Deus. Ouvir é abrir-se à Palavra. Aprender, lamad, é internalizar o ensino com mente e coração. Cumprir, shamar, é guardar e praticar com zelo. Assim, a fé torna-se viva e operante. Deuteronômio, capítulo 6, versículo 4; Romanos, capítulo 10, versículo 17; e Apocalipse, capítulo 2, versículo 7. A Palavra molda pensamentos e atitudes e forma verdadeiros discípulos. Salmo 119, versículo 73; Mateus, capítulo 11, versículo 29; e Segunda Timóteo, capítulo 3, versículos 14 e 15. O contraste com a geração anterior, que não obedeceu, reforça o chamado atual. Somos exortados em Cristo a viver, conforme ensina Tiago, capítulo 1, versículos 22 a 25, como praticantes da Palavra, e não somente ouvintes.'},
+ {t:'subtopic', x:'2. A pessoalidade da Aliança.'},
+ {t:'body', x:'Moisés ensina que a aliança com Deus exige resposta pessoal. Deuteronômio, capítulo 5, versículo 3. A fé não é herança automática, mas decisão individual de compromisso com o Senhor. Exemplos como Josué e Calebe demonstram perseverança consciente. Josué, capítulo 24, versículo 15; e Deuteronômio, capítulo 1, versículo 36. Da mesma forma, Jesus afirma que o ato de segui-lo requer renúncia pessoal. Mateus, capítulo 16, versículo 24. E Paulo reconhece em Timóteo uma fé assumida por ele mesmo. Segunda Timóteo, capítulo 1, versículo 5. Nesse sentido, cada crente é chamado a crer com o coração e confessar com a boca. Romanos, capítulo 10, versículos 9 e 10. Por isso, a exortação de Moisés aponta para a responsabilidade de cada israelita em aprender e cumprir os mandamentos, bem como em renovar a aliança com a nova geração. Diferentemente da anterior, que falhou, esta é chamada a viver o cumprimento da promessa. A fidelidade dos patriarcas contrasta com a infidelidade passada e reforça o chamado presente à obediência.'},
+ {t:'subtopic', x:'3. Uma revelação direta de Deus.'},
+ {t:'body', x:'Deus revelou ao seu povo o seu desejo de relacionar-se com ele. Deuteronômio, capítulo 5, versículo 4. No monte, em meio ao fogo, Ele manifestou-se com poder e santidade e mostrou que a sua Palavra é viva, purificadora e autoritativa. Jeremias, capítulo 23, versículo 29. A Lei, portanto, não é só uma simples regra, e sim uma expressão de um pacto relacional com Javé. Embora temível, a sua presença visa guiar e habitar com o povo. Temos acesso direto ao Pai por meio de Cristo. Efésios, capítulo 2, versículo 18. Assim como Israel foi chamado à fidelidade, o cristão também deve viver em obediência à nova aliança firmada no sangue de Jesus, como resposta consciente ao relacionamento com o Pai.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Moisés relembra a Aliança e chama o povo a ouvir e a obedecer.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Relembrando a Aliança.', x:'“Moisés relembrou os poderosos atos pelos quais Deus libertou Israel da escravidão no Egito, destacando tanto o auxílio divino concedido à nação quanto os episódios de desobediência do povo ao Senhor. Ao recordar as promessas de Deus e seus grandes feitos na história, aprendemos mais sobre o seu caráter e desenvolvemos uma compreensão mais profunda de quem Ele é. Conhecemos o Senhor de maneira mais íntima quando observamos como Ele agiu no passado em favor do seu povo. Além disso, a história de Israel serve como importante advertência, ajudando-nos a evitar erros e enganos, enquanto fortalece nossa confiança na fidelidade e no cuidado de Deus.” Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro: CPAD, dois mil e dezessete, página duzentos e trinta e sete.'},
+
+ {t:'topic', x:'Tópico 2. A Expressão da Vontade de Deus nos Mandamentos.'},
+ {t:'subtopic', x:'1. Os quatro primeiros mandamentos: amor a Deus.'},
+ {t:'body', x:'Em Deuteronômio, capítulo 5, versículos 6 a 11, Moisés reafirma os quatro primeiros mandamentos e enfatiza a relação exclusiva do povo com Deus. Não se trata apenas de proibições, mas também de um chamado ao amor pleno e reverente ao Senhor. Israel deveria rejeitar toda forma de idolatria, evitar o uso leviano do nome divino e reconhecer que pertence a um Deus que o redimiu. Amar a Deus de todo o coração implica submeter a vontade, as decisões e os afetos à sua Palavra. Mateus, capítulo 22, versículo 37. Esse amor não pode ser dividido com ídolos modernos, como poder, riqueza ou prazeres. Ademais, a fidelidade a Deus deve alcançar as gerações por meio de um legado espiritual consciente. O amor ao Senhor, portanto, não é só sentimento, mas também um compromisso contínuo que transforma a vida e reflete a presença de Cristo.'},
+ {t:'subtopic', x:'2. Os seis mandamentos: amor ao próximo.'},
+ {t:'body', x:'Nos versículos 16 a 21, encontramos a segunda parte da Lei, agora voltada para o relacionamento com o próximo. Esses mandamentos estabelecem uma ética baseada no amor verdadeiro, que se expressa em ações concretas. Primeira João, capítulo 3, versículo 18. Honrar os pais, preservar a vida, manter a fidelidade conjugal, respeitar os bens alheios, falar a verdade e guardar o coração contra a cobiça são princípios que sustentam uma convivência justa. O sábado, ainda que mencionado anteriormente, reforça o cuidado com a vida integral e inclui descanso e santificação. Esses mandamentos revelam que o pecado social nasce do egoísmo e da apropriação indevida do que pertence ao outro. Deus, em contraste, chama o seu povo a viver com justiça, verdade e integridade, inclusive no uso das palavras, a evitar falsos testemunhos e a preservar a dignidade do próximo.'},
+ {t:'subtopic', x:'3. Qual a utilidade da Lei para os cristãos hoje?'},
+ {t:'body', x:'A Lei continua sendo relevante para o cristão, mas não como meio de salvação, e sim como expressão do caráter de Deus. O apóstolo Paulo afirma que ela é santa, justa e boa. Romanos, capítulo 7, versículo 12. E que serve como guia moral para a vida cristã. Primeira Timóteo, capítulo 1, versículo 8. Em Cristo, a Lei é internalizada no coração. Hebreus, capítulo 10, versículo 16. E orienta pensamentos e atitudes. Ela revela o pecado, conduz à graça e aponta para uma vida de santidade. Romanos, capítulo 3, versículo 20; Gálatas, capítulo 3, versículo 24; e Romanos, capítulo 8, versículo 4. Além disso, ela evidencia as consequências do pecado e inspira temor e amor a Deus. A obediência cristã, portanto, não é legalista, mas fruto da ação do Espírito Santo, que transforma a natureza humana. O crente obedece não por imposição, mas por amor, e reflete na sua vida a justiça e a graça que recebeu em Cristo.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Os mandamentos revelam a vontade de Deus para amar e servir.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. O que os Mandamentos Revelam.', x:'“Os israelitas haviam feito uma aliança com Deus, por isso Moisés mandou que eles ouvissem, aprendessem e cumprissem os mandamentos divinos. Os cristãos também fizeram uma aliança com o Eterno por intermédio de Jesus Cristo e devem agir da forma esperada. A tríplice recomendação de Moisés aos israelitas é um excelente conselho para todos os cristãos. Ouvir é absorver e aceitar a informação sobre Deus. Aprender é compreender o significado e as implicações de ser aliançado com Ele. Obedecer é colocar em ação tudo o que sabemos. As três ações são essenciais para um crescente relacionamento com Deus. Os Dez Mandamentos representam os padrões de Deus para uma vida correta. Obedecê-los é obedecer a Deus. Ainda assim, em todos os livros do Antigo Testamento, podemos constatar que cada mandamento foi infringido. Ao ler as histórias, note as trágicas consequências resultantes da violação da Lei de Deus.” Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro: CPAD, dois mil e dezessete, páginas duzentos e trinta e nove e duzentos e quarenta e um.'},
+
+ {t:'topic', x:'Tópico 3. Obedecendo à Voz de Deus.'},
+ {t:'subtopic', x:'1. A Palavra de Deus revelada à congregação.'},
+ {t:'body', x:'A partir de Deuteronômio, capítulo 5, versículo 22, Moisés destaca o privilégio singular de Israel: receber a revelação direta de Deus, registrada por Ele mesmo. O povo testemunhou uma manifestação poderosa no Sinai, com fogo, nuvem, escuridão e voz divina, que evidenciou a santidade do Senhor e despertou temor reverente. Êxodo, capítulo 20, versículos 18 a 21. Diante disso, pediram que Moisés atuasse como mediador. Deuteronômio, capítulo 5, versículo 27. Isso aponta para Cristo, o único mediador entre Deus e os homens. Primeira Timóteo, capítulo 2, versículo 5. Essa revelação produziu consciência do pecado e compromisso com a obediência, além de mostrar que Deus deseja relacionamento sincero; não mera formalidade religiosa, mas, sim, vida transformada pelo Espírito. Ezequiel, capítulo 36, versículo 27.'},
+ {t:'subtopic', x:'2. Bênção e preservação aos obedientes.'},
+ {t:'body', x:'Deus promete bênçãos aos que o obedecem e evidencia o seu desejo de um relacionamento profundo com o seu povo. Deuteronômio, capítulo 5, versículo 33. O coração, entendido como centro da vontade, do intelecto e das emoções, deve estar plenamente voltado ao Senhor. Assim, a obediência não é externa, mas integral, e reflete um compromisso verdadeiro com Deus. Pais fiéis influenciam positivamente as gerações futuras e estabelecem um legado espiritual duradouro. Essa verdade permanece no Novo Testamento: são bem-aventurados os que ouvem e guardam a Palavra. Lucas, capítulo 11, versículo 28. A obediência, portanto, continua sendo o caminho seguro para uma vida abençoada e preservada.'},
+ {t:'subtopic', x:'3. Palavras exortativas de Moisés.'},
+ {t:'body', x:'Moisés encerra o discurso reforçando a necessidade de perseverar na obediência: “Andareis em todo o caminho”. Deuteronômio, capítulo 5, versículo 33. Enquanto o povo retorna às suas tendas, Moisés permanece diante do Senhor para receber mais instruções e, assim, evidencia a responsabilidade espiritual da liderança. A nova geração é exortada a cumprir o compromisso assumido e a viver segundo a vontade divina. Diferentemente do primeiro momento no Sinai, a ênfase está na Palavra já revelada. O crente hoje, portanto, também deve viver guiado pela Escritura, mediante a ação e suficiência do Espírito Santo, e confiar e andar continuamente na luz do Senhor. Salmo 119, versículo 105.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Ouvir e obedecer a Deus conduz à bênção e à preservação.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Viver em obediência a Deus não foi um chamado restrito ao passado, mas permanece plenamente atual. No Antigo Testamento, especialmente nos Dez Mandamentos, a vontade divina foi claramente revelada ao seu povo. A sua prática, por meio da obediência, conduzia à vida e à proteção. Deus ainda continua chamando cada cristão a submeter-se à sua Palavra e a viver de modo digno do Evangelho, a fim de que o cristão experimente, desde já, a realidade da vida eterna.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Como Moisés inicia o capítulo 5? Moisés inicia o capítulo convocando o povo a ouvir, aprender e cumprir a Lei: “Ouve, ó Israel”. Deuteronômio, capítulo 5, versículo 1.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'De acordo com a lição, para que aponta a exortação de Moisés? A exortação de Moisés aponta para a responsabilidade de cada israelita em aprender e cumprir os mandamentos, renovando a aliança com a nova geração.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Do que tratam os quatro primeiros mandamentos? Em Deuteronômio, capítulo 5, versículos 6 a 11, Moisés reafirma os quatro primeiros mandamentos e enfatiza a relação exclusiva do povo com Deus, isto é, do amor a Deus.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Do que tratam os seis últimos mandamentos? Nos versículos 16 a 21, encontramos a segunda parte da Lei, voltada para o relacionamento com o próximo, isto é, a ética relacional, do amor ao próximo.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'Como Moisés encerra o seu discurso no capítulo 5? Moisés encerra o discurso reforçando a necessidade de perseverar na obediência: “Andareis em todo o caminho”. Deuteronômio, capítulo 5, versículo 33.'}
+];
+
+const reader=document.getElementById('reader'),segs=[];
+function tokenize(el,text){let pos=0;text.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){el.appendChild(document.createTextNode(p));}else{const w=document.createElement('span');w.className='w';w.textContent=p;w.dataset.start=pos;w.dataset.end=pos+p.length;el.appendChild(w);}pos+=p.length;});}
+function addSeg(parent,cls,text,italic){const e=document.createElement('div');e.className='seg '+cls;e.tabIndex=0;if(italic)e.style.fontStyle='italic';tokenize(e,text);parent.appendChild(e);segs.push(e);return e;}
+DATA.forEach(i=>{
+  if(i.t==='divider'){const d=document.createElement('div');d.className='sec-divider';const s=document.createElement('span');s.textContent=i.x;d.appendChild(s);reader.appendChild(d);return;}
+  if(i.t==='aux'){const b=document.createElement('div');b.className='aux';reader.appendChild(b);addSeg(b,'label',i.label);addSeg(b,'body',i.x,true);return;}
+  addSeg(reader,i.t,i.x);
+});
+
+const synth=window.speechSynthesis;let voices=[],current=0,playing=false,stopped=true;
+const $=id=>document.getElementById(id);
+const $play=$('play'),$pause=$('pause'),$stop=$('stop'),$rate=$('rate'),$rateVal=$('rateVal'),$voice=$('voice'),$status=$('status');
+if(!synth){$status.textContent='Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';$play.disabled=true;}
+function loadVoices(){voices=synth.getVoices();const pt=voices.filter(v=>/pt/i.test(v.lang));const list=pt.length?pt:voices;$voice.innerHTML='';list.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=v.name+(/pt.?br/i.test(v.lang)?'  (Brasil)':'  ['+v.lang+']');$voice.appendChild(o);});const br=list.find(v=>/pt.?br/i.test(v.lang));if(br)$voice.value=br.name;}
+if(synth){loadVoices();synth.onvoiceschanged=loadVoices;}
+const chosenVoice=()=>voices.find(v=>v.name===$voice.value)||voices.find(v=>/pt/i.test(v.lang))||null;
+const clearWordHL=el=>el&&el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+const clearAll=()=>segs.forEach(s=>{s.classList.remove('active');clearWordHL(s);});
+
+function speakFrom(i){
+  if(i>=segs.length){finish();return;}
+  current=i;const el=segs[i];
+  clearAll();el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'center'});
+  const u=new SpeechSynthesisUtterance(el.textContent.trim());
+  const v=chosenVoice();if(v)u.voice=v;u.lang=(v&&v.lang)||'pt-BR';u.rate=parseFloat($rate.value);
+  const words=Array.from(el.querySelectorAll('.w'));
+  u.onboundary=e=>{if(e.charIndex==null)return;clearWordHL(el);let hit=null;for(const w of words){const s=+w.dataset.start,en=+w.dataset.end;if(e.charIndex>=s&&e.charIndex<en){hit=w;break;}if(e.charIndex<s){hit=w;break;}}if(hit)hit.classList.add('spoken');};
+  u.onend=()=>{clearWordHL(el);if(stopped)return;speakFrom(i+1);};
+  u.onerror=()=>{if(!stopped)speakFrom(i+1);};
+  $status.textContent='Lendo… trecho '+(i+1)+' de '+segs.length;
+  synth.speak(u);
+}
+function start(n){if(!synth)return;stopped=false;playing=true;synth.cancel();$play.disabled=true;$pause.disabled=false;$stop.disabled=false;$pause.textContent='⏸ Pausar';speakFrom(n!=null?n:current);}
+function finish(){playing=false;stopped=true;clearAll();$play.disabled=false;$pause.disabled=true;$stop.disabled=true;$status.textContent='Leitura concluída.';current=0;}
+$play.addEventListener('click',()=>{start(current);});
+$pause.addEventListener('click',()=>{if(synth.paused){synth.resume();$pause.textContent='⏸ Pausar';$status.textContent='Retomando…';}else{synth.pause();$pause.textContent='▶ Continuar';$status.textContent='Pausado.';}});
+$stop.addEventListener('click',()=>{stopped=true;playing=false;synth.cancel();finish();$status.textContent='Parado.';});
+$rate.addEventListener('input',()=>{$rateVal.textContent=parseFloat($rate.value).toFixed(2)+'×';});
+segs.forEach((el,idx)=>{const go=()=>start(idx);el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});});
+window.addEventListener('beforeunload',()=>{try{synth.cancel();}catch(e){}});
+</script>
+</body>
+</html>
