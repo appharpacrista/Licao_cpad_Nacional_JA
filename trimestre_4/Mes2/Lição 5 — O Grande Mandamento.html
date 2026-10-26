@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lição 5 — O Grande Mandamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--soft:#5b5236;--gold:#a87f2e;--deep:#7a5a16;--line:#d8c9a3;--hs:#f6e4ad;--hw:#e2b53d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px 140px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;margin:0 -22px 30px;background:var(--paper);border-bottom:1px solid var(--line)}
+.bi{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.btn{font-family:inherit;font-size:15px;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--deep);padding:8px 16px;border-radius:999px}
+.btn:hover{background:var(--gold);color:#fff}
+.btn.p{background:var(--gold);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--soft)}
+select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px}
+input[type=range]{width:108px;accent-color:var(--gold)}
+.status{margin-left:auto;font-size:12.5px;color:var(--soft);font-style:italic}
+header{text-align:center;padding:34px 0 8px}
+.kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--deep);font-weight:600}
+.date{font-style:italic;color:var(--soft);font-size:15px;margin-top:6px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px}
+hr{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none}
+.hint{text-align:center;font-style:italic;color:var(--soft);font-size:14px;margin:6px 0 26px}
+.seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;outline:none}
+.seg:hover{background:#f1e6c5}
+.seg.active{background:var(--hs);box-shadow:inset 3px 0 0 var(--gold)}
+.w{border-radius:4px;padding:0 1px}
+.w.spoken{background:var(--hw);color:#3a2c05}
+.label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--deep);margin:30px 0 4px}
+.topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;margin:38px 0 6px;line-height:1.15}
+.subtopic{font-weight:600;font-size:18px;color:var(--deep);margin:20px 0 2px}
+.versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:18px 0 8px;font-style:italic}
+.body{font-size:18px;margin:11px 0;text-align:justify}
+.verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line)}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--deep);text-align:center;margin:16px auto;max-width:620px}
+.aux{background:#f5ebcc;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+.aux .label{margin-top:0}
+.daily{font-size:17px;margin:7px 0}
+.div{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--deep)}
+footer{text-align:center;margin-top:50px;color:var(--soft);font-size:13px;font-style:italic}
+@media(max-width:520px){.status{width:100%;margin-left:0}.body{text-align:left}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bi">
+<button id="play" class="btn p">▶ Ouvir</button>
+<button id="pause" class="btn" disabled>⏸ Pausar</button>
+<button id="stop" class="btn" disabled>⏹ Parar</button>
+<div class="ctl">Velocidade <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95"><span id="rateVal">0.95×</span></div>
+<div class="ctl">Voz <select id="voice"></select></div>
+<div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+</div></div>
+<div class="wrap">
+<header>
+<div class="kicker">Lição 5</div>
+<div class="date">1 de Novembro de 2026</div>
+<h1>O Grande Mandamento</h1><hr>
+<p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+</header>
+<div id="reader"></div>
+<footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+<script>
+const DATA=[
+{t:'label',x:'Lição 5.'},
+{t:'versehead',x:'O Grande Mandamento.'},
+{t:'body',x:'Primeiro de novembro de dois mil e vinte e seis.'},
+{t:'label',x:'Texto Áureo.'},
+{t:'quote',x:'"Amarás, pois, o SENHOR, teu Deus, de todo o teu coração, e de toda a tua alma, e de todo o teu poder." Deuteronômio, capítulo 6, versículo 5.'},
+{t:'label',x:'Verdade Prática.'},
+{t:'body',x:'O amor a Deus expressa-se em obediência sincera, ensino no lar, prática constante da sua Palavra e do amor ao próximo.'},
+{t:'label',x:'Leitura Diária.'},
+{t:'daily',x:'Segunda. Deuteronômio, capítulo 6, versículos 1 a 3; Provérbios, capítulo 1, versículo 7. Ouvindo e guardando a Palavra para viver em obediência.'},
+{t:'daily',x:'Terça. Deuteronômio, capítulo 6, versículo 4; Isaías, capítulo 45, versículo 5. Amando a Deus de forma exclusiva com todo o coração.'},
+{t:'daily',x:'Quarta. Deuteronômio, capítulo 6, versículo 6; Tiago, capítulo 1, versículo 22. Guardando a Palavra no coração e praticando com fidelidade.'},
+{t:'daily',x:'Quinta. Deuteronômio, capítulo 6, versículo 7; Provérbios, capítulo 22, versículo 6. Ensinando a Palavra no lar para formar gerações fiéis.'},
+{t:'daily',x:'Sexta. Deuteronômio, capítulo 10, versículos 12 e 13; Primeira João, capítulo 5, versículo 3. Amando a Deus por meio da obediência sincera.'},
+{t:'daily',x:'Sábado. Deuteronômio, capítulo 6, versículo 5; João, capítulo 14, versículo 15. Vivendo o amor a Deus com fidelidade no dia a dia.'},
+{t:'label',x:'Leitura Bíblica em Classe.'},
+{t:'versehead',x:'Deuteronômio, capítulo 6, versículos 1 a 9.'},
+{t:'verse',x:'Versículo 1. Estes, pois, são os mandamentos, os estatutos e os juízos que mandou o SENHOR, vosso Deus, para se vos ensinar, para que os fizésseis na terra a que passais a possuir;'},
+{t:'verse',x:'Versículo 2. para que temas ao SENHOR, teu Deus, e guardes todos os seus estatutos e mandamentos, que eu te ordeno, tu, e teu filho, e o filho de teu filho, todos os dias da tua vida; e que teus dias sejam prolongados.'},
+{t:'verse',x:'Versículo 3. Ouve, pois, ó Israel, e atenta que os guardes, para que bem te suceda, e muito te multipliques, como te disse o SENHOR, Deus de teus pais, na terra que mana leite e mel.'},
+{t:'verse',x:'Versículo 4. Ouve, Israel, o SENHOR, nosso Deus, é o único SENHOR.'},
+{t:'verse',x:'Versículo 5. Amarás, pois, o SENHOR, teu Deus, de todo o teu coração, e de toda a tua alma, e de todo o teu poder.'},
+{t:'verse',x:'Versículo 6. E estas palavras que hoje te ordeno estarão no teu coração;'},
+{t:'verse',x:'Versículo 7. e as intimarás a teus filhos e delas falarás assentado em tua casa, e andando pelo caminho, e deitando-te, e levantando-te.'},
+{t:'verse',x:'Versículo 8. Também as atarás por sinal na tua mão, e te serão por testeiras entre os teus olhos.'},
+{t:'verse',x:'Versículo 9. E as escreverás nos umbrais de tua casa e nas tuas portas.'},
+{t:'body',x:'Hinos sugeridos: duzentos e dezessete, trezentos e oitenta e cinco, e quatrocentos e trinta e dois, da Harpa Cristã.'},
+
+{t:'divider',x:'Plano de Aula'},
+{t:'subtopic',x:'1. Introdução.'},
+{t:'body',x:'Em Deuteronômio, capítulo 6, Moisés apresenta o grande mandamento que resume a essência da aliança: amar a Deus de todo o coração, alma e força. Esse amor não se limita a sentimentos, mas expressa-se em obediência, devoção exclusiva ao Senhor e compromisso com a sua Palavra. Assim sendo, veremos que o amor a Deus deve ocupar o centro da vida, ser cultivado no coração e transmitido às futuras gerações por meio do ensino e do testemunho cristão.'},
+{t:'subtopic',x:'2. Apresentação da Lição.'},
+{t:'body',x:'Objetivos da Lição. Primeiro, apresentar o amor a Deus como fundamento dos mandamentos. Segundo, enfatizar a importância da Palavra na formação espiritual. Terceiro, expressar o amor a Deus e ao próximo por meio da prática.'},
+{t:'body',x:'Motivação. Vivemos em um tempo de muitos amores concorrentes e corações divididos. Por isso, esta lição convida-nos a redescobrir o que significa amar a Deus acima de tudo. Incentive os alunos a perceberem que esse amor não é apenas um sentimento, mas uma escolha diária que transforma o coração, fortalece a família e orienta toda a vida pela Palavra do Senhor.'},
+{t:'body',x:'Sugestão de Método. Para reforçar o ensino do segundo tópico, sugerimos que leve para a aula uma Bíblia, uma fotografia de família e um objeto de valor simbólico, como um relógio, uma medalha ou um livro. Pergunte aos alunos: Qual dessas heranças tem maior valor e dura por mais tempo? Após ouvir as respostas, destaque que bens materiais podem ser perdidos, mas a fé transmitida no lar alcança gerações. Em seguida, leia Deuteronômio, capítulo 6, versículo 7, e peça que os alunos compartilhem uma lembrança espiritual recebida de pais, avós ou líderes cristãos. Conclua enfatizando que o ensino bíblico no lar é a mais valiosa herança que uma família pode deixar.'},
+{t:'subtopic',x:'3. Conclusão da Lição.'},
+{t:'body',x:'Aplicação. A lição ensina-nos que o amor a Deus é o fundamento da vida cristã. Esse amor nasce da Palavra guardada no coração, fortalece a comunhão com o Senhor e deve ser transmitido às novas gerações. Desafie os alunos a separar, nesta semana, um momento para ler a Bíblia com a família, compartilhar um ensinamento bíblico e demonstrar, na prática, o amor a Deus por meio da obediência e do cuidado com o próximo.'},
+{t:'subtopic',x:'4. Subsídio ao Professor.'},
+{t:'body',x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e oito, você encontrará um subsídio especial para esta lição.'},
+{t:'body',x:'Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Comunicando o Amor de Deus, localizado após o primeiro tópico, auxilia no aprofundamento do tema da constância e da fidelidade do amor de Deus. Segundo, o texto A Totalidade da Devoção, localizado ao fim do segundo tópico, contribui para a compreensão da devoção integral a Deus, envolvendo o coração e todas as dimensões do ser.'},
+
+{t:'divider',x:'Comentário'},
+{t:'label',x:'Introdução.'},
+{t:'body',x:'Os mandamentos do Senhor não devem ser compreendidos como regras rígidas e inflexíveis, mas como expressões do cuidado e da sabedoria divina, pois, como diz Salmos, capítulo 19, versículo 7: A Lei do SENHOR é perfeita e refrigera a alma. Nesse aspecto, a aliança com Israel tinha como fundamento o amor de Deus. Em Deuteronômio, capítulo 6, texto de estudo nesta lição, encontramos a declaração de grande fundamento conhecido como Shemá, cujo significado é ouve: Ouve, ó Israel. Ela ensina a amar a Deus de todo o coração, alma e poder. Esse princípio também se aplica aos cristãos. Jesus reafirmou-o como o maior mandamento, em Marcos, capítulo 12, versículos 29 e 30, e mostrou que amar a Deus expressa-se no amor ao próximo. Não se trata, portanto, de mera emoção, mas de compromisso que orienta a vida.'},
+{t:'label',x:'Palavra-chave.'},
+{t:'body',x:'Amor.'},
+
+{t:'topic',x:'Tópico 1. O Amor que Sustenta os Mandamentos.'},
+{t:'subtopic',x:'1. O propósito dos mandamentos.'},
+{t:'body',x:'Deuteronômio, capítulo 6, apresenta os mandamentos como instrumentos divinos para formar um povo santo e exemplar entre as nações. Deuteronômio, capítulo 6, versículos 1 a 3. Eles não são apenas normas, mas também fundamentos da aliança e expressão da vontade de Deus para a vida coletiva de Israel. Moisés continua ensinando princípios ligados aos Dez Mandamentos, que são a base da aliança de Deus com o povo e o centro da sua Lei. A ideia principal do texto é que esses mandamentos deveriam ser ensinados com cuidado e dedicação, como parte essencial da vida espiritual. Portanto, não bastava conhecê-los, mas era necessário aprendê-los, praticá-los, transmiti-los e, por fim, entender que foram dados por Deus com um propósito claro: orientar o povo em uma vida de obediência e comunhão com Ele.'},
+{t:'subtopic',x:'2. O chamado ao amor exclusivo a Deus.'},
+{t:'body',x:'A resposta de Israel aos mandamentos deveria ser marcada por amor exclusivo a Deus, fundamentado na sua revelação e ação redentora ao libertá-los do Egito. A declaração: O SENHOR, nosso Deus, é o único SENHOR, afirma não apenas a unidade divina, meramente numérica, como também a sua exclusividade absoluta. Deuteronômio, capítulo 6, versículo 4. Não há outro Deus digno de adoração. Essa verdade estabelece o fundamento do monoteísmo bíblico e exige lealdade total do povo. Isaías, capítulo 45, versículo 5. Esta verdade permanece para o cristão: nada deve ocupar o lugar de Deus no coração. Primeira Coríntios, capítulo 8, versículo 4. A devoção ao Senhor, portanto, requer fidelidade integral e rejeita qualquer forma de idolatria ou divisão de afeto espiritual.'},
+{t:'subtopic',x:'3. O significado de Ouve, ó Israel.'},
+{t:'body',x:'A expressão Ouve, ó Israel introduz um chamado profundo à escuta obediente. Deuteronômio, capítulo 6, versículos 4 e 5. Não se trata apenas de ouvir com os ouvidos, mas também de acolher a Palavra com atenção, refletir sobre ela e praticá-la. Esse chamado resume a essência da aliança: Deus fala, e o povo responde com obediência e amor. Deuteronômio, capítulo 32, versículo 29; Isaías, capítulo 42, versículo 8. Nesses termos, amar a Deus de todo o coração, alma e poder envolve todo o ser: pensamentos, emoções, vontades e ações. Josué, capítulo 24, versículo 15; Primeiro Reis, capítulo 18, versículo 21. Jesus reafirmou esse princípio como o maior mandamento. Mateus, capítulo 22, versículo 37; Marcos, capítulo 12, versículos 29 e 30; Lucas, capítulo 10, versículo 27. E mostrou que a verdadeira espiritualidade fundamenta-se no amor obediente. João, capítulo 14, versículo 15; Tiago, capítulo 1, versículos 22 a 25. A fé, portanto, não é apenas declarativa, mas também é vivida em relacionamento e prática diária.'},
+{t:'label',x:'Ampliando o Conhecimento.'},
+{t:'body',x:'Ouve, Israel. Esta passagem é conhecida como o Shemá, do hebraico shamá, que significa ouvir. Era uma passagem familiar aos judeus na época de Jesus, sendo recitada diariamente pelos judeus devotos. O Shemá é declaração clássica do caráter monoteísta de Deus. É acompanhado de uma dupla obrigação para os israelitas: primeiro, amar a Deus de todo o coração, de toda a alma, de toda a força, versículos 5 e 6; segundo, ensinar a fé diligentemente aos filhos, versículos 7 a 9. Amplie mais seu conhecimento consultando a Bíblia de Estudo Pentecostal, Edição Global, editada pela CPAD, página 312.'},
+{t:'label',x:'Sinopse 1.'},
+{t:'body',x:'O amor a Deus sustenta os mandamentos e exige completa fidelidade.'},
+{t:'aux',label:'Auxílio Devocional. Comunicando o Amor de Deus.',x:'Moisés diz que a comunicação da fé começa com o próprio amor que os pais sentem por Deus. O amor de todo o teu coração, de toda a tua alma, e de todo o teu poder, Deuteronômio, capítulo 6, versículo 5, esse tipo de amor nos abre para Deus, para que Ele possa escrever os seus mandamentos em nosso coração. Versículo 6. Mas, por que isso é tão importante? Porque enquanto os mandamentos de Deus parecerem apenas ordens gravadas numa pedra, nunca seremos capazes de transmiti-los ou de transmitir o nosso amor por Deus. É somente quando Ele escreve suas leis no nosso coração, e eles passam a ter alguma expressão na nossa vida, que somos capazes de intimá-las aos nossos filhos. Versículo 7. Quando o amor a Deus nos torna sensíveis aos seus mandamentos, e eles se tornam uma parte integral da nossa vida, somos capazes de falar sobre eles assentados em nossa casa, e andando pelo caminho, e deitando-nos, e levantando-nos. Deus, que é real para nós, também será real para os nossos filhos e, então, o nosso amor por Ele encontrará guarida no coração dos nossos filhos e filhas. Richards, Lawrence O. Comentário Devocional da Bíblia. Rio de Janeiro: CPAD, dois mil e doze, página 111.'},
+
+{t:'topic',x:'Tópico 2. O Amor Despertado pela Palavra.'},
+{t:'subtopic',x:'1. Avivados pela Palavra no coração.'},
+{t:'body',x:'O coração do crente permanece avivado quando a Palavra de Deus habita nele, Deuteronômio, capítulo 6, versículo 6, pois ela é viva e eficaz. Jeremias, capítulo 23, versículo 29. Mais do que informar, a Escritura transforma o interior e forma o caráter. Segunda Timóteo, capítulo 3, versículos 16 e 17. Quando está no coração, ela produz amor obediente a Deus, João, capítulo 14, versículo 15, e impede uma fé superficial. Mateus, capítulo 13, versículos 20 a 22. Assim, não basta ouvir; é necessário guardar e praticar, Tiago, capítulo 1, versículo 22, bem como permitir que a Palavra mantenha a vida espiritual sempre viva. Salmos, capítulo 119, versículo 11; Colossenses, capítulo 3, versículo 16.'},
+{t:'subtopic',x:'2. Ensinando a Palavra aos filhos.'},
+{t:'body',x:'O ensino da Palavra aos filhos deve ser constante e intencional no lar, Deuteronômio, capítulo 6, versículo 7, e partir de pais que a vivam no coração. Lucas, capítulo 6, versículo 45. Assim, Moisés orienta que esse ensino ocorra em todo o tempo, ao assentar, andar, deitar e levantar, e mostra que não deve ser ocasional, mas contínuo, prático e relacional. Consequentemente, os pais conduzem os filhos a responder com prontidão à vontade de Deus. A fé é transmitida na convivência, forma valores e direciona a vida. Provérbios, capítulo 22, versículo 6; Efésios, capítulo 6, versículo 4; Segunda Timóteo, capítulo 3, versículos 14 e 15; Colossenses, capítulo 3, versículo 17.'},
+{t:'subtopic',x:'3. A importância do ensino no lar.'},
+{t:'body',x:'O lar cristão enfrenta constantes influências contrárias à fé, como ideologias, relativismo e diversos conteúdos sem controle. Por isso, o ensino fiel da Palavra é indispensável, Deuteronômio, capítulo 6, versículo 7, e deve ser aliado à vigilância espiritual, Colossenses, capítulo 2, versículo 8, e à oração contínua. Salmos, capítulo 127, versículos 3 a 5; Efésios, capítulo 6, versículo 4. Por isso, cabe aos pais discipular os filhos com constância, formar-lhes o caráter e lançar sobre eles fundamentos espirituais sólidos. Provérbios, capítulo 22, versículo 6; Segunda Timóteo, capítulo 1, versículo 5. Esse ensino contínuo gera uma cultura de fé e preserva as futuras gerações. Deuteronômio, capítulo 11, versículo 19; Salmos, capítulo 78, versículos 4 a 7. A Palavra, portanto, deve orientar pensamentos e ações. Josué, capítulo 1, versículo 8; Tiago, capítulo 1, versículo 22.'},
+{t:'label',x:'Sinopse 2.'},
+{t:'body',x:'A Palavra no coração fortalece a fé e alcança as gerações.'},
+{t:'aux',label:'Auxílio Devocional. A Totalidade da Devoção.',x:'Deuteronômio, capítulo 6, nos exorta a dedicar o coração, a alma e o poder para amar a Deus. No Antigo Testamento, o coração é o lugar onde estão assentadas a mente e as emoções. A alma é entendida aqui como o ser de alguém. Devemos amar a Deus com todo o nosso ser, sem limitá-lo aos menores compartimentos da nossa vida. Poder sugere a direção voluntária de toda a nossa capacidade em direção ao amor. O uso destas três palavras poderosas em um único versículo deixa bem claro que o relacionamento com Deus exige uma devoção total da pessoa. A implicação destes capítulos é que somente uma pessoa verdadeiramente devotada a Deus irá obedecê-lo. Richards, Lawrence O. Comentário Devocional da Bíblia. Rio de Janeiro: CPAD, dois mil e doze, página 109.'},
+
+{t:'topic',x:'Tópico 3. Como Viver o Amor de Deus na Prática.'},
+{t:'subtopic',x:'1. A palavra amor em Deuteronômio.'},
+{t:'body',x:'Em Deuteronômio, o amor não é um mero sentimento, e sim uma disposição para obedecer e evidenciar sinceridade diante de Deus. Deuteronômio, capítulo 10, versículos 12 e 13; Primeira João, capítulo 5, versículo 3. Ele é relacional, pactual e fundamento da aliança estabelecida por iniciativa divina. Deuteronômio, capítulo 7, versículo 8. O Senhor amou Israel por graça e fidelidade e espera como resposta uma lealdade expressa na obediência. Deuteronômio, capítulo 6, versículo 5; e capítulo 10, versículos 12 a 14. O amor verdadeiro, portanto, revela-se em fidelidade contínua, reverência e compromisso com Deus. Deuteronômio, capítulo 11, versículo 1.'},
+{t:'subtopic',x:'2. A teologia do amor em Deuteronômio.'},
+{t:'body',x:'Ainda no último livro do Pentateuco, o amor ocupa lugar central e frequentemente aparece revelando a sua importância na aliança. O termo hebraico ahev aponta para afeição, compromisso e fidelidade, bem como expressa um amor ativo, voluntário e fundamentado na escolha soberana de Deus. Deuteronômio, capítulo 7, versículo 8. Esse amor é eletivo e pactual, pois o Senhor escolheu Israel, firmou com ele uma aliança e manteve-se fiel apesar da sua infidelidade. Deuteronômio, capítulo 7, versículo 9. Trata-se de um amor duradouro, que se estende por gerações. Esse é o amor que cada israelita era chamado a responder com obediência sincera e dedicação total ao Senhor.'},
+{t:'subtopic',x:'3. Vivendo o amor na prática.'},
+{t:'body',x:'Deuteronômio ensina, por fim, que o amor a Deus é consciente e expressa-se em obediência diária. João, capítulo 14, versículo 15. Nesse sentido, os pais desempenham papel fundamental ao ensinar aos filhos não apenas com palavras, mas também com a própria vida. Deuteronômio, capítulo 6, versículo 7. Ensino e ação sem amor tornam-se formais e não alcançam o coração. Quando falta afeto, forma-se uma fé fria, como a do filho mais velho na parábola do filho pródigo. Lucas, capítulo 15, versículos 11 a 32. O amor, portanto, deve ser vivido no lar, com escuta, cuidado e exemplo, formando, assim, uma espiritualidade verdadeira e relacional.'},
+{t:'label',x:'Sinopse 3.'},
+{t:'body',x:'O amor a Deus revela-se na obediência e na prática diária.'},
+
+{t:'divider',x:'Conclusão'},
+{t:'body',x:'Em Deuteronômio, o grande mandamento não é uma norma fria, mas o fundamento do relacionamento com o Senhor. A obediência revela o amor do crente, que deve ser expresso com todo o ser. Deuteronômio, capítulo 6, versículo 5. Esse amor molda a vida, alcança a família e impacta a sociedade. Em um tempo de corações divididos, Deus continua chamando o seu povo a ouvi-lo, obedecê-lo, amá-lo acima de tudo e viver esse amor de forma prática e constante.'},
+
+{t:'divider',x:'Revisando o Conteúdo'},
+{t:'subtopic',x:'Pergunta 1.'},
+{t:'body',x:'Como Deuteronômio, capítulo 6, apresenta os mandamentos? Deuteronômio, capítulo 6, apresenta os mandamentos como instrumentos divinos para formar um povo santo e exemplar entre as nações. Deuteronômio, capítulo 6, versículos 1 a 3.'},
+{t:'subtopic',x:'Pergunta 2.'},
+{t:'body',x:'Como a resposta de Israel aos mandamentos deveria ser marcada? A resposta de Israel aos mandamentos deveria ser marcada por amor exclusivo a Deus, fundamentado na sua revelação e ação redentora ao libertá-los do Egito.'},
+{t:'subtopic',x:'Pergunta 3.'},
+{t:'body',x:'O que a expressão Ouve, ó Israel introduz e do que se trata? A expressão Ouve, ó Israel introduz um chamado profundo à escuta obediente. Deuteronômio, capítulo 6, versículo 5. Não se trata apenas de ouvir com os ouvidos, mas de acolher a Palavra com atenção, refletir sobre ela e praticá-la.'},
+{t:'subtopic',x:'Pergunta 4.'},
+{t:'body',x:'Como Moisés orienta o ensino de Deuteronômio, capítulo 6, em relação aos filhos? Moisés orienta que esse ensino ocorra em todo o tempo, ao assentar, andar, deitar e levantar, e mostra que não deve ser ocasional, mas contínuo, prático e relacional.'},
+{t:'subtopic',x:'Pergunta 5.'},
+{t:'body',x:'O que acontece quando ensino e ação são praticados sem amor? Ensino e ação sem amor tornam-se formais e não alcançam o coração. Quando falta afeto, forma-se uma fé fria, como a do filho mais velho na parábola do filho pródigo. Lucas, capítulo 15, versículos 11 a 32.'}
+];
+
+const reader=document.getElementById('reader'),segs=[];
+function tok(el,text){let pos=0;for(const p of text.split(/(\s+)/)){if(!p)continue;if(/^\s+$/.test(p)){el.appendChild(document.createTextNode(p))}else{const w=document.createElement('span');w.className='w';w.textContent=p;w.dataset.s=pos;w.dataset.e=pos+p.length;el.appendChild(w)}pos+=p.length}}
+function mk(cls,text){const e=document.createElement('div');e.className='seg '+cls;e.tabIndex=0;tok(e,text);segs.push(e);return e}
+DATA.forEach(i=>{
+ if(i.t==='divider'){const d=document.createElement('div');d.className='div';d.innerHTML='<span></span>';d.firstChild.textContent=i.x;reader.appendChild(d);return}
+ if(i.t==='aux'){const b=document.createElement('div');b.className='aux';b.appendChild(mk('label',i.label));const p=mk('body',i.x);p.style.fontStyle='italic';b.appendChild(p);reader.appendChild(b);return}
+ reader.appendChild(mk(i.t,i.x));
+});
+
+const synth=window.speechSynthesis;let voices=[],cur=0,playing=false,stopped=true;
+const $=id=>document.getElementById(id);
+const play=$('play'),pause=$('pause'),stop=$('stop'),rate=$('rate'),vsel=$('voice'),st=$('status');
+if(!synth){st.textContent='Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';play.disabled=true}
+function loadV(){voices=synth.getVoices();const pt=voices.filter(v=>/pt/i.test(v.lang)),l=pt.length?pt:voices;vsel.innerHTML='';l.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=v.name+(/pt.?br/i.test(v.lang)?' (Brasil)':' ['+v.lang+']');vsel.appendChild(o)});const br=l.find(v=>/pt.?br/i.test(v.lang));if(br)vsel.value=br.name}
+if(synth){loadV();synth.onvoiceschanged=loadV}
+const cv=()=>voices.find(v=>v.name===vsel.value)||voices.find(v=>/pt/i.test(v.lang))||null;
+const clrW=el=>el&&el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken'));
+const clrA=()=>segs.forEach(s=>{s.classList.remove('active');clrW(s)});
+function speak(i){
+ if(i>=segs.length){finish();return}
+ cur=i;const el=segs[i];clrA();el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'center'});
+ const u=new SpeechSynthesisUtterance(el.textContent.trim()),v=cv();
+ if(v)u.voice=v;u.lang=(v&&v.lang)||'pt-BR';u.rate=parseFloat(rate.value);
+ const ws=[...el.querySelectorAll('.w')];
+ u.onboundary=e=>{if(e.charIndex==null)return;clrW(el);let h=null;for(const w of ws){if(e.charIndex>=+w.dataset.s&&e.charIndex<+w.dataset.e){h=w;break}if(e.charIndex<+w.dataset.s){h=w;break}}if(h)h.classList.add('spoken')};
+ u.onend=()=>{clrW(el);if(!stopped)speak(i+1)};
+ u.onerror=()=>{if(!stopped)speak(i+1)};
+ st.textContent='Lendo… trecho '+(i+1)+' de '+segs.length;synth.speak(u);
+}
+function start(i){if(!synth)return;stopped=false;playing=true;synth.cancel();play.disabled=true;pause.disabled=false;stop.disabled=false;pause.textContent='⏸ Pausar';speak(i!=null?i:cur)}
+function finish(){playing=false;stopped=true;clrA();play.disabled=false;pause.disabled=true;stop.disabled=true;st.textContent='Leitura concluída.';cur=0}
+play.onclick=()=>{if(synth.paused&&playing){synth.resume();pause.disabled=false;pause.textContent='⏸ Pausar';return}start(cur)};
+pause.onclick=()=>{if(synth.paused){synth.resume();pause.textContent='⏸ Pausar';st.textContent='Retomando…'}else{synth.pause();pause.textContent='▶ Continuar';st.textContent='Pausado.'}};
+stop.onclick=()=>{stopped=true;playing=false;synth.cancel();finish();st.textContent='Parado.'};
+rate.oninput=()=>{$('rateVal').textContent=parseFloat(rate.value).toFixed(2)+'×'};
+segs.forEach((el,i)=>{const go=()=>start(i);el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+addEventListener('beforeunload',()=>{try{synth.cancel()}catch(e){}});
+</script>
+</body>
+</html>
