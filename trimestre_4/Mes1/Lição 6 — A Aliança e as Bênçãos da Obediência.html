@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lição 6 — A Aliança e as Bênçãos da Obediência</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--soft:#5b5236;--gold:#a87f2e;--deep:#7a5a16;--line:#d8c9a3;--hs:#f6e4ad;--hw:#e2b53d;--hwt:#3a2c05;--aux:#f5ebcd;--hov:#f1e6c5;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a12;--paper:#262216;--ink:#efe6cf;--soft:#b9ae90;--gold:#d2a64a;--deep:#e0bb6a;--line:#4a4128;--hs:#41361a;--hw:#b88a22;--hwt:#fff;--aux:#2d2819;--hov:#332d1b}}
+:root[data-theme="dark"]{--bg:#1d1a12;--paper:#262216;--ink:#efe6cf;--soft:#b9ae90;--gold:#d2a64a;--deep:#e0bb6a;--line:#4a4128;--hs:#41361a;--hw:#b88a22;--hwt:#fff;--aux:#2d2819;--hov:#332d1b}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px 140px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;margin:0 -22px 30px;background:var(--paper);border-bottom:1px solid var(--line)}
+.bi{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.btn{font:15px 'Spectral',serif;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--deep);padding:8px 16px;border-radius:999px}
+.btn:hover{background:var(--gold);color:#fff}.btn.p{background:var(--gold);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--soft)}
+select,input[type=range]{accent-color:var(--gold);font-family:inherit}
+select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px}
+input[type=range]{width:108px}
+.status{margin-left:auto;font-size:12.5px;color:var(--soft);font-style:italic}
+header{text-align:center;padding:34px 0 8px}
+.k{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--deep);font-weight:600}
+.date{font-style:italic;color:var(--soft);font-size:15px;margin-top:6px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(32px,7vw,50px);line-height:1.08;margin:14px 0 6px}
+.rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:0}
+.hint{text-align:center;font-style:italic;color:var(--soft);font-size:14px;margin:6px 0 26px}
+.seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;outline:none}
+.seg:hover{background:var(--hov)}.seg.active{background:var(--hs);box-shadow:inset 3px 0 0 var(--gold)}
+.w{border-radius:4px;padding:0 1px}.w.on{background:var(--hw);color:var(--hwt)}
+.label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.24em;font-size:14px;font-weight:700;color:var(--deep);margin:30px 0 4px}
+.topic{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4.5vw,29px);font-weight:700;margin:38px 0 6px;line-height:1.15}
+.subtopic{font-weight:600;font-size:18px;color:var(--deep);margin:20px 0 2px}
+.versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;font-style:italic;margin:18px 0 8px}
+.body{font-size:18px;margin:11px 0;text-align:justify}
+.verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line)}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--deep);text-align:center;margin:16px auto;max-width:620px}
+.daily{font-size:17px;margin:7px 0}
+.aux{background:var(--aux);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+.aux .label{margin-top:0}.aux .it{font-style:italic}
+.div{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--deep)}
+footer{text-align:center;margin-top:50px;color:var(--soft);font-size:13px;font-style:italic}
+@media(max-width:520px){.status{width:100%;margin-left:0}.body{text-align:left}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bi">
+<button id="play" class="btn p">▶ Ouvir</button>
+<button id="pause" class="btn" disabled>⏸ Pausar</button>
+<button id="stop" class="btn" disabled>⏹ Parar</button>
+<div class="ctl">Velocidade <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95"><span id="rv">0.95×</span></div>
+<div class="ctl">Voz <select id="voice"></select></div>
+<div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+</div></div>
+<div class="wrap">
+<header>
+<div class="k">Lição 6</div>
+<div class="date">8 de Novembro de 2026</div>
+<h1>A Aliança e as Bênçãos da Obediência</h1>
+<hr class="rule">
+<p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+</header>
+<div id="reader"></div>
+<footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+<script>
+const D=[
+['l','Lição 6.'],['h','A Aliança e as Bênçãos da Obediência.'],['b','Oito de novembro de dois mil e vinte e seis.'],
+['l','Texto Áureo.'],
+['q','“Porque povo santo és ao SENHOR, teu Deus; o SENHOR, teu Deus, te escolheu, para que lhe fosses o seu povo próprio, de todos os povos que sobre a terra há.” Deuteronômio, capítulo 7, versículo 6.'],
+['l','Verdade Prática.'],
+['b','A aliança com Deus exige amor exclusivo, obediência fiel e separação do mal, que nos conduzem à plena comunhão com o Senhor.'],
+['l','Leitura Diária.'],
+['d','Segunda. Êxodo, capítulo 19, versículo 5; e Primeira Pedro, capítulo 2, versículo 9. Eleição: um chamado para pertencer a Deus.'],
+['d','Terça. Deuteronômio, capítulo 14, versículo 2; e Primeira Pedro, capítulo 1, versículos 15 e 16. Santidade: a resposta ao chamado divino.'],
+['d','Quarta. Deuteronômio, capítulo 7, versículos 6 a 8; e Primeira João, capítulo 4, versículo 10. Eleição por amor: a base da aliança.'],
+['d','Quinta. Deuteronômio, capítulo 7, versículo 9; e Romanos, capítulo 2, versículo 6. Fidelidade e justiça: o caráter de Deus.'],
+['d','Sexta. Deuteronômio, capítulo 7, versículos 12 e 13; e Mateus, capítulo 6, versículo 33. Obediência: o caminho das bênçãos de Deus.'],
+['d','Sábado. Deuteronômio, capítulo 7, versículos 17 a 19; e Romanos, capítulo 8, versículo 37. Confiança em Deus: vitória sobre os inimigos espirituais.'],
+['l','Leitura Bíblica em Classe.'],
+['h','Deuteronômio, capítulo 7, versículos 6 a 13, e 21 a 23.'],
+['v','Versículo 6. Porque povo santo és ao SENHOR, teu Deus; o SENHOR, teu Deus, te escolheu, para que lhe fosses o seu povo próprio, de todos os povos que sobre a terra há.'],
+['v','Versículo 7. O SENHOR não tomou prazer em vós, nem vos escolheu, porque a vossa multidão era mais do que a de todos os outros povos, pois vós éreis menos em número do que todos os povos,'],
+['v','Versículo 8. mas porque o SENHOR vos amava; e, para guardar o juramento que jurara a vossos pais, o SENHOR vos tirou com mão forte e vos resgatou da casa da servidão, da mão de Faraó, rei do Egito.'],
+['v','Versículo 9. Saberás, pois, que o SENHOR, teu Deus, é Deus, o Deus fiel, que guarda o concerto e a misericórdia até mil gerações aos que o amam e guardam os seus mandamentos;'],
+['v','Versículo 10. e dá o pago em sua face a qualquer dos que o aborrecem, fazendo-o perecer; não será remisso para quem o aborrece; em sua face lho pagará.'],
+['v','Versículo 11. Guarda, pois, os mandamentos, e os estatutos, e os juízos que hoje te mando fazer.'],
+['v','Versículo 12. Será, pois, que, se, ouvindo estes juízos, os guardardes e fizerdes, o SENHOR, teu Deus, te guardará o concerto e a beneficência que jurou a teus pais;'],
+['v','Versículo 13. e amar-te-á, e abençoar-te-á, e te fará multiplicar, e abençoará o fruto do teu ventre, e o fruto da tua terra, e o teu cereal, e o teu mosto, e o teu azeite, e a criação das tuas vacas, e o rebanho do teu gado miúdo, na terra que jurou a teus pais dar-te.'],
+['v','Versículo 21. Não te espantes diante deles, porque o SENHOR, teu Deus, está no meio de ti, Deus grande e terrível.'],
+['v','Versículo 22. E o SENHOR, teu Deus, lançará fora estas nações, pouco a pouco, de diante de ti; não poderás destruí-las todas de pronto, para que as feras do campo se não multipliquem contra ti.'],
+['v','Versículo 23. E o SENHOR tas dará diante de ti e as fará pasmar com grande pasmo, até que sejam destruídas.'],
+['b','Hinos sugeridos: cinquenta, cento e setenta e seis, e trezentos e oitenta e seis, da Harpa Cristã.'],
+['x','Plano de Aula'],
+['s','1. Introdução.'],
+['b','Deuteronômio enfatiza que a aliança com Deus não consiste apenas em privilégios, mas também em responsabilidades. Israel foi escolhido por amor e chamado para viver em santidade, fidelidade e obediência ao Senhor. Nesse contexto, Moisés alerta contra a idolatria e reafirma que as bênçãos da aliança estão associadas a uma vida de compromisso com Deus. A lição é um desafio para cultivarmos uma fé marcada pela consagração e pela fidelidade ao Senhor.'],
+['s','2. Apresentação da Lição.'],
+['b','A. Objetivos da Lição. Primeiro, evidenciar a relação entre eleição, santidade e propósito na aliança divina. Segundo, demonstrar como o amor, a fidelidade e a obediência sustentam a aliança. Terceiro, orientar os alunos quanto à importância da santidade e da separação do mal.'],
+['b','B. Motivação. A aliança com Deus envolve amor, fidelidade e obediência. Por isso, podemos refletir sobre como a santidade e a confiança no Senhor continuam essenciais para a vida cristã. Mostre para a classe que as bênçãos divinas não são fruto do acaso, mas resultado de uma caminhada comprometida com Deus e a sua Palavra.'],
+['b','C. Sugestão de Método. Para reforçar o terceiro tópico, sugerimos que distribua pequenos cartões e peça que cada aluno escreva, de forma anônima, uma situação, hábito ou influência que pode enfraquecer sua comunhão com Deus. Em seguida, recolha os cartões e leia alguns exemplos sem identificar os autores. Promova uma reflexão sobre como a obediência e a santidade ajudam o cristão a vencer essas influências. Conclua convidando a classe a assumir um compromisso pessoal de vigilância e consagração durante a semana, aplicando o ensino da lição à vida diária.'],
+['s','3. Conclusão da Lição.'],
+['b','Aplicação. Aprendemos que Deus escolheu o seu povo por amor, chamou-o à santidade e convocou-o a viver em fidelidade à aliança. Israel deveria rejeitar tudo o que ameaçasse a sua comunhão com o Senhor e confiar plenamente nas suas promessas. Da mesma forma, somos chamados a examinar nossa vida, abandonar práticas incompatíveis com a fé e cultivar uma obediência sincera. A verdadeira bênção está em permanecer fiel ao Senhor todos os dias.'],
+['s','4. Subsídio ao Professor.'],
+['b','A. Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e nove, você encontrará um subsídio especial para esta lição.'],
+['b','B. Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto O Papel de Israel, localizado depois do primeiro tópico, auxilia na compreensão da vocação de Israel como povo escolhido para testemunhar às nações. Segundo, os textos O Concerto e a Misericórdia, aos que o Amam, e Abominação em Tua Casa, localizados ao fim do segundo tópico, contribuem para o aprofundamento da relação entre o amor de Deus, a fidelidade à aliança e a santidade exigida do seu povo.'],
+['x','Comentário'],
+['l','Introdução.'],
+['b','Quem entra em aliança com Deus deve viver em plena fidelidade com Ele. No segundo discurso de Moisés, Deuteronômio, capítulos 5 a 26, o legislador adverte o povo quanto ao perigo de negligenciar os mandamentos e cair na idolatria. Pelo pacto com o Senhor, Israel deveria viver em santidade, que é a condição para desfrutar das suas bênçãos. A aliança não era unilateral no tocante às bênçãos, mas baseada em obediência, separação, fidelidade, exclusividade e devoção somente ao Senhor.'],
+['l','Palavra-chave.'],['b','Consagração.'],
+['t','Tópico 1. Eleição e Santidade: Dois Aspectos da Aliança.'],
+['s','1. Eleição, santidade e propósito na Aliança Divina.'],
+['b','A natureza da aliança divina com Israel fundamentava-se na eleição e na santidade, de modo que cada israelita compreendia o seu chamado à separação das nações pecaminosas. Deuteronômio, capítulo 7, versículos 6 a 8. Cada um era propriedade exclusiva do Senhor: “sereis a minha propriedade peculiar dentre todos os povos”. Êxodo, capítulo 19, versículo 5. Confira também Deuteronômio, capítulo 14, versículo 2; Deuteronômio, capítulo 26, versículo 19; e Primeira Pedro, capítulo 2, versículo 9. Tal eleição não se refere à salvação individual, isto é, à soteriologia, mas a um chamado coletivo e funcional: preservar a revelação, ser luz às nações, Isaías, capítulo 49, versículo 6, e preparar o caminho do Messias. Gênesis, capítulo 12, versículo 3; e Gálatas, capítulo 3, versículo 16. Ela não garantia salvação, como mostra Hebreus, capítulo 3, versículos 7 a 19. Há, portanto, distinção entre Israel nacional e espiritual. Romanos, capítulo 8, versículo 9; e Romanos, capítulo 9, versículo 6. A Igreja, chamada por Cristo, deve viver em santidade. Primeira Coríntios, capítulo 6, versículos 19 e 20; e Primeira Pedro, capítulo 1, versículos 15 e 16.'],
+['s','2. A separação como exigência da Lei de Deus.'],
+['b','Escolhido como nação santa e testemunho vivo, Malaquias, capítulo 3, versículo 18, Israel deveria viver de modo distinto das nações ímpias. Deuteronômio, capítulo 7, versículo 6. As suas vitórias e a posse da Terra Prometida provinham do Senhor. Entre os povos cananeus, estavam heteus, jebuseus, girgaseus, heveus, Josué, capítulo 11, versículo 3; e Juízes, capítulo 3, versículo 3; gibeonitas, Josué, capítulo 9, versículos 3 a 15; amorreus, cananeus e ferezeus, ligados à linhagem de Canaã. Gênesis, capítulo 10, versículos 15 a 18. Sob o juízo divino, Israel não deveria ter aliança com eles, a fim de preservar a santidade do povo de Deus. Casamentos mistos eram proibidos e toda forma de idolatria deveria ser removida. Números, capítulo 25, versículos 1 a 9. Tal ordem tinha fundamento espiritual e moral para todo o povo peregrino.'],
+['s','3. O princípio permanente dos juízos em Deuteronômio.'],
+['b','A ordem divina para destruir tais povos deve ser compreendida à luz da revelação progressiva: dirigida a Israel, nação vocacionada a preservar a revelação e preparar a vinda do Messias. Romanos, capítulo 9, versículos 4 e 5. Tratava-se de povos marcados por pecados graves. Levítico, capítulo 18, versículos 21 a 25; e Deuteronômio, capítulo 18, versículos 9 a 12. Hoje, em Cristo, Hebreus, capítulo 1, versículos 2 e 3, não se aplica tal juízo às nações, pois o combate é espiritual. Efésios, capítulo 6, versículos 10 a 12; e Segunda Coríntios, capítulo 10, versículo 4. Permanece, porém, o princípio: Deus julga o pecado. Romanos, capítulo 1, versículos 18 a 22. Cabe à Igreja proclamar o Evangelho, Romanos, capítulo 1, versículos 16 e 17, que transforma vidas, como em Corinto, Primeira Coríntios, capítulo 6, versículos 9 a 11, e em Nínive. Mateus, capítulo 12, versículo 41.'],
+['l','Sinopse 1.'],['b','Israel foi eleito por Deus para viver em santidade e cumprir o seu propósito no mundo.'],
+['a','Auxílio Bibliológico. O Papel de Israel.','“Uma importante razão que Israel tinha para permanecer fiel à Lei de Deus era a possibilidade de atrair outras nações para o Senhor, demonstrando a sabedoria e os benefícios de seguir os seus caminhos. Deuteronômio, capítulo 4, versículos 5 a 8. Como cristãos, devemos viver em obediência, pois a bênção acompanha a fidelidade, enquanto a desobediência traz consequências. Assim como Israel, os crentes do Novo Testamento são a geração eleita, o sacerdócio real, a nação santa e o povo adquirido por Deus. Por isso, foram chamados para proclamar as virtudes, os louvores e a soberania daquele que os chamou das trevas para a sua maravilhosa luz. Primeira Pedro, capítulo 2, versículo 9; Apocalipse, capítulo 1, versículo 6; e Apocalipse, capítulo 5, versículo 10.” Bíblia de Estudo Pentecostal, Edição Global. Primeira edição. Rio de Janeiro: CPAD, dois mil e vinte e dois, página 307.'],
+['t','Tópico 2. A Eleição de Israel: Amor, Aliança e Obediência.'],
+['s','1. O chamado à santidade do povo de Deus.'],
+['b','O próprio Deus declara Israel como povo santo, separado e consagrado, pois lhe pertencia como propriedade exclusiva. Essa verdade também se aplica à Igreja redimida, Tito, capítulo 2, versículo 14, sendo “povo próprio”, isto é, tesouro pessoal. A eleição de Israel não se baseou em méritos humanos, mas no amor soberano do Senhor, Deuteronômio, capítulo 10, versículo 22; Romanos, capítulo 5, versículos 6 a 8; e Primeira João, capítulo 4, versículo 10, em fidelidade à aliança. Desde Abraão até o êxodo, percebemos a ausência de mérito humano, pois tudo procede da graça divina. Do mesmo modo, a salvação em Cristo ocorre pela graça. João, capítulo 3, versículo 16; e Efésios, capítulo 2, versículos 8 e 9. Diante desse amor, devemos responder com temor, gratidão e obediência.'],
+['s','2. O Deus fiel e justo: base da aliança.'],
+['b','Cada israelita deveria reconhecer a fidelidade e o amor de Deus, evidenciados na escolha e na libertação do Egito. Assim, cada um compreendia que servia a um Deus fiel, que cumpre as suas promessas, honra a sua aliança e requer obediência. Destacam-se dois atributos: fidelidade, em hebraico neemã, que expressa constância, e misericórdia, em hebraico chésed, que revela o seu amor leal. Ele usa de misericórdia até mil gerações, demonstra graça, mas retribui com justiça. Romanos, capítulo 2, versículo 6. Isso comprova que o seu juízo é reto e imparcial. Como cristãos, devemos viver em obediência, pois a bênção acompanha a fidelidade, enquanto a desobediência traz consequências. Gálatas, capítulo 6, versículos 7 e 8.'],
+['s','3. Obediência e confiança: o caminho da prosperidade em Deus.'],
+['b','Aos que viviam em obediência e fidelidade, conforme os mandamentos divinos, o Senhor prometia bênçãos abundantes, e isso envolvia tanto a prosperidade espiritual quanto o cuidado material. Deuteronômio, capítulo 7, versículos 12 e 13; e Êxodo, capítulo 15, versículo 26. Essa realidade incluía saúde, fecundidade e provisão. Além disso, Israel deveria confiar no poder de Deus, que já se manifestara na libertação do Egito, para vencer as nações da Terra Prometida. Deuteronômio, capítulo 7, versículos 17 a 19. A memória dos feitos divinos fortalecia a fé para avançar sem temor. Do mesmo modo, a Igreja é chamada a viver em obediência e dependência de Deus, a vencer o mundo e a permanecer fiel ao Senhor. Mateus, capítulo 6, versículo 33; Efésios, capítulo 6, versículos 12 e 13; e Romanos, capítulo 8, versículo 37.'],
+['l','Sinopse 2.'],['b','O amor e a fidelidade de Deus requerem obediência e confiança do seu povo.'],
+['a','Auxílio Bibliológico. O Concerto e a Misericórdia, aos que o Amam.','“A escolha que Deus fez de Israel foi motivada pelo seu amor por eles. Deuteronômio, capítulo 7, versículos 7 e 8. Além disso, Deus prometeu guardar fielmente o seu concerto e mostrar misericórdia às gerações dos que o amam e guardam os seus mandamentos. Confira Deuteronômio, capítulo 6, versículos 4 a 9. Não apenas o amor de Deus dependia dessa resposta de amor e obediência, mas também a prosperidade do povo, versículos 13 e 14, a sua boa saúde, versículo 15, e o sucesso militar, versículo 16.” A resposta e a obediência do povo deveriam ser apresentadas de maneira concreta como, por exemplo: Abominação em Tua Casa. “A abominação se refere à prata e ao ouro dos ídolos cananeus, versículo 25; qualquer coisa ligada à idolatria tinha de ser destruída. Esta admoestação para que os israelitas removessem tudo o que fosse detestável de suas casas se aplica ainda hoje. Qualquer coisa que promova o pecado e a imoralidade e seja contrária à santa natureza de Deus não deve entrar em nossa casa. Confira Ezequiel, capítulo 5, versículos 7 e 9. Portanto, os crentes devem ser extremamente cuidadosos em não permitir que a influência de modos de vida imorais penetre em seu lar por meio de pessoas ou algum tipo de entretenimento. Confira Deuteronômio, capítulo 12, versículos 29 a 31; Deuteronômio, capítulo 18, versículos 12 e 13; e Provérbios, capítulo 6, versículos 15 a 19.” Bíblia de Estudo Pentecostal, Edição Global. Primeira edição. Rio de Janeiro: CPAD, dois mil e vinte e dois, páginas 316 e 317.'],
+['t','Tópico 3. Santidade e Separação: Vivendo em Obediência.'],
+['s','1. Fortalecendo a confiança pela obediência.'],
+['b','A geração anterior não entrou na Terra Prometida por conta da incredulidade e da desobediência. A nova geração, porém, deveria agir diferentemente: crer e obedecer ao Senhor. Deuteronômio, capítulo 7, versículos 18 a 21. O próprio Deus lutaria pelo seu povo, como indica o envio de vespões contra os inimigos. Deuteronômio, capítulo 7, versículo 20. A lembrança de Cades-Barneia não deveria gerar medo, e sim advertência. Agora, confiando no poder divino, Israel poderia vencer. Assim, a fé fortalecida pela obediência restauraria a confiança e produziria vitória.'],
+['s','2. Sem acordo com o mal.'],
+['b','A vitória sobre as nações era certa, mas Israel não poderia fazer alianças com elas, pois eram abomináveis diante de Deus. Deuteronômio, capítulo 7, versículos 16 e 24 a 26. Era necessário destruir os seus ídolos e rejeitar qualquer sedução material. Paulo adverte quanto à bondade e à severidade de Deus. Romanos, capítulo 11, versículo 22. Hoje, muitos são atraídos por valores mundanos, o que compromete a santidade. É preciso, portanto, vigilância constante e rejeição a toda forma de idolatria. Colossenses, capítulo 3, versículo 5; e Primeira João, capítulo 5, versículo 21.'],
+['s','3. Separação total para uma vida santa.'],
+['b','Qualquer aliança com aquelas nações levaria Israel à ruína espiritual. O Senhor ordenou a eliminação do mal para preservar a santidade do povo. Deuteronômio, capítulo 7, versículos 25 e 26. A negligência abriria espaço para a idolatria e a corrupção, afetando até mesmo os lares. Do mesmo modo, o cristão deve viver em vigilância e evitar a contaminação com o mundo. Romanos, capítulo 12, versículo 2; e Segunda Coríntios, capítulo 6, versículos 14 a 17. Quem foi chamado à santidade deve, portanto, separar-se do pecado e viver consagrado a Deus. Segunda Timóteo, capítulo 2, versículo 21; e Hebreus, capítulo 12, versículo 14.'],
+['l','Sinopse 3.'],['b','A santidade exige rejeitar o mal, confiar em Deus e viver em obediência.'],
+['x','Conclusão'],
+['b','Como povo eleito, Israel foi chamado a viver em santidade e obediência, separando-se de tudo o que pudesse comprometer a aliança com Deus. Moisés ensinou que o desfrutar das bênçãos espirituais e materiais estava condicionado à fidelidade e à obediência. Assim, a aliança divina envolvia promessas, mas também exigia compromisso; sem isso, as consequências seriam inevitáveis. Do mesmo modo, a Igreja é chamada a viver em santidade, rejeitar os ídolos contemporâneos e permanecer em consagração ao Senhor.'],
+['x','Revisando o Conteúdo'],
+['s','Pergunta 1.'],['b','Como se fundamentava a natureza da aliança divina com Israel? A natureza da aliança divina com Israel fundamentava-se na eleição e na santidade.'],
+['s','Pergunta 2.'],['b','De acordo com a identidade de uma nação santa, como Israel deveria viver? Escolhido como nação santa e testemunho vivo, Malaquias, capítulo 3, versículo 18, Israel deveria viver de modo distinto das nações ímpias. Deuteronômio, capítulo 7, versículo 6.'],
+['s','Pergunta 3.'],['b','De acordo com a lição, como Deus declara Israel? O próprio Deus declara Israel como povo santo, separado e consagrado, pois lhe pertencia como propriedade exclusiva.'],
+['s','Pergunta 4.'],['b','Como a nova geração deveria agir? A nova geração deveria crer e obedecer ao Senhor. Deuteronômio, capítulo 7, versículos 18 a 21.'],
+['s','Pergunta 5.'],['b','Como o cristão deve viver? Do mesmo modo, o cristão deve viver em vigilância e evitar contaminação com o mundo. Romanos, capítulo 12, versículo 2; e Segunda Coríntios, capítulo 6, versículos 14 a 17.']
+];
+const R=document.getElementById('reader'),S=[],C={l:'label',t:'topic',s:'subtopic',h:'versehead',v:'verse',d:'daily',b:'body',q:'quote'};
+function tok(el,t){let p=0;t.split(/(\s+)/).forEach(s=>{if(!s)return;if(/^\s+$/.test(s))el.appendChild(document.createTextNode(s));else{const w=document.createElement('span');w.className='w';w.textContent=s;w.dataset.s=p;w.dataset.e=p+s.length;el.appendChild(w)}p+=s.length})}
+function seg(cls,t){const e=document.createElement('div');e.className='seg '+cls;e.tabIndex=0;tok(e,t);S.push(e);return e}
+D.forEach(i=>{
+if(i[0]=='x'){const d=document.createElement('div');d.className='div';const s=document.createElement('span');s.textContent=i[1];d.appendChild(s);R.appendChild(d);return}
+if(i[0]=='a'){const b=document.createElement('div');b.className='aux';b.appendChild(seg('label',i[1]));b.appendChild(seg('it',i[2]));R.appendChild(b);return}
+R.appendChild(seg(C[i[0]],i[1]))});
+const Y=window.speechSynthesis,$=id=>document.getElementById(id);
+let V=[],cur=0,playing=false,stopped=true;
+if(!Y){$('status').textContent='Seu navegador não suporta leitura em voz alta.';$('play').disabled=true}
+function lv(){V=Y.getVoices();const pt=V.filter(v=>/pt/i.test(v.lang)),L=pt.length?pt:V,s=$('voice');s.innerHTML='';L.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=v.name+(/pt.?br/i.test(v.lang)?' (Brasil)':' ['+v.lang+']');s.appendChild(o)});const b=L.find(v=>/pt.?br/i.test(v.lang));if(b)s.value=b.name}
+if(Y){lv();Y.onvoiceschanged=lv}
+const cw=e=>e&&e.querySelectorAll('.w.on').forEach(w=>w.classList.remove('on'));
+const ca=()=>S.forEach(s=>{s.classList.remove('active');cw(s)});
+function say(i){
+if(i>=S.length){fin();return}
+cur=i;const el=S[i];ca();el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'center'});
+const u=new SpeechSynthesisUtterance(el.textContent.trim()),v=V.find(x=>x.name===$('voice').value)||V.find(x=>/pt/i.test(x.lang));
+if(v)u.voice=v;u.lang=(v&&v.lang)||'pt-BR';u.rate=parseFloat($('rate').value);
+const ws=[...el.querySelectorAll('.w')];
+u.onboundary=e=>{if(e.charIndex==null)return;cw(el);const h=ws.find(w=>e.charIndex<+w.dataset.e);if(h)h.classList.add('on')};
+u.onend=()=>{cw(el);if(!stopped)say(i+1)};u.onerror=()=>{if(!stopped)say(i+1)};
+$('status').textContent='Lendo… trecho '+(i+1)+' de '+S.length;Y.speak(u)}
+function start(i){stopped=false;playing=true;Y.cancel();$('play').disabled=true;$('pause').disabled=false;$('stop').disabled=false;$('pause').textContent='⏸ Pausar';say(i)}
+function fin(){playing=false;stopped=true;ca();$('play').disabled=false;$('pause').disabled=true;$('stop').disabled=true;$('status').textContent='Leitura concluída.';cur=0}
+$('play').onclick=()=>start(cur);
+$('pause').onclick=()=>{if(Y.paused){Y.resume();$('pause').textContent='⏸ Pausar';$('status').textContent='Retomando…'}else{Y.pause();$('pause').textContent='▶ Continuar';$('status').textContent='Pausado.'}};
+$('stop').onclick=()=>{stopped=true;Y.cancel();fin();$('status').textContent='Parado.'};
+$('rate').oninput=()=>{$('rv').textContent=parseFloat($('rate').value).toFixed(2)+'×'};
+S.forEach((el,i)=>{el.onclick=()=>start(i);el.onkeydown=e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();start(i)}}});
+addEventListener('beforeunload',()=>{try{Y.cancel()}catch(e){}});
+</script>
+</body>
+</html>
