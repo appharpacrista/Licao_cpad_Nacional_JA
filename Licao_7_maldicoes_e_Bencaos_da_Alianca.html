@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lição 7 — Maldições e Bênçãos da Aliança</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--soft:#5b5236;--gold:#a87f2e;--deep:#7a5a16;--line:#d8c9a3;--hseg:#f6e4ad;--hword:#e2b53d;--hwt:#3a2c05;--aux:#f5ebcd;--hov:#f1e6c5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1a10;--paper:#2a2416;--ink:#f1e8d0;--soft:#bfb28a;--gold:#d4a843;--deep:#e3bf6a;--line:#4a3f26;--hseg:#4a3d17;--hword:#c9962a;--hwt:#fff;--aux:#2f2818;--hov:#392f1a;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px 120px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;margin:0 -22px 24px;background:var(--paper);border-bottom:1px solid var(--line)}
+.bi{max-width:780px;margin:0 auto;padding:10px 22px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.btn{font:inherit;font-size:15px;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--deep);padding:7px 15px;border-radius:999px}
+.btn:hover{background:var(--gold);color:#fff}.btn.p{background:var(--gold);color:#fff}.btn:disabled{opacity:.4;cursor:default}
+.ctl{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--soft)}
+select,input{accent-color:var(--gold)}select{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px;max-width:150px}input[type=range]{width:100px}
+.status{width:100%;font-size:12.5px;color:var(--soft);font-style:italic}
+.head{text-align:center;padding:26px 0 6px}
+.kick{font-family:'Cormorant Garamond',serif;letter-spacing:.4em;text-transform:uppercase;color:var(--deep);font-weight:600}
+.date{font-style:italic;color:var(--soft)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);line-height:1.05;margin:12px 0}
+.hint{font-style:italic;color:var(--soft);font-size:14px}
+.seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px}
+.seg:hover{background:var(--hov)}.seg.active{background:var(--hseg);box-shadow:inset 3px 0 0 var(--gold)}
+.w{border-radius:4px;padding:0 1px}.w.on{background:var(--hword);color:var(--hwt)}
+.label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.24em;font-size:14px;font-weight:700;color:var(--deep);margin-top:26px}
+.topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;margin-top:36px;line-height:1.15}
+.sub{font-weight:600;font-size:18px;color:var(--deep);margin-top:18px}
+.vh{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;font-style:italic;margin-top:16px}
+.body{font-size:18px;margin:10px 0;text-align:justify}
+.verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line)}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--deep);text-align:center;margin:14px auto;max-width:620px}
+.daily{font-size:17px;margin:6px 0}
+.aux{background:var(--aux);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0}
+.aux .label{margin-top:0}.aux .seg.t{font-style:italic}
+.div{display:flex;align-items:center;gap:14px;margin:40px 0 8px}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--deep)}
+footer{text-align:center;margin-top:44px;color:var(--soft);font-size:13px;font-style:italic}
+@media(max-width:520px){.body{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar"><div class="bi">
+<button id="play" class="btn p">▶ Ouvir</button>
+<button id="pause" class="btn" disabled>⏸ Pausar</button>
+<button id="stop" class="btn" disabled>⏹ Parar</button>
+<button id="copy" class="btn">📋 Copiar texto</button>
+<div class="ctl">Velocidade <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95"><span id="rv">0.95×</span></div>
+<div class="ctl">Voz <select id="voice"></select></div>
+<div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+</div></div>
+<header class="head">
+<div class="kick">Lição 7</div>
+<div class="date">15 de Novembro de 2026</div>
+<h1>Maldições e Bênçãos da Aliança</h1>
+<p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+</header>
+<div id="reader"></div>
+<footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+<script>
+const BK={Dt:'Deuteronômio',Rm:'Romanos','1Sm':'Primeiro Samuel',Gl:'Gálatas',Is:'Isaías',Hb:'Hebreus',Jr:'Jeremias',Sl:'Salmos',Jo:'João',Ef:'Efésios',Mt:'Mateus','2Co':'Segundo Coríntios',Fp:'Filipenses','1Pe':'Primeira Pedro',Êx:'Êxodo',Lv:'Levítico',Ml:'Malaquias',Mc:'Marcos',Lc:'Lucas',At:'Atos',Ap:'Apocalipse'};
+function ref(s){return s.replace(/\{\{(\S+) (\d+)(?:\.([\d,\-]+))?\}\}/g,(m,b,c,v)=>{
+ let r=BK[b]+', capítulo '+c;if(!v)return r;
+ const p=v.split(',').map(x=>x.replace('-',' a '));
+ const pl=p.length>1||v.includes('-');
+ const j=p.length>1?p.slice(0,-1).join(', ')+' e '+p[p.length-1]:p[0];
+ return r+', versículo'+(pl?'s ':' ')+j;});}
+const DATA=[
+{t:'label',x:'Lição 7.'},
+{t:'vh',x:'Maldições e Bênçãos da Aliança.'},
+{t:'body',x:'Quinze de novembro de dois mil e vinte e seis.'},
+{t:'label',x:'Texto Áureo.'},
+{t:'quote',x:'“E será que, se ouvires a voz do Senhor, teu Deus, tendo cuidado de guardar todos os seus mandamentos que eu te ordeno hoje, o Senhor, teu Deus, te exaltará sobre todas as nações da terra.” {{Dt 28.1}}.'},
+{t:'label',x:'Verdade Prática.'},
+{t:'body',x:'A obediência à voz de Deus revela amor e fé, conduz às bênçãos da aliança em Cristo e preserva nossa comunhão com Ele.'},
+{t:'label',x:'Leitura Diária.'},
+{t:'daily',x:'Segunda. {{Dt 28.1}}; {{Rm 10.17}}. Obediência: ouvir a Deus com o coração.'},
+{t:'daily',x:'Terça. {{Dt 6.4}}; {{Rm 6.16,17}}. Ouvir e obedecer: a resposta de fé à Palavra.'},
+{t:'daily',x:'Quarta. {{Dt 28.1}}; {{1Sm 15.22}}. Obediência: condição para desfrutar das promessas.'},
+{t:'daily',x:'Quinta. {{Dt 28.15}}; {{Gl 6.7,8}}. Desobediência: consequências da rejeição a Deus.'},
+{t:'daily',x:'Sexta. {{Dt 28.16,17}}; {{Is 59.2}}. O pecado rompe a comunhão com Deus.'},
+{t:'daily',x:'Sábado. {{Dt 11.26}}; {{Hb 10.26,27}}. Escolha e responsabilidade diante da graça divina.'},
+{t:'label',x:'Leitura Bíblica em Classe.'},
+{t:'vh',x:'Deuteronômio, capítulo 28, versículos 1 a 6, e 15 a 19.'},
+{t:'verse',x:'Versículo 1. E será que, se ouvires a voz do Senhor, teu Deus, tendo cuidado de guardar todos os seus mandamentos que eu te ordeno hoje, o Senhor, teu Deus, te exaltará sobre todas as nações da terra.'},
+{t:'verse',x:'Versículo 2. E todas estas bênçãos virão sobre ti e te alcançarão, quando ouvires a voz do Senhor, teu Deus.'},
+{t:'verse',x:'Versículo 3. Bendito serás tu na cidade e bendito serás no campo.'},
+{t:'verse',x:'Versículo 4. Bendito o fruto do teu ventre, e o fruto da tua terra, e o fruto dos teus animais, e a criação das tuas vacas, e os rebanhos das tuas ovelhas.'},
+{t:'verse',x:'Versículo 5. Bendito o teu cesto e a tua amassadeira.'},
+{t:'verse',x:'Versículo 6. Bendito serás ao entrares e bendito serás ao saíres.'},
+{t:'verse',x:'Versículo 15. Será, porém, que, se não deres ouvidos à voz do Senhor, teu Deus, para não cuidares em fazer todos os seus mandamentos e os seus estatutos, que hoje te ordeno, então, sobre ti virão todas estas maldições e te alcançarão.'},
+{t:'verse',x:'Versículo 16. Maldito serás tu na cidade e maldito serás no campo.'},
+{t:'verse',x:'Versículo 17. Maldito o teu cesto e a tua amassadeira.'},
+{t:'verse',x:'Versículo 18. Maldito o fruto do teu ventre, e o fruto da tua terra, e a criação das tuas vacas, e os rebanhos das tuas ovelhas.'},
+{t:'verse',x:'Versículo 19. Maldito serás ao entrares e maldito serás ao saíres.'},
+{t:'body',x:'Hinos sugeridos: cento e vinte e seis, cento e setenta e cinco, e duzentos e cinquenta e oito, da Harpa Cristã.'},
+
+{t:'div',x:'Plano de Aula'},
+{t:'sub',x:'1. Introdução.'},
+{t:'body',x:'Em Deuteronômio, capítulo 28, Moisés apresenta diante de Israel duas realidades inseparáveis da aliança: as bênçãos decorrentes da obediência e as consequências da desobediência. O texto revela que Deus é fiel, justo e coerente com a sua Palavra, chamando o seu povo à responsabilidade espiritual. Nesta lição, veremos que a verdadeira obediência nasce da fé e do amor a Deus, produz comunhão com o Senhor e encontra o seu pleno significado na Nova Aliança estabelecida em Cristo.'},
+{t:'sub',x:'2. Apresentação da Lição.'},
+{t:'body',x:'Objetivos da Lição. Primeiro, esclarecer a relação entre obediência e bênçãos na aliança divina. Segundo, expor as consequências espirituais e práticas da desobediência a Deus. Terceiro, ressaltar as bênçãos e responsabilidades da Nova Aliança em Cristo.'},
+{t:'body',x:'Motivação. Nossas escolhas espirituais produzem consequências reais. Esta lição ensina-nos sobre a importância de ouvirmos a voz de Deus e permanecermos fiéis à sua Palavra. Por isso, devemos apresentar a obediência não como um peso, mas como uma expressão de amor e fé que fortalece a comunhão com o Senhor e conduz a uma vida espiritualmente abençoada.'},
+{t:'body',x:'Sugestão de Método. Para aprofundar a conclusão do primeiro tópico, O equívoco da teologia da prosperidade, escreva no quadro duas afirmações: “Deus me abençoa porque sou fiel” e “Se sou fiel, nunca enfrentarei sofrimento”. Peça que a classe identifique qual delas está de acordo com as Escrituras. Em seguida, apresente exemplos bíblicos de servos fiéis que enfrentaram dificuldades, como Jó, Paulo e os primeiros cristãos. Mostre que a verdadeira prosperidade não consiste na ausência de problemas ou na presença de riqueza material, mas em viver em comunhão com Deus e desfrutar das suas bênçãos espirituais e da esperança eterna em Cristo.'},
+{t:'sub',x:'3. Conclusão da Lição.'},
+{t:'body',x:'Aplicação. Deus chama o seu povo a responder à sua graça com fé e obediência. As bênçãos da aliança revelam o cuidado divino, enquanto a desobediência traz consequências que afetam a comunhão com o Senhor. Na Nova Aliança, somos convidados a viver em fidelidade a Cristo. Desafie os alunos a examinarem suas escolhas diárias e a cultivarem uma vida de obediência sincera à Palavra de Deus.'},
+{t:'sub',x:'4. Subsídio ao Professor.'},
+{t:'body',x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página trinta e nove, você encontrará um subsídio especial para esta lição.'},
+{t:'body',x:'Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Se Obedeceres Plenamente, localizado após o primeiro tópico, auxilia na reflexão sobre as bênçãos decorrentes da obediência e da fidelidade à Aliança. Segundo, o texto O que Realmente Aconteceu?, localizado ao fim do segundo tópico, contribui para a compreensão das consequências da desobediência e do cumprimento das advertências divinas ao longo da história de Israel.'},
+
+{t:'div',x:'Comentário'},
+{t:'label',x:'Introdução.'},
+{t:'body',x:'Iniciaremos nesta lição o estudo do terceiro grande discurso de Moisés e veremos que a aliança firmada por Deus com Israel em Horebe e reafirmada em Moabe envolve promessas condicionais. {{Dt 29.1}}. A obediência conduz às bênçãos, enquanto a desobediência traria maldições. {{Dt 28}}. Tal princípio revela o caráter justo e fiel de Deus, que requer responsabilidade do seu povo.'},
+{t:'label',x:'Palavra-chave.'},
+{t:'body',x:'Responsabilidade.'},
+
+{t:'topic',x:'Tópico 1. As Bênçãos da Obediência na Aliança.'},
+{t:'sub',x:'1. A natureza bíblica da obediência.'},
+{t:'body',x:'Do hebraico shamá, obedecer expressa a união entre ouvir e acatar, sendo resposta de fé à Palavra. {{Dt 28.1}}. Não se trata de mera audição, mas um ouvir do coração. {{Dt 6.4}}. Isso implica prontidão, reverência e submissão como expressão da aliança. {{Dt 11.13-14}}; {{Dt 30.20}}. No grego, hipakoúo indica submissão após ouvir. {{Rm 1.5}}; {{Hb 5.9}}. Assim, o conceito bíblico de ouvir vai além da simples audição, pois envolve acolher a Palavra de Deus e responder-lhe com obediência. {{Jr 42.6}}; {{Rm 6.16,17}}.'},
+{t:'sub',x:'2. A condição para desfrutar das promessas divinas.'},
+{t:'body',x:'O texto é claro: “Se ouvires a voz do Senhor, teu Deus”. {{Dt 28.1}}. A conjunção hebraica im estabelece condição: as bênçãos dependem da obediência e são manifestas quando ouvimos e guardamos a Palavra. {{Sl 1.1-3}}; {{Sl 19.7-11}}; {{Sl 119.1-2}}; {{Sl 119.33-35}}. Essas bênçãos não procedem de ritos ou práticas humanas, mas da submissão ao Senhor. {{1Sm 15.22}}. Essa exigência era central no pacto mosaico. No Novo Testamento, embora a salvação seja pela graça, a vivência das bênçãos espirituais requer obediência. {{Jo 14.15}}. Elas abrangem toda a vida {{Dt 28.2-6}} e revelam o cuidado e a justiça de Deus. {{Ef 1.3}}; {{Mt 6.33}}.'},
+{t:'sub',x:'3. O equívoco da teologia da prosperidade.'},
+{t:'body',x:'Jamais se deve utilizar Deuteronômio 28 para sustentar a teologia da prosperidade. Esse texto pertence ao contexto do pacto mosaico, em que as bênçãos materiais, territoriais e sociais estavam condicionadas à obediência coletiva de Israel em uma realidade teocrática. Não se trata de promessas individuais nem de garantias automáticas. A teologia da prosperidade ignora o contexto e a mudança da aliança. {{Hb 8.6}}. Além disso, contraria o ensino de Jesus e dos apóstolos sobre sofrimentos e privações. {{Mt 5.11,12}}; {{2Co 6.10}}; {{Fp 4.12}}. A verdadeira prosperidade está em viver o Reino de Deus {{Mt 6.33}} com esperança eterna. {{1Pe 1.4}}.'},
+{t:'aux',l:'Ampliando o Conhecimento. Bênção e Maldição.',x:'As bênçãos e as maldições nas Escrituras são fundamentadas em uma cosmovisão que entende que o Deus soberano é o ministrador final de cada uma. Deus é o doador de bênçãos e, no fim das contas, o Juiz final que determina a retirada ou o banimento. Ele é a fonte de toda boa dádiva {{Tg 1.17}} e aquele que dá poder e força para prosperar. {{Dt 8.17}}. Amplie mais seu conhecimento consultando o Dicionário Bíblico Baker, editado pela CPAD, página setenta e nove.'},
+{t:'label',x:'Sinopse 1.'},
+{t:'body',x:'A obediência à Palavra conduz às bênçãos e honra a aliança com Deus.'},
+{t:'aux',l:'Auxílio Devocional. Se Obedeceres Plenamente. {{Dt 28.1-14}}.',x:'As bênçãos prometidas a Israel por causa da sua obediência estavam dirigidas à prosperidade e segurança dentro da Terra Prometida. O cristão dispõe de um compromisso semelhante da parte de Deus, e somos informados de que, além disso, Deus nos abençoou com todas as bênçãos espirituais nos lugares celestiais em Cristo. {{Ef 1.3}}. As bênçãos espirituais nos garantem a amável presença de Deus em nossa vida, e que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados por seu decreto. {{Rm 8.28}}. Richards, Lawrence O. Comentário Devocional da Bíblia. Rio de Janeiro: CPAD, dois mil e doze, página cento e vinte e quatro.'},
+
+{t:'topic',x:'Tópico 2. As Consequências da Desobediência na Aliança.'},
+{t:'sub',x:'1. O contraste: da bênção à maldição.'},
+{t:'body',x:'Do versículo 1 ao 14, destacam-se as bênçãos da obediência; e do 15 ao 68, as maldições da desobediência. A expressão “Se não deres ouvidos” {{Dt 28.15}} traz a condição negativa, im lo, e indica juízo pela rejeição deliberada. {{Êx 19.5}}; {{Lv 26.14,15}}. Não se trata de rigor arbitrário, mas de consequência da rebeldia. O cristão, contudo, não deve ler esse texto de modo legalista, mas compreender que o pecado consciente gera consequências. {{1Sm 15.22}}; {{Mt 7.21}}.'},
+{t:'sub',x:'2. As maldições nas dimensões da vida: pessoal, social e espiritual.'},
+{t:'body',x:'A desobediência inverte o cenário: em vez de bênçãos, maldições. {{Dt 28.15-19}}. O que era favor nas áreas material, social e espiritual torna-se juízo pela quebra da aliança. Entre as consequências, estão derrota, opressão, vergonha e fome. No âmbito pessoal, afeta o cotidiano, a casa e o trabalho. {{Dt 28.16,17}}. No social, gera conflitos e falta de paz. {{Dt 28.19}}. E, no espiritual, rompe a comunhão com Deus {{Is 59.2}} e produz esterilidade. {{Jo 15.5,6}}.'},
+{t:'sub',x:'3. As bênçãos devem conduzir à comunhão com Deus.'},
+{t:'body',x:'Deus é a fonte de toda bênção e colocou diante do povo as opções bênção e maldição. {{Dt 11.26}}. Dessa maneira, a obediência preserva a aliança, e a rebeldia transforma bênçãos em juízo. {{Ml 2.2}}. As bênçãos devem conduzir à comunhão com Deus, não à idolatria. {{Dt 8.10-17}}. A prosperidade material, portanto, não pode ser vista como sinal absoluto da aprovação divina. {{Mc 8.36}}. Sem amor e temor ao Senhor, até o que é bom pode afastar o coração da verdadeira fé.'},
+{t:'label',x:'Sinopse 2.'},
+{t:'body',x:'A desobediência rompe a comunhão com Deus e produz sérias consequências.'},
+{t:'aux',l:'Auxílio Teológico. O que Realmente Aconteceu?',x:'Séculos depois que Moisés escreveu as palavras de advertência, o povo de Israel dividiu-se em duas nações, norte e sul. O Reino do Norte, chamado Israel, foi subjugado, e seu povo levado em cativeiro pelos assírios em setecentos e vinte e dois antes de Cristo. O Reino do Sul, Judá, sobreviveu somente até quinhentos e oitenta e seis antes de Cristo, quando, após uma série de deportações, os babilônios finalmente destruíram Jerusalém. Uma população simbólica voltou a estabelecer Jerusalém e parte de Judeia cerca de setenta anos mais tarde. Porém, a maioria dos judeus permaneceu nas terras estrangeiras por toda a era do Novo Testamento. Então, no ano setenta depois de Cristo, Jerusalém foi novamente arrasada, nessa época pelos romanos. Até mil novecentos e quarenta e oito o povo judeu não tinha pátria nacional. A terrível perseguição sofrida pelos judeus, culminando no holocausto nazista dos anos trinta e quarenta, acrescentou seu testemunho às antigas palavras de Moisés: “E nem ainda entre as nações descansarás, nem a planta de teu pé terá repouso; mas o Senhor, ali, te dará coração tremente, e desfalecimento de olhos, e desmaio de alma. E a tua vida estará como em suspenso diante de ti; e estremecerás de noite e de dia, e não terás segurança da tua própria vida.” Contudo, como é bom saber que Deus preservou seu povo exilado e, como Moisés mais tarde promete, todavia o resgatará e restaurará como sua propriedade. Richards, Lawrence O. Guia do Leitor da Bíblia: Uma análise de Gênesis a Apocalipse capítulo por capítulo. Rio de Janeiro: CPAD, dois mil e dezesseis, página cento e trinta e oito.'},
+
+{t:'topic',x:'Tópico 3. A Nova Aliança: Natureza, Bênçãos e Responsabilidade.'},
+{t:'sub',x:'1. A natureza da Nova Aliança.'},
+{t:'body',x:'Para compreender a Nova Aliança, é necessário entender a Antiga, pois é nela que se inicia o plano da salvação, cumprido em Cristo. {{Mt 19.17}}. A Nova Aliança cumpre a anterior, baseada em leis externas, sendo agora estabelecida por Deus em Cristo, mediante o seu sangue. {{Jr 31.31}}; {{Lc 22.20}}; {{Hb 8.8}}. Prometida em Jeremias, tem Cristo como mediador, sendo inaugurada na sua morte, confirmada na ressurreição e na vinda do Espírito. {{Hb 9.16}}; {{At 2}}. Não se fundamenta na letra, mas na obediência, {{Hb 8.10}} trazendo salvação {{Hb 5.9}} e exigindo fé e submissão.'},
+{t:'sub',x:'2. As bênçãos espirituais da Nova Aliança.'},
+{t:'body',x:'A Antiga e a Nova Aliança estão conectadas pela revelação progressiva: a primeira prepara, e a segunda cumpre. {{Mt 5.17}}. Uma é sombra, e a outra, realidade. {{Hb 10.1}}. A Antiga teve função pedagógica {{Gl 3.24,25}}, mas foi temporária; já a Nova, firmada no sangue de Cristo, é perfeita e eterna. {{Hb 8.13}}. Por isso, esta é superior em promessas, sacrifício e mediação. {{Hb 8.6}}. Fundada na graça e no sangue de Jesus {{Jo 1.29}}, ela chama à obediência pela fé. Nessa Nova Aliança, há perdão e transformação, {{Hb 10.16,17}} o que garante ao crente bênçãos espirituais, paz, justificação e esperança eterna. {{Ef 1.3}}; {{Rm 5.1-5}}.'},
+{t:'sub',x:'3. O perigo da desobediência à Nova Aliança.'},
+{t:'body',x:'O escritor aos Hebreus alerta quanto ao perigo de desprezar a graça de Deus, o que resulta em juízo. {{Hb 10.26,27}}. A graça não anula a justiça; Deus permanece santo, e colhemos o que semeamos. {{Gl 6.7}}. Trata-se da desobediência deliberada mesmo após conhecer a verdade. {{Hb 10.26}}. A salvação custou o sangue de Cristo {{Ef 2.8,9}}, e rejeitá-la é o mesmo que desprezar a cruz. {{Hb 10.29}}. Tal atitude conduz à apostasia, o que rompe com a comunhão com Deus {{Is 59.2}}; {{Jo 15.6}} e resulta em condenação. {{Ap 21.8}}. Devemos, portanto, viver em vigilância e fidelidade.'},
+{t:'label',x:'Sinopse 3.'},
+{t:'body',x:'A Nova Aliança oferece bênçãos espirituais e requer fé, vigilância e fidelidade.'},
+
+{t:'div',x:'Conclusão'},
+{t:'body',x:'Na Antiga Aliança, as bênçãos para Israel estavam condicionadas à obediência e fidelidade. {{Dt 28}}. A sua quebra resultava em maldições. A Nova Aliança, firmada no sangue de Cristo, enfatiza as bênçãos espirituais. Para desfrutá-las, o cristão deve responder com fé e obediência; desprezá-la implica juízo divino.'},
+
+{t:'div',x:'Revisando o Conteúdo'},
+{t:'sub',x:'Pergunta 1.'},
+{t:'body',x:'O que a palavra “obedecer” expressa? Do hebraico shamá, obedecer expressa a união entre ouvir e acatar, sendo resposta de fé à Palavra. {{Dt 28.1}}.'},
+{t:'sub',x:'Pergunta 2.'},
+{t:'body',x:'Segundo a lição, o que a vivência das bênçãos espirituais requer na vida do crente e qual a abrangência dessas bênçãos? No Novo Testamento, embora a salvação seja pela graça, a vivência das bênçãos espirituais requer obediência. {{Jo 14.15}}. Elas abrangem toda a vida {{Dt 28.2-6}} e revelam o cuidado e a justiça de Deus. {{Ef 1.3}}; {{Mt 6.33}}.'},
+{t:'sub',x:'Pergunta 3.'},
+{t:'body',x:'O que a expressão “Se não deres ouvidos” traz como condição? A expressão “Se não deres ouvidos” {{Dt 28.15}} traz a condição negativa, im lo, e indica juízo pela rejeição deliberada. {{Êx 19.5}}; {{Lv 26.14,15}}. Não se trata de rigor arbitrário, mas consequência da rebeldia.'},
+{t:'sub',x:'Pergunta 4.'},
+{t:'body',x:'Segundo a lição, Deus é a fonte de quê? E que escolha Ele colocou diante do povo? Deus é a fonte de toda bênção e colocou diante do povo a escolha entre a bênção e a maldição. {{Dt 11.26}}.'},
+{t:'sub',x:'Pergunta 5.'},
+{t:'body',x:'O que é necessário para compreender a Nova Aliança? Para compreender a Nova Aliança, é necessário entender a Antiga, pois nela inicia-se o plano da salvação, cumprido em Cristo. {{Mt 9.17}}.'}
+];
+BK.Tg='Tiago';
+const rd=document.getElementById('reader'),segs=[],plain=[];
+function tok(el,t){t.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){el.appendChild(document.createTextNode(p));return}const w=document.createElement('span');w.className='w';w.textContent=p;el.appendChild(w)})}
+function seg(cls,t,par){const e=document.createElement('div');e.className='seg '+cls;e.tabIndex=0;tok(e,t);par.appendChild(e);segs.push(e);plain.push(t);return e}
+DATA.forEach(d=>{const x=ref(d.x);
+ if(d.t==='div'){const e=document.createElement('div');e.className='div';e.innerHTML='<span></span>';e.firstChild.textContent=d.x;rd.appendChild(e);plain.push(d.x+'.');return}
+ if(d.t==='aux'){const b=document.createElement('div');b.className='aux';rd.appendChild(b);seg('label',ref(d.l),b);seg('t',x,b);return}
+ seg(d.t==='body'?'body':d.t,x,rd)});
+const S=speechSynthesis,$=i=>document.getElementById(i);
+let voices=[],cur=0,stopped=true,playing=false;
+function lv(){voices=S.getVoices();const pt=voices.filter(v=>/pt/i.test(v.lang)),l=pt.length?pt:voices;$('voice').innerHTML='';l.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=v.name+' ['+v.lang+']';$('voice').appendChild(o)});const b=l.find(v=>/pt.?br/i.test(v.lang));if(b)$('voice').value=b.name}
+if(S){lv();S.onvoiceschanged=lv}else{$('status').textContent='Seu navegador não suporta leitura em voz alta.';$('play').disabled=true}
+function clr(e){e&&e.querySelectorAll('.w.on').forEach(w=>w.classList.remove('on'))}
+function say(i){
+ if(i>=segs.length){fin();return}
+ cur=i;const el=segs[i];segs.forEach(s=>{s.classList.remove('active');clr(s)});
+ el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'center'});
+ const u=new SpeechSynthesisUtterance(el.textContent.trim()),v=voices.find(x=>x.name===$('voice').value);
+ if(v)u.voice=v;u.lang=v?v.lang:'pt-BR';u.rate=parseFloat($('rate').value);
+ const ws=[...el.querySelectorAll('.w')];let pos=[],c=0;const txt=el.textContent;
+ ws.forEach(w=>{const s=txt.indexOf(w.textContent,c);pos.push(s);c=s+w.textContent.length});
+ u.onboundary=e=>{clr(el);let h=0;for(let k=0;k<ws.length;k++){if(pos[k]<=e.charIndex)h=k}ws[h].classList.add('on')};
+ u.onend=()=>{clr(el);if(!stopped)say(i+1)};
+ u.onerror=()=>{if(!stopped)say(i+1)};
+ $('status').textContent='Lendo trecho '+(i+1)+' de '+segs.length;S.speak(u)}
+function go(i){stopped=false;playing=true;S.cancel();$('play').disabled=true;$('pause').disabled=false;$('stop').disabled=false;$('pause').textContent='⏸ Pausar';say(i)}
+function fin(){playing=false;stopped=true;segs.forEach(s=>{s.classList.remove('active');clr(s)});$('play').disabled=false;$('pause').disabled=true;$('stop').disabled=true;cur=0;$('status').textContent='Leitura concluída.'}
+$('play').onclick=()=>go(cur);
+$('pause').onclick=()=>{if(S.paused){S.resume();$('pause').textContent='⏸ Pausar'}else{S.pause();$('pause').textContent='▶ Continuar'}};
+$('stop').onclick=()=>{stopped=true;S.cancel();fin();$('status').textContent='Parado.'};
+$('rate').oninput=()=>{$('rv').textContent=parseFloat($('rate').value).toFixed(2)+'×'};
+$('copy').onclick=async()=>{const t=plain.join('\n\n');try{await navigator.clipboard.writeText(t);$('status').textContent='Texto para áudio copiado.'}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');$('status').textContent='Texto para áudio copiado.'}catch(_){$('status').textContent='Não foi possível copiar.'}a.remove()}};
+segs.forEach((e,i)=>{e.onclick=()=>go(i);e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();go(i)}}});
+addEventListener('beforeunload',()=>{try{S.cancel()}catch(e){}});
+</script>
+</body>
+</html>
