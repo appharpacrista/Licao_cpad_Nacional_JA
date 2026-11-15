@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lição 8 — Escolhendo a Vida ou a Morte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--ink-soft:#5b5236;--gold:#a87f2e;--gold-deep:#7a5a16;--line:#d8c9a3;--hl-seg:#f6e4ad;--hl-word:#e2b53d;--shadow:rgba(80,60,20,.18);}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:radial-gradient(circle at 18% 12%,#fbf3df 0%,transparent 55%),radial-gradient(circle at 85% 80%,#efe3c4 0%,transparent 50%),var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px 140px;}
+  .bar{position:sticky;top:0;z-index:50;margin:0 -22px 30px;background:linear-gradient(180deg,#fbf6e9 70%,rgba(251,246,233,.92));border-bottom:1px solid var(--line);backdrop-filter:blur(6px);box-shadow:0 6px 18px -10px var(--shadow);}
+  .bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;}
+  .btn{font-family:'Spectral',serif;font-size:15px;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);padding:8px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;transition:all .18s ease;letter-spacing:.02em;}
+  .btn:hover{background:var(--gold);color:#fff;}
+  .btn.primary{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .btn.primary:hover{background:var(--gold-deep);}
+  .btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft);}
+  .ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+  select,input[type=range]{accent-color:var(--gold);font-family:inherit;}
+  select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px;}
+  input[type=range]{width:108px;}
+  .spd{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;}
+  .status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+  header.head{text-align:center;padding:34px 0 8px;}
+  .kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600;}
+  .date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px;}
+  h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px;color:var(--ink);}
+  .rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none;position:relative;}
+  .rule::before,.rule::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translateY(-50%);}
+  .rule::before{left:-12px;}.rule::after{right:-12px;}
+  .seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s ease;outline:none;}
+  .seg:hover{background:#f1e6c5;}
+  .seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold);}
+  .w{border-radius:4px;transition:background .08s linear,color .08s linear;padding:0 1px;}
+  .w.spoken{background:var(--hl-word);color:#3a2c05;}
+  .label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px;}
+  .topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;color:var(--ink);margin:38px 0 6px;line-height:1.15;}
+  .subtopic{font-family:'Spectral',serif;font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px;}
+  .versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);margin:18px 0 8px;font-style:italic;}
+  p.body,.body{font-size:18px;margin:11px 0;text-align:justify;}
+  .verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line);}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px;}
+  .aux{background:linear-gradient(180deg,#f7eed4,#f3e8c8);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0;}
+  .aux .label{margin-top:0;}
+  .daily{font-size:17px;margin:7px 0;}
+  .hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px;}
+  .sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px;color:var(--gold);}
+  .sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep);}
+  footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic;}
+  @media(max-width:520px){.status{width:100%;margin-left:0;text-align:left;}.body{text-align:left;}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <button id="play" class="btn primary">▶ Ouvir</button>
+    <button id="pause" class="btn" disabled>⏸ Pausar</button>
+    <button id="stop" class="btn" disabled>⏹ Parar</button>
+    <div class="ctl">Velocidade
+      <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95">
+      <span class="spd" id="rateVal">0.95×</span>
+    </div>
+    <div class="ctl">Voz <select id="voice"></select></div>
+    <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 8</div>
+    <div class="date">22 de Novembro de 2026</div>
+    <h1 class="title">Escolhendo a Vida ou a Morte</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+
+  <div id="reader"></div>
+
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+
+<script>
+/* CONTEÚDO — texto otimizado para áudio: referências por extenso, pausas após títulos, sem caracteres estranhos */
+const DATA = [
+ {t:'label', x:'Lição 8.'},
+ {t:'versehead', x:'Escolhendo a Vida ou a Morte.'},
+ {t:'body', x:'Vinte e dois de novembro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'“Os céus e a terra tomo, hoje, por testemunhas contra ti, que te tenho proposto a vida e a morte, a bênção e a maldição; escolhe, pois, a vida, para que vivas, tu e a tua semente.” Deuteronômio, capítulo 30, versículo 19.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Deus propõe a vida por meio da sua Palavra; cabe a cada um responder com fé e obediência.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Deuteronômio, capítulo 30, versículo 15; e Romanos, capítulo 6, versículo 23. A escolha entre a vida e a morte.'},
+ {t:'daily', x:'Terça. Deuteronômio, capítulo 30, versículo 16; e João, capítulo 14, versículo 21. Amar a Deus é obedecer à sua Palavra.'},
+ {t:'daily', x:'Quarta. Deuteronômio, capítulo 30, versículo 19; e Josué, capítulo 24, versículo 15. A responsabilidade da decisão espiritual.'},
+ {t:'daily', x:'Quinta. Deuteronômio, capítulo 30, versículo 14; e Romanos, capítulo 10, versículos 8 a 10. A Palavra está próxima: direção para a vida.'},
+ {t:'daily', x:'Sexta. Deuteronômio, capítulo 30, versículo 6; e Ezequiel, capítulo 36, versículo 26. A ação de Deus no coração humano.'},
+ {t:'daily', x:'Sábado. Deuteronômio, capítulo 30, versículo 20; e João, capítulo 11, versículo 25. A vida está em permanecer no Senhor.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Deuteronômio, capítulo 30, versículos 15 a 20.'},
+ {t:'verse', x:'Versículo 15. Vês aqui, hoje te tenho proposto a vida e o bem, a morte e o mal;'},
+ {t:'verse', x:'Versículo 16. porquanto te ordeno, hoje, que ames o Senhor, teu Deus, que andes nos seus caminhos e que guardes os seus mandamentos, e os seus estatutos, e os seus juízos, para que vivas e te multipliques, e o Senhor, teu Deus, te abençoe na terra, a qual passas a possuir.'},
+ {t:'verse', x:'Versículo 17. Porém, se o teu coração se desviar, e não quiseres dar ouvidos, e fores seduzido para te inclinares a outros deuses, e os servires,'},
+ {t:'verse', x:'Versículo 18. então, eu te denuncio, hoje, que, certamente, perecerás; não prolongarás os dias na terra a que vais, passando o Jordão, para que, entrando nela, a possuas.'},
+ {t:'verse', x:'Versículo 19. Os céus e a terra tomo, hoje, por testemunhas contra ti, que te tenho proposto a vida e a morte, a bênção e a maldição; escolhe, pois, a vida, para que vivas, tu e a tua semente,'},
+ {t:'verse', x:'Versículo 20. amando ao Senhor, teu Deus, dando ouvidos à sua voz e te achegando a ele; pois ele é a tua vida e a longura dos teus dias; para que fiques na terra que o Senhor jurou a teus pais, a Abraão, a Isaque e a Jacó, que lhes havia de dar.'},
+ {t:'body', x:'Hinos sugeridos: cento e cinquenta e oito, duzentos e um, e quatrocentos e cinquenta e dois, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Em Deuteronômio, capítulo 30, Moisés aproxima-se do encerramento da sua missão e dirige à nova geração de israelitas um dos apelos mais solenes das Escrituras. Diante da iminente entrada na Terra Prometida, o legislador apresenta duas possibilidades: vida ou morte. Essa escolha não se restringia ao futuro de Israel, mas revelava uma verdade permanente: Deus chama o seu povo a responder à sua Palavra com fé, amor e obediência. Assim, a presente lição destaca a responsabilidade humana diante da graça e do chamado divino.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, discorrer sobre o livre-arbítrio à luz das Escrituras e da graça divina. Segundo, analisar a proposta divina e a responsabilidade humana diante da escolha espiritual. Terceiro, conduzir a classe à compreensão da escolha pela vida e das suas implicações eternas.'},
+ {t:'body', x:'Motivação. Todos os dias, somos chamados a fazer escolhas que influenciam nossa caminhada espiritual. Nesta lição, veremos que Deus não apenas apresenta o caminho da vida, como também nos orienta por meio da sua Palavra. Incentive os alunos a estudarem o tema com atenção e a refletir sobre como as suas decisões podem fortalecer a sua comunhão com o Senhor e conduzi-los a uma vida de fidelidade e esperança.'},
+ {t:'body', x:'Sugestão de Método. Para o desenvolvimento do primeiro tópico, desenhe no quadro dois caminhos: um representando um robô e outro uma pessoa diante de uma encruzilhada. Em seguida, pergunte à classe: “Qual dos dois pode amar verdadeiramente?”. Após ouvir as respostas, explique que o amor pressupõe escolha e que Deus criou o ser humano com capacidade de responder voluntariamente ao seu chamado. Mostre que o livre-arbítrio bíblico não significa independência de Deus, mas responsabilidade diante da sua graça. Conclua destacando que a aliança divina é relacional e convida o homem a uma resposta consciente de fé e obediência.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. Deus continua apresentando o caminho da vida por meio da sua Palavra. Todos os dias, fazemos escolhas que fortalecem ou enfraquecem nossa comunhão com o Senhor. Desafie os alunos a examinarem as suas decisões e a escolherem conscientemente viver segundo a vontade de Deus.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição cento e sete, página quarenta, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto A Antiga Aliança e a Responsabilidade Humana, localizado após o primeiro tópico, auxilia no aprofundamento da relação entre a aliança divina e a responsabilidade moral do ser humano diante de Deus. Segundo, o texto Escolhe a Vida, localizado ao fim do terceiro tópico, contribui para a exposição da necessidade de uma resposta consciente à proposta divina de salvação.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'No capítulo 30 de Deuteronômio, que é o terceiro discurso de Moisés, o legislador de Israel apresenta o ápice da sua exortação ao povo de Israel e propõe uma escolha decisiva: vida ou morte, bênção ou maldição. Deuteronômio, capítulo 30, versículos 15 a 20. Essa convocação revela o caráter relacional da aliança divina, em que Deus, que é justo e misericordioso, concede ao homem liberdade de decisão sem anular a sua responsabilidade moral. A proposta divina não é filosófica, mas espiritual e eterna, fundamentada na Palavra. À luz do Novo Testamento, compreendemos que, embora a salvação seja dom gratuito, a caminhada cristã exige escolhas conscientes. Mateus, capítulo 7, versículos 13 e 14; compare com Colossenses, capítulo 3, versículos 1 e 2. A escolha pela vida, portanto, permanece atual para todo aquele que deseja viver em comunhão com Deus.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Escolha.'},
+
+ {t:'topic', x:'Tópico 1. O Livre-Arbítrio à Luz das Escrituras.'},
+ {t:'subtopic', x:'1. A compreensão do livre-arbítrio.'},
+ {t:'body', x:'O livre-arbítrio tem sido amplamente discutido na filosofia e na teologia. No campo filosófico, especialmente na sua vertente secularizada, essa temática é tratada de forma perigosa, pois tende a absolutizar a autonomia humana, colocando o homem como senhor de si mesmo, independente de Deus e alheio à realidade do pecado. Romanos, capítulo 1, versículos 21 a 23. Tal concepção enfraquece a responsabilidade moral e ignora a necessidade da graça divina. Em contraste, as Escrituras apresentam uma visão equilibrada: o homem possui liberdade real; ela, porém, é limitada pela sua condição caída e subordinada à soberania de Deus. Isaías, capítulo 46, versículo 10. A Bíblia, portanto, afirma a responsabilidade humana sem negar a atuação divina na história da salvação.'},
+ {t:'subtopic', x:'2. O livre-arbítrio na teologia bíblica.'},
+ {t:'body', x:'À luz das Escrituras, o livre-arbítrio deve ser entendido em harmonia com a soberania divina e a graça. Deus oferece a salvação a todos sem impô-la, respeitando a resposta humana. João, capítulo 3, versículo 16; e Ezequiel, capítulo 18, versículo 30. Contudo, o homem, que é afetado pelo pecado, depende da graça divina, que o capacita a responder. João, capítulo 6, versículo 44; compare com João, capítulo 5, versículo 40. Assim, ele pode resistir à graça. Atos, capítulo 7, versículo 51. Por isso, é responsável pela sua decisão. A salvação é pela graça, e a condenação, pela rejeição.'},
+ {t:'subtopic', x:'3. O livre-arbítrio em Deuteronômio.'},
+ {t:'body', x:'Em Deuteronômio, o livre-arbítrio é apresentado no contexto da aliança: Deus propõe dois caminhos, vida e morte, e convoca o povo à decisão. Deuteronômio, capítulo 30, versículos 15 a 20. Essa liberdade não é independência, e sim responsabilidade diante de Deus. Tal escolha, todavia, é possível pela graça divina, mediante a ação divina que transforma o coração. Deuteronômio, capítulo 30, versículo 6. De igual forma, o Senhor não impõe, mas instrui, persuade e chama o povo à obediência. A aliança é relacional e exige resposta voluntária de amor. Deuteronômio, capítulo 6, versículo 5.'},
+ {t:'quote', x:'“O Senhor não impõe, mas instrui e persuade, chamando o povo à obediência.”'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'O livre-arbítrio bíblico revela a responsabilidade humana diante da graça de Deus.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. A Antiga Aliança e a Responsabilidade Humana.', x:'“No caso da aliança de Deus com o seu povo, Ele promete ser o Deus deste povo, e o povo, por sua vez, reserva-se a Deus como o povo dele. Basicamente, a antiga aliança compreendia os meios prescritos por Deus acerca da manutenção de um relacionamento correto com Ele e de receber o perdão das ofensas cometidas contra Ele, antes de enviar Jesus para finalmente dar a sua vida para pagar a pena pelos nossos pecados. A antiga aliança estabelecida com Israel estava baseada em leis e promessas de Deus para o povo e na fidelidade e obediência do povo a Deus. Enquanto as pessoas fossem fiéis a Deus e respeitassem as condições e os requisitos daquela aliança, desfrutariam de um relacionamento especial com Ele e experimentariam a vida e os propósitos que Ele tinha para elas.” Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro, CPAD, dois mil e vinte e um, página dois mil, trezentos e doze.'},
+
+ {t:'topic', x:'Tópico 2. A Proposta Divina e a Responsabilidade Humana.'},
+ {t:'subtopic', x:'1. A hora da decisão.'},
+ {t:'body', x:'Chega o momento decisivo para Israel no discurso de Moisés. A Lei já havia sido exposta, e agora o povo é chamado a responder: escolher entre a vida e o bem, ou a morte e o mal. Deuteronômio, capítulo 30, versículo 15. Não há espaço para neutralidade quando o assunto é o destino humano, pois a relação com o Senhor Deus exige posicionamento. Essa decisão envolve obediência prática e revela a condição do coração. Tal princípio é reafirmado por Cristo ao falar dos dois caminhos. Mateus, capítulo 7, versículos 13 e 14. Desse modo, a vida está ligada à comunhão com Deus, enquanto a rejeição conduz à perdição, o que evidencia a responsabilidade pessoal diante da revelação divina.'},
+ {t:'subtopic', x:'2. O verbo “propor”.'},
+ {t:'body', x:'O verbo hebraico natan, que significa pôr ou propor, revela a ação divina de apresentar com clareza as alternativas ao homem. Deus não coloca a vida e a morte diante do povo arbitrariamente, mas pedagógica e relacionalmente. Deuteronômio, capítulo 30, versículo 15. Ele não impõe a sua vontade, mas expõe-na, chamando à reflexão e à escolha consciente. Josué, capítulo 24, versículo 15. Tal proposta manifesta a bondade divina, pois torna acessível o caminho da vida. A Palavra está próxima e é suficiente para orientar as decisões. Deuteronômio, capítulo 30, versículo 14. O homem, portanto, é chamado a responder com entendimento e responsabilidade espiritual.'},
+ {t:'subtopic', x:'3. A teologia de Deuteronômio.'},
+ {t:'body', x:'A teologia de Deuteronômio enfatiza que o Senhor chama o homem à decisão e responsabiliza-o pelas suas escolhas. O anúncio solene de Moisés, confirmado pelos céus e pela terra, revela que não há neutralidade: toda escolha traz consequências. Deuteronômio, capítulo 30, versículo 19. A obediência conduz à vida e à bênção; já a desobediência, à morte e à maldição. Deuteronômio, capítulo 30, versículos 17 e 18. Esse princípio expressa a justiça divina e permanece no Novo Testamento. Gálatas, capítulo 6, versículo 7. Assim sendo, o livro evidencia que o homem é responsável pelas suas decisões, sendo chamado a escolher a vida em resposta ao convite gracioso de Deus.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Escolher a vida é amar, ouvir e obedecer a Deus para viver em comunhão.'},
+
+ {t:'topic', x:'Tópico 3. Escolhendo o Melhor Convite.'},
+ {t:'subtopic', x:'1. Escolhe a vida.'},
+ {t:'body', x:'Diante da proposta divina, Deus conclama o povo a uma decisão: “Escolhe, pois, a vida”. Deuteronômio, capítulo 30, versículo 19. O verbo hebraico bāḥar indica uma escolha deliberada, consciente e responsável. Não se trata apenas de existir, mas também de optar por uma vida em comunhão com Deus, marcada por amor e obediência. Deuteronômio, capítulo 30, versículo 16. Essa escolha, embora pessoal, é influenciada pela graça divina, que orienta o coração. Dessa forma, Deus não apenas apresenta o melhor caminho, como também exorta o homem a segui-lo, o que evidencia que a verdadeira vida está em responder positivamente ao seu chamado.'},
+ {t:'subtopic', x:'2. A trilha da obediência.'},
+ {t:'body', x:'A escolha pela vida concretiza-se por meio de uma trilha espiritual formada por três verbos centrais em Deuteronômio: ouvir, obedecer e cumprir. Ouvir, em hebraico shāma, envolve atenção reverente e disposição interior; obedecer implica responder com submissão à vontade divina; cumprir refere-se à prática fiel dos mandamentos. Deuteronômio, capítulo 30, versículos 10 e 14. Esses verbos expressam a dinâmica da aliança, em que a fé manifesta-se em atitudes concretas. Esse princípio permanece no Novo Testamento. João, capítulo 14, versículo 23. A verdadeira espiritualidade, portanto, não é só conceitual, mas também vivida na prática diária da Palavra.'},
+ {t:'subtopic', x:'3. A promessa da vida.'},
+ {t:'body', x:'A escolha pela vida está vinculada à promessa de Deus: viver, prosperar e permanecer na sua presença. Deuteronômio, capítulo 30, versículo 20. No contexto de Israel, isso incluía a permanência na Terra Prometida; essa realidade, porém, aponta para uma dimensão maior. A herança terrena prefigura a esperança escatológica da vida eterna com Deus. Hebreus, capítulo 11, versículo 16. Desse modo, a obediência não visa apenas benefícios temporais, mas também a comunhão eterna com o Senhor. Em Cristo, essa promessa cumpre-se plenamente, garantindo vida abundante no presente e vida eterna na consumação final. João, capítulo 10, versículo 10.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Escolher a vida é amar, ouvir e obedecer a Deus para viver em comunhão.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Escolhe a Vida.', x:'“Moisés chamou Israel ao compromisso. Deus ainda nos chama para que nos comprometamos com Ele, amando-o com todas as nossas forças, com nossa alma e nosso coração. Deus lembrou a seu povo que, para ratificar a aliança, Israel precisava optar pela obediência. A decisão pessoal de obedecer traria muitos benefícios; a rebelião acarretaria severas calamidades. Nossas escolhas fazem a diferença. Obedecer a Deus nos beneficia e melhora nosso relacionamento com as pessoas.” Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro, CPAD, dois mil e dezessete, página duzentos e trinta e dois.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Deuteronômio, capítulo 30, apresenta um chamado decisivo que atravessa toda a revelação bíblica: Deus propõe, o homem decide, e as consequências manifestam-se. O Senhor, na sua graça, oferece a vida e orienta o caminho por meio da sua Palavra, capacitando o homem a responder. Assim, o livre-arbítrio revela-se como responsabilidade diante da proposta divina. Escolher a vida implica amar a Deus, ouvir a sua voz, obedecer aos seus mandamentos e trilhar o caminho que conduz à comunhão e à promessa eterna. Essa escolha alcança o seu pleno sentido em Cristo, pois somente nele está a vida verdadeira. João, capítulo 14, versículo 6. Não há, portanto, neutralidade: somos chamados a responder com fé e obediência ao convite gracioso de Deus.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'Como as Escrituras apresentam o livre-arbítrio em contraste com a filosofia secularizada? As Escrituras apresentam uma visão equilibrada: o homem possui liberdade real, porém limitada pela sua condição caída e subordinada à soberania de Deus. Isaías, capítulo 46, versículo 10.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'De acordo com a lição, qual é a relação entre a graça divina e a resposta humana na salvação? O homem, afetado pelo pecado, depende da graça preveniente, que o capacita a responder. João, capítulo 6, versículo 44.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Como é o momento da decisão apresentado ao povo em Deuteronômio? A Lei já havia sido exposta, e agora o povo é chamado a responder: escolher entre a vida e o bem, ou a morte e o mal. Deuteronômio, capítulo 30, versículo 15.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'Por que não há neutralidade diante da proposta divina? O anúncio solene de Moisés, confirmado pelos céus e pela terra, revela que não há neutralidade: toda escolha traz consequências. Deuteronômio, capítulo 30, versículo 19.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'O que significa escolher a vida segundo Deuteronômio? Optar por uma vida em comunhão com Deus, marcada por amor e obediência. Deuteronômio, capítulo 30, versículo 16.'}
+];
+
+/* RENDERIZAÇÃO */
+const reader = document.getElementById('reader');
+const segIndexEls = [];
+
+function tokenize(el, text){
+  const parts = text.split(/(\s+)/);
+  let charPos = 0;
+  for(const part of parts){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+    } else {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      w.dataset.start = charPos;
+      w.dataset.end = charPos + part.length;
+      el.appendChild(w);
+    }
+    charPos += part.length;
+  }
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    const s = document.createElement('span');
+    s.textContent = item.x;
+    d.appendChild(s);
+    reader.appendChild(d);
+    return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div');
+    box.className = 'aux';
+    const lab = document.createElement('div');
+    lab.className = 'label';
+    const labSeg = document.createElement('div');
+    labSeg.className = 'seg'; labSeg.tabIndex = 0;
+    tokenize(labSeg, item.label);
+    lab.appendChild(labSeg);
+    box.appendChild(lab);
+    segIndexEls.push(labSeg);
+    const p = document.createElement('div');
+    p.className = 'seg'; p.tabIndex = 0;
+    p.style.fontStyle = 'italic';
+    tokenize(p, item.x);
+    box.appendChild(p);
+    segIndexEls.push(p);
+    reader.appendChild(box);
+    return;
+  }
+  const el = document.createElement('div');
+  const cls = {label:'label',topic:'topic',subtopic:'subtopic',versehead:'versehead',verse:'verse',daily:'daily',quote:'quote'}[item.t] || 'body';
+  el.className = 'seg ' + cls;
+  el.tabIndex = 0;
+  tokenize(el, item.x);
+  reader.appendChild(el);
+  segIndexEls.push(el);
+});
+
+/* SÍNTESE DE VOZ + DESTAQUE */
+const synth = window.speechSynthesis;
+let voices = [], current = 0, playing = false, stopped = true;
+const $play = document.getElementById('play');
+const $pause = document.getElementById('pause');
+const $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate');
+const $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice');
+const $status = document.getElementById('status');
+
+if(!synth){
+  $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.';
+  $play.disabled = true;
+}
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  ['+v.lang+']');
+    $voice.appendChild(o);
+  });
+  const br = list.find(v=>/pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+
+function chosenVoice(){
+  return voices.find(v=>v.name === $voice.value) || voices.find(v=>/pt/i.test(v.lang)) || null;
+}
+function clearWordHL(el){ if(el) el.querySelectorAll('.w.spoken').forEach(w=>w.classList.remove('spoken')); }
+function clearAll(){ segIndexEls.forEach(s=>{ s.classList.remove('active'); clearWordHL(s); }); }
+
+function speakFrom(i){
+  if(i >= segIndexEls.length){ finish(); return; }
+  current = i;
+  const el = segIndexEls[i];
+  const text = el.textContent.trim();
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+
+  const u = new SpeechSynthesisUtterance(text);
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = (e)=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{ clearWordHL(el); if(stopped) return; speakFrom(i+1); };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i+1); };
+
+  $status.textContent = 'Lendo… trecho ' + (i+1) + ' de ' + segIndexEls.length;
+  synth.speak(u);
+}
+
+function start(fromIndex){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(fromIndex != null ? fromIndex : current);
+}
+function finish(){
+  playing = false; stopped = true;
+  clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $play.textContent = '▶ Ouvir';
+  $status.textContent = 'Leitura concluída.';
+  current = 0;
+}
+
+$play.addEventListener('click', ()=>{
+  if(synth.paused && playing){
+    synth.resume(); $pause.disabled = false; $pause.textContent = '⏸ Pausar';
+    $status.textContent = 'Retomando…';
+    return;
+  }
+  start(current);
+});
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){ synth.resume(); $pause.textContent = '⏸ Pausar'; $status.textContent = 'Retomando…'; }
+  else { synth.pause(); $pause.textContent = '▶ Continuar'; $status.textContent = 'Pausado.'; }
+});
+$stop.addEventListener('click', ()=>{
+  stopped = true; playing = false;
+  synth.cancel();
+  finish();
+  $status.textContent = 'Parado.';
+});
+$rate.addEventListener('input', ()=>{ $rateVal.textContent = parseFloat($rate.value).toFixed(2)+'×'; });
+
+segIndexEls.forEach((el, idx)=>{
+  const go = ()=>{ start(idx); };
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+});
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
