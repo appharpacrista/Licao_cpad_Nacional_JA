@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lição 9 — A Sucessão de Moisés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#2b2417;--ink-soft:#5b5236;--gold:#a87f2e;--gold-deep:#7a5a16;--line:#d8c9a3;--hl-seg:#f6e4ad;--hl-word:#e2b53d;--hl-txt:#3a2c05;--hover:#f1e6c5;--aux1:#f7eed4;--aux2:#f3e8c8;--shadow:rgba(80,60,20,.18);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d1910;--paper:#262015;--ink:#f0e6cc;--ink-soft:#c2b48c;--gold:#d4a843;--gold-deep:#e6c06a;--line:#4a3f26;--hl-seg:#3b3118;--hl-word:#a87f2e;--hl-txt:#fff6dc;--hover:#30291a;--aux1:#2a2316;--aux2:#2e261a;--shadow:rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d1910;--paper:#262015;--ink:#f0e6cc;--ink-soft:#c2b48c;--gold:#d4a843;--gold-deep:#e6c06a;--line:#4a3f26;--hl-seg:#3b3118;--hl-word:#a87f2e;--hl-txt:#fff6dc;--hover:#30291a;--aux1:#2a2316;--aux2:#2e261a;--shadow:rgba(0,0,0,.5)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px 140px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;margin:0 -22px 30px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 6px 18px -10px var(--shadow)}
+.bar-inner{max-width:780px;margin:0 auto;padding:12px 22px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.btn{font-family:inherit;font-size:15px;cursor:pointer;border:1px solid var(--gold);background:var(--paper);color:var(--gold-deep);padding:8px 16px;border-radius:999px;transition:all .18s}
+.btn:hover{background:var(--gold);color:#fff}
+.btn.primary{background:var(--gold);color:#fff}
+.btn:disabled{opacity:.4;cursor:default;background:var(--paper);color:var(--ink-soft)}
+.ctl{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft)}
+select,input[type=range]{accent-color:var(--gold);font-family:inherit}
+select{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 8px;color:var(--ink);font-size:13px;max-width:170px}
+input[type=range]{width:108px}
+.spd{min-width:38px;text-align:right}
+.status{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-style:italic}
+header.head{text-align:center;padding:34px 0 8px}
+.kicker{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;text-transform:uppercase;font-size:14px;color:var(--gold-deep);font-weight:600}
+.date{font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:6px}
+h1.title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,7vw,54px);line-height:1.05;margin:14px 0 6px}
+.rule{width:70px;height:2px;background:var(--gold);margin:18px auto;border:none}
+.seg{cursor:pointer;border-radius:8px;padding:3px 8px;margin:0 -8px;transition:background .15s;outline:none}
+.seg:hover{background:var(--hover)}
+.seg.active{background:var(--hl-seg);box-shadow:inset 3px 0 0 var(--gold)}
+.w{border-radius:4px;transition:background .08s,color .08s;padding:0 1px}
+.w.spoken{background:var(--hl-word);color:var(--hl-txt)}
+.label{font-family:'Cormorant Garamond',serif;text-transform:uppercase;letter-spacing:.26em;font-size:14px;font-weight:700;color:var(--gold-deep);margin:30px 0 4px}
+.topic{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4.5vw,30px);font-weight:700;margin:38px 0 6px;line-height:1.15}
+.subtopic{font-weight:600;font-size:18px;color:var(--gold-deep);margin:20px 0 2px}
+.versehead{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:18px 0 8px;font-style:italic}
+p.body,.body{font-size:18px;margin:11px 0;text-align:justify}
+.verse{font-size:17px;margin:6px 0;padding-left:14px;border-left:1px solid var(--line)}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,3.6vw,25px);line-height:1.4;color:var(--gold-deep);text-align:center;margin:16px auto;max-width:620px}
+.aux{background:linear-gradient(180deg,var(--aux1),var(--aux2));border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+.aux .label{margin-top:0}
+.daily{font-size:17px;margin:7px 0}
+.hint{text-align:center;font-style:italic;color:var(--ink-soft);font-size:14px;margin:6px 0 26px}
+.sec-divider{display:flex;align-items:center;gap:14px;margin:42px 0 8px}
+.sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.sec-divider span{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold-deep)}
+footer{text-align:center;margin-top:50px;color:var(--ink-soft);font-size:13px;font-style:italic}
+@media(max-width:520px){.status{width:100%;margin-left:0;text-align:left}p.body,.body{text-align:left}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-inner">
+  <button id="play" class="btn primary">▶ Ouvir</button>
+  <button id="pause" class="btn" disabled>⏸ Pausar</button>
+  <button id="stop" class="btn" disabled>⏹ Parar</button>
+  <div class="ctl">Velocidade <input id="rate" type="range" min="0.6" max="1.4" step="0.05" value="0.95"><span class="spd" id="rateVal">0.95×</span></div>
+  <div class="ctl">Voz <select id="voice"></select></div>
+  <div class="status" id="status">Toque em “Ouvir” ou clique em qualquer trecho.</div>
+</div></div>
+<div class="wrap">
+  <header class="head">
+    <div class="kicker">Lição 9</div>
+    <div class="date">29 de Novembro de 2026</div>
+    <h1 class="title">A Sucessão de Moisés</h1>
+    <hr class="rule">
+    <p class="hint">Clique em qualquer parágrafo para a leitura começar a partir dele.</p>
+  </header>
+  <div id="reader"></div>
+  <footer>Lições Bíblicas — Adultos · Leitor de áudio acessível</footer>
+</div>
+<script>
+const DATA = [
+ {t:'label', x:'Lição 9.'},
+ {t:'versehead', x:'A Sucessão de Moisés.'},
+ {t:'body', x:'Vinte e nove de novembro de dois mil e vinte e seis.'},
+
+ {t:'label', x:'Texto Áureo.'},
+ {t:'quote', x:'“Esforçai-vos, e animai-vos; não temais, nem vos espanteis diante deles, porque o SENHOR, vosso Deus, é o que vai convosco; não vos deixará nem vos desamparará.” Deuteronômio, capítulo 31, versículo 6.'},
+
+ {t:'label', x:'Verdade Prática.'},
+ {t:'body', x:'Líderes são instrumentos na obra de Deus; a continuidade da missão depende da fidelidade divina.'},
+
+ {t:'label', x:'Leitura Diária.'},
+ {t:'daily', x:'Segunda. Eclesiastes, capítulo 1, versículo 4; e Salmos, capítulo 90, versículo 10. Os ciclos da vida, das gerações e da liderança.'},
+ {t:'daily', x:'Terça. Deuteronômio, capítulo 31, versículo 2; e Segunda Timóteo, capítulo 4, versículo 7. O tempo de concluir a missão.'},
+ {t:'daily', x:'Quarta. Deuteronômio, capítulo 31, versículo 3; e Josué, capítulo 1, versículo 5. Deus permanece à frente do seu povo.'},
+ {t:'daily', x:'Quinta. Números, capítulo 27, versículos 18 a 23; e Primeira Timóteo, capítulo 3, versículo 6. A escolha de líderes segundo Deus.'},
+ {t:'daily', x:'Sexta. Deuteronômio, capítulo 31, versículo 6; e Isaías, capítulo 41, versículo 10. A presença que sustenta o líder.'},
+ {t:'daily', x:'Sábado. Primeira Coríntios, capítulo 3, versículos 6 e 7; e Atos, capítulo 20, versículo 28. Deus dá o crescimento à sua obra.'},
+
+ {t:'label', x:'Leitura Bíblica em Classe.'},
+ {t:'versehead', x:'Deuteronômio, capítulo 31, versículos 1 a 8.'},
+ {t:'verse', x:'Versículo 1. Depois, foi Moisés, e falou estas palavras a todo o Israel,'},
+ {t:'verse', x:'Versículo 2. e disse-lhes: Da idade de cento e vinte anos sou eu hoje; já não poderei mais sair e entrar; além disso, o SENHOR me disse: Não passarás o Jordão.'},
+ {t:'verse', x:'Versículo 3. O SENHOR, teu Deus, passará adiante de ti; ele destruirá estas nações diante de ti, para que as possuas; Josué passará adiante de ti, como o SENHOR tem dito.'},
+ {t:'verse', x:'Versículo 4. E o SENHOR lhes fará como fez a Seom, e a Ogue, reis dos amorreus, e à sua terra, os quais destruiu.'},
+ {t:'verse', x:'Versículo 5. Quando, pois, o SENHOR vo-los der diante de vós, então, com eles fareis conforme todo o mandamento que vos tenho ordenado.'},
+ {t:'verse', x:'Versículo 6. Esforçai-vos, e animai-vos; não temais, nem vos espanteis diante deles, porque o SENHOR, vosso Deus, é o que vai convosco; não vos deixará nem vos desamparará.'},
+ {t:'verse', x:'Versículo 7. E chamou Moisés a Josué e lhe disse aos olhos de todo o Israel: Esforça-te e anima-te, porque com este povo entrarás na terra que o SENHOR jurou a teus pais lhes dar; e tu os farás herdá-la.'},
+ {t:'verse', x:'Versículo 8. O SENHOR, pois, é aquele que vai adiante de ti; ele será contigo, não te deixará, nem te desamparará; não temas, nem te espantes.'},
+ {t:'body', x:'Hinos sugeridos: duzentos e sessenta, trezentos e quatro, e quinhentos e quinze, da Harpa Cristã.'},
+
+ {t:'divider', x:'Plano de Aula'},
+ {t:'subtopic', x:'1. Introdução.'},
+ {t:'body', x:'Ao aproximar-se do fim da sua jornada, Moisés conduz Israel a um dos momentos mais significativos da sua história: a transição de liderança. Em Deuteronômio, capítulo 31, o grande legislador reconhece que o seu ministério terminou e prepara o povo para seguir adiante sob a liderança de Josué. O texto destaca que a continuidade da obra de Deus não depende de homens, mas da fidelidade do Senhor, que permanece guiando, sustentando e cumprindo os seus propósitos em todas as gerações.'},
+
+ {t:'subtopic', x:'2. Apresentação da Lição.'},
+ {t:'body', x:'Objetivos da Lição. Primeiro, evidenciar como Moisés discerniu o fim do seu ministério com fé. Segundo, demonstrar os princípios divinos envolvidos na sucessão de Josué. Terceiro, ressaltar que Deus sustenta a sua obra e levanta novos líderes.'},
+ {t:'body', x:'Motivação. A obra de Deus continua mesmo quando líderes concluem sua missão. Ao estudar a sucessão de Moisés e o chamado de Josué, aprenderemos a confiar na direção do Senhor, que permanece conduzindo o seu povo em todas as gerações. Abramos o coração para refletir sobre fidelidade, serviço e dependência de Deus.'},
+ {t:'body', x:'Sugestão de Método. Ao concluir a lição, sugerimos que distribua pequenos cartões e peça aos alunos que escrevam uma resposta para a seguinte pergunta: Que legado espiritual desejo deixar para a próxima geração? Em seguida, convide alguns voluntários para compartilhar as suas reflexões. Relacione as respostas ao exemplo de Moisés, que preparou Josué e o povo para a continuidade da missão. Encerre destacando que líderes passam, mas a obra de Deus prossegue. Encerre a aula com uma oração, pedindo ao Senhor que levante servos fiéis para as próximas gerações.'},
+
+ {t:'subtopic', x:'3. Conclusão da Lição.'},
+ {t:'body', x:'Aplicação. A sucessão de Moisés ensina-nos que a obra de Deus é maior do que qualquer líder. Moisés cumpriu a sua missão, Josué assumiu a sua responsabilidade, e o Senhor permaneceu conduzindo o povo. Da mesma forma, devemos servir com fidelidade no tempo que Deus nos concede, preparando outros para continuar a missão. A lição prática é clara: confie menos em capacidades humanas e mais na presença constante de Deus, que jamais abandona o seu povo.'},
+
+ {t:'subtopic', x:'4. Subsídio ao Professor.'},
+ {t:'body', x:'Revista Ensinador Cristão. Vale a pena conhecer essa revista que traz reportagens, artigos, entrevistas e subsídios de apoio às Lições Bíblicas Adultos. Na edição 107, página 40, você encontrará um subsídio especial para esta lição.'},
+ {t:'body', x:'Auxílios Especiais. Ao fim do tópico, você encontrará auxílios que darão suporte na preparação de sua aula. Primeiro, o texto Preparação de Novos Líderes, localizado após o primeiro tópico, auxilia na reflexão sobre a formação de sucessores e a continuidade da obra de Deus. Segundo, o texto A Obra de Deus Continua, localizado ao fim do terceiro tópico, contribui para a compreensão da fidelidade divina na condução do seu povo através das gerações.'},
+
+ {t:'divider', x:'Comentário'},
+ {t:'label', x:'Introdução.'},
+ {t:'body', x:'Em Deuteronômio, capítulo 31, Moisés chega ao fim do seu ministério e conduz Israel a um momento decisivo de transição. O texto revela que a liderança, na perspectiva bíblica, está subordinada à soberania de Deus, que dirige a sua obra acima das limitações humanas. A sucessão de Josué demonstra que o Senhor conduz a sua missão com sabedoria, ordem, continuidade e propósito. Pastoralmente, aprendemos que líderes passam, mas a presença de Deus permanece, requerendo do povo fé, obediência e confiança no agir contínuo do Senhor.'},
+ {t:'label', x:'Palavra-chave.'},
+ {t:'body', x:'Sucessão.'},
+
+ {t:'topic', x:'Tópico 1. A Despedida de Moisés.'},
+ {t:'subtopic', x:'1. O discernimento do tempo.'},
+ {t:'body', x:'Moisés reconhece que o seu ciclo ministerial terminou, o que evidencia maturidade espiritual e submissão à vontade divina. O líder chamado por Deus deve discernir o tempo de parar, não movido pelo temor, mas pela consciência de fidelidade cumprida. Deuteronômio, capítulo 31, versículos 1 e 2. Como Paulo declarou ter completado a sua carreira, Segunda Timóteo, capítulo 4, versículo 7; compare Atos, capítulo 20, versículo 24, Moisés entendera os seus limites: idade avançada e determinação divina. Deuteronômio, capítulo 4, versículo 21; e Números, capítulo 20, versículo 12. Desse modo, ele demonstrou humildade e desapego e ensinou que encerrar ciclos, segundo Deus, não é fracasso, mas expressão de fé. Eclesiastes, capítulo 3, versículo 1.'},
+ {t:'subtopic', x:'2. Preparando o povo para seguir.'},
+ {t:'body', x:'Moisés prepara o povo para a continuidade da jornada e reconhece as limitações da vida humana. Deuteronômio, capítulo 31, versículo 2. A menção da sua idade evidencia tanto a plenitude dos seus dias quanto a realidade do desgaste natural. Salmos, capítulo 90, versículo 10. O líder espiritual entende que a obra não depende da sua permanência, mas da vontade de Deus. Assim, ensina que é necessário aceitar limites, submeter-se ao plano divino e confiar que o Senhor já preparou o futuro da missão. Provérbios, capítulo 19, versículo 21. Trabalhar para Deus, portanto, implica formar sucessores e garantir continuidade.'},
+ {t:'subtopic', x:'3. Deus continuará à frente.'},
+ {t:'body', x:'O líder de Israel reafirma que o verdadeiro líder é o Senhor: O SENHOR, teu Deus, passará adiante de ti. Deuteronômio, capítulo 31, versículo 3. Esse princípio revela que a obra não pertence ao homem, mas a Deus, que dirige, protege e concede vitória. Deuteronômio, capítulo 31, versículos 4 e 5. A sucessão de Josué não é fruto da escolha humana, mas da decisão divina. Números, capítulo 27, versículos 18 a 23. Dessa forma, o povo é chamado a confiar na presença de Deus. A aplicação é clara: a Igreja deve depender do Senhor, pois Ele permanece conduzindo a sua obra em todas as gerações. Isaías, capítulo 43, versículo 13.'},
+
+ {t:'label', x:'Sinopse 1.'},
+ {t:'body', x:'Moisés aceita o fim do seu ciclo e prepara Israel para seguir confiando em Deus.'},
+
+ {t:'aux', label:'Ampliando o Conhecimento. Preparação de Novos Líderes.', x:'Deus havia deixado claro que Moisés não entraria na Terra Prometida. Números, capítulo 20, versículo 12. Mandou que Moisés comissionasse Josué como novo líder e o encorajasse nessa nova função. Este é um bom exemplo para as igrejas que eventualmente precisam substituir seus líderes. Os bons condutores preparam seu povo para que tudo possa correr bem em sua ausência, descobrindo pessoas com potencial para a liderança, provendo o treinamento necessário e buscando formas de encorajá-las. Amplie mais seu conhecimento consultando a Bíblia de Estudo Aplicação Pessoal, CPAD, página 238. A Palavra de Deus mostra-nos que líderes devem ser aprovados pela Igreja; não apenas indicados, mas também reconhecidos pelo seu caráter e vocação.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. Preparação de Novos Líderes.', x:'Assim como nações, empresas e organizações, na medida em que as igrejas crescem, tornam-se complexas. Moisés tomou uma sábia decisão ao compartilhar a liderança com outros. Em vez de tentar lidar com as maiores responsabilidades sozinho, procurou repartir a carga, permitindo que outros exercitassem seus dons e habilidades dados por Deus. Deus havia deixado claro que Moisés não entraria na Terra Prometida. Números, capítulo 20, versículo 12. Mandou que Moisés comissionasse Josué como novo líder e o encorajasse nessa nova função. Este é um bom exemplo para as igrejas que eventualmente precisam substituir seus líderes. Os bons condutores preparam seu povo para que tudo possa correr bem em sua ausência, descobrindo pessoas com potencial para a liderança, provendo o treinamento necessário e buscando formas de encorajá-las. Bíblia de Estudo Aplicação Pessoal. Rio de Janeiro: CPAD, dois mil e três, páginas 232, 233 e 236.'},
+
+ {t:'topic', x:'Tópico 2. A Escolha de um Novo Líder.'},
+ {t:'subtopic', x:'1. Um chamado público.'},
+ {t:'body', x:'Josué é chamado diante de todo o povo, o que evidencia que a sua escolha não foi secreta, mas pública e legítima. Deuteronômio, capítulo 31, versículos 7 e 8. O termo hebraico qará indica convocação solene, confirmando a autoridade divina. Números, capítulo 27, versículos 18 a 23. O Novo Testamento mostra-nos que a liderança espiritual exige reconhecimento coletivo e bom testemunho; logo, evita-se divisão e suspeita. Primeira Timóteo, capítulo 3, versículo 6. A Palavra de Deus revela-nos que líderes devem ser aprovados pela Igreja; não apenas indicados, mas também reconhecidos pelo seu caráter e vocação. Atos, capítulo 16, versículos 1 e 2.'},
+ {t:'subtopic', x:'2. Encorajando o novo líder.'},
+ {t:'body', x:'Moisés fortalece Josué com palavras de ânimo e demonstra que a sucessão não gera disputa, e sim cooperação na obra de Deus. Primeira Coríntios, capítulo 3, versículo 6. As expressões sê forte, chazaq, e corajoso, amats, apontam para firmeza espiritual e perseverança. Josué, capítulo 1, versículos 6 e 9. O líder não depende apenas de posição, mas também da força que vem de Deus. Efésios, capítulo 6, versículo 10. Essa realidade bíblica ensina que Igreja e liderança devem apoiar o sucessor com oração, unidade e encorajamento, o que garante uma transição saudável e frutífera.'},
+ {t:'subtopic', x:'3. A missão de Josué.'},
+ {t:'body', x:'Josué não é chamado para inovar, mas para dar continuidade ao plano divino. A sua missão é conduzir o mesmo povo à Terra Prometida e repartir a herança. Josué, capítulos 13 a 21. Isso demonstra que a obra de Deus não gira em torno de personalidades, mas da sua fidelidade às promessas. Gênesis, capítulo 12, versículo 7. O líder espiritual conduz o povo à herança divina, não à sua própria glória. Os líderes, portanto, devem atuar com santidade e foco na maturidade do povo em Cristo. Efésios, capítulo 4, versículos 11 a 13.'},
+
+ {t:'label', x:'Sinopse 2.'},
+ {t:'body', x:'Josué é confirmado por Deus e encorajado para liderar o povo com fidelidade.'},
+
+ {t:'topic', x:'Tópico 3. A Continuidade da Missão.'},
+ {t:'subtopic', x:'1. A presença de Deus com o líder.'},
+ {t:'body', x:'Moisés assegura que a mudança de liderança não altera a presença divina: não vos deixará nem vos desamparará. Deuteronômio, capítulo 31, versículo 6. O Senhor acompanha o novo líder e também o povo, e isso garante direção e sustento. Isaías, capítulo 41, versículo 10. A segurança do ministério não está na capacidade humana, mas na presença constante do Senhor. Nesse sentido, líderes e Igreja devem confiar em Deus, pois é Ele que sustenta a obra em todos os momentos. Salmos, capítulo 20, versículo 7; e Hebreus, capítulo 13, versículo 5.'},
+ {t:'subtopic', x:'2. Deus levanta novos líderes.'},
+ {t:'body', x:'A sucessão é parte do agir soberano de Deus, que constitui líderes para dar continuidade à sua obra. Atos, capítulo 20, versículo 28; e Jeremias, capítulo 3, versículo 15. O líder precisa depender constantemente de Deus, pois desafios são inevitáveis, mas a vitória vem do Senhor. Josué, capítulo 1, versículo 9. Paulo, por exemplo, reconheceu que era apenas um cooperador. Primeira Coríntios, capítulo 3, versículos 6 e 7. Nesse caso, ninguém é insubstituível; o líder deve servir com humildade e sempre depender da graça divina para desempenhar a sua função. Segunda Coríntios, capítulo 12, versículo 9.'},
+ {t:'subtopic', x:'3. Unidade entre líder e povo.'},
+ {t:'body', x:'O êxito da missão depende do alinhamento entre líder e povo. A orientação de Moisés produz confiança, obediência e unidade. Deuteronômio, capítulo 31, versículo 6. Amós afirma que dois só caminham juntos se houver acordo. Amós, capítulo 3, versículo 3; compare Filipenses, capítulo 2, versículo 2. Josué deveria seguir o plano de Deus, enquanto o povo deveria obedecer e reconhecer a presença divina. A verdadeira liderança, portanto, gera submissão voluntária, baseada na confiança em Deus, e não na imposição humana. Primeira Pedro, capítulo 5, versículos 2 a 4.'},
+
+ {t:'label', x:'Sinopse 3.'},
+ {t:'body', x:'Deus sustenta a sua obra, levanta líderes e conduz o seu povo em cada geração.'},
+
+ {t:'aux', label:'Auxílio Bibliológico. A Obra de Deus Continua.', x:'O propósito original de Moisés ao se dirigir à nova geração de Israel antes de passar a liderança a Josué foi desafiar, encorajar e instruir as pessoas sobre: primeiro, os atos poderosos e as promessas de Deus; segundo, as suas próprias obrigações de fé e obediência previstas no concerto; e terceiro, a sua necessidade de reverenciar a Deus e viver para realizar os seus propósitos. Moisés queria relembrar o povo da séria responsabilidade e do privilégio de amar e honrar a Deus de todo o coração, de toda a alma e força. Deuteronômio, capítulo 6, versículo 4. Uma das principais ênfases do livro de Deuteronômio é o princípio fé mais obediência. Esse princípio confirma a necessidade de que o povo confie em Deus completamente e obedeça aos seus mandamentos sem fazer concessões. Fé mais obediência permitiria que a nova geração de israelitas herdasse as promessas com a bênção total de Deus. Bíblia de Estudo Pentecostal, Edição Global. Rio de Janeiro: CPAD, dois mil e vinte e um, páginas 300 e 301.'},
+
+ {t:'divider', x:'Conclusão'},
+ {t:'body', x:'Deuteronômio, capítulo 31, revela que a sucessão na obra de Deus transcende aspectos humanos e administrativos, sendo, acima de tudo, espiritual. O Senhor dirige a sua obra com soberania e levanta líderes conforme o seu propósito eterno. Aprendemos, assim, que nenhum homem é indispensável, mas todos são instrumentos nas mãos de Deus; cabe à Igreja permanecer em fé e obediência e confiar que a presença divina garante a continuidade da missão e a vitória em todas as gerações. Salmos, capítulo 100, versículo 5.'},
+
+ {t:'divider', x:'Revisando o Conteúdo'},
+ {t:'subtopic', x:'Pergunta 1.'},
+ {t:'body', x:'O que Moisés reconhece em relação ao seu ministério? Moisés reconhece que o seu ciclo ministerial chegou ao fim. Isso evidencia maturidade espiritual e submissão à vontade divina.'},
+ {t:'subtopic', x:'Pergunta 2.'},
+ {t:'body', x:'Como Moisés prepara o povo para a continuidade da jornada? Moisés prepara o povo para a continuidade da jornada, reconhecendo as limitações da vida humana.'},
+ {t:'subtopic', x:'Pergunta 3.'},
+ {t:'body', x:'Quem Moisés escolhe como sucessor? Josué é chamado diante de todo o povo. Isso evidencia que a sua escolha não foi secreta, mas pública e legítima.'},
+ {t:'subtopic', x:'Pergunta 4.'},
+ {t:'body', x:'A segurança do ministério está em quê? A segurança do ministério não está na capacidade humana, mas na presença constante do Senhor.'},
+ {t:'subtopic', x:'Pergunta 5.'},
+ {t:'body', x:'O que a verdadeira liderança gera? A verdadeira liderança gera submissão voluntária, baseada na confiança em Deus, e não na imposição humana. Primeira Pedro, capítulo 5, versículos 2 a 4.'}
+];
+
+const reader = document.getElementById('reader');
+const segEls = [];
+
+function tokenize(el, text){
+  let pos = 0;
+  for(const part of text.split(/(\s+)/)){
+    if(part === '') continue;
+    if(/^\s+$/.test(part)){ el.appendChild(document.createTextNode(part)); }
+    else{
+      const w = document.createElement('span');
+      w.className = 'w'; w.textContent = part;
+      w.dataset.start = pos; w.dataset.end = pos + part.length;
+      el.appendChild(w);
+    }
+    pos += part.length;
+  }
+}
+function seg(cls, text, parent){
+  const el = document.createElement('div');
+  el.className = 'seg ' + cls; el.tabIndex = 0;
+  tokenize(el, text);
+  parent.appendChild(el); segEls.push(el);
+  return el;
+}
+
+DATA.forEach(item=>{
+  if(item.t === 'divider'){
+    const d = document.createElement('div');
+    d.className = 'sec-divider';
+    const s = document.createElement('span'); s.textContent = item.x;
+    d.appendChild(s); reader.appendChild(d); return;
+  }
+  if(item.t === 'aux'){
+    const box = document.createElement('div'); box.className = 'aux';
+    seg('label', item.label, box);
+    const p = seg('body', item.x, box); p.style.fontStyle = 'italic';
+    reader.appendChild(box); return;
+  }
+  seg(item.t, item.x, reader);
+});
+
+const synth = window.speechSynthesis;
+let voices = [], current = 0, playing = false, stopped = true;
+const $play = document.getElementById('play'), $pause = document.getElementById('pause'), $stop = document.getElementById('stop');
+const $rate = document.getElementById('rate'), $rateVal = document.getElementById('rateVal');
+const $voice = document.getElementById('voice'), $status = document.getElementById('status');
+
+if(!synth){ $status.textContent = 'Seu navegador não suporta leitura em voz alta. Tente o Chrome, Edge ou Safari.'; $play.disabled = true; }
+
+function loadVoices(){
+  voices = synth.getVoices();
+  const pt = voices.filter(v => /pt/i.test(v.lang));
+  const list = pt.length ? pt : voices;
+  $voice.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (/pt.?br/i.test(v.lang) ? '  (Brasil)' : '  [' + v.lang + ']');
+    $voice.appendChild(o);
+  });
+  const br = list.find(v => /pt.?br/i.test(v.lang));
+  if(br) $voice.value = br.name;
+}
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+
+const chosenVoice = ()=> voices.find(v => v.name === $voice.value) || voices.find(v => /pt/i.test(v.lang)) || null;
+const clearWordHL = el => el && el.querySelectorAll('.w.spoken').forEach(w => w.classList.remove('spoken'));
+const clearAll = ()=> segEls.forEach(s => { s.classList.remove('active'); clearWordHL(s); });
+
+function speakFrom(i){
+  if(i >= segEls.length){ finish(); return; }
+  current = i;
+  const el = segEls[i];
+  clearAll();
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  const u = new SpeechSynthesisUtterance(el.textContent.trim());
+  const v = chosenVoice();
+  if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'pt-BR';
+  u.rate = parseFloat($rate.value);
+  const words = Array.from(el.querySelectorAll('.w'));
+  u.onboundary = e=>{
+    if(e.charIndex == null) return;
+    clearWordHL(el);
+    let hit = null;
+    for(const w of words){
+      const s = +w.dataset.start, en = +w.dataset.end;
+      if(e.charIndex >= s && e.charIndex < en){ hit = w; break; }
+      if(e.charIndex < s){ hit = w; break; }
+    }
+    if(hit) hit.classList.add('spoken');
+  };
+  u.onend = ()=>{ clearWordHL(el); if(!stopped) speakFrom(i + 1); };
+  u.onerror = ()=>{ if(!stopped) speakFrom(i + 1); };
+  $status.textContent = 'Lendo… trecho ' + (i + 1) + ' de ' + segEls.length;
+  synth.speak(u);
+}
+function start(idx){
+  if(!synth) return;
+  stopped = false; playing = true;
+  synth.cancel();
+  $play.disabled = true; $pause.disabled = false; $stop.disabled = false;
+  $pause.textContent = '⏸ Pausar';
+  speakFrom(idx != null ? idx : current);
+}
+function finish(){
+  playing = false; stopped = true; clearAll();
+  $play.disabled = false; $pause.disabled = true; $stop.disabled = true;
+  $status.textContent = 'Leitura concluída.'; current = 0;
+}
+$play.addEventListener('click', ()=> start(current));
+$pause.addEventListener('click', ()=>{
+  if(synth.paused){ synth.resume(); $pause.textContent = '⏸ Pausar'; $status.textContent = 'Retomando…'; }
+  else{ synth.pause(); $pause.textContent = '▶ Continuar'; $status.textContent = 'Pausado.'; }
+});
+$stop.addEventListener('click', ()=>{ stopped = true; playing = false; synth.cancel(); finish(); $status.textContent = 'Parado.'; });
+$rate.addEventListener('input', ()=>{ $rateVal.textContent = parseFloat($rate.value).toFixed(2) + '×'; });
+
+segEls.forEach((el, idx)=>{
+  const go = ()=> start(idx);
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } });
+});
+window.addEventListener('beforeunload', ()=>{ try{ synth.cancel(); }catch(e){} });
+</script>
+</body>
+</html>
